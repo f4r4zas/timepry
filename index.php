@@ -60,8 +60,9 @@ if(filesize('nodcms/config/database.php')==0){
  * NOTE: If you change these, also change the error_reporting() code below
  */
 //    define('ENVIRONMENT', 'development');
-    define('ENVIRONMENT', 'production');
-	//Comment by zeeshan
+
+    define('ENVIRONMENT', 'development');
+    //comment by faraz aimviz
 /*
  *---------------------------------------------------------------
  * ERROR REPORTINGs
