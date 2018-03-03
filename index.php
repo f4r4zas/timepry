@@ -61,6 +61,7 @@ if(filesize('nodcms/config/database.php')==0){
  */
 //    define('ENVIRONMENT', 'development');
     define('ENVIRONMENT', 'production');
+	//Comment by zeeshan
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
