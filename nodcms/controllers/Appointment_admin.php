@@ -150,8 +150,6 @@ class Appointment_admin extends NodCMS_Controller
     // Admin Homepage (Choose a provider)
     function index($id=NULL)
     {
-		echo "worke";
-		die();
         if($id!=NULL){
             if($this->session->userdata('group_id')!=1 && $this->session->userdata('group_id')!=100){
                 $where = NULL;
