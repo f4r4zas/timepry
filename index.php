@@ -64,7 +64,7 @@ if(filesize('nodcms/config/database.php')==0){
 	//Comment by zeeshan
 /*
  *---------------------------------------------------------------
- * ERROR REPORTING
+ * ERROR REPORTINGs
  *---------------------------------------------------------------
  *
  * Different environments will require different levels of error reporting.
