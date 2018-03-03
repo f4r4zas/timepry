@@ -172,7 +172,7 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th><?php echo _l("Unique Name",$this); ?></th>
+                            <th><?php echo _l("Name",$this); ?></th>
                             <th><?php echo _l("Date",$this); ?></th>
                             <th><?php echo _l("Active",$this); ?></th>
                             <th></th>
@@ -187,7 +187,7 @@
                                         <i class="fa fa-times font-red"  data-toggle="tooltip" data-placement="bottom" title="<?php echo _l('Inaccessible', $this); ?>"></i>
                                     <?php } ?>
                                     <a href="<?php echo APPOINTMENT_ADMIN_URL."index/".$item["provider_id"]; ?>">
-                                        <?php echo $item["provider_username"]; ?>
+                                        <?php echo $item["provider_name"]; ?>
                                     </a>
                                 </td>
                                 <td><?php echo my_int_date($item["created_date"]); ?></td>

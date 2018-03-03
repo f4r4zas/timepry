@@ -41,6 +41,7 @@ class Appointment_admin extends NodCMS_Controller
             'makeProviderDefault',
             'providerRemove',
             'getUsername',
+            'getEmail',
             'providerManager',
             'providerManagerRemove',
             'settings',
@@ -131,6 +132,21 @@ class Appointment_admin extends NodCMS_Controller
         $config['use_page_numbers']  = TRUE;
         $this->pagination->initialize($config);
         $this->data['pagination'] = $this->pagination->create_links();
+    }
+    
+    
+    function getEmail(){
+        if($this->input->input_stream('text')){
+            $text = $this->input->post('text',TRUE);
+            if (preg_match('/^[a-z0-9_]{1,18}$/', $text) != FALSE) {
+                $result = $this->Appointment_admin_model->getEmail("email LIKE '$text%'");
+            }else{
+                $result = array();
+            }
+            echo json_encode(array('status'=>'success', 'data'=>$result));
+        }else{
+            echo json_encode(array('status'=>'error', 'error'=>'Not Set'));
+        } 
     }
 
     function getUsername(){
@@ -296,14 +312,14 @@ class Appointment_admin extends NodCMS_Controller
             if($this->input->raw_input_stream){
                 if (in_array($this->session->userdata['group'], array(1, 20))) {
                     $this->load->library('form_validation');
-                    $this->form_validation->set_rules('username', _l('Username',$this), 'required|callback_validateUsernameType');
+                    $this->form_validation->set_rules('email', _l('email',$this), 'required|callback_validateUserEmail');
                     $this->form_validation->set_rules('group', _l('Group',$this), 'required|is_natural');
                     if ($this->form_validation->run() != TRUE){
                         $this->session->set_flashdata('static_error', validation_errors());
                     }else{
-                        $username = $this->input->post("username",TRUE);
+                        $username = $this->input->post("email",TRUE);
                         $group = $this->input->post("group",TRUE);
-                        $user = $this->Appointment_admin_model->getUserByUsername($username);
+                        $user = $this->Appointment_admin_model->getUserByEmail($username);
                         if(count($user) != 0){
                             $provider_manager = $this->Appointment_admin_model->getProviderManagers($id, array('r_provider_admins.user_id'=>$user[0]['user_id']));
                             if(count($provider_manager)==0){
@@ -327,7 +343,7 @@ class Appointment_admin extends NodCMS_Controller
             }
             $this->data['groups'] = $this->Appointment_admin_model->getManagersGroups();
             $this->data['data'] = $this->Appointment_admin_model->getProviderManagers($id);
-            $this->data['title'] = _l("providers",$this);
+            $this->data['title'] = _l("Members",$this);
             $this->data['sub_title'] = _l("Managers",$this);
             $this->data['breadcrumb']=array(
                 array('title'=>$provider[0]['provider_name']),

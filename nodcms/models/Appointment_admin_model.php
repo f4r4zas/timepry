@@ -1498,6 +1498,22 @@ class Appointment_admin_model extends CI_Model{
 
 
     // Select a list of username from "users" table
+    
+    function getEmail($conditions = NULL)
+
+    {
+
+        $this->db->select('email');
+
+        $this->db->from('users');
+
+        if($conditions != NULL) $this->db->where($conditions);
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+
+    }
 
     function getUsername($conditions = NULL)
 
@@ -1536,6 +1552,22 @@ class Appointment_admin_model extends CI_Model{
 
 
     // Select a row from "users" table
+    
+    function getUserByEmail($email, $conditions = NULL){
+
+        $this->db->select('*');
+
+        $this->db->from('users');
+
+        $this->db->where('email', $email);
+
+        if($conditions!=NULL) $this->db->where($conditions);
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+
+    }
 
     function getUserByUsername($username, $conditions = NULL){
 
