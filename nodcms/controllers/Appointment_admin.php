@@ -150,6 +150,8 @@ class Appointment_admin extends NodCMS_Controller
     // Admin Homepage (Choose a provider)
     function index($id=NULL)
     {
+		echo "worke";
+		die();
         if($id!=NULL){
             if($this->session->userdata('group_id')!=1 && $this->session->userdata('group_id')!=100){
                 $where = NULL;
@@ -1752,6 +1754,13 @@ class Appointment_admin extends NodCMS_Controller
                 'url'=>APPOINTMENT_ADMIN_URL.'services',
                 'icon'=>'icon-briefcase',
                 'title'=>_l('Practitioners',$this),
+                'class'=>'',
+                'addOn'=>'',
+            ),
+			'dental-office'=>array(
+                'url'=>'/timepry/Dental/addDentalOffice',
+                'icon'=>'icon-briefcase',
+                'title'=>_l('Add Dental Office',$this),
                 'class'=>'',
                 'addOn'=>'',
             ),

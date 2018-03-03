@@ -9,7 +9,7 @@
  */
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Registration extends NodCMS_Controller {
+class Dental extends NodCMS_Controller {
     function __construct()
     {
         parent::__construct('frontend');
@@ -23,6 +23,8 @@ class Registration extends NodCMS_Controller {
         $this->load->library(array('upload','form_validation'));
     }
 
+	
+	
     // Set system language from URL
     function preset($lang = "en")
     {
@@ -173,8 +175,10 @@ class Registration extends NodCMS_Controller {
                 }
     }
     
-    function dentistRegistration($step =1,$lang="en")
+    function addDentalOffice($step =2,$lang="en")
     {
+	
+		$this->input->post("step");
         $status = true;
 		$error = array();
         $this->preset($lang);
@@ -305,21 +309,18 @@ class Registration extends NodCMS_Controller {
                     'class'=>'note note-success'
                 );
                 $this->session->set_flashdata('message', $message);
-                echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."register/dentist-registration/2"));		
+                echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."Dental/addDentalOffice/2"));		
 		        die();
             } 
             //redirect(base_url()."register/dentist-registration");
-            echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."register/dentist-registration/"));		
+            echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."Dental/addDentalOffice/"));	
+		
 		    die();
             
         }
         
         elseif($this->input->post("step")=="update2"){
-            //echo "<pre>";
-            //print_r($this->input->post());
-            //echo "</pre>";
-            //exit();
-            
+           
             
             $this->form_validation->set_rules('dental_officename', _l('Name of the Dental Office',$this), 'required|xss_clean|callback_formRulesName');
             $this->form_validation->set_rules('dental_officedescription', _l('Description of Dental Office',$this), 'required|xss_clean|callback_formRulesName');
@@ -455,8 +456,6 @@ class Registration extends NodCMS_Controller {
                 
                 $get_last_user_id = $query->result();
                 
-                
-                
                 $data = array(
                     "provider_name"=>$this->input->post('dental_officename'),
                     "provider_username"=>$time_start,
@@ -467,6 +466,7 @@ class Registration extends NodCMS_Controller {
                     "created_date"=>time(),
                     "user_id"=>$get_last_user_id[0]->user_id
                 );
+				
                 $this->db->insert('r_providers',$data);
                 $provider_id = $this->db->insert_id();
                 
@@ -661,11 +661,11 @@ class Registration extends NodCMS_Controller {
                 
                 
                 //$this->session->set_flashdata('message', $message);
-                echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."register/dentist-registration/3"));		
+                echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."Dental/addDentalOffice/3"));		
 		        die();
             }
             //redirect(base_url()."register/dentist-registration");
-            echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."register/dentist-registration/2"));		
+            echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."Dental/addDentalOffice/2"));		
 		    die();
         }elseif($this->input->post("step")=="update3"){
             //print_r($this->input->post());
@@ -727,11 +727,11 @@ class Registration extends NodCMS_Controller {
                 
                 
                 //$this->session->set_flashdata('message', $message);
-                echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."register/dentist-registration/4"));		
+                echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."Dental/addDentalOffice/4"));		
 		        die();
             }
             //redirect(base_url()."register/dentist-registration");
-            echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."register/dentist-registration/3"));		
+            echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."Dental/addDentalOffice/3"));		
 		    die();
         }elseif($this->input->post("step")=="update4"){
 
@@ -799,11 +799,11 @@ class Registration extends NodCMS_Controller {
                 
                 
                 //$this->session->set_flashdata('message', $message);
-                echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."register/dentist-registration/5"));		
+                echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."Dental/addDentalOffice/5"));		
 		        die();
             }
             //redirect(base_url()."register/dentist-registration");
-            echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."register/dentist-registration/4"));		
+            echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."Dental/addDentalOffice/4"));		
 		    die();
         }elseif($this->input->post("step")=="update5"){
         
@@ -865,12 +865,12 @@ class Registration extends NodCMS_Controller {
                     'class'=>'note note-success'
                 );
                 $this->session->set_flashdata('message', $message);*/
-                echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."register/dentist-registration/message"));		
+                echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."Dental/addDentalOffice/message"));		
 		        die();
             }
             //redirect(base_url()."register/dentist-registration");
             
-            echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."register/dentist-registration/5"));		
+            echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."Dental/addDentalOffice/5"));		
 		    die();
         } 
         if($this->session->flashdata('set_value')){
@@ -905,7 +905,7 @@ class Registration extends NodCMS_Controller {
                 
         $this->data['step']=$step;
         $this->data['title']=_l("Dentist Registration",$this);
-        $this->data['content']=$this->load->view($this->mainTemplate.'/dentist_register',$this->data,true);
+        $this->data['content']=$this->load->view($this->mainTemplate.'/add_dental_office',$this->data,true);
         $this->load->view($this->frameTemplate, $this->data);
     }
     
@@ -952,8 +952,8 @@ class Registration extends NodCMS_Controller {
         
         $this->preset($lang);
         $message = array(
-                    'title'=>_l('Your subscription was successful!', $this),
-                    'body'=>_l('Please check your email and click on the link posted.', $this),
+                    'title'=>_l('Dental office added!', $this),
+                    'body'=>_l('Successfully Add Dental office.', $this),
                     'class'=>'note note-success'
                 );
         $this->session->set_flashdata('message', $message);
@@ -965,7 +965,7 @@ class Registration extends NodCMS_Controller {
             $this->data['message_title'] = $message['title'];
             $this->data['message'] = $message['body'];
             $this->data['message_class'] = $message['class'];
-            $this->data['content']=$this->load->view($this->mainTemplate.'/user_registration_message',$this->data,true);
+            $this->data['content']=$this->load->view($this->mainTemplate.'/dental_office_message',$this->data,true);
             $this->load->view($this->frameTemplate, $this->data);
         }else{
             echo "df;ldsf";
