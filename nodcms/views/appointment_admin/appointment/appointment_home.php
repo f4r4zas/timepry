@@ -1,6 +1,6 @@
 <div class="portlet">
     <div class="portlet-body">
-        <div class="table-toolbar">
+        <div class="table-toolbar" style="display: none;">
             <div class="row">
                 <div class="col-md-6">
                     <div class="btn-group">

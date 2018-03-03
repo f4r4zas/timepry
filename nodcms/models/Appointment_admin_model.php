@@ -1265,8 +1265,11 @@ class Appointment_admin_model extends CI_Model{
         $this->db->join('users', "users.user_id = r_providers.user_id");
 
         if($conditions!=NULL) $this->db->where($conditions);
+        
+        $this->db->order_by("r_providers.provider_id","DESC");
 
         if($limit!=NULL) $this->db->limit($limit, $offset);
+        
 
         $query = $this->db->get();
 

@@ -448,13 +448,13 @@ class Dental extends NodCMS_Controller {
                 $time_start = time();
                 $time_start = $time_start + (7 * 24 * 60 * 60 * 60);
                 
-                $this->db->select('user_id');
+                /*$this->db->select('user_id');
                 $this->db->from('users');
                 $this->db->order_by('user_id','desc');
                 $this->db->limit('1');
-                $query = $this->db-> get();
+                $query = $this->db-> get();*/
                 
-                $get_last_user_id = $query->result();
+                $get_last_user_id = $this->session->userdata('user_id');
                 
                 $data = array(
                     "provider_name"=>$this->input->post('dental_officename'),
@@ -464,7 +464,7 @@ class Dental extends NodCMS_Controller {
                     "description"=>$this->input->post('dental_officedescription'),
                     "website"=>$this->input->post('dental_officewebsite'),
                     "created_date"=>time(),
-                    "user_id"=>$get_last_user_id[0]->user_id
+                    "user_id"=>$get_last_user_id
                 );
 				
                 $this->db->insert('r_providers',$data);
@@ -484,7 +484,7 @@ class Dental extends NodCMS_Controller {
                     "service_description"=>"",
                     "created_date"=>time(),
                     "price" => 1.0,
-                    "user_id"=>$get_last_user_id[0]->user_id,
+                    "user_id"=>$get_last_user_id,
                     "public"=>1,
                     "price_show"=>1,
                     
@@ -502,7 +502,7 @@ class Dental extends NodCMS_Controller {
                         $end_min = explode(":",$_POST['closingHours'][$y]);
                         $end_min = ((int) $end_min[0]*60) + (int) $end_min[1];
                         
-                        $data4["user_id"]=$get_last_user_id[0]->user_id;
+                        $data4["user_id"]=$get_last_user_id;
                         $data4["created_date"]=time();
                         $data4["service_id"]=$service_id;
                         $data4["day_no"]=$y;
@@ -561,24 +561,23 @@ class Dental extends NodCMS_Controller {
                 endforeach;
                 
                 $this->session->set_userdata(array(
-                    'user_id'  => $get_last_user_id[0]->user_id,
-                    'provider_id' => $provider_id,
-                    'service_id' => $service_id
+                    'new_provider_id' => $provider_id,
+                    'service_id' => $service_ids
                 ));
                 
                 $this->db->set('status', 1);
         $this->db->set('active_register', 1);
-        $this->db->where('user_id', $get_last_user_id[0]->user_id);
+        $this->db->where('user_id', $get_last_user_id);
         $this->db->update('users');
         
 
         $this->db->set('active', 1);
-        $this->db->where('user_id', $get_last_user_id[0]->user_id);
+        $this->db->where('user_id', $get_last_user_id);
         $this->db->update('r_providers');
         
         $this->db->select('*');
         $this->db->from('users');
-        $this->db->where('user_id',$get_last_user_id[0]->user_id);
+        $this->db->where('user_id',$get_last_user_id);
         $query = $this->db->get();
         $user_all_data = $query->result();
         
@@ -595,11 +594,11 @@ class Dental extends NodCMS_Controller {
         $service_all_data = $query->result();
         
         
-        $value2['user_id'] = $get_last_user_id[0]->user_id;
+        $value2['user_id'] = $get_last_user_id;
         $value2['provider_id'] = $provider_id;
         $value2['group_id'] = 1;
         
-        $where = array('user_id'=>$get_last_user_id[0]->user_id,'provider_id'=>$provider_id);
+        $where = array('user_id'=>$get_last_user_id,'provider_id'=>$provider_id);
         $query = $this->db->get_where('r_provider_admins',$where);
         if($query->num_rows() != 0)
         {
@@ -611,7 +610,7 @@ class Dental extends NodCMS_Controller {
             
         }
         
-                $value3['user_id'] = $get_last_user_id[0]->user_id;
+                $value3['user_id'] = $get_last_user_id;
                 $value3['language_id'] = 1;
                 $value3['relation_id'] = $provider_id;
                 $value3['data_type'] = 'r_providers';
@@ -635,7 +634,7 @@ class Dental extends NodCMS_Controller {
                
                 for($j=0; $j<count($service_ids);$j++){
 					
-                    $value1['user_id'] = $get_last_user_id[0]->user_id;
+                    $value1['user_id'] = $get_last_user_id;
                     $value1['language_id'] = 1;
                     $value1['relation_id'] = $service_ids[$j];
                     $value1['data_type'] = 'r_services';
@@ -644,7 +643,7 @@ class Dental extends NodCMS_Controller {
                     $value1['full_description'] = "<p>".$service_all_data[0]->service_description."</p>";
                     $value1['name'] = $service_all_data[0]->service_name;
                     $value1['description'] = $service_all_data[0]->service_description;
-                    $where = array('language_id'=>1,'relation_id'=>$service_id[$j],'data_type'=>'r_services');
+                    $where = array('language_id'=>1,'relation_id'=>$service_ids[$j],'data_type'=>'r_services');
                     $query = $this->db->get_where('extensions',$where);
                     if($query->num_rows() != 0)
                     {
@@ -721,7 +720,7 @@ class Dental extends NodCMS_Controller {
                 
                 $data = array("address"=>$address);
                 
-                $this->db->where('provider_id',$this->session->userdata('provider_id'));
+                $this->db->where('provider_id',$this->session->userdata('new_provider_id'));
                 $this->db->update('r_providers',$data);
 
                 
@@ -776,7 +775,7 @@ class Dental extends NodCMS_Controller {
                 $data1 = array(
                     "title"=>$_POST['treatment_name'][$x],
                     "service_description"=>$_POST['treatment_desc'][$x],
-                    "provider_id"=>$this->session->userdata('provider_id'),
+                    "provider_id"=>$this->session->userdata('new_provider_id'),
                     "user_id"=>$this->session->userdata('user_id'),
                     "created_date"=>time(),
                     "price" => $_POST['treatment_price'][$x],

@@ -177,7 +177,7 @@ class Appointment_admin extends NodCMS_Controller
             }
         }
         $this->data['title']=_l("Home",$this);
-        $this->data['sub_title']=_l("providers",$this);
+        $this->data['sub_title']=_l("Dental Offices",$this);
         $this->data['page']='home';
         if($this->session->userdata('group') == 1 || $this->session->userdata('group') == 100){
             // # Admin Home

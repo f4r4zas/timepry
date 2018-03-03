@@ -359,11 +359,12 @@
                                     
                                 </select>
                                 <input class="update_4" type="text" placeholder="Price($)" name="treatment_price[]" style="width: 15%; display: inline-block; vertical-align: top; height: 40px; margin: 0 2px;"/>
+                                <?php //echo $this->session->userdata('new_provider_id');?>
                                 <div style="width: 29%; display: inline-block; vertical-align: top; height: 40px;">
                                 <?php 
                                 $this->db->select('*');
                                 $this->db->from('practitioners');
-                                $this->db->where('provider_id',$this->session->userdata('provider_id'));
+                                $this->db->where('provider_id',$this->session->userdata('new_provider_id'));
                                 $query = $this->db->get();
                                 $practitioners = $query->result();?>
                                     <select id="" class="update_4 e9" name="treatment_practitioner[]" multiple="">
@@ -472,7 +473,7 @@
                                                                     <?php 
                                                                     $this->db->select('*');
                                                                     $this->db->from('practitioners');
-                                                                    $this->db->where('provider_id',$this->session->userdata('provider_id'));
+                                                                    $this->db->where('provider_id',$this->session->userdata('new_provider_id'));
                                                                     $query = $this->db->get();
                                                                     $practitioners = $query->result();?>
                                                                         <select id="" class="update_4 e9" name="treatment_practitioner[]" multiple="">
