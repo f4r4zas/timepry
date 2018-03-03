@@ -1,0 +1,17 @@
+.nodcms-appointment-iframe-style1-bg{
+    background: rgba(0,0,0,.4);
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+}
+.nodcms-appointment-iframe-style1{
+    border:0;
+    width: 100%;
+    min-height: 300px;
+}
+.nodcms-appointment-iframe-style1:hover, .nodcms-appointment-iframe-style1:focus{
+    position: absolute;
+
+}

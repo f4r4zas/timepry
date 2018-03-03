@@ -1,0 +1,192 @@
+/* here you can put your own css to customize and override the theme */
+
+
+
+/***
+
+Rounded Portlets
+
+***/
+
+/*
+
+.portlet {
+
+	border-radius: 4px !important;
+
+}
+
+
+
+.portlet .portlet-title {
+
+	border-radius: 4px 4px 0px 0px !important;
+
+}
+
+
+
+.portlet .portlet-body,
+
+.portlet .portlet-body .form-actions  {
+
+	border-radius: 0px 0px 4px 4px !important;
+
+}
+
+*/
+
+a{
+
+    -webkit-transition: all 250ms;
+
+    -moz-transition: all 250ms;
+
+    -ms-transition: all 250ms;
+
+    -o-transition: all 250ms;
+
+    transition: all 250ms;
+
+}
+
+.nav > li > a:focus, .nav > li > a:hover{
+
+    background: transparent;
+
+}
+
+#date_pick_label{font-size:1.5em; color:#ff4848;padding-left:20px}
+
+
+
+.portlet-title > h3.caption {margin:0;}
+
+
+
+.page-header .page-header-menu .search-form {
+
+    background: rgba(255, 255, 255, 0.8);
+
+    -webkit-transition: all 300ms;
+
+    -moz-transition: all 300ms;
+
+    -ms-transition: all 300ms;
+
+    -o-transition: all 300ms;
+
+    transition: all 300ms;
+
+}
+
+.page-header .page-header-menu .search-form.open {
+
+    background: rgba(255, 255, 255, 0.9);
+
+}
+
+.page-header .page-header-menu .search-form .input-group {
+
+    background: transparent;
+
+}
+
+.page-header .page-header-menu .search-form .input-group .form-control {
+
+    color: #616d7d;
+
+    background: transparent;
+
+}
+
+.page-header .page-header-menu .search-form .input-group .form-control::-moz-placeholder {
+
+    color: #5f6a7a;
+
+    opacity: 1;
+
+}
+
+.page-header .page-header-menu .search-form .input-group .form-control:-ms-input-placeholder {
+
+    color: #5f6a7a;
+
+}
+
+.page-header .page-header-menu .search-form .input-group .form-control::-webkit-input-placeholder {
+
+    color: #5f6a7a;
+
+}
+
+.page-header .page-header-menu .search-form .input-group .input-group-btn .btn.submit > i {
+
+    color: #616d7d;
+
+}
+
+.portfolio-btn a{
+
+    background: #BBBBBB !important;
+
+}
+.nav-tabs>li.disabled>a {
+    color: #b7b7b7;
+    background-color: #f2f2f2;
+}
+
+.nav-tabs>li>a::after {
+    border-left-color: #00958c;
+    border-left-width: 19px;
+    border-bottom-width: 22px;
+}
+
+.nav-tabs>li>a {
+    background-color: #00958c;
+    color: #fff;
+}
+
+.nav-tabs>li.disabled>a::after {
+    border-left-color: #f2f2f2;
+}
+.nav > li.active > a:hover {
+    background-color: rgba(81, 142, 210, 0.9);
+}
+.nav > li.active > a:hover::after {
+    border-left-color: rgba(81, 142, 210, 0.9);
+}
+.nav > li > a:hover {
+    background-color: rgba(0, 149, 140, 0.9);
+}
+.nav > li > a:hover::after {
+    border-left-color: rgba(0, 149, 140, 0.9);
+}
+.nav-tabs>li.disabled>a:hover::after {
+    border-left-color: #f2f2f2;
+}
+.nav-tabs>li.disabled>a:hover {
+    background-color: #f2f2f2;
+}
+.registration-tabs .tab-content .tab-pane .row > div {
+    margin-bottom: 20px;
+}
+.help-block {
+    margin: 0;
+    margin-top: 2px;
+    font-size: 12px;
+}
+.registration-tabs input[type=text],
+.registration-tabs input[type=password],
+.registration-tabs textarea{
+    margin-bottom: 0px;
+}
+.page-content {
+    background-color: transparent;
+}
+.register-user form .row > div {
+    margin-bottom: 20px;
+}
+.register-user form .row > div > input {
+    margin-bottom:  0;
+}

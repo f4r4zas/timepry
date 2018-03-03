@@ -1,0 +1,52 @@
+.fc-header-toolbar .fc-prev-button,
+.fc-header-toolbar .fc-next-button {
+    border: 0;
+    background-color: transparent;
+    background: transparent;
+    text-shadow: none;
+    color: #47a6ff;
+    font-size: 32px;
+    font-weight: 900;
+    padding-left: 0;
+    padding-right: 0;
+}
+.fc-toolbar .fc-center h2 {
+    font-size: 32px;
+    font-weight: 400;
+    font-family: 'Lato', sans-serif;
+    height: 67px;
+    line-height: 70px;
+    color: #47a6ff;
+    text-transform: uppercase;
+}
+th.fc-day-header.fc-widget-header {
+    color: #fff;
+    background-color: #47a6ff;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    padding: 5px 0;
+    border-color: #47a6ff;
+    font-weight: 400;
+}
+.fc-ltr .fc-basic-view .fc-day-top .fc-day-number {
+    color: #333;
+}
+.fc-ltr .fc-basic-view .fc-day-top {
+    text-align: center;
+}
+.fc-day-grid-event .fc-content>span {
+    display: block;
+    text-align: center;
+    font-size: 15px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    line-height: 15px;
+    padding: 5px 5px;
+}
+.fc-day-grid-event {
+    border-radius: 0;
+    margin: 0;
+    background-color: #47a6ff;
+    border: 0;
+    border-bottom: 1px solid #fff;
+}

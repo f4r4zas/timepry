@@ -1,4 +1,4 @@
-*/config/development
+nodcms/config
 */logs/log-*.php
 !*/logs/index.html
 */cache/*

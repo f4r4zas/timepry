@@ -1,0 +1,16 @@
+body{
+    padding-top: 10px;
+}
+#date_pick_label{font-size:1.5em; color:#ff4848;padding-left:20px}
+
+@media(max-width:768px){
+    .info-bar, .info-bar .text-right{text-align: center;}
+    /* Custom responsive menu*/
+    .navbar-default .navbar-collapse{display: inline;padding: 0;margin: 0;}
+    .navbar-default .navbar-header .collapsed{display: none;}
+    .navbar-default .navbar-collapse .navbar-nav.navbar-right{position: absolute;top:0;right: 20px;}
+    .navbar-default .navbar-collapse .navbar-nav.navbar-right > li{float: right;}
+    .navbar-default .navbar-collapse .navbar-nav.navbar-right > li > a{padding: 8px 13px;}
+    .navbar-default .navbar-collapse .navbar-nav.navbar-right > li span.title {display: none;}
+
+}

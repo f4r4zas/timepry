@@ -1,0 +1,325 @@
+<section class="home-banner page-home">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="section-text">
+
+                    <p class="light-font">FREE ONLINE BOOKING WITH OVER</p>
+
+                    <p class="heavy-font">3,500 NHS AND PRIVATE DENTISTS</p>
+
+                </div>
+
+
+
+                <div class="search_div">
+                    <div class="search_tabs">
+                        <div class="s_tab active" data-tab="one" onclick="s_tab(event)">Search By Location</div>
+                        <div class="s_tab" data-tab="two" onclick="s_tab(event)">Search By Dental Office</div>
+                    </div>
+                    <div class="search_bar">
+
+                        <div id="tabcontent-one" class="tab_content active">
+                            <div class="input_field fa fa-search">
+                                <?php 
+                                $this->db->select('provider_id,address');
+                                $this->db->from('r_providers');
+                                $query = $this->db->get();
+                                $locations = $query->result();?>
+                                    <select id="" class="e9" name="search_location">
+                                        <?php foreach($locations as $location):
+                                        $fetched = array();
+                                        $location_city = explode(",",$location->address);
+                                        end($location_city);
+                                        $location_city = prev($location_city);
+                                        if(!in_array($location_city,$fetched)):
+                                        ?>
+                                        <option value="<?= urlencode($location_city);?>"><?= $location_city;?></option>
+                                        <?php 
+                                        $fetched[] = $location_city;
+                                        endif;
+                                        endforeach;?>
+                                    </select>
+                                <!--<input type="text" placeholder="Location" name="search_location">-->
+
+                            </div>
+
+                            <div class="input_field">
+                            
+                                <?php 
+                                $this->db->select('subcat_id,subcat_name');
+                                $this->db->from('subcategory');
+                                $query = $this->db->get();
+                                $treatments = $query->result();?>
+                                    <select id="" class="e10" name="search_treatment">
+                                        <?php foreach($treatments as $treatment):
+                                        $fetched = array();
+                                        if(!in_array($treatment->subcat_name,$fetched)):
+                                        ?>
+                                        <option value="<?= urlencode($treatment->subcat_id);?>"><?= $treatment->subcat_name;?></option>
+                                        <?php 
+                                        $fetched[] = $treatment->subcat_name;
+                                        endif;
+                                        endforeach;?>
+                                    </select>
+
+                                <!--<input type="text" placeholder="Treatment" name="search_treatment">-->                        
+
+                            </div>
+
+                            <div class="input_field">
+
+                                <input type="text" name="search_date" id="search_date">                        
+
+                            </div>
+                            <script>
+                                $("#search_date").kendoDatePicker({
+                                    min: new Date(),
+                                    format: "dd/MM/yyyy"
+                                });
+                            </script>
+
+                            <!-- <div class="input_field range">
+
+                                <label>Distance</label>
+
+                                <input type="range" name="search_distance" class="range_slider">
+
+                            </div> -->
+
+                            <div class="input_field btn">
+
+                                <input type="button" class="toothBtn">
+
+                            </div>
+
+                            <input type="button" class="searchBtnOnMobile" value="Search">
+
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div id="tabcontent-two" class="tab_content">
+
+                            <div class="input_field fa fa-search">
+                                <input type="text" placeholder="Dental Clinic" name="search_dental_clinic">
+                            </div>
+
+                            <div class="input_field btn">
+                                <input type="button" class="toothBtn">
+                            </div>
+                        
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <div class="section-heading">
+
+                    <h1>Nearby Dentist</h1>
+
+                    <div class="cus-hr"></div>
+
+                </div>
+
+            </div>
+
+        </div>    
+
+    </div>    
+
+</section>
+
+
+
+<section class="map_wrapper">
+
+    <div id="map"></div>
+
+</section>
+
+
+
+<section class="how-it-works">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="section-heading">
+
+                <h1>How It Works</h1>
+
+                <div class="cus-hr"></div>
+
+            </div>
+
+            <div class="col-md-4 box">
+
+                <div class="work-img">
+
+                    <img src="<?php echo base_url();?>assets/front/images/timepry_search_icon.png" alt="Search">
+
+                </div>
+
+                <div class="work-title">Search</div>
+
+                <div class="work-content">
+
+                    <p>
+
+                        This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. 
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-md-4 box">
+
+                <div class="work-img">
+
+                    <img src="<?php echo base_url();?>assets/front/images/timepry_browse_icon.png" alt="Browse">
+
+                </div>
+
+                <div class="work-title">Browse</div>
+
+                <div class="work-content">
+
+                    <p>
+
+                        This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. 
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-md-4 box">
+
+                <div class="work-img">
+
+                    <img src="<?php echo base_url();?>assets/front/images/timepry_book_icon.png" alt="Book">
+
+                </div>
+
+                <div class="work-title">Book</div>
+
+                <div class="work-content">
+
+                    <p>
+
+                        This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. 
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<section class="treatment">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="section-heading">
+
+                <h1>Find The Right Treatment</h1>
+
+                <div class="cus-hr"></div>
+
+            </div>
+
+            <div class="col-sm-6 col-md-3 box">
+
+                <div class="img">
+
+                    <img src="<?php echo base_url();?>assets/front/images/nhs_thumb.jpg" alt="">
+
+                </div>
+
+                <div class="title">NHS</div>
+
+            </div>
+
+
+
+            <div class="col-sm-6 col-md-3 box">
+
+                <div class="img">
+
+                    <img src="<?php echo base_url();?>assets/front/images/emergency_thumb.jpg" alt="">
+
+                </div>
+
+                <div class="title">Emergency</div>
+
+            </div>
+
+
+
+            <div class="col-sm-6 col-md-3 box">
+
+                <div class="img">
+
+                    <img src="<?php echo base_url();?>assets/front/images/private_thumb.jpg" alt="">
+
+                </div>
+
+                <div class="title">Private</div>
+
+            </div>
+
+
+
+            <div class="col-sm-6 col-md-3 box">
+
+                <div class="img">
+
+                    <img src="<?php echo base_url();?>assets/front/images/cosmetic_thumb.jpg" alt="">
+
+                </div>
+
+                <div class="title">Cosmetic</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<script>
+$(document).ready(function(){
+$(".e9").select2({
+    placeholder: "Location",
+}); 
+
+$(".e10").select2({
+    placeholder: "Treatment",
+}); 
+}); 
+</script>

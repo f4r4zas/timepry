@@ -1,0 +1,141 @@
+body{background: #FFFFFF;}
+.reservation-service, .reservation-service-img
+{
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -ms-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+}
+.reservation-service{
+    border:1px solid #dddddd;
+    background: #FFFFFF;
+    margin-top: 20px;
+    height: 200px;
+    overflow: hidden;
+    -webkit-box-shadow: 3px 4px 5px -3px rgba(0,0,0,0.38);
+    -moz-box-shadow: 3px 4px 5px -3px rgba(0,0,0,0.38);
+    box-shadow: 3px 4px 5px -3px rgba(0,0,0,0.38);
+}
+.reservation-service.transparent{
+    opacity: 0.3;
+}
+.reservation-service:hover{
+    border-color: #dddddd;
+    color:#000;
+    /*overflow: visible;*/
+    opacity: 1;
+}
+/*.reservation-service:hover .reservation-service-img{*/
+    /*position: absolute;*/
+    /*margin-left: -10px;*/
+    /*margin-right: -10px;*/
+    /*margin-top: -10px;*/
+    /*height: 220px;*/
+/*}*/
+.reservation-service .col-xs-1, .reservation-service .col-sm-1, .reservation-service .col-md-1, .reservation-service .col-lg-1, .reservation-service .col-xs-2, .reservation-service .col-sm-2, .reservation-service .col-md-2, .reservation-service .col-lg-2, .reservation-service .col-xs-3, .reservation-service .col-sm-3, .reservation-service .col-md-3, .reservation-service .col-lg-3, .reservation-service .col-xs-4, .reservation-service .col-sm-4, .reservation-service .col-md-4, .reservation-service .col-lg-4, .reservation-service .col-xs-5, .reservation-service .col-sm-5, .reservation-service .col-md-5, .reservation-service .col-lg-5, .reservation-service .col-xs-6, .reservation-service .col-sm-6, .reservation-service .col-md-6, .reservation-service .col-lg-6, .reservation-service .col-xs-7, .reservation-service .col-sm-7, .reservation-service .col-md-7, .reservation-service .col-lg-7, .reservation-service .col-xs-8, .reservation-service .col-sm-8, .reservation-service .col-md-8, .reservation-service .col-lg-8, .reservation-service .col-xs-9, .reservation-service .col-sm-9, .reservation-service .col-md-9, .reservation-service .col-lg-9, .reservation-service .col-xs-10, .reservation-service .col-sm-10, .reservation-service .col-md-10, .reservation-service .col-lg-10, .reservation-service .col-xs-11, .reservation-service .col-sm-11, .reservation-service .col-md-11, .reservation-service .col-lg-11, .reservation-service .col-xs-12, .reservation-service .col-sm-12, .reservation-service .col-md-12, .reservation-service .col-lg-12 {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.reservation-service .row{
+    margin-left: -5px;
+    margin-right: -5px;
+}
+.reservation-service-img{
+    height: 200px;
+    overflow: hidden;
+    background: #EEEEEE;
+    -webkit-box-shadow: 5px 0px 5px -3px rgba(0,0,0,0.43);
+    -moz-box-shadow: 5px 0px 5px -3px rgba(0,0,0,0.43);
+    box-shadow: 5px 0px 5px -3px rgba(0,0,0,0.43);
+}
+.pull-right .reservation-service-img{
+    -webkit-box-shadow: -5px 0px 5px -3px rgba(0,0,0,0.43);
+    -moz-box-shadow: -5px 0px 5px -3px rgba(0,0,0,0.43);
+    box-shadow: -5px 0px 5px -3px rgba(0,0,0,0.43);
+}
+.reservation-service-img img{
+    width: 100%;
+}
+.reservation-service-body{
+    padding: 10px;
+    padding-top: 0;
+    height:100px;
+    overflow: hidden;
+}
+.reservation-service h2{
+    font-size: 1.5em;
+    margin:0;
+    padding: 10px;
+}
+.reservation-service .btn{
+    margin:10px;
+}
+#form_elements{display: none}
+#form_elements.pullDown {display: block !important;}
+.pullDown{
+    display: block;
+    animation-name: pullDown;
+    -webkit-animation-name: pullDown;
+
+    animation-duration: 1.1s;
+    -webkit-animation-duration: 1.1s;
+
+    animation-timing-function: ease-out;
+    -webkit-animation-timing-function: ease-out;
+
+    transform-origin: 50% 0%;
+    -ms-transform-origin: 50% 0%;
+    -webkit-transform-origin: 50% 0%;
+}
+
+@keyframes pullDown {
+    0% {
+        transform: scaleY(0.1);
+    }
+    40% {
+        transform: scaleY(1.02);
+    }
+    60% {
+        transform: scaleY(0.98);
+    }
+    80% {
+        transform: scaleY(1.01);
+    }
+    100% {
+        transform: scaleY(0.98);
+    }
+    80% {
+        transform: scaleY(1.01);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+@-webkit-keyframes pullDown {
+    0% {
+        -webkit-transform: scaleY(0.1);
+    }
+    40% {
+        -webkit-transform: scaleY(1.02);
+    }
+    60% {
+        -webkit-transform: scaleY(0.98);
+    }
+    80% {
+        -webkit-transform: scaleY(1.01);
+    }
+    100% {
+        -webkit-transform: scaleY(0.98);
+    }
+    80% {
+        -webkit-transform: scaleY(1.01);
+    }
+    100% {
+        -webkit-transform: scaleY(1);
+    }
+}
+
+.input-group-addon.btn{background: #FFFFFF;}
+.input-group-addon.btn:hover{background: #f4f4f4;}

@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+    <head>
+    <meta charset="utf-8">
+	<title>NodAPS User Guide</title>
+ 	<meta name="description" content="Thank you for purchasing NodAPS. If you have any questions that are beyond the scope of this help file, please feel free to email via my user page contact form here">
+	<meta name="author" content="NodCMS">
+	<meta name="copyright" content="NodCMS">
+	<meta name="generator" content="Documenter v2.0 http://rxa.li/documenter">
+	<meta name="date" content="2016-05-26T00:00:00+02:00">
+	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="assets/css/documenter_style.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    
+	
+	<style>
+		html, body{background-color:#EEEEEE;color:#383838;}
+		h1,h2,h3,h4,h5,h6{color:#383838;}
+		section table{background-color:#EEEEEE;}
+		::-moz-selection{background:#333636;color:#0085DD;}
+		::selection{background:#333636;color:#0085DD;}
+		a.brand{background-image:url(assets/images/NodCMS-LOGO.png);}
+		a, a:hover, a:active{color:#003F9E;}
+		hr{border-top:1px solid #D4D4D4;border-bottom:1px solid #FFFFFF;}
+		div.navbar-inner, .navbar .nav li ul{background:#343838;color:#FFFFFF;}
+		a.btn-navbar{background:#343838;color:#FFFFFF;}
+		.navbar .nav li a{color:#FFFFFF;text-shadow:1px 1px 0px #494F4F;}
+		.navbar .nav li a:hover, .navbar .nav li.active a{text-shadow:none;}
+		div.navbar-inner ul{}
+		.marketing-byline{color:#777777;}
+		.navbar .nav > li a{color:#FFFFFF;}
+		.navbar .nav > li a:hover, a.btn-navbar:hover{background:#333636;color:#0085DD;}
+		.navbar .nav .active > a, .navbar .nav .active > a:hover, a.btn-navbar:active{background-color:#333636;color:#0085DD;}
+		.navbar .nav li ul li a:hover{background:#333636;color:#0085DD;}
+		.navbar .nav li ul li a:active{background:#333636;color:#0085DD;}
+		.btn-primary {
+			  background-image: -moz-linear-gradient(top, #005F9E, #0088CC);
+			  background-image: -ms-linear-gradient(top, #005F9E, #0088CC);
+			  background-image: -webkit-gradient(linear, 0 0, 0 005F9E%, from(#343838), to(#0088CC));
+			  background-image: -webkit-linear-gradient(top, #005F9E, #0088CC);
+			  background-image: -o-linear-gradient(top, #005F9E, #0088CC);
+			  background-image: linear-gradient(top, #005F9E, #0088CC);
+			  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#005F9E', endColorstr='#0088CC', GradientType=0);
+			  border-color: #0088CC #0088CC #bfbfbf;
+			  color:#FFFFFF;
+		}
+		.btn-primary:hover,
+		.btn-primary:active,
+		.btn-primary.active,
+		.btn-primary.disabled,
+		.btn-primary[disabled] {
+		  background-color: #0088CC;
+		}
+		#documenter_copyright{display:block !important;visibility:visible !important;}
+	</style>
+	
+	
+	<script src="assets/js/cufon.js"></script><script src="https://fonts.googleapis.com/css?family=Open+Sans"></script><script>Cufon.replace("h1, h2, h3, h4, h5, h6");</script>
+    </head>
+    
+<body class="documenter-project-nodaps-user-guide" data-spy="scroll" id="top">
+
+<!-- Documentation Navbar -->
+
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container"> 
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> 
+			<a class="brand" href="#">NodAPS User Guide</a>
+			<div class="nav-collapse">
+			<ul class="nav">
+					
+			<li><a href="#installation" title="1. Installation">1. Installation</a></li>
+			<li><a href="#update" title="1. Update">2. Update</a></li>
+			<li><a href="#configuration" title="2. Configuration">3. Configuration</a></li>
+			<li><a href="#management" title="3. Management">4. Management</a></li>
+
+			</ul>
+			</div>
+		</div>
+	</div>
+</div> <!-- End of Navbar -->
+
+<!-- Main Container Beginning -->			
+			
+<div class="container" id="documenter_content">
+    
+	<div id="documenter-cover">
+	<div class="masthead">
+	    <h1>NodAPS User Guide</h1>
+	    <p>Thank you for purchasing NodAPS. If you have any questions that are beyond the scope of this help file, please feel free to email via my user page contact form <a href="http://www.nodcms.com/en/contact">here</a></p>
+	    <ul class="marketing-byline">
+			<li>created: 05/25/2016</li>
+			<li>latest update: 05/26/2016</li>
+			<li>by: NodCMS</li>
+			<li><a href=""></a></li>
+		</ul>
+	    <p class="download-info">
+			<a href="#installation" class="btn btn-primary btn-large">1. Installation</a>
+			<a href="#update" class="btn btn-large">2. Update</a>
+            <a href="#configuration" class="btn btn-large">3. Configuration</a>
+            <a href="#management" class="btn btn-large">4. Management</a>
+		</p>
+		
+	</div> <!-- masthead -->
+	
+   <div id="intro">
+    <p class="highlight hero-unit">In this document you will know how work NodAPS, how you can config and manage it.
+There is 3 section.</p>
+   </div> <!-- intro -->
+   
+	</div>
+      
+  <section id="installation">
+	<div class="page-header"><h3>1. Installation</h3><hr class="notop"></div>
+<h2 style="font-family: Arial; color: rgb(0, 0, 0);">
+	Installation Wizard:</h2>
+      <p>After purchase NodAPS and extract main file you have a <b>"NodAPS"</b> folder that it is your system files.</p>
+      <p>Copy all file and folders from <b>"NodAPS"</b> and paste them in where you want, and just open your URL with your browser.</p>
+<h2 style="font-family: Arial; color: rgb(0, 0, 0);">
+	Manual installation steps:</h2>
+<ol style="color: rgb(0, 0, 0); font-family: Arial; font-size: medium;">
+	<li style="margin-bottom: 10px;">
+		Create a new empty database on your MySQL server(Set &quot;Collation&quot; on utf8_general_ci)</li>
+	<li style="margin-bottom: 10px;">
+		Import the&nbsp;<code style="font-family: Arial; font-size: 0.85em; padding: 5px 10px; background: rgb(238, 238, 238);">install.sql</code>&nbsp;file from in your database</li>
+	<li style="margin-bottom: 10px;">
+		Rename the file database_manual.php to database.php in&nbsp;<code style="font-family: Arial; font-size: 0.85em; padding: 5px 10px; background: rgb(238, 238, 238);">/nodcms/config/</code></li>
+	<li style="margin-bottom: 10px;">
+		Inter your database name in line 81 of database.php between the last two quotation marks&nbsp;<code style="font-family: Arial; font-size: 0.85em; padding: 5px 10px; background: rgb(238, 238, 238);">(&#39;database&#39; =&gt; &#39;YOUR DATABASE NAME&#39;)</code></li>
+	<li style="margin-bottom: 10px;">
+		Set your host username on line 79 instead of root&nbsp;<code style="font-family: Arial; font-size: 0.85em; padding: 5px 10px; background: rgb(238, 238, 238);">(&#39;username&#39; =&gt; &#39;root&#39;)</code></li>
+	<li style="margin-bottom: 10px;">
+		Inter your password in line 80 between the last two quotation marks.&nbsp;<code style="font-family: Arial; font-size: 0.85em; padding: 5px 10px; background: rgb(238, 238, 238);">(&#39;password&#39; =&gt; &#39;YOUR PASSWORD&#39;)</code></li>
+</ol>
+<h3 style="font-family: Arial; color: rgb(0, 0, 0);">
+	Administrator&#39;s panel:</h3>
+<p style="font-family: Arial; color: rgb(0, 0, 0); font-size: medium;">
+	After install, you can access the admin side on this URL&nbsp;<code style="font-family: Arial; font-size: 0.85em; padding: 5px 10px; background: rgb(238, 238, 238);">www.your-domain.com/admin</code></p>
+<p style="font-family: Arial; color: rgb(0, 0, 0); font-size: medium;">
+	username:&nbsp;<strong>admin</strong></p>
+<p style="font-family: Arial; color: rgb(0, 0, 0); font-size: medium;">
+	password:&nbsp;<strong>123456</strong></p>
+      <div style="padding:20px;margin-bottom:20px;background:#fcf8e3;border:1px solid #faebcc;color:#8a6d3b;">
+          <p><span style="color:#ff0000;font-weight: bold;">!IMPORTANT</span></p>
+          <p> To use Installer wizard pay attention to below important things:</p>
+          <ul style="font-size:1.2em;">
+              <li style="margin-bottom: 10px;">Any one can use installer on your host. There is no any password to access to install.</li>
+              <li style="margin-bottom: 10px;">After install remove <b>"install"</b> folder from your root.</li>
+              <li>After install change your default admin password.</li>
+          </ul>
+      </div>
+
+      <p>
+          If you installed NodAPS without error but after installation you see 404 error, please replace bellow code in your .htaccess file in root of your system.
+      </p>
+      <textarea style="width:500px;height:150px;" onClick="this.setSelectionRange(0, this.value.length)" readonly>RewriteEngine On
+          RewriteCond %{REQUEST_FILENAME} -f [OR]
+          RewriteCond %{REQUEST_FILENAME} -l [OR]
+          RewriteCond %{REQUEST_FILENAME} -d
+          RewriteRule ^.*$ - [NC,L]
+          RewriteRule ^(.*)$ index.php?/$1 [QSA,L]
+      </textarea>
+      <p><strong>If it doesn’t work, send me your log files with email.</strong></p>
+  </section>
+<section id="update">
+    <div class="page-header"><h3>2. Update</h3><hr class="notop"></div>
+    <p>If you already installed and use the previous version of NodUS, please do the below guides.</p>
+    <h4>Update Database</h4>
+    <div style="padding:20px;margin-bottom:20px;background:#fcf8e3;border:1px solid #faebcc;color:#8a6d3b;">
+        <span style="color:#ff0000;font-weight: bold;">IMPORTANT</span> This is not a first update in Database!
+		If you didn't update your NodAPS to last version please reinstall it.
+    </div>
+     <div style="padding:20px;margin-bottom:20px;background:#fcf8e3;border:1px solid #faebcc;color:#8a6d3b;">
+        <span style="color:#ff0000;font-weight: bold;">IMPORTANT</span> Before update your database, please take a backup from it!
+    </div>
+    <p>You have 2 way to upgrade your database:</p>
+    <ol>
+        <li>Implode the <b>"install_update.sql"</b> in your database.</li>
+        <li>
+            <p>Copy & paste below MySQL queries in your database. (phpMyAdmin->[Your Database]->SQL)</p>
+            <textarea style="width:100%;height:200px;font-size: 10px;" onClick="this.setSelectionRange(0, this.value.length)" readonly>ALTER TABLE `r_providers`
+  ADD COLUMN `payment_type` int(1) unsigned DEFAULT '0',
+  ADD COLUMN `provider_currency_code` VARCHAR(3),
+  ADD COLUMN `paypal_user_id` VARCHAR(255),
+  ADD COLUMN `paypal_password` VARCHAR(255),
+  ADD COLUMN `paypal_signature` VARCHAR(255),
+  ADD COLUMN `currency_sign` VARCHAR(255),
+  ADD COLUMN `currency_sign_before` int(1) unsigned DEFAULT '0';
+
+ALTER TABLE `r_provider_admins`
+  ADD COLUMN `notification_email` int(1) unsigned DEFAULT '0';
+
+ALTER TABLE `r_reservation`
+  ADD COLUMN `pre_registration_id` int(10) unsigned DEFAULT '0',
+  ADD COLUMN `paid` int(1) unsigned DEFAULT '0',
+  ADD COLUMN `paypal_paid` int(1) unsigned DEFAULT '0';
+
+ALTER TABLE `r_services`
+	ADD COLUMN `price_show` int(1) unsigned DEFAULT '0';
+
+ALTER TABLE `setting`
+  ADD COLUMN `appointment_payment` int(1) unsigned DEFAULT '0',
+  ADD COLUMN `timezone` VARCHAR(255),
+  ADD COLUMN `date_format` VARCHAR(255),
+  ADD COLUMN `time_format` VARCHAR(255),
+  ADD COLUMN `currency_code` VARCHAR(255),
+  ADD COLUMN `paypal_user_id` VARCHAR(255),
+  ADD COLUMN `paypal_password` VARCHAR(255),
+  ADD COLUMN `paypal_signature` VARCHAR(255),
+  ADD COLUMN `currency_sign` VARCHAR(255),
+  ADD COLUMN `currency_format` VARCHAR(255),
+  ADD COLUMN `currency_sign_before` int(1) unsigned DEFAULT '0';
+
+INSERT INTO `auto_email_messages` (`code_key`, `subject`, `content`, `language_id`, `lang`) VALUES
+	('reservation_payment_confirmation', 'Payment confirmation', '<p>Hi dear [--$reservation_fname--],</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<div style="background:#eee;border:1px solid #ccc;padding:5px 10px;"><span style="color:#008000"><strong>Your payment completed successfully.</strong></span></div>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Appointment info:</p>\r\n\r\n<table border="0">\r\n	<tbody>\r\n		<tr>\r\n			<td>Price</td>\r\n			<th>[--$reservation_price--]</th>\r\n		</tr>\r\n		<tr>\r\n			<td>Appointment date:</td>\r\n			<th>[--$reservation_date--]</th>\r\n		</tr>\r\n		<tr>\r\n			<td>Appointment time:</td>\r\n			<th>[--$reservation_time--]</th>\r\n		</tr>\r\n		<tr>\r\n			<td>Customer name:</td>\r\n			<th>[--$reservation_fname--] [--$reservation_lname--]</th>\r\n		</tr>\r\n		<tr>\r\n			<td>Reference number:</td>\r\n			<th>[--$reservation_number--]</th>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Thanks</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>[--$company--]</strong></p>\r\n', 1, NULL),
+	('reservation_payment_confirmation', 'Zahlungsbestätigung', '<p>Sehr geehrte <strong>[--$reservation_fname--]</strong>,</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<div style="background:#eee;border:1px solid #ccc;padding:5px 10px;"><strong><span style="color:#008000">Ihre Zahlung erfolgreich abgeschlossen.</span></strong></div>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Termin info:</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<table border="0">\r\n	<tbody>\r\n		<tr>\r\n			<td>Preis</td>\r\n			<th>[--$reservation_price--]</th>\r\n		</tr>\r\n		<tr>\r\n			<td>Datum des Termins:</td>\r\n			<th>[--$reservation_date--]</th>\r\n		</tr>\r\n		<tr>\r\n			<td>Zeit des Termins:</td>\r\n			<th>[--$reservation_time--]</th>\r\n		</tr>\r\n		<tr>\r\n			<td>Kundenname:</td>\r\n			<th>[--$reservation_fname--] [--$reservation_lname--]</th>\r\n		</tr>\r\n		<tr>\r\n			<td>Referenznummer:</td>\r\n			<th>[--$reservation_number--]</th>\r\n		</tr>\r\n	</tbody>\r\n</table>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Mit freundlichen Gr&uuml;&szlig;en</p>\r\n\r\n<p><strong>[--$company--]</strong></p>\r\n', 3, NULL);
+</textarea>
+        </li>
+    </ol>
+    <h4>Update Files</h4>
+    <p>Copy & replace content of <b>"Update"</b> folder in your system root.</p>
+    <h3>Detail of new update</h3>
+    <p>In new version fixed bugs of the previous version and new features is added to the system!</p>
+    <ul>
+        <li>
+            <h4>New features</h4>
+			<ul>
+                <li>Advance search for appointments in backend</li>
+                <li>Print mode for appointments list</li>
+                <li>Add price to services</li>
+                <li>Show service prices in frontend</li>
+                <li>View appointment info in calendar with mouse over</li>
+                <li>Manage appointments on calendar with double click</li>
+                <li>Load calendar more faster</li>
+                <li>Set your currency display in settings</li>
+                <li>Set your system timezone in settings</li>
+                <li>Set your show date format in settings</li>
+                <li>Ready to add PayPal getaway</li>
+			</ul>
+        </li>
+        <li>
+            <h4>Changes</h4>
+            <ul>
+                <li>New admin sidebar order</li>
+                <li>Updated user manager</li>
+                <li>Show all appointments on calendar</li>
+            </ul>
+		</li>
+        <li>
+            <h4>Debugs</h4>
+			<ul>
+				<li>Change highlight in calendar</li>
+			</ul>
+        </li>
+    </ul>
+</section>
+<section id="configuration">
+	<div class="page-header"><h3>3. Configuration</h3><hr class="notop"></div>
+<p>
+	After you install through the admin panel to set the following items.</p>
+<ol>
+	<li>
+		Settings</li>
+	<li>
+		Languages</li>
+	<li>
+		Dental Offices</li>
+	<li>
+		Services</li>
+	<li>
+		Work Program</li>
+	<li>
+		Holidays</li>
+	<li>
+		Extrafields</li>
+	<li>
+		Members (if you want add some another administrator)</li>
+</ol>
+<h3>
+	3.1. Settings</h3>
+<p>
+	In settings page you have 5 taps:</p>
+<ul>
+	<li>
+		<h4 id="configuration_general_settings">General</h4>
+		<ul>
+			<li>
+				<strong>Admin language</strong>: the language that you want set for your admin panel</li>
+			<li>
+				<b>Company name</b>: the name that will show in title</li>
+			<li>
+				<strong>Logo</strong>: your logo image</li>
+			<li>
+				<strong>Fav Icon</strong>: the smoll icon in browser title</li>
+		</ul>
+	</li>
+	<li>
+		<h4>Date & Time</h4>
+		<ul>
+			<li>
+				<strong>Timezone</strong>: your country timezone</li>
+			<li>
+				<b>Date Format</b>: the format of date that you want see in your system(Example: Month/Day/Year or Day.Month.Year)</li>
+			<li>
+				<strong>Time Format</strong>: 24 or 12 hour format for show times</li>
+		</ul>
+	</li>
+	<li>
+		<h4 id="configuration_seo_optimaise">SEO optimaise</h4>
+		<ul>
+			<li>
+				<strong>Site Title</strong></li>
+			<li>
+				<strong>Site Description</strong></li>
+			<li>
+				<strong>Site Keywords</strong></li>
+		</ul>
+	</li>
+	<li>
+		<h4 id="configuration_strongcontact_settings_strong"><strong>Contact settings</strong></h4>
+		<ul>
+			<li>
+				<strong>​Email Address</strong>: your site email address (the automaticaly emails will send from this email address)</li>
+			<li>
+				<strong>Phone Number</strong>: will show top of the homepage</li>
+			<li>
+				<strong>Zip Code</strong></li>
+			<li>
+				<strong>Address:</strong> will show top of the homepage</li>
+		</ul>
+	</li>
+	<li>
+		<h4 id="configuration_send_mail_settings">Send mail settings</h4>
+		<ul>
+			<li>
+				<strong>Email protocol:</strong> you can set your send emal protocol (SMTP-protocol or mail-protocol)</li>
+			<li>
+				<strong>Auto messages:</strong> you can set for each language a message for your customer after send a request and a notification emal for site email address. (email messages should be HTML)</li>
+		</ul>
+	</li>
+	<li>
+		<h4 id="configuration_appointments_settings">Appointments settiings</h4>
+		<ul>
+			<li>
+				<strong>Display Price Format:</strong> you can select your price display format</li>
+			<li>
+				<strong>Currency Sign:</strong> you can put your currency sign in it(Example: $, € or other chars like EURO)</li>
+            <li>
+				<strong>Currency Sign Position:</strong> you can choose your currency sign position for a price(Before sign or After it)</li>
+            <li>
+				<strong>​Not Duplicate:</strong> if you set this option &quot;Yes&quot; then each email address just can send one request.</li>
+            <li>
+				<strong>​Use Multi-Owner system:</strong> if you set this option &quot;No&quot; then just your default provider will be available.</li>
+            <li>
+				<strong>Active Registration:</strong> if you set this option &quot;No&quot; then register for in frontend will be unavailable.</li>
+		</ul>
+	</li>
+</ul>
+<h3>
+	3.2. Languages</h3>
+<p style="margin-left: 40px;">
+	As default you have English and German languages for your system. But you can add some new languages or deactive or remove the exsists languages. You can also set your own translate for exsists languages.</p>
+<p style="margin-left: 40px;">
+	In add/edit form you should be carefull to set the fields.</p>
+<ul>
+	<li style="margin-left: 40px;">
+		<strong>image:</strong> the flag of your language</li>
+	<li style="margin-left: 40px;">
+		<strong>Language Name:</strong> name of your language (example: English, Deutsch)</li>
+	<li style="margin-left: 40px;">
+		<strong>Language Code:</strong>&nbsp;international 2 letter language codes (example: English = en, German = de)</li>
+	<li style="margin-left: 40px;">
+		<strong>Order</strong>: number of order view</li>
+	<li style="margin-left: 40px;">
+		<strong>Direction RTL</strong>: if your language direction is right to left like arabic or persian set this field &quot;Yes&quot;</li>
+	<li style="margin-left: 40px;">
+		<strong>Public:</strong> Yes = visable in frontend, No = hidden from frontend</li>
+	<li style="margin-left: 40px;">
+		<strong>Default</strong>: Yes = the language that is your first system language</li>
+</ul>
+<p style="margin-left: 40px;">
+	After add a new language you can set the translates for languages (for admin side and customer side)</p>
+<h3>
+	3.3. Dental Offices</h3>
+    <p>You should have minimum one provider to work your system.</p>
+    <p>If you use single-owner system, available just your default provider.</p>
+    <p>For each provider you can choose some manager with 3 different permissions(Admin, Assistant, Staff) from your user list to mange them.</p>
+    <p>Admin of the providers can choose some manger for own providers and edit own provider details.</p>
+    <p>Each provider has own "Dashboard", "Services", "Work Times", "Reservations requests", "Holidays", "Extra Fields" and "Booking Button".</p>
+<h3>
+	3.4. Services</h3>
+<p style="margin-left: 40px;">
+	You should define all services that you present to your customer. You can wright name and description in any language that your customers need.</p>
+<h3>
+	3.5. Work Program</h3>
+<p style="margin-left: 40px;">
+	Then set a work program for each service. Setting in this part is as timescales. For any timescales must determine service duration and number of customer. (numebr 0 means unlimited)</p>
+<p style="margin-left: 40px;">
+	For example:</p>
+<p style="margin-left: 40px;">
+	On monday from 9:00 o&#39;clock until 12:00 o&#39;clcock and the duration for this service just 30 minutes that in this 30 minuts, 3 person can together in specific thine use this service.</p>
+	<img src="assets/images/period.png" style="width:600px;margin:10px auto;margin-left: 40px;">
+<h3>
+	3.6. Holidays</h3>
+<p style="margin-left: 40px;">
+	You can write and add the name and date of this holidays to holiiday&#39;s scedule.</p>
+<p style="margin-left: 40px;">
+	It&#39;s impossible for customer to catch or reserve an appointment in holidays.</p>
+<h3>
+	3.7. Extra fields</h3>
+<p style="margin-left: 40px;">
+	<span style="font-size: 12px;">As assumption for every appointemt request, system want customer to fill in the blanks by following. information:</span></p>
+<ul>
+	<li style="margin-left: 40px;">
+		First Name</li>
+	<li style="margin-left: 40px;">
+		Last Name</li>
+	<li style="margin-left: 40px;">
+		Email-Address</li>
+	<li style="margin-left: 40px;">
+		Phone-Number</li>
+</ul>
+<p style="margin-left: 40px;">
+	If you need more information from your customer, you can add more fields in this section.</p>
+<p style="margin-left: 40px;">
+	Your extra fields can add in 4 type as require or optional:</p>
+<table border="1" cellpadding="3" cellspacing="0" style="width: 500px;margin-left: 40px;">
+	<tbody>
+		<tr>
+			<th>
+				Type name</th>
+			<th>
+				Value</th>
+			<th>
+				Min and Max</th>
+		</tr>
+		<tr>
+			<td>
+				Number</td>
+			<td>
+				The real numbers</td>
+			<td>
+				Numerical interval</td>
+		</tr>
+		<tr>
+			<td>
+				Alphanumeric</td>
+			<td>
+				Numbers and characters</td>
+			<td>
+				Length&nbsp;interval</td>
+		</tr>
+		<tr>
+			<td>
+				Text</td>
+			<td>
+				Numbers, alphabet, special characters and space</td>
+			<td>
+				Length&nbsp;interval</td>
+		</tr>
+		<tr>
+			<td>
+				Textarea</td>
+			<td>
+				It&#39;s like &quot;Text&quot; but that show a biger box to customer</td>
+			<td>
+				Length&nbsp;interval</td>
+		</tr>
+		<tr>
+			<td>
+				URL</td>
+			<td>
+				Acepte just website&#39;s URLs</td>
+			<td>
+				-</td>
+		</tr>
+		<tr>
+			<td>
+				Checkbox</td>
+			<td>
+				It will show as checkbox to customer</td>
+			<td>
+				-</td>
+		</tr>
+	</tbody>
+</table>
+<h3>
+	3.8. Members</h3>
+<p style="margin-left: 40px;">
+	In this page you can define another accounts to managing the system.</p>
+<p style="margin-left: 40px;">
+	You have 2 different member type:</p>
+    <ul style="margin-left: 80px;">
+        <li><strong>Admin</strong>: Access to all part of system.</li>
+        <li><strong>Users</strong>: Access to providers that they are in manger list of them.
+        (3 different permission: Admin, Assistant, Staff)</li>
+    </ul>
+</section>
+<section id="management">
+	<div class="page-header"><h3>4. Management</h3><hr class="notop"></div>
+<p>
+	These submenus show you the requests in 2 ways:</p>
+<h4 id="management_calendar_form">Calendar form</h4>
+<p style="margin-left: 80px;">
+	In this form you can see the requests on calendar and timeline.</p>
+<p style="margin-left: 80px;">
+	You can edit date and time of them on calendar with drag, drop and resize.</p>
+<h4 id="management_list_form">List form</h4>
+    <p style="margin-left: 80px;">
+        In appointment listing view you can see all appointments in a table list.</p>
+    <p style="margin-left: 80px;">
+        There is an advanced search to make your desired report.</p>
+    <img style="margin-left: 80px;max-width: 900px;" src="assets/images/appointmentlist.png">
+    <p style="margin-left: 80px;">
+<p style="margin-left: 80px;">
+	You can also validate yor request or send a reminder email for your customers in this form.</p>
+<p style="margin-left: 40px;">
+	By these ways you can you can close, remove, highlight the requests or add a comment on them. The requests comments are just for management usage. (Close means successfull appointment)</p>
+
+</section>
+
+
+
+    <hr />
+
+<footer>
+    <p>Copyright NodCMS 2016 made with the <a href="http://rxa.li/documenter">Documenter v2.0</a></p>
+</footer>
+
+</div><!-- /container --> 
+
+<!-- Le javascript
+    ================================================== --> 
+<!-- Placed at the end of the document so the pages load faster --> 
+<script>document.createElement('section');var duration='500',easing='swing';</script>
+<script src="assets/js/jquery.js"></script> 
+<script src="assets/js/jquery.scrollTo.js"></script>
+<script src="assets/js/jquery.easing.js"></script>
+<script src="assets/js/scripts.js"></script> 
+<script src="assets/js/google-code-prettify/prettify.js"></script> 
+<script src="assets/js/bootstrap-min.js"></script> 
+</body>
+</html>

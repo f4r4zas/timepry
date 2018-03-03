@@ -1,0 +1,61 @@
+@font-face {
+    font-family: 'ed-normal';
+    src: url('Yekan-modified.eot');
+    src: url('Yekan-modified.eot?iefix') format('eot'),
+    url('Yekan-modified.woff') format('woff'),
+    url('Yekan-modified.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-size:13px;
+}
+@font-face {
+    font-family: 'ed-normal2';
+    src: url('BRoya.eot');
+    src: url('BRoya.eot?#iefix') format('embedded-opentype'),
+    url('BRoya.woff') format('woff'),
+    url('BRoya.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ed-normal3';
+    src: url('Web_Yekan.eot');
+    src: url('Web_Yekan.eot#iefix') format('embedded-opentype'),
+         url('Web_Yekan.woff') format('woff'),
+         url('Web_Yekan.ttf') format('truetype'),
+         url('Web_Yekan.svg#CartoGothicStdBook') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ed-title';
+    src: url('DroidArabicKufi.eot');
+    src: url('DroidArabicKufi.eot?iefix') format('eot'),
+    url('DroidArabicKufi.woff') format('woff'),
+    url('DroidArabicKufi.otf') format('woff'),
+    url('DroidArabicKufi.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-size:13px;
+}
+@font-face {
+    font-family: 'w3kf';
+    src: url('DroidArabicKufi.eot');
+    src: url('DroidArabicKufi.eot?iefix') format('eot'),
+         url('DroidArabicKufi.woff') format('woff'),
+		 url('DroidArabicKufi.otf') format('woff'),
+         url('DroidArabicKufi.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+	font-size:13px;
+}
+@font-face {
+    font-family: 'w3yk';
+    src: url('Yekan-modified.eot');
+    src: url('Yekan-modified.eot?iefix') format('eot'),
+         url('Yekan-modified.woff') format('woff'),
+         url('Yekan-modified.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+	font-size:13px;
+}
