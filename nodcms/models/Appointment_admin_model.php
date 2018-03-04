@@ -1733,4 +1733,10 @@ class Appointment_admin_model extends CI_Model{
 		return true;
 	}
 	
+	public function treatmentRemove($id){
+		  $this->db->where('id', $id);
+		$this->db->delete('treatments'); 
+			return true;
+	}
+	
 }

@@ -691,14 +691,33 @@ class Appointment_admin extends NodCMS_Controller
 	
 	function treatmentUpdate(){
 		
-		if($this->Appointment_admin_model->updateTreatment($_POST,$_POST['id'])){
-			  $this->session->set_flashdata('success', _l('Treatment updated successfully!',$this));
-             redirect(APPOINTMENT_ADMIN_URL.'treatment');
+		if($this->input->post()){
+			if($this->Appointment_admin_model->updateTreatment($this->input->post(),$this->input->post('id'))){
+				  $this->session->set_flashdata('success', _l('Treatment updated successfully!',$this));
+				 redirect(APPOINTMENT_ADMIN_URL.'treatment');
+			}else{
+				 $this->session->set_flashdata('error', _l('Your request was wrong!', $this));
+				 redirect(APPOINTMENT_ADMIN_URL.'treatment');
+			}
 		}else{
-			 $this->session->set_flashdata('error', _l('Your request was wrong!', $this));
-             redirect(APPOINTMENT_ADMIN_URL.'treatment');
+			redirect(APPOINTMENT_ADMIN_URL.'treatment');
 		}
+		
 	
+	}
+	
+	function treatmentRemove($id){
+			if($id){
+				if($this->Appointment_admin_model->treatmentRemove($id)){
+				  $this->session->set_flashdata('success', _l('Removed updated successfully!',$this));
+				 redirect(APPOINTMENT_ADMIN_URL.'treatment');
+				}else{
+					 $this->session->set_flashdata('error', _l('Your request was wrong!', $this));
+					 redirect(APPOINTMENT_ADMIN_URL.'treatment');
+				}
+			}else{
+				redirect(APPOINTMENT_ADMIN_URL.'treatment');
+			}
 	}
 	
     // Services list
@@ -1823,6 +1842,7 @@ class Appointment_admin extends NodCMS_Controller
             'treatment',
             'treatmentEdit',
             'treatmentUpdate',
+            'treatmentRemove',
             'services',
             'services',
             'serviceEdit',
