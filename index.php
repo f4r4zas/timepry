@@ -61,11 +61,11 @@ if(filesize('nodcms/config/database.php')==0){
  */
 //    define('ENVIRONMENT', 'development');
 
-    define('ENVIRONMENT', 'development');
+    define('ENVIRONMENT', 'production');
     //comment by faraz aimviz
 /*
  *---------------------------------------------------------------
- * ERROR REPORTING
+ * ERROR REPORTINGs
  *---------------------------------------------------------------
  *
  * Different environments will require different levels of error reporting.

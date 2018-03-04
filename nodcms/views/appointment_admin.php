@@ -49,7 +49,6 @@
 <body class="">
 <div class="page-header navbar">
 
-
 <header id="header">
         <div class="header_inner">
             <div class="container">
@@ -259,7 +258,7 @@
                             <li <?=($page == "service")?'class="star active"':''?>>
                                 <a href="<?php echo APPOINTMENT_ADMIN_URL; ?>services/">
                                     <i class="icon-briefcase"></i>
-                                    <span class="title"><?php echo _l('Practitioners',$this); ?></span>
+                                    <span class="title"><?php echo _l('Practitionerss',$this); ?></span>
                                     <?php if($page == "service"){ ?>
                                         <span class="selected"></span>
                                     <?php } ?>

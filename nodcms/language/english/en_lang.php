@@ -213,3 +213,9 @@ $lang["Unfortunately, now is no time available for appointments for this Dentist
 $lang["No Time!"] = "No Time!";
 $lang["Your request time was is not in right range! Please refresh your browser and try your request again."] = "Your request time was is not in right range! Please refresh your browser and try your request again.";
 $lang["Not true select"] = "Not true select";
+$lang["Yours subscription was successful!"] = "Yours subscription was successful!";
+$lang["Dental_office_message!"] = "Dental_office_message!";
+$lang["Successfully dental_office_message."] = "Successfully dental_office_message.";
+$lang["Dental office added!"] = "Dental office added!";
+$lang["Successfully Add Dental office."] = "Successfully Add Dental office.";
+$lang["Back to dashboard"] = "Back to dashboard";
