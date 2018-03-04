@@ -112,7 +112,7 @@ class Registration extends NodCMS_Controller {
                     "group_id"=>20,
                     "active_register"=>0,
                     "active"=>1,
-                    "status"=>0
+                    "status"=>1
                 );
                 $this->Registration_model->insertUser($user);
                 $refurl = base_url().'register/user-registration/active/'.md5($email).'/'.$active_code;

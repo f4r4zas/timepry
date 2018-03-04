@@ -612,3 +612,4 @@ $lang["Practitioner Name"] = "Practitioner Name";
 $lang["My Dental Offices"] = "My Dental Offices";
 $lang["Add Dental Office"] = "Add Dental Office";
 $lang["Practitionerss"] = "Practitionerss";
+$lang["email"] = "email";

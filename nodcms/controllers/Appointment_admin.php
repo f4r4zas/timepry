@@ -229,11 +229,21 @@ class Appointment_admin extends NodCMS_Controller
             // # Users Home
             $where = array('r_provider_admins.user_id'=>$this->session->userdata('user_id'));
             $this->data['data'] = $this->Appointment_admin_model->getProviderManagers(NULL, $where);
-            if(count($this->data['data'])==1){
-                redirect(APPOINTMENT_ADMIN_URL.'index/'.$this->data['data'][0]['provider_id']);
+            
+            //print_r(count($this->data['data']));
+            
+            if(count($this->data['data']) != 0){
+                if(count($this->data['data'])==1){
+                    redirect(APPOINTMENT_ADMIN_URL.'index/'.$this->data['data'][0]['provider_id']);
+                }
+                $loadPage = "appointment_home";
+            } else {
+                $loadPage = "user_dashboard";
             }
-            $loadPage = "appointment_home";
         }
+        
+        
+        //print_r($loadPage);
         $this->data['content']=$this->load->view($this->mainTemplate."/appointment/".$loadPage,$this->data,TRUE);
         $this->loadView();
     }
@@ -308,9 +318,10 @@ class Appointment_admin extends NodCMS_Controller
     function providerManager($id)
     {
         $provider = $this->Appointment_admin_model->getProvider(array('provider_id'=>$id));
+        //print_r($provider);
         if(count($provider)!=0){
             if($this->input->raw_input_stream){
-                if (in_array($this->session->userdata['group'], array(1, 20))) {
+                if (in_array($this->session->userdata['group'], array(1, 20, 21))) {
                     $this->load->library('form_validation');
                     $this->form_validation->set_rules('email', _l('email',$this), 'required|callback_validateUserEmail');
                     $this->form_validation->set_rules('group', _l('Group',$this), 'required|is_natural');
@@ -339,7 +350,7 @@ class Appointment_admin extends NodCMS_Controller
                 }else{
                     $this->session->set_flashdata('error', _l("Unfortunately you do not have permission to this part of system.",$this));
                 }
-                $this["provider_data"] = $provider;
+                $this->data["provider_data"] = $provider;
             }
             $this->data['groups'] = $this->Appointment_admin_model->getManagersGroups();
             $this->data['data'] = $this->Appointment_admin_model->getProviderManagers($id);
@@ -385,7 +396,7 @@ class Appointment_admin extends NodCMS_Controller
     function providerManipulate($id = null)
     {
         // Check admin permissions
-        if (in_array($this->session->userdata['group'], array(1, 20))) {
+        if (in_array($this->session->userdata['group'], array(1, 20,21 ))) {
             if($this->input->raw_input_stream){
                 $this->load->library('form_validation');
                 $this->form_validation->set_rules('data[provider_name]', _l('Dental Office Name',$this), 'required');
@@ -456,7 +467,7 @@ class Appointment_admin extends NodCMS_Controller
     function providerManagerRemove($id, $user_id)
     {
         // Check admin(group_id = 1) access
-        if (in_array($this->session->userdata['group'],array(1, 20))) {
+        if (in_array($this->session->userdata['group'],array(1, 20,21))) {
             $data = $this->Appointment_admin_model->getProviderManagerById($id);
             if(count($data)!=0){
                 $this->Appointment_admin_model->providerManagerRemove($id, $user_id);
@@ -495,7 +506,7 @@ class Appointment_admin extends NodCMS_Controller
     function myProviderEdit(){
         $this->data['post_method']='myProviderEdit/';
         if($this->input->raw_input_stream){
-            if (in_array($this->session->userdata['group'],array(1, 20))) {
+            if (in_array($this->session->userdata['group'],array(1, 20,21))) {
                 $setData = $this->input->post("data",TRUE);
                 $extensions = $this->input->post("extensions",TRUE);
                 if($this->session->userdata('group')!=1){
@@ -679,7 +690,7 @@ class Appointment_admin extends NodCMS_Controller
     function serviceManipulate($id=null)
     {
         // Check admin(group_id = 1) and assistant(group_id = 22) access
-        if (in_array($this->session->userdata['group'], array(1,20)) && in_array($this->provider_group, array(1, 22))) {
+        if (in_array($this->session->userdata['group'], array(1,20,21)) && in_array($this->provider_group, array(1, 22))) {
             if($this->input->raw_input_stream){
                 $this->load->library('form_validation');
                 $this->form_validation->set_rules('data[service_name]', _l('Name',$this), 'required');
@@ -721,7 +732,7 @@ class Appointment_admin extends NodCMS_Controller
     function serviceRemove($id)
     {
         // Check admin(group_id = 1) and assistant(group_id = 22) access
-        if (in_array($this->session->userdata['group'],array(1,20)) && in_array($this->provider_group,array(1,22))) {
+        if (in_array($this->session->userdata['group'],array(1,20,21)) && in_array($this->provider_group,array(1,22))) {
             $services =  @reset($this->Appointment_admin_model->getServiceDetail($id));
             if(!isset($services["service_id"])){
                 $result = array("status"=>"error","error"=>_l("Service not founded!",$this));
@@ -832,7 +843,7 @@ class Appointment_admin extends NodCMS_Controller
     function servicePeriodsManipulate($service_id,$id=null)
     {
         // Check admin(group_id = 1) and assistant(group_id = 22) access
-        if (in_array($this->session->userdata['group'],array(1, 20)) && in_array($this->provider_group,array(1, 22))) {
+        if (in_array($this->session->userdata['group'],array(1, 20,21)) && in_array($this->provider_group,array(1, 22))) {
             $services =  @reset($this->Appointment_admin_model->getServiceDetail($service_id));
             if(!isset($services["service_id"])){
                 $result = array("status"=>"error","error"=>_l("No service found!",$this));
@@ -904,7 +915,7 @@ class Appointment_admin extends NodCMS_Controller
     function servicePeriodRemove($service_id,$id)
     {
         // Check admin(group_id = 1) and assistant(group_id = 22) access
-        if (in_array($this->session->userdata['group'],array(1, 20)) && in_array($this->provider_group, array(1, 22))) {
+        if (in_array($this->session->userdata['group'],array(1, 20,21)) && in_array($this->provider_group, array(1, 22))) {
             $services =  @reset($this->Appointment_admin_model->getServiceDetail($service_id));
             if(!isset($services["service_id"])){
             $result = array("status"=>"error","error"=>_l("No service found!",$this));
@@ -1134,7 +1145,7 @@ class Appointment_admin extends NodCMS_Controller
     function reservationAction($id,$type)
     {
         // Check admin(group_id = 1), assistant(group_id = 22) and staff(group_id = 21) access
-        if (in_array($this->session->userdata['group'],array(1, 20)) ||
+        if (in_array($this->session->userdata['group'],array(1, 20,21)) ||
             $type=="valid" ||
             $type=="novalid" ||
             $type=="comment" ||
@@ -1256,7 +1267,7 @@ class Appointment_admin extends NodCMS_Controller
     // Send group reminder email to who tomorrow have an appointment
     function reservationGroupReminder()
     {
-        if (in_array($this->session->userdata('group'),array(1, 20))){
+        if (in_array($this->session->userdata('group'),array(1, 20,21))){
             $tomorrow_date = mktime(0, 0, 0, date('m'), (date('d') + 1));
             $conditions = array('reservation_date'=>$tomorrow_date, 'closed'=>0, 'reminded'=>0);
             $reservations = $this->Appointment_admin_model->getReservation(NULL, NULL, $conditions);
@@ -1329,7 +1340,7 @@ class Appointment_admin extends NodCMS_Controller
     function holidaysManipulate($id=null)
     {
         // Check admin(group_id = 1) and assistant(group_id = 22) access
-        if (in_array($this->session->userdata['group'],array(1, 20)) && in_array($this->provider_group,array(1, 22))) {
+        if (in_array($this->session->userdata['group'],array(1, 20,21)) && in_array($this->provider_group,array(1, 22))) {
             if($this->input->raw_input_stream){
                 $this->load->library('form_validation');
                 $this->form_validation->set_rules('name', _l('Name',$this), 'required');
@@ -1394,7 +1405,7 @@ class Appointment_admin extends NodCMS_Controller
     function holidaysRemove($id)
     {
         // Check admin(group_id = 1) and assistant(group_id = 22) access
-        if (in_array($this->session->userdata['group'],array(1, 20)) && in_array($this->provider_group,array(1, 22))) {
+        if (in_array($this->session->userdata['group'],array(1, 20,21)) && in_array($this->provider_group,array(1, 22))) {
             $data =  @reset($this->Appointment_admin_model->getHolidaysDetail($id));
             if(!isset($data["date_id"])){
                 $result = array("status"=>"error","error"=>_l("Service not founded!",$this));
@@ -1466,7 +1477,7 @@ class Appointment_admin extends NodCMS_Controller
     function extraFieldsManipulate($id=null)
     {
         // Check admin(group_id = 1) and assistant(group_id = 22) access
-        if (in_array($this->session->userdata['group'],array(1, 20)) && in_array($this->provider_group,array(1, 22))) {
+        if (in_array($this->session->userdata['group'],array(1, 20,21)) && in_array($this->provider_group,array(1, 22))) {
             if ($this->Appointment_admin_model->extraFieldsManipulate($this->input->post('data',TRUE),$id)){
                 $this->session->set_flashdata('success', _l('Updated Extra Fields!',$this));
             }
@@ -1484,7 +1495,7 @@ class Appointment_admin extends NodCMS_Controller
     function extraFieldsRemove($id=0)
     {
         // Check admin(group_id = 1) and assistant(group_id = 22) access
-        if (in_array($this->session->userdata['group'],array(1, 20)) && in_array($this->provider_group,array(1, 22))) {
+        if (in_array($this->session->userdata['group'],array(1, 20,21)) && in_array($this->provider_group,array(1, 22))) {
             $this->db->trans_start();
             $this->db->delete('r_extra_fields', array('id' => $id));
             $this->db->trans_complete();
@@ -1615,7 +1626,7 @@ class Appointment_admin extends NodCMS_Controller
         $this->load->library('form_validation');
         if($this->input->input_stream('data')){
             // Check admin(group_id = 1), assistant(group_id = 22) and staff(group_id = 21) access
-            if (in_array($this->session->userdata['group'],array(1, 20))) {
+            if (in_array($this->session->userdata['group'],array(1, 20,21))) {
                 $this->form_validation->set_rules('data[username]', _l('Username',$this), 'required|callback_validateUsername');
                 $this->form_validation->set_rules('data[email]', _l('Email Address',$this), 'required|valid_email|callback_emailUnique');
                 $this->form_validation->set_rules('data[fullname]', _l('Full Name',$this), 'required|callback_formRulesName');
