@@ -798,7 +798,12 @@ class Dental extends NodCMS_Controller {
                 
                 
                 //$this->session->set_flashdata('message', $message);
-                echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."Dental/addDentalOffice/5"));		
+				if($this->input->get('add')){
+					echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."Dental/addDentalOffice/5?add=treatment"));		
+				}else{
+					echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."Dental/addDentalOffice/5"));
+				}
+		
 		        die();
             }
             //redirect(base_url()."register/dentist-registration");
@@ -904,9 +909,14 @@ class Dental extends NodCMS_Controller {
                 
         $this->data['step']=$step;
 		
-		if($this->input->get('add') == "treatment"){
-			redirect('/admin-appointment/treatment');
+		if($step == 5){
+			print_r($_GET);
+			
+			 if($this->input->get('add') == "treatment"){
+				redirect('/admin-appointment/treatment');
+			} 	
 		}
+		
 		
         $this->data['title']=_l("Dentist Registration",$this);
         $this->data['content']=$this->load->view($this->mainTemplate.'/add_dental_office',$this->data,true);

@@ -9,8 +9,7 @@
     <?php if(isset($settings["fav_icon"]) && $settings["fav_icon"]!=''){ ?>
     <link rel="shortcut icon" href="<?php echo base_url($settings["fav_icon"]); ?>">
     <?php } ?>
-    <title><?=_l('Administration',$this)?> <?=isset($settings["company"])?$settings["company"]:""?></title>
-
+    
     <script src="<?php echo base_url(); ?>assets/metronic/global/plugins/pace/pace.min.js"></script>
     <link href="<?php echo base_url(); ?>assets/metronic/global/plugins/pace/themes/pace-theme-minimal.css" rel="stylesheet" type="text/css"/>
     

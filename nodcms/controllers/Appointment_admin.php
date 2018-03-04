@@ -166,8 +166,6 @@ class Appointment_admin extends NodCMS_Controller
     // Admin Homepage (Choose a provider)
     function index($id=NULL)
     {
-		echo "worked";
-		die();
         if($id!=NULL){
             if($this->session->userdata('group_id')!=1 && $this->session->userdata('group_id')!=100){
                 $where = NULL;
@@ -679,6 +677,18 @@ class Appointment_admin extends NodCMS_Controller
         $this->data['content']=$this->load->view($this->mainTemplate."/appointment/".$this->data['page'],$this->data,TRUE);
         $this->loadView();
     }
+	
+	function treatmentUpdate(){
+		
+		if($this->Appointment_admin_model->updateTreatment($_POST,$_POST['id'])){
+			  $this->session->set_flashdata('success', _l('Treatment updated successfully!',$this));
+             redirect(APPOINTMENT_ADMIN_URL.'treatment');
+		}else{
+			 $this->session->set_flashdata('error', _l('Your request was wrong!', $this));
+             redirect(APPOINTMENT_ADMIN_URL.'treatment');
+		}
+	
+	}
 	
     // Services list
     function services()
@@ -1801,6 +1811,7 @@ class Appointment_admin extends NodCMS_Controller
             'holidaysRemove',
             'treatment',
             'treatmentEdit',
+            'treatmentUpdate',
             'services',
             'services',
             'serviceEdit',
@@ -1867,6 +1878,13 @@ class Appointment_admin extends NodCMS_Controller
                 'url'=>'/timepry/Dental/addDentalOffice',
                 'icon'=>'icon-briefcase',
                 'title'=>_l('Add Dental Office',$this),
+                'class'=>'',
+                'addOn'=>'',
+            ),
+			'treatment'=>array(
+                'url'=>APPOINTMENT_ADMIN_URL.'treatment',
+                'icon'=>'icon-briefcase',
+                'title'=>_l('Treatments',$this),
                 'class'=>'',
                 'addOn'=>'',
             ),
