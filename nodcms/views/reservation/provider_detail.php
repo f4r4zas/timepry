@@ -839,7 +839,7 @@ echo "</pre>";
                                 <input name="lname" id="lname" type="text" class="form-control" data-validation="required">
                             </div>
                         </div>
-                        <div class="form-group" style="display: none;">
+                        <div class="form-group">
                             <label><?php echo _l("Email Address",$this)?></label>
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-at"></i></div>
