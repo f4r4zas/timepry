@@ -112,7 +112,7 @@ class Registration extends NodCMS_Controller {
                     "group_id"=>20,
                     "active_register"=>0,
                     "active"=>1,
-                    "status"=>0
+                    "status"=>1
                 );
                 $this->Registration_model->insertUser($user);
                 $refurl = base_url().'register/user-registration/active/'.md5($email).'/'.$active_code;
@@ -288,6 +288,18 @@ class Registration extends NodCMS_Controller {
                     "status"=>0
                 );
                 $this->Registration_model->insertUser($user);
+                $this->db->select('user_id');
+                $this->db->from('users');
+                $this->db->order_by('user_id','desc');
+                $this->db->limit('1');
+                $query = $this->db-> get();
+                
+                $get_last_user_id = $query->result();
+                
+                $this->session->set_userdata(array(
+                    'user_id'  => $get_last_user_id[0]->user_id,
+                ));
+                
                 $refurl = base_url().'register/user-registration/active/'.md5($email).'/'.$active_code;
 
                 // Send auto email for user confirm
@@ -449,6 +461,7 @@ class Registration extends NodCMS_Controller {
                 
                 $this->db->select('user_id');
                 $this->db->from('users');
+                $this->db->where('user_id',$this->session->userdata('user_id'));
                 $this->db->order_by('user_id','desc');
                 $this->db->limit('1');
                 $query = $this->db-> get();
@@ -561,9 +574,8 @@ class Registration extends NodCMS_Controller {
                 endforeach;
                 
                 $this->session->set_userdata(array(
-                    'user_id'  => $get_last_user_id[0]->user_id,
                     'provider_id' => $provider_id,
-                    'service_id' => $service_id
+                    'service_id' => $service_ids
                 ));
                 
                 $this->db->set('status', 1);
@@ -590,7 +602,7 @@ class Registration extends NodCMS_Controller {
         
         $this->db->select('*');
         $this->db->from('r_services');
-        $this->db->where_in('service_id',$service_id);
+        $this->db->where_in('service_id',$service_ids);
         $query = $this->db->get();
         $service_all_data = $query->result();
         
@@ -644,7 +656,7 @@ class Registration extends NodCMS_Controller {
                     $value1['full_description'] = "<p>".$service_all_data[0]->service_description."</p>";
                     $value1['name'] = $service_all_data[0]->service_name;
                     $value1['description'] = $service_all_data[0]->service_description;
-                    $where = array('language_id'=>1,'relation_id'=>$service_id[$j],'data_type'=>'r_services');
+                    $where = array('language_id'=>1,'relation_id'=>$service_ids[$j],'data_type'=>'r_services');
                     $query = $this->db->get_where('extensions',$where);
                     if($query->num_rows() != 0)
                     {

@@ -2288,9 +2288,9 @@ section.edit_treatments {
 }
 
 .dashboard_area .week_appointments .reservation-cards .r-card .tooth-img {
-    width: 90px;
+    width: 75px;
     overflow: hidden;
-    margin: 0 10px;
+    margin: 0 auto;
     margin-bottom: 20px;
 }
 
@@ -2302,10 +2302,10 @@ section.edit_treatments {
     border: 2px dashed #7b7b7b;
     margin: 0 15px;
     display: flex;
-    height: 70px;
+    height: 60px;
     justify-content: center;
     flex-direction: column;
-    width: 75px;
+    width: 60px;
 }
 
 .dashboard_area .week_appointments .reservation-cards .r-card .r-no .number {

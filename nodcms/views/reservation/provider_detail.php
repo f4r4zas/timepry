@@ -815,6 +815,14 @@ echo "</pre>";
                 <div class="order_total">
                     <p>Order Total</p>                   
                     <p class="total_prices">$ <span class="rates">0</span></p>
+                    <?php 
+                    $this->db->select('*');
+                    $this->db->from('users');
+                    $this->db->where('user_id',$this->session->userdata('user_id'));
+                    $query = $this->db->get();
+                    $user_info = $query->result();?>
+                    
+                    
                     <form id="checkout" style="display: none;">
                         <div id="final_treatment"></div>                    
                         <div class="form-group">
@@ -835,7 +843,7 @@ echo "</pre>";
                             <label><?php echo _l("Email Address",$this)?></label>
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-at"></i></div>
-                                <input name="email" id="email" type="text" class="form-control" data-validation="required email">
+                                <input name="email" id="email" type="text" class="form-control" data-validation="required email" value="<?php echo (!empty($user_info))?$user_info[0]->email:'';?>">
                             </div>
                         </div>
                         <div class="form-group">

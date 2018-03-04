@@ -618,7 +618,7 @@ $lang["service_description"] = "service_description";
 $lang["Period Min"] = "Period Min";
 $lang["Edit a Treatment "] = "Edit a Treatment ";
 $lang["Practitionerss"] = "Practitionerss";
-
-
 $lang["Treatment updated successfully!"] = "Treatment updated successfully!";
 $lang["Treatments"] = "Treatments";
+$lang["Practitionerss"] = "Practitionerss";
+$lang["email"] = "email";
