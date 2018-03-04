@@ -11,10 +11,10 @@
             <p><?php echo _l('Add property manager form:', $this); ?></p>
             <form method="post" action="" role="form" class="form-inline" autocomplete="off">
                 <div class="form-group">
-                    <label for="username" class="sr-only"><?php echo _l('Username', $this); ?></label>
+                    <label for="email" class="sr-only"><?php echo _l('Email', $this); ?></label>
                     <div class="input-icon">
                         <i class="fa fa-user"></i>
-                        <input type="text" placeholder="<?php echo _l('Username', $this); ?>" id="username" name="username" data-list="username-list" class="form-control">
+                        <input type="text" placeholder="<?php echo _l('Email', $this); ?>" id="email" name="email" data-list="username-list" class="form-control">
                         <ul id="username-list" class="dropdown-menu"></ul>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                 <thead>
                 <tr>
                     <th></th>
-                    <th><?php echo _l("Username",$this); ?></th>
+                    <th><?php echo _l("Email",$this); ?></th>
                     <th></th>
                     <th><?php echo _l("Permission",$this); ?></th>
                     <th><?php echo _l("Created Date",$this); ?></th>
@@ -49,7 +49,7 @@
                     <tr>
                         <td><?php echo $i; ?>.</td>
                         <td style="min-width:50%;">
-                            <?php echo $item["username"]; ?>
+                            <?php echo $item["email"]; ?>
                         </td>
                         <td>
                             <?php if($item["notification_email"] != 1){ ?>
@@ -118,10 +118,10 @@
                             $.each(data.data, function(i, item) {
                                 $("<li/>", {
                                     html : $("<a/>", {
-                                        text : item.username,
+                                        text : item.email,
                                         href : "javascript:;"
                                     }).click(function(){
-                                        chooseItem(item.username);
+                                        chooseItem(item.email);
                                     })
                                 })
                                     .appendTo(thisPluginList)
@@ -174,8 +174,8 @@
     }( jQuery ));
 
     $(function(){
-        $('#username').ajaxSearch({
-            postURL : '<?php echo APPOINTMENT_ADMIN_URL; ?>getUsername',
+        $('#email').ajaxSearch({
+            postURL : '<?php echo APPOINTMENT_ADMIN_URL; ?>getEmail',
             successFunction : function(data){
                 data = $.parseJSON(data);
 

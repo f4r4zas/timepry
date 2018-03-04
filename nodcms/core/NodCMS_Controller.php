@@ -253,6 +253,28 @@ class NodCMS_Controller extends CI_Controller{
             return true;
         }
     }
+    
+    
+    // Validation email type function
+    public function validateUserEmail($value)
+    {
+        $this->db->select("*");
+
+        $this->db->from('users');
+
+        $this->db->where('email',$value);
+
+        $query = $this->db->get();
+
+        $found = $query->num_rows();
+        
+        if (empty($found)) {
+            $this->form_validation->set_message('validateUserEmail', '{field} email not found.');
+            return FALSE;
+        }else{
+            return TRUE;
+        }
+    }
 
     // Validation username type function
     public function validateUsernameType($value)

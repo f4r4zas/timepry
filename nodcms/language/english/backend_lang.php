@@ -617,3 +617,5 @@ $lang["title"] = "title";
 $lang["service_description"] = "service_description";
 $lang["Period Min"] = "Period Min";
 $lang["Edit a Treatment "] = "Edit a Treatment ";
+$lang["Practitionerss"] = "Practitionerss";
+

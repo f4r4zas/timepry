@@ -617,8 +617,13 @@ class Appointment_admin_model extends CI_Model{
     function getProviderById($id,$conditions=NULL){
         $this->db->select("*");
         $this->db->from('r_providers');
-        if($conditions!=NULL) $this->db->where($conditions);
-        $this->db->where('provider_id',$id);
+        if($conditions!=NULL){
+            $this->db->where($conditions);
+        } 
+        if($id!=NULL){
+            $this->db->where('provider_id',$id);
+        } 
+        
         $query = $this->db->get();
         return $query->result_array();
     }
