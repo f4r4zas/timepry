@@ -67,7 +67,7 @@
                                         <a href="<?php echo base_url();?>">Home</a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo base_url();?>appointment">All Dental Offices</a>
+                                        <a href="<?php echo base_url();?>">Find The Right Treatment</a>
                                     </li>
                                     <li>
                                         <a href="<?php echo base_url();?>">About</a>
