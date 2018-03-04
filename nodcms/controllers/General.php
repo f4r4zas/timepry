@@ -49,6 +49,40 @@ class General extends CI_Controller
     }
     
     
+    function about_us(){
+        if(isset($_SESSION['language'])){
+            $this->lang->load($_SESSION['language']['code'], $_SESSION['language']["language_name"]);
+            $homeURL = base_url().$_SESSION['language']['code'];
+        }else{
+            $homeURL = base_url();
+        }
+        
+        
+        
+        $this->data['title'] = _l('Timepry', $this);
+        $this->load->view("header", $this->data);
+        $this->load->view("about", $this->data);
+        $this->load->view("footer", $this->data);
+    }
+    
+    
+    function faq(){
+        if(isset($_SESSION['language'])){
+            $this->lang->load($_SESSION['language']['code'], $_SESSION['language']["language_name"]);
+            $homeURL = base_url().$_SESSION['language']['code'];
+        }else{
+            $homeURL = base_url();
+        }
+        
+        
+        
+        $this->data['title'] = _l('Timepry', $this);
+        $this->load->view("header", $this->data);
+        $this->load->view("faq", $this->data);
+        $this->load->view("footer", $this->data);
+    }
+    
+    
     function register(){
         if(isset($_SESSION['language'])){
             $this->lang->load($_SESSION['language']['code'], $_SESSION['language']["language_name"]);
