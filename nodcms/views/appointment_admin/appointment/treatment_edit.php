@@ -52,7 +52,7 @@
 		<input type="hidden" value="<?php echo $data['id']; ?>" name="id">
         <div class="form-actions">
             <?php
-            mk_hsubmit(_l('Submit',$this),APPOINTMENT_ADMIN_URL.'services',_l('Cancel',$this));
+            mk_hsubmit(_l('Submit',$this),APPOINTMENT_ADMIN_URL.'treatment',_l('Cancel',$this));
             ?>
         </div>
         <?php
