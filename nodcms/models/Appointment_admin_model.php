@@ -1665,5 +1665,22 @@ class Appointment_admin_model extends CI_Model{
         }
 
     }
+	
+	public function getAllTreatment($provider_id){
+		
+		$this->db->select("*");
+        $this->db->from('treatments');
+        $this->db->where('provider_id',$provider_id);
+        $query = $this->db->get();
+        return $query->result_array();
 
+	}
+	
+	public function getSingleTreatment($id){
+		$this->db->select("*");
+        $this->db->from('treatments');
+        $this->db->where('id',$id);
+        $query = $this->db->get();
+        return $query->result_array();
+	}
 }

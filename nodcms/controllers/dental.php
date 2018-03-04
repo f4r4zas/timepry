@@ -806,7 +806,7 @@ class Dental extends NodCMS_Controller {
             echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."Dental/addDentalOffice/4"));		
 		    die();
         }elseif($this->input->post("step")=="update5"){
-        
+				
              $optional_fields = array();
             foreach($this->input->post() as $key => $value)
 	        {
@@ -904,6 +904,11 @@ class Dental extends NodCMS_Controller {
         
                 
         $this->data['step']=$step;
+		
+		if($this->input->get('add') == "treatment"){
+			redirect('/admin-appointment/treatment');
+		}
+		
         $this->data['title']=_l("Dentist Registration",$this);
         $this->data['content']=$this->load->view($this->mainTemplate.'/add_dental_office',$this->data,true);
         $this->load->view($this->frameTemplate, $this->data);

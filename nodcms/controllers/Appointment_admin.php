@@ -150,6 +150,8 @@ class Appointment_admin extends NodCMS_Controller
     // Admin Homepage (Choose a provider)
     function index($id=NULL)
     {
+		echo "worked";
+		die();
         if($id!=NULL){
             if($this->session->userdata('group_id')!=1 && $this->session->userdata('group_id')!=100){
                 $where = NULL;
@@ -575,6 +577,93 @@ class Appointment_admin extends NodCMS_Controller
         $this->loadView();
     }
 
+	function treatment(){
+		
+		$provider_id = $this->session->userdata("provider_id");
+		$all_treatments =  $this->Appointment_admin_model->getAllTreatment($provider_id);
+		
+		$_SESSION["back_redirect"]=APPOINTMENT_ADMIN_URL."treatment";
+        $days = array(
+            _l('Sun',$this),
+            _l('Mon',$this),
+            _l('Tue',$this),
+            _l('Wed',$this),
+            _l('Thu',$this),
+            _l('Fri',$this),
+            _l('Sat',$this)
+        );
+  
+		$this->data['data'] = $all_treatments;
+        
+		/* foreach($this->data['data'] as &$item){
+            $item['languages'] = $this->Appointment_admin_model->getExistedServicesLanguage($item['service_id']);
+            $item['work_times'] = array();
+            for($i=0;$i<6;$i++){
+                if(count($this->Appointment_admin_model->getAllPeriods($item['service_id'], $i))!=0){
+                    array_push($item['work_times'], $days[$i]);
+                }
+            }
+        } */
+        $this->data['title']=_l("All Treatment",$this);
+        $this->data['sub_title']=_l("Treatments list",$this);
+        $this->data['breadcrumb']=array(
+            array('title'=>$this->data['sub_title'])
+        );
+        $this->data['page']='treatment';
+        $this->data['content']=$this->load->view($this->mainTemplate."/appointment/".$this->data['page'],$this->data,TRUE);
+        $this->loadView();
+	}
+	
+	 function treatmentEdit($id=null)
+    {
+        if($id!=null){
+            $this->data['data'] =  $this->Appointment_admin_model->getSingleTreatment($id);
+            if(count($this->data['data'])!=0){
+                $this->data['data'] = reset($this->data['data']);
+            }else{
+                $this->session->set_flashdata('error', _l('Your request was wrong!', $this));
+                redirect(APPOINTMENT_ADMIN_URL.'services');
+            }
+            $extensions = array();
+            $data_extensions = $this->Nodcms_admin_model->get_all_extension("r_services",$id);
+            if(count($data_extensions)!=0){
+                foreach ($data_extensions as $value) {
+                    $extensions[$value["language_id"]] = $value;
+                }
+            }
+            $this->data['extensions'] = $extensions;
+            if($this->input->is_ajax_request()){
+                if(!isset($this->data['data']["service_id"])){
+                    echo json_encode(array("status"=>"error","error"=>_l("Your request was wrong!",$this)));
+                }else{
+                    $data = array(
+                        "name"=>$this->data['data']["service_name"],
+                        "price"=>$this->data['data']["price"],
+                        "description"=>$this->data['data']["service_description"]
+                    );
+                    echo json_encode(array("status"=>"success", "data"=>$data));
+                }
+                exit;
+            }
+            $this->data['sub_title']=_l("Edit a Treatment ",$this);
+        }else{
+            $this->data['sub_title']=_l("Add new service",$this);
+            if($this->input->is_ajax_request()){
+                echo json_encode(array("status"=>"error","error"=>_l("Your request was wrong!",$this)));
+                exit;
+            }
+        }
+        $this->data['languages'] = $this->Nodcms_admin_model->get_all_language();
+        $this->data['title']=_l("Practitioners",$this);
+        $this->data['breadcrumb']=array(
+            array('title'=>_l('Practitioners',$this),'url'=>APPOINTMENT_ADMIN_URL.'treatment'),
+            array('title'=>$this->data['sub_title'])
+        );
+        $this->data['page']='treatment_edit';
+        $this->data['content']=$this->load->view($this->mainTemplate."/appointment/".$this->data['page'],$this->data,TRUE);
+        $this->loadView();
+    }
+	
     // Services list
     function services()
     {
@@ -1694,6 +1783,9 @@ class Appointment_admin extends NodCMS_Controller
             'holidaysManipulate',
             'holidaysEdit',
             'holidaysRemove',
+            'treatment',
+            'treatmentEdit',
+            'services',
             'services',
             'serviceEdit',
             'serviceManipulate',

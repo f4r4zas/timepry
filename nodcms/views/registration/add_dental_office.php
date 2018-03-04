@@ -43,11 +43,19 @@
             <div class="registration-tabs">
                 <ul class="nav nav-tabs">
                 
+					<?php if($this->input->get('add') == "treatment"){ ?>
+					
+						<li <?php echo($step == 4 ?'class="active"':'');?><?php echo($step > 3 ?'':'class="disabled"');?>><a <?php echo($step > 3 ?'data-toggle="tab"':'');?> href="#step4"><span class="big">1</span> Add Treatment</a></li>
+						
+					<?php }else{ ?>
+					
+						<li <?php echo($step == 2 ?'class="active"':'');?><?php echo($step > 1 ?'':'class="disabled"');?>><a <?php echo($step > 1 ?'data-toggle="tab"':'');?> href="#step2"><span class="big">1</span> Dental Office Information</a></li>
+						<li <?php echo($step == 3 ?'class="active"':'');?><?php echo($step > 2 ?'':'class="disabled"');?>><a <?php echo($step > 2 ?'data-toggle="tab"':'');?> href="#step3" id="loadMap"><span class="big">2</span> Dental Office Address</a></li>
+						<li <?php echo($step == 4 ?'class="active"':'');?><?php echo($step > 3 ?'':'class="disabled"');?>><a <?php echo($step > 3 ?'data-toggle="tab"':'');?> href="#step4"><span class="big">3</span> Price List</a></li>
+						<li <?php echo($step == 5 ?'class="active"':'');?><?php echo($step > 4 ?'':'class="disabled"');?>><a <?php echo($step > 4 ?'data-toggle="tab"':'');?> href="#step5"><span class="big">4</span> Pictures</a></li>
+					
+					<?php } ?>
                    
-                    <li <?php echo($step == 2 ?'class="active"':'');?><?php echo($step > 1 ?'':'class="disabled"');?>><a <?php echo($step > 1 ?'data-toggle="tab"':'');?> href="#step2"><span class="big">1</span> Dental Office Information</a></li>
-                    <li <?php echo($step == 3 ?'class="active"':'');?><?php echo($step > 2 ?'':'class="disabled"');?>><a <?php echo($step > 2 ?'data-toggle="tab"':'');?> href="#step3" id="loadMap"><span class="big">2</span> Dental Office Address</a></li>
-                    <li <?php echo($step == 4 ?'class="active"':'');?><?php echo($step > 3 ?'':'class="disabled"');?>><a <?php echo($step > 3 ?'data-toggle="tab"':'');?> href="#step4"><span class="big">3</span> Price List</a></li>
-                    <li <?php echo($step == 5 ?'class="active"':'');?><?php echo($step > 4 ?'':'class="disabled"');?>><a <?php echo($step > 4 ?'data-toggle="tab"':'');?> href="#step5"><span class="big">4</span> Pictures</a></li>
                 </ul>
 
                 <div class="tab-content">
