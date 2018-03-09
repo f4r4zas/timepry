@@ -39,7 +39,14 @@ class Registration_model extends CI_Model
 
     // Insert to "users" table
     function insertUser($data){
-        $this->db->insert('users',$data);
+		$user_id =	$this->db->insert('users',$data);
+		
+		if($user_id){
+			return $user_id;
+		}else{
+			return false;
+		}
+		
     }
 
     // Select a row from "users" table

@@ -584,7 +584,11 @@
                               
                               $("#selected_treat").append(formData);
                               $('.hiddenfields').append(hiddenfields);
-                                $(".e9").select2("destroy");
+							  
+							  if ($(".e9").hasClass("select2-hidden-accessible")){
+								   //$(".e9").select2("destroy");
+							  }
+                               
             
                                var clone = $("#toclone").clone();
                                var first_div = add_treat.parent();

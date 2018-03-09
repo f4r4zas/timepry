@@ -76,7 +76,7 @@
                                         <a href="<?php echo base_url();?>faq">FAQ</a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo base_url();?>">Contact</a>
+                                        <a href="<?php echo base_url();?>contact">Contact</a>
                                     </li>
                                     <?php 
                                     

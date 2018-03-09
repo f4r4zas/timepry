@@ -261,8 +261,13 @@ class Registration extends NodCMS_Controller {
                     "active"=>1,
                     "status"=>0
                 );
-                $this->Registration_model->insertUser($user);
-                $refurl = base_url().'register/user-registration/active/'.md5($email).'/'.$active_code;
+                
+				$createdUserId =  $this->Registration_model->insertUser($user);
+                
+				$this->session->set_userdata("createdUserId",$createdUserId);
+				$this->session->set_userdata("dataStepOne",$user);
+				
+				$refurl = base_url().'register/user-registration/active/'.md5($email).'/'.$active_code;
 
                 // Send auto email for user confirm
                 $autoEmailMsgConfig = $this->config->item('autoEmailMessages');
@@ -406,14 +411,8 @@ class Registration extends NodCMS_Controller {
 				    }
                     else{
 						//do nothing
-					
-					}
-                    
-                    
-				}
-				
-			  
-	        	
+					}   
+				}				
 	        }
                 
                 
@@ -426,7 +425,7 @@ class Registration extends NodCMS_Controller {
                 
                 $get_last_user_id = $query->result();
                 
-                
+				
                 
                 $data = array(
                     "provider_name"=>$this->input->post('dental_officename'),
@@ -438,6 +437,8 @@ class Registration extends NodCMS_Controller {
                 );
                 $this->db->insert('r_providers',$data);
                 $provider_id = $this->db->insert_id();
+				
+				$sessionRegister['stepTwo']['provider'] = $data;
                 
                 
                 $data1 = array(
@@ -465,6 +466,7 @@ class Registration extends NodCMS_Controller {
                         "closed"=>$_POST["dayClosed"][$x],
                         "provider_id"=>$provider_id
                     );
+					$sessionRegister['stepTwo']['timings'][] = $data2;
                     $this->db->insert('r_provider_time',$data2);
                 endforeach;
                 
@@ -473,8 +475,7 @@ class Registration extends NodCMS_Controller {
                     'provider_id' => $provider_id
                 ));
                 
-                
-                
+				$this->session->set_userdata("dataStepTwo",$session);
                 
                 //$this->session->set_flashdata('message', $message);
                 echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."register/dentist-registration/3"));		
@@ -539,7 +540,8 @@ class Registration extends NodCMS_Controller {
                 
                 $this->db->where('provider_id',$this->session->userdata('provider_id'));
                 $this->db->update('r_providers',$data);
-
+				
+				$this->session->set_userdata('dataStepThree',$data);
                 
                 
                 //$this->session->set_flashdata('message', $message);
