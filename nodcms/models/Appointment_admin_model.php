@@ -1700,5 +1700,43 @@ class Appointment_admin_model extends CI_Model{
         }
 
     }
+	
+	public function getAllTreatment($provider_id){
+		
+		$this->db->select("*");
+        $this->db->from('treatments');
+        $this->db->where('provider_id',$provider_id);
+        $query = $this->db->get();
+        return $query->result_array();
 
+	}
+	
+	public function getSingleTreatment($id){
+		$this->db->select("*");
+        $this->db->from('treatments');
+        $this->db->where('id',$id);
+        $query = $this->db->get();
+        return $query->result_array();
+	}
+	
+	public function updateTreatment($data,$id){
+		
+		
+		$this->db->set("title", $data['title']);
+		$this->db->set("price", $data['price']);
+		$this->db->set("service_description", $data['description']);
+		$this->db->set("dentists_id", implode(",",$data['treatment_practitioner']));
+        $this->db->where("id", (int)$id);
+        $this->db->update("treatments");
+		
+
+		return true;
+	}
+	
+	public function treatmentRemove($id){
+		  $this->db->where('id', $id);
+		$this->db->delete('treatments'); 
+			return true;
+	}
+	
 }
