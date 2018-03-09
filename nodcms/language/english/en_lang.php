@@ -219,3 +219,4 @@ $lang["Successfully dental_office_message."] = "Successfully dental_office_messa
 $lang["Dental office added!"] = "Dental office added!";
 $lang["Successfully Add Dental office."] = "Successfully Add Dental office.";
 $lang["Back to dashboard"] = "Back to dashboard";
+$lang["Dentist doesn't exists!"] = "Dentist doesn't exists!";

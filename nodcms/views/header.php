@@ -32,12 +32,15 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/additional-methods.min.js"></script>
-
-
-
-
-
 	
+    <style>
+        span.help-block {
+            display: none;
+        }
+        span.help-block.form-error {
+            display: block;
+        }
+    </style>
 	
 </head>
 <body>
@@ -82,7 +85,7 @@
                                     
                                     if(!$this->session->userdata('group')):?>
                                     <li>
-                                        <a href="<?php echo base_url();?>register">Signup</a>
+                                        <a href="<?php echo base_url();?>register">Register</a>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0)" class="showLogin">Login</a>

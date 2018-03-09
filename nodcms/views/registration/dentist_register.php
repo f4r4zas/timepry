@@ -362,13 +362,13 @@
                                 <div style="width: 29%; display: inline-block; vertical-align: top; height: 40px;">
                                 <?php 
                                 $this->db->select('*');
-                                $this->db->from('practitioners');
+                                $this->db->from('r_services');
                                 $this->db->where('provider_id',$this->session->userdata('provider_id'));
                                 $query = $this->db->get();
                                 $practitioners = $query->result();?>
                                     <select id="" class="update_4 e9" name="treatment_practitioner[]" multiple="">
                                         <?php foreach($practitioners as $practitioner):?>
-                                        <option value="<?= $practitioner->practitioner_id;?>"><?= $practitioner->practitioner_title;?> <?= $practitioner->practitioner_fullname;?></option>
+                                        <option value="<?= $practitioner->service_id;?>"><?= $practitioner->service_name;?> <?= $practitioner->service_name;?></option>
                                         <?php endforeach;?>
                                     </select>
                                 </div>
@@ -471,13 +471,13 @@
                                                                     <div style="width: 29%; display: inline-block; vertical-align: top; height: 40px;">
                                                                     <?php 
                                                                     $this->db->select('*');
-                                                                    $this->db->from('practitioners');
+                                                                    $this->db->from('r_services');
                                                                     $this->db->where('provider_id',$this->session->userdata('provider_id'));
                                                                     $query = $this->db->get();
                                                                     $practitioners = $query->result();?>
                                                                         <select id="" class="update_4 e9" name="treatment_practitioner[]" multiple="">
                                                                             <?php foreach($practitioners as $practitioner):?>
-                                                                            <option value="<?= $practitioner->practitioner_id;?>"><?= $practitioner->practitioner_title;?> <?= $practitioner->practitioner_fullname;?></option>
+                                                                            <option value="<?= $practitioner->service_id;?>"><?= $practitioner->service_name;?> <?= $practitioner->service_name;?></option>
                                                                             <?php endforeach;?>
                                                                         </select>
                                                                     </div>

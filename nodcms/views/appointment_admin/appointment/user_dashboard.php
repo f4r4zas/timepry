@@ -104,7 +104,7 @@ $(document).ready(function(){
                         ?>
                         
                         <?php for($i=1;$i<=10;$i++){
-                            if($i < $total_reservation){
+                            if($i <= $total_reservation){
                                 $tooth = "tooth-pic.png";
                             } else {
                                 $tooth = "gtooth-pic.png";
