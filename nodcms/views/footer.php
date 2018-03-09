@@ -189,13 +189,16 @@
 
 
     <script>
+        var enableHomePopup = false;
         $(document).ready(function() {
             $(".se-pre-con").css("display", "none");
             if ( $('.home-banner').length > 0 ) {
-                setTimeout(function() {
-                    $('#site_auto_popup').show();
-                    $('.black_overlay').show();
-                }, 2000);
+                if (enableHomePopup) {
+                    setTimeout(function() {
+                        $('#site_auto_popup').show();
+                        $('.black_overlay').show();
+                    }, 2000);
+                }
             }
         });
         $('#mobilemenuBtn').on('click', function() {
