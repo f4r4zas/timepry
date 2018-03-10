@@ -109,8 +109,6 @@ class Appointment extends NodCMS_Controller {
 			
 		}else{
 			
-			
-			
 		}
 		
        
