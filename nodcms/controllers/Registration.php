@@ -65,7 +65,7 @@ class Registration extends NodCMS_Controller {
             $this->form_validation->set_rules('mobile', _l('Phone Number',$this), 'required|is_natural');
             $this->form_validation->set_rules('email', _l('Email Address',$this), 'required|valid_email|callback_userUniqueEmail');
             
-            $this->form_validation->set_rules('password', _l('Password',$this), 'trim|required|callback_formRulesPassword');
+            $this->form_validation->set_rules('password', _l('Password',$this), 'trim|required||min_length[6]|callback_formRulesPassword');
             $this->form_validation->set_rules('cpassword', _l('Confirm Password',$this), 'trim|required|matches[password]');
             if ($this->form_validation->run() == FALSE){
                 $this->session->set_flashdata('error_message', _l('Errors:',$this).validation_errors());
@@ -194,7 +194,7 @@ class Registration extends NodCMS_Controller {
             $this->form_validation->set_rules('lname', _l('Last Name',$this), 'required|xss_clean|callback_formRulesName');
             $this->form_validation->set_rules('mobile', _l('Phone Number',$this), 'required|is_natural');
             $this->form_validation->set_rules('email', _l('Email Address',$this), 'required|valid_email|callback_userUniqueEmail');
-            $this->form_validation->set_rules('password', _l('Password',$this), 'trim|required|callback_formRulesPassword');
+            $this->form_validation->set_rules('password', _l('Password',$this), 'trim|required|min_length[6]|callback_formRulesPassword');
             $this->form_validation->set_rules('cpassword', _l('Confirm Password',$this), 'trim|required|matches[password]');
             if ($this->form_validation->run() == FALSE){
                 $this->session->set_flashdata('error_message', _l('Errors:',$this).validation_errors());
@@ -985,13 +985,7 @@ class Registration extends NodCMS_Controller {
     // Validation password format function
     public function formRulesPassword($value)
     {
-        if (preg_match('/^[a-z0-9\/~`\!@#\$£€%\^&\*\(\)_\-\+=\{\}\[\]\|;:]{6,18}$/', $value) == FALSE) {
-            $this->form_validation->set_message('formRulesPassword', '{field} must contain letters and spaces only.');
-            $errors[] = 'Name must contain letters and spaces only';
-            return FALSE;
-        }else{
-            return TRUE;
-        }
+        return true;
     }
 
     // Validation username for user registration
