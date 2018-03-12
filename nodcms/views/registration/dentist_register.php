@@ -292,7 +292,6 @@
                             
                             
                             <?php 
-<<<<<<< HEAD
 							
                             $days = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 							$start = 0;
