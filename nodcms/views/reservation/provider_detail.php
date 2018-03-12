@@ -862,7 +862,9 @@ echo "</pre>";
                             <label><?php echo _l("Email Address",$this)?></label>
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-at"></i></div>
+
                                 <input value="<?php if(!empty($email)){ echo $email;}  ?>" name="email" id="email" type="text" class="form-control" data-validation="required email">
+
                             </div>
                         </div>
                         <div class="form-group">

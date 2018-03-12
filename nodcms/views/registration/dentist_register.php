@@ -90,7 +90,9 @@
                                         
                 </div>
                 <div class="col-sm-6">
-                    <input placeholder="Phone" value="<?php if(!empty($phone)){ echo $phone; } ?>" name="mobile" id="mobile" type="text" class="form-control update1">
+
+                    <input placeholder="00398738927892" value="<?php if(!empty($phone)){ echo $phone; } ?>" name="mobile" id="mobile" type="text" class="form-control update1">
+
                     
                         <span class="help-block"></span>
                                       
@@ -290,6 +292,7 @@
                             
                             
                             <?php 
+<<<<<<< HEAD
 							
                             $days = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 							$start = 0;
@@ -313,7 +316,8 @@
 						
 						
 							?>
-                            <div class="row">
+                            <div class="row daysRow">
+
                                 <div class="col-xs-8 col-sm-4">
                                     <input class="update2" disabled="disabled" type="text" value="<?=$day;?>" name="opening_day[]" placeholder="<?=$day;?>">
                                 </div>
@@ -337,7 +341,7 @@
                                 </div>
                                 <div class="col-xs-8 col-sm-2">
                                     <div class="closed_day">
-                                        <span class="open fa fa-circle-o"></span>
+                                        <span class="open fa fa-circle-o open"></span>
                                         <span class="closed_label">Closed</span>
                                         <input class="closed_day_value update2" type="hidden" name="dayClosed[]"/>
                                     </div>
@@ -356,28 +360,37 @@
     /*$('.datetimepicker3').datetimepicker({
       pickDate: false
     });*/
-    
-    $(".closed_day").click(function(){
-        var value_field = $(this).find(".closed_day_value");
-        var icon_value = $(this).find("span.fa");
-        if($(this).children("span.open").length > 0){
-            value_field.val("1");
-            icon_value.removeClass("fa-circle-o");
-            icon_value.removeClass("open");
-            icon_value.addClass("fa-circle");
-            icon_value.addClass("closed");
-        } else {
-           value_field.val("");
-            icon_value.removeClass("fa-circle");
-            icon_value.removeClass("closed");
-            icon_value.addClass("fa-circle-o");
-            icon_value.addClass("open"); 
-        }
-    });
 
     $(".timePicker-from").kendoTimePicker({format:"HH:mm"});
     $(".timePicker-to").kendoTimePicker({format:"HH:mm"});
   });
+
+// $(".closed_day").off("click");
+$(".closed_day").on("click", function(){
+    var value_field = $(this).find(".closed_day_value");
+    var icon_value = $(this).find("span.fa");
+    if($(this).children("span.open").length > 0){
+        value_field.val("1");
+        $(this).parents(".daysRow").addClass("closedDay");
+        for(var i=0;i<2;i++){
+          $(this).parents(".daysRow").find("input.time").eq(i).data("kendoTimePicker").enable(false);
+        }
+        icon_value.removeClass("fa-circle-o");
+        icon_value.removeClass("open");
+        icon_value.addClass("fa-circle");
+        icon_value.addClass("closed");
+    } else {
+        value_field.val("");
+      	for(var i=0;i<2;i++){
+          $(this).parents(".daysRow").find("input.time").eq(i).data("kendoTimePicker").enable(true);
+        }
+        $(this).parents(".daysRow").removeClass("closedDay");
+        icon_value.removeClass("fa-circle");
+        icon_value.removeClass("closed");
+        icon_value.addClass("fa-circle-o");
+        icon_value.addClass("open");
+    }
+});
 </script>
                             
                             
@@ -468,7 +481,9 @@
                                 $practitioners = $query->result();?>
                                     <select id="" class="update_4 e9" name="treatment_practitioner[]" multiple="">
                                         <?php foreach($practitioners as $practitioner):?>
+
                                         <option value="<?= $practitioner->practitioner_id;?>"><?= $practitioner->practitioner_fullname;?></option>
+                                        
                                         <?php endforeach;?>
                                     </select>
                                 </div>

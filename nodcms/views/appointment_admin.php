@@ -245,15 +245,7 @@
                                     </a>
                                 </li>
                             <?php } ?>
-                            <li <?=($page == "holidays")?'class="star active"':''?>>
-                                <a href="<?php echo APPOINTMENT_ADMIN_URL; ?>holidays/">
-                                    <i class="icon-calendar"></i>
-                                    <span class="title"><?php echo _l('Holidays',$this); ?></span>
-                                    <?php if($page == "holidays"){ ?>
-                                        <span class="selected"></span>
-                                    <?php } ?>
-                                </a>
-                            </li>
+
                             <li <?=($page == "service")?'class="star active"':''?>>
                                 <a href="<?php echo APPOINTMENT_ADMIN_URL; ?>services/">
                                     <i class="icon-briefcase"></i>
@@ -262,6 +254,17 @@
                                         <span class="selected"></span>
                                     <?php } ?>
                                 </a>
+                                <ul class="sub-menu">
+                                    <li <?=($page == "holidays")?'class="star active"':''?>>
+                                        <a href="<?php echo APPOINTMENT_ADMIN_URL; ?>holidays/">
+                                            <i class="icon-calendar"></i>
+                                            <span class="title"><?php echo _l('Holidays',$this); ?></span>
+                                            <?php if($page == "holidays"){ ?>
+                                                <span class="selected"></span>
+                                            <?php } ?>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                             <li style="display: none;" <?=($page == "extra_fields")?'class="star active"':''?>>
                                 <a href="<?php echo APPOINTMENT_ADMIN_URL; ?>extraFields/">
