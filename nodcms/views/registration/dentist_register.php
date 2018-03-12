@@ -377,7 +377,9 @@ $(".closed_day").on("click", function(){
                                 $practitioners = $query->result();?>
                                     <select id="" class="update_4 e9" name="treatment_practitioner[]" multiple="">
                                         <?php foreach($practitioners as $practitioner):?>
-                                        <option value="<?= $practitioner->practitioner_id;?>"><?= $practitioner->practitioner_title;?> <?= $practitioner->practitioner_fullname;?></option>
+
+                                        <option value="<?= $practitioner->practitioner_id;?>"><?= $practitioner->practitioner_fullname;?></option>
+                                        
                                         <?php endforeach;?>
                                     </select>
                                 </div>
@@ -554,10 +556,11 @@ $(".closed_day").on("click", function(){
                         <script>
                         $(".add_treat").click(function(e){
                             e.preventDefault();
+							var id = "unique-"+Math.floor((Math.random() * 100) + 1);
                             $("#selected_treat").hide();
                             var add_treat = $(this);
                             var filled = true;
-                            add_treat.parent().siblings().find('.update_4').each(function(i,v){
+                            add_treat.parent().siblings().find('.notto .update_4').each(function(i,v){
                                 if($(this).prop("tagName") != "SPAN" && $(this).prop("tagName") != "DIV" && $(this).prop("tagName") != "BUTTON")
                                   {
                                       v = $(v);
@@ -570,36 +573,37 @@ $(".closed_day").on("click", function(){
                             });
                             
                             if(filled == true){
-                                var formData = "<tr>";
+                                var formData = "<tr class='"+id+"' >";
                                 var hiddenfields = "";
 				                
                                 add_treat.parent().siblings().last().find('.update_4').each(function(i,v){
                                   if($(this).prop("tagName") != "SPAN" && $(this).prop("tagName") != "DIV" && $(this).prop("tagName") != "BUTTON")
                                   {
                                       v = $(v);
+									   console.log("Go");
+									   console.log(v.val());
                                       var temp = v.attr('name');
-                                      hiddenfields +='<input type="hidden" name="'+temp+'" class="update4" value="'+v.val()+'"/>';
-                                        formData +="<td style='text-align: center; padding: 10px; border: 1px solid #ccc;'>"+v.val()+"</td>"; 
-                                        
+                                      hiddenfields +='<input type="hidden" name="'+temp+'" class="update4 '+id+'" value="'+v.val()+'"/>';
+                                        formData +="<td style='text-align: center; padding: 10px; border: 1px solid #ccc;'>"+v.val()+"</td>";      
                                   }
-                                  
                 			  }); 
-                              hiddenfields +='<input type="hidden" name="cat[]" class="update4" value="'+$(".cat.active a").attr("data-catid")+'"/>';
-                              hiddenfields +='<input type="hidden" name="subcat[]" class="update4" value="'+$(".subcat.active a").attr("data-subcatid")+'"/>';
+                              hiddenfields +='<input type="hidden" name="cat[]" class="update4 '+id+'" value="'+$(".cat.active a").attr("data-catid")+'"/>';
+                              hiddenfields +='<input type="hidden" name="subcat[]" class="update4 '+id+'" value="'+$(".subcat.active a").attr("data-subcatid")+'"/>';
                               formData += "<td style='text-align: center; padding: 10px; border: 1px solid #ccc;'>"+$('.cat.active a').text()+"</td>";
                                formData += "<td style='text-align: center; padding: 10px; border: 1px solid #ccc;'>"+$('.subcat.active a').text()+"</td>";
                               
                               formData += "</tr>";
                               
-                              $("#selected_treat").append(formData);
-                              $('.hiddenfields').append(hiddenfields);
-                                $(".e9").select2("destroy");
+                              $("#selected_treat").prepend(formData);
+                              $('.hiddenfields').prepend(hiddenfields);
+                                //$(".e9").select2("destroy");
             
                                var clone = $("#toclone").clone();
                                var first_div = add_treat.parent();
                                clone.find('.error').html("");
                                clone.removeAttr("id");
                                clone.removeAttr("style");
+                               clone.attr("custom-class",id);
                                first_div.before(clone);
                                 
                                 setTimeout(function(){
@@ -625,7 +629,17 @@ $(".closed_day").on("click", function(){
                         });
                         
                         
-                        
+                        jQuery(document).on("click",".remove_treatment",function(){
+							
+							var idRemove = jQuery(this).parent(".cloned").attr("custom-class");
+							
+							jQuery("."+idRemove).remove();
+							jQuery(this).parent(".cloned").remove();
+							/* jQuery(this).parent(".cloned").remove();
+							console.log("ID");
+							console.log(id);
+							jQuery("."+id).remove(); */
+						});
                         
                          /*$(".add_treat").click(function(){
                             $("#selected_treat").hide();

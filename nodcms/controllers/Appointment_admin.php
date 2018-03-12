@@ -1069,7 +1069,7 @@ class Appointment_admin extends NodCMS_Controller
             $conditions["search_text"] = urldecode($search_text);
             $this->data["search_text"] = htmlspecialchars($search_text);
         }
-//         Search reservation id
+		//Search reservation id
         $filter = $this->input->get("id", TRUE);
         if($filter != NULL){
             $filter = urldecode($filter);

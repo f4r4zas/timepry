@@ -98,5 +98,37 @@ class General extends CI_Controller
         $this->load->view("register", $this->data);
         $this->load->view("footer", $this->data);
     }
+	
+	function contact(){
+		  if(isset($_SESSION['language'])){
+            $this->lang->load($_SESSION['language']['code'], $_SESSION['language']["language_name"]);
+            $homeURL = base_url().$_SESSION['language']['code'];
+        }else{
+            $homeURL = base_url();
+        }
+        
+        
+        
+        $this->data['title'] = _l('Timepry', $this);
+        $this->load->view("header", $this->data);
+        $this->load->view("reservation/contact", $this->data);
+        $this->load->view("footer", $this->data);
+	}
+	
+	function aboutus(){
+		  if(isset($_SESSION['language'])){
+            $this->lang->load($_SESSION['language']['code'], $_SESSION['language']["language_name"]);
+            $homeURL = base_url().$_SESSION['language']['code'];
+        }else{
+            $homeURL = base_url();
+        }
+        
+        
+        
+        $this->data['title'] = _l('Timepry', $this);
+        $this->load->view("header", $this->data);
+        $this->load->view("about", $this->data);
+        $this->load->view("footer", $this->data);
+	}
     
 }

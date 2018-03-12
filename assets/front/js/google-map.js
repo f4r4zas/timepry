@@ -112,11 +112,15 @@ var placeSearch, autocomplete;
         postal_code: 'short_name'
       };
       function initAutocomplete() {
+		   var myLatLng = {lat: -25.363, lng: 131.044};
+		 
         var map = new google.maps.Map(document.getElementById('dentist_reg_map'), {
           center: {lat: -33.8688, lng: 151.2195},
           zoom: 13,
           mapTypeId: 'roadmap'
         });
+		
+		
 
         // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
@@ -188,9 +192,9 @@ var placeSearch, autocomplete;
             // Create a marker for each place.
             markers.push(new google.maps.Marker({
               map: map,
-              icon: "http://techopialabs.com/timepry_upd/images/teeth_marker.png",
+              
               title: place.name,
-              draggable:true,
+              draggable:false,
               position: place.geometry.location
             }));
             
@@ -235,7 +239,15 @@ var placeSearch, autocomplete;
                   }
                 });
             });*/
-
+			
+			/* var marker = new google.maps.Marker({
+				  position: place.geometry.location,
+				  map: map,
+				  icon: "timepry/assets/front/images/teeth_marker.png",
+				  title: place.name,
+				draggable:true,
+			}); */
+			
             if (place.geometry.viewport) {
               // Only geocodes have viewport.
               bounds.union(place.geometry.viewport);

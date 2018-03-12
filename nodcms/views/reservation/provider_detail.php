@@ -535,11 +535,14 @@ echo "</pre>";
             var disable_dates = [];
             var selectedtreatment_id = 0;            
             $('#dentist_name').change(function(){
+				
+				
                                 
                 if($(this).val() != ""){
                     
                     $.setPractitioner(selectedtreatment_id);                    
                     $.chooseService($(this).val());
+					
                                         
                 } else {
                     $.backTo('step1');
@@ -557,8 +560,9 @@ echo "</pre>";
                 $("option.dentist_name").remove();
                 $('#step1').slideUp(500);
                 $.backTo('step1');
-                
+                    $("#beforeCheckout_popout").LoadingOverlay("show");   
                 $.post("<?php echo base_url().$lang.$this->provider_prefix ?>/get_practitioner/" + treatment_id ,{},function(data){
+					$("#beforeCheckout_popout").LoadingOverlay("hide");
                         data = JSON.parse(data);
                         selectedtreatment_id = data.treatment_id;                        
                         if(data.status=="success"){
@@ -570,6 +574,7 @@ echo "</pre>";
                             $('#error').show().find('p').text("practitioner not found");
                         }
                     }).fail(function(e){
+						$("#beforeCheckout_popout").LoadingOverlay("hide");
                         $('#error').show().find('p').text('<?php echo _l('There is some error from system! Please try later.',$this); ?>');
                     });
                 
@@ -578,6 +583,7 @@ echo "</pre>";
             };
             
             $.chooseService = function( serviceId ) {
+				    $("#beforeCheckout_popout").LoadingOverlay("show");   
                 $('#error').hide();
                 if(serviceId!=''){
                     Metronic.blockUI({
@@ -588,6 +594,7 @@ echo "</pre>";
                     $('.final_treatment_field'+selectedtreatment_id+'.practitionername').text($("#dentist_name option:selected").text());                    
                     $('#post_form').attr("action","<?php echo base_url().$lang.$this->provider_prefix ?>/set_appointment/" + serviceID);
                     $.post("<?php echo base_url().$lang.$this->provider_prefix ?>/get_service/" + serviceId ,{},function(data){
+						$("#beforeCheckout_popout").LoadingOverlay("hide");
                         data = JSON.parse(data);
                         if(data.status=="success"){
                             allow_days = data.allow_days;
@@ -602,6 +609,7 @@ echo "</pre>";
                         }
                         Metronic.unblockUI('#reservation_wizard_form');
                     }).fail(function(e){
+						$("#beforeCheckout_popout").LoadingOverlay("hide");
                         $('#error').show().find('p').text('<?php echo _l('There is some error from system! Please try later.',$this); ?>');
                         Metronic.unblockUI('#reservation_wizard_form');
                     });
@@ -646,8 +654,9 @@ echo "</pre>";
                     
                     //console.log(selected_times);
                     //console.log(selected_duration);
-                    
+                        $("#beforeCheckout_popout").LoadingOverlay("show");   
                     $.post("<?php echo base_url().$lang.$this->provider_prefix ?>/reservation/get_times/" + serviceID,{"date":selectedDate,'selected_times':selected_times,'selected_duration':selected_duration},function(data){
+						$("#beforeCheckout_popout").LoadingOverlay("hide");
                         data = JSON.parse(data);
                         if(data.status=="success"){
                             $('#time_pick').html('');
@@ -666,6 +675,7 @@ echo "</pre>";
                         }
                         Metronic.unblockUI('#reservation_wizard_form');
                     }).fail(function(){
+						$("#beforeCheckout_popout").LoadingOverlay("hide");
                         $('#error').show().find('p').text("Request fail!");
                         Metronic.unblockUI('#reservation_wizard_form');
                     });
@@ -693,7 +703,7 @@ echo "</pre>";
             var reservationPOST = function(){
                 $('#error').hide();
                 
-                                                
+                                     $("#beforeCheckout_popout").LoadingOverlay("show");           
                 
                 $.ajax("<?php echo base_url().$lang.$this->provider_prefix ?>/set_appointment/" + serviceID,
                     {
@@ -726,9 +736,11 @@ echo "</pre>";
                             });
                         },
                         complete: function(){
+							$("#beforeCheckout_popout").LoadingOverlay("hide");
                             Metronic.unblockUI('#reservation_wizard_form');
                         },
                         success: function(data){
+							$("#beforeCheckout_popout").LoadingOverlay("hide");
                             $(".se-pre-con").fadeOut("slow");
                             data = JSON.parse(data);
                             if(data.status=="success"){
@@ -813,7 +825,23 @@ echo "</pre>";
                     <i class="fa fa-plus-square-o"></i>Add another service
                 </div>
                 <div class="order_total">
-                    <p>Order Total</p>                   
+                    <p>Order Total</p>   
+					<?php if($this->session->userdata("logged_in_status")){
+						
+						print_r($this->session->userdata());
+						
+						$name = explode(" ",$this->session->userdata('fullname'));
+						if(count($name) > 1){
+							$fname = $name[0]; 
+							$lname = $name[1];
+						}else{
+							$name = $name;
+						}
+						echo $email = $this->session->userdata('email');
+						$phone = $this->session->userdata('phone');
+ 
+						
+					} ?>
                     <p class="total_prices">$ <span class="rates">0</span></p>
                     <form id="checkout" style="display: none;">
                         <div id="final_treatment"></div>                    
@@ -821,28 +849,30 @@ echo "</pre>";
                             <label><?php echo _l("First Name",$this)?></label>
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-i-cursor"></i></div>
-                                <input name="fname" id="fname" type="text" class="form-control" data-validation="required">
+                                <input value="<?php if(!empty($fname)){ echo $fname;}else if(!empty($name)){ echo $name;}  ?>" name="fname" id="fname" type="text" class="form-control" data-validation="required">
                             </div>
                         </div>
                         <div class="form-group">
                             <label><?php echo _l("Last Name",$this)?></label>
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-i-cursor"></i></div>
-                                <input name="lname" id="lname" type="text" class="form-control" data-validation="required">
+                                <input value="<?php if(!empty($lname)){ echo $lname;}else if(!empty($name)){ echo $name;}  ?>" name="lname" id="lname" type="text" class="form-control" data-validation="required">
                             </div>
                         </div>
                         <div class="form-group">
                             <label><?php echo _l("Email Address",$this)?></label>
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-at"></i></div>
-                                <input name="email" id="email" type="text" class="form-control" data-validation="required email">
+
+                                <input value="<?php if(!empty($email)){ echo $email;}  ?>" name="email" id="email" type="text" class="form-control" data-validation="required email">
+
                             </div>
                         </div>
                         <div class="form-group">
                             <label><?php echo _l("Phone Number",$this)?></label>
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-phone"></i></div>
-                                <input name="tel" id="phone" type="text" class="form-control" data-validation="required number">
+                                <input value="<?php if(!empty($phone)){ echo $phone;}  ?>" name="tel" id="phone" type="text" class="form-control" data-validation="required number">
                             </div>
                         </div>
                         <input type="submit" class="greyButton" value="Checkout"/>

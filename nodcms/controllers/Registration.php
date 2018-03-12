@@ -114,7 +114,13 @@ class Registration extends NodCMS_Controller {
                     "active"=>1,
                     "status"=>1
                 );
-                $this->Registration_model->insertUser($user);
+
+              $registered_user_id = $this->Registration_model->insertUser($user);
+				
+				//Get Registered user id
+				
+				$this->session->setuserdata('registered_user_id',$registered_user_id);
+				
                 $refurl = base_url().'register/user-registration/active/'.md5($email).'/'.$active_code;
 
                 // Send auto email for user confirm
@@ -920,9 +926,6 @@ class Registration extends NodCMS_Controller {
         $this->data['content']=$this->load->view($this->mainTemplate.'/dentist_register',$this->data,true);
         $this->load->view($this->frameTemplate, $this->data);
     }
-    
-    
-
     // Reservation messages page after any active
     function userRegistrationMessage($lang="en"){
         $this->db->set('status', 1);

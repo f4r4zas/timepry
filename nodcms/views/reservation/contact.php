@@ -122,40 +122,4 @@
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfkzWoPeDKw-RbhGbYp3-RWGgzCVaHvZU&callback=initMap">
 </script>
-<!--<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>-->
-<!--<script type="text/javascript" src="--><?php //echo base_url()?><!--assets/metronic/global/plugins/gmaps/gmaps.js"></script>-->
-<!---->
-<!--<script>-->
-<!--    var GoogleMaps = function () {-->
-<!---->
-<!--        var mapMarker = function () {-->
-<!--            var map = new GMaps({-->
-<!--                div: '#gmap_marker',-->
-<!--                lat: --><?php //echo substr($settings["location"],0,10)?>//,
-//                lng: <?php //echo substr($settings["location"],11,10)?>
-//            });
-//            map.addMarker({
-//                lat: <?//=substr($settings["location"],0,10)?>//,
-//                lng: <?//=substr($settings["location"],11,10)?>//,
-//                title: 'Lima',
-//                details: {
-//                    database_id: 42,
-//                    author: 'HPNeo'
-//                },
-//                click: function (e) {
-//                    if (console.log) console.log(e);
-//                    alert('You clicked in this marker');
-//                }
-//            });
-//        }
-//        return {
-//            //main function to initiate map samples
-//            init: function () {
-//                mapMarker();
-//            }
-//        };
-//    }();
-//    jQuery(document).ready(function() {
-//        GoogleMaps.init();
-//    });
-//</script>
+
