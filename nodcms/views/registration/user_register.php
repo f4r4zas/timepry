@@ -98,7 +98,7 @@
 
                 <div class="col-sm-6">
 
-                    <input placeholder="Phone" value="<?php echo $set_value['mobile']; ?>" name="mobile" id="mobile" type="text" class="form-control <?php echo $set_value['mobile']!=''?'edited':''; ?>" data-validation="required">
+                    <input placeholder="00398738927892" value="<?php echo $set_value['mobile']; ?>" name="mobile" id="mobile" type="text" class="form-control <?php echo $set_value['mobile']!=''?'edited':''; ?>" data-validation="required">
 
                     <?php if($form_error['mobile']!=''){ ?>
 

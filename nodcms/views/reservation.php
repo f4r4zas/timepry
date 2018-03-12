@@ -155,7 +155,7 @@
                                     
                                     if(!$this->session->userdata('group')):?>
                                     <li>
-                                        <a href="<?php echo base_url();?>register">Signup</a>
+                                        <a href="<?php echo base_url();?>register">Register</a>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0)" class="showLogin">Login</a>
