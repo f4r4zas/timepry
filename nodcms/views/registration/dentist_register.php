@@ -418,7 +418,7 @@ $(".closed_day").on("click", function(){
                         </div>
                         <div class="row">
                             <div class="col-md-2">
-                                <input class="field update3" id="street_number" type="text" placeholder="Address *" value="<?php if(!empty($addressData)){ echo $addressData['address']; } ?>" name="address">
+                                <input class="field update3" id="street_number" type="text" placeholder="Street No *" value="<?php if(!empty($addressData)){ echo $addressData['address']; } ?>" name="address">
                                 <span class="help-block"></span>
                             </div>
                             <div class="col-md-3">
