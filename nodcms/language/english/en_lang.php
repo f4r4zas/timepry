@@ -220,3 +220,4 @@ $lang["Dental office added!"] = "Dental office added!";
 $lang["Successfully Add Dental office."] = "Successfully Add Dental office.";
 $lang["Back to dashboard"] = "Back to dashboard";
 $lang["Dentist doesn't exists!"] = "Dentist doesn't exists!";
+$lang["print Receipt"] = "print Receipt";

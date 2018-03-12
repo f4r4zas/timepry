@@ -189,9 +189,6 @@ class Registration extends NodCMS_Controller {
         if(isset($_POST['undefined']))unset($_POST['undefined']);
         
         if($this->input->post("step")=="update1"){
-            //print_r($this->input->post());
-            //exit();
-            
             
             $this->form_validation->set_rules('fname', _l('First Name',$this), 'required|xss_clean|callback_formRulesName');
             $this->form_validation->set_rules('lname', _l('Last Name',$this), 'required|xss_clean|callback_formRulesName');
@@ -294,6 +291,7 @@ class Registration extends NodCMS_Controller {
                     "status"=>0
                 );
                 $this->Registration_model->insertUser($user);
+				$this->session->set_userdata("dataStepOne",$user);
                 $this->db->select('user_id');
                 $this->db->from('users');
                 $this->db->order_by('user_id','desc');
@@ -332,12 +330,7 @@ class Registration extends NodCMS_Controller {
             
         }
         
-        elseif($this->input->post("step")=="update2"){
-            //echo "<pre>";
-            //print_r($this->input->post());
-            //echo "</pre>";
-            //exit();
-            
+        elseif($this->input->post("step")=="update2"){            
             
             $this->form_validation->set_rules('dental_officename', _l('Name of the Dental Office',$this), 'required|xss_clean|callback_formRulesName');
             $this->form_validation->set_rules('dental_officedescription', _l('Description of Dental Office',$this), 'required|xss_clean|callback_formRulesName');
@@ -420,47 +413,6 @@ class Registration extends NodCMS_Controller {
                 $error = array_filter($form_error);
                 $status == FALSE;
                 
-                //$optional_fields = array();
-			 //print_r($_POST['phone']);
-			 //exit();
-            /*foreach($this->input->post() as $key => $value)
-	        {
-	           	           
-			
-				if(in_array($key,$optional_fields)){
-					
-					continue;
-				}
-                 else {
-					
-					if(is_array($value)){
-						
-						foreach($value as $row_val){
-						  
-							if(empty($row_val)){
-								$status = FALSE;
-								$error[$key] = form_error($key);
-							}
-						}
-					}
-                    elseif(empty($value)){
-						
-				        $status = FALSE;
-				        $error[$key] = form_error($key);
-				    }
-                    else{
-						//do nothing
-					
-					}
-                    
-                    
-				}
-				
-			  
-	        	
-	        }*/
-                
-                
             }else{
                 $time_start = time();
                 $time_start = $time_start + (7 * 24 * 60 * 60 * 60);
@@ -473,8 +425,8 @@ class Registration extends NodCMS_Controller {
                 $query = $this->db-> get();
                 
                 $get_last_user_id = $query->result();
-                
-                
+				
+				$dataStepTwo = array();
                 
                 $data = array(
                     "provider_name"=>$this->input->post('dental_officename'),
@@ -487,6 +439,9 @@ class Registration extends NodCMS_Controller {
                     "user_id"=>$get_last_user_id[0]->user_id
                 );
                 $this->db->insert('r_providers',$data);
+				
+				$dataStepTwo['providerDetails'] = $data;
+				
                 $provider_id = $this->db->insert_id();
                 
                 foreach($_POST['practitioners_title'] as $x => $oneTextFieldsValue) {
@@ -498,7 +453,7 @@ class Registration extends NodCMS_Controller {
                 $this->db->insert('practitioners',$data1);
                 
                 $data3 = array(
-                    "service_name"=>$_POST['practitioners_title'][$x]." ".$_POST['practitioner_name'][$x],
+                    "service_name"=>$_POST['practitioners_title'][$x]."  ".$_POST['practitioner_name'][$x],
                     "provider_id"=>$provider_id,
                     "service_description"=>"",
                     "created_date"=>time(),
@@ -506,9 +461,10 @@ class Registration extends NodCMS_Controller {
                     "user_id"=>$get_last_user_id[0]->user_id,
                     "public"=>1,
                     "price_show"=>1,
-                    
                 );
                 
+				$dataStepTwo['doctors'][] = $data3;
+				
                 $this->db->insert('r_services',$data3);
                 $service_id = $this->db->insert_id();
                 
@@ -530,31 +486,17 @@ class Registration extends NodCMS_Controller {
                         $data4["period_end_time"]=$end_min;
                         $data4["period_min"]=30;
                         $this->db->insert('r_time_period',$data4);
+						
+						$data4['staticStartTime'] = $_POST['openingHours'][$y];
+						$data4['staticEndtartTime']= $_POST['closingHours'][$y];
+						$dataStepTwo['timePeriod'][] = $data4;
+						
                     }
-                // Validate $oneTextFieldsValue...
                 }
                 
-				@$service_ids[] = $service_id;             
-                }
-                //$provider_id = $this->db->insert_id();
+					@$service_ids[] = $service_id;             
                 
-                
-                /*$data2 = array(
-                        "title"=>'Hygeine Treatment',
-                        "service_description"=>"",
-                        "provider_id"=>$provider_id,
-                        "user_id"=>$get_last_user_id[0]->user_id,
-                        "created_date"=>time(),
-                        "price" => 1.0,
-                        "subcategory"=>1
-
-                    );
-                
-                
-                
-                $this->db->insert('treatments',$data2);
-                $treatment_id = $this->db->insert_id();*/
-					
+				}
                 
                 $days = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
                 foreach($days as $x => $day):
@@ -574,8 +516,10 @@ class Registration extends NodCMS_Controller {
                         "closed"=>$_POST["dayClosed"][$x],
                         "provider_id"=>$provider_id
                     );
+					
+					$dataStepTwo['providerTime'][] = $data3;
+					
                     $this->db->insert('r_provider_time',$data3);
-                    
                     
                 endforeach;
                 
@@ -676,7 +620,7 @@ class Registration extends NodCMS_Controller {
                 
                 }
                 
-                
+                $this->session->set_userdata('dataStepTwo',$dataStepTwo);
                 
                 //$this->session->set_flashdata('message', $message);
                 echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."register/dentist-registration/3"));		
@@ -737,14 +681,18 @@ class Registration extends NodCMS_Controller {
                 
                 $address = $this->input->post('address').', '.$this->input->post('street').', '.$this->input->post('city').', '.$this->input->post('state');
                 
+				$dataStepThree['address']['address'] = $this->input->post('address');
+				$dataStepThree['address']['street'] = $this->input->post('street');
+				$dataStepThree['address']['city'] = $this->input->post('city');
+				$dataStepThree['address']['state'] = $this->input->post('state');
+				
+				$this->session->set_userdata('dataStepThree',$dataStepThree);
+				
                 $data = array("address"=>$address);
                 
                 $this->db->where('provider_id',$this->session->userdata('provider_id'));
-                $this->db->update('r_providers',$data);
-
+                $this->db->update('r_providers',$data);                
                 
-                
-                //$this->session->set_flashdata('message', $message);
                 echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."register/dentist-registration/4"));		
 		        die();
             }
@@ -789,7 +737,7 @@ class Registration extends NodCMS_Controller {
                 $error = array_filter($error); // Some might be empty
                 
             }else{
-                
+                $dataStepFour = array();
                 foreach($_POST['treatment_name'] as $x => $oneTextFieldsValue) {
                 $data1 = array(
                     "title"=>$_POST['treatment_name'][$x],
@@ -804,17 +752,11 @@ class Registration extends NodCMS_Controller {
                     
                 );
                 $treatment_id = $this->db->insert('treatments',$data1);
-                
+				$dataStepFour[] =  $data1;
+               
                 
                 }
-                
-                
-                
-                /*$address = $this->input->post('address').','.$this->input->post('street').','.$this->input->post('city').','.$this->input->post('state');
-                
-                */
-
-                
+                 $this->session->set_userdata('dataStepFour',$dataStepFour);
                 
                 //$this->session->set_flashdata('message', $message);
                 echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."register/dentist-registration/5"));		

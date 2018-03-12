@@ -54,7 +54,7 @@
 
                     <?php }else{ ?>
 
-                        <span class="help-block"><?php echo _l('Please enter your first name just with alphabet and space.', $this); ?></span>
+                        <span class="help-block"></span>
 
                     <?php } ?>
 
@@ -70,7 +70,7 @@
 
                     <?php }else{ ?>
 
-                        <span class="help-block"><?php echo _l('Please enter your last name just with alphabet and space.', $this); ?></span>
+                        <span class="help-block"></span>
 
                     <?php } ?>                  
 
@@ -90,7 +90,7 @@
 
                     <?php }else{ ?>
 
-                        <span class="help-block"><?php echo _l('Please enter your email address. It should be unique in this system.', $this); ?></span>
+                        <span class="help-block"></span>
 
                     <?php } ?>                      
 
@@ -106,7 +106,7 @@
 
                     <?php }else{ ?>
 
-                        <span class="help-block"><?php echo _l('Please enter your mobile number.', $this); ?></span>
+                        <span class="help-block"></span>
 
                     <?php } ?>                   
 
@@ -142,7 +142,7 @@
 
                     <?php }else{ ?>
 
-                        <span class="help-block"><?php echo _l('Please enter a password between 6 and 16 character for your account.', $this); ?></span>
+                        <span class="help-block"></span>
 
                     <?php } ?>                    
 
@@ -160,7 +160,7 @@
 
                     <?php }else{ ?>
 
-                        <span class="help-block"><?php echo _l('Please re-enter password.', $this); ?></span>
+                        <span class="help-block"></span>
 
                     <?php } ?>                    
 

@@ -456,7 +456,7 @@ echo "</pre>";
     <div class="modal-inner">
         <div class="row">
         <h1 style="text-align: center; font-family: 'Lato', sans-serif; font-size: 17px; padding-left: 2px; font-weight: 400; color: #fff; padding-bottom: 20px;">Click on treatment on right then select dentist from dropdown and select start time for your appointment</h1>
-            <div class="col-md-6">
+            <div class="col-md-6 pull-right">
             
              <div class="schedule_calender">
                 <div class="steps dentist-select" id="step1" style="display: none;">
@@ -524,7 +524,7 @@ echo "</pre>";
     <div class="steps" id="step_success" style="display: none;">
         <div class="content"></div>
         <button type="button" class="btn btn-default" onclick="$.backTo('step1');"><i class="fa fa-refresh"></i> <?php echo _l('Set new appointment',$this); ?></button>
-        <button class="btn btn-success hidden-print" type="button" onclick="window.print();"><i class="fa fa-print"></i> <?php echo _l('Print Page',$this); ?></button>
+        <button class="btn btn-success hidden-print" type="button" onclick="window.print();"><i class="fa fa-print"></i> <?php echo _l('print Receipt',$this); ?></button>
     </div>
 
     <script src="<?php echo base_url(); ?>assets/form-validator/jquery.form-validator.js"></script>
@@ -744,6 +744,7 @@ echo "</pre>";
                             $(".se-pre-con").fadeOut("slow");
                             data = JSON.parse(data);
                             if(data.status=="success"){
+								jQuery("#checkout").hide();
                                 $('#step_success').show().find('.content').html(data.result);
                                 $('#step3').hide();
                                 $('#checkout .input-group input').val('');
@@ -811,7 +812,7 @@ echo "</pre>";
     </script>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 pull-left">
                 <div id="selected_services">
                 <!--<div class="steps" id="step1">-->
                 <?php $i=0; foreach($data_list as $item){ $i++; $right_pic=($i>2)?1:0; if($i>4){ $i=1; } ?>
@@ -828,8 +829,6 @@ echo "</pre>";
                     <p>Order Total</p>   
 					<?php if($this->session->userdata("logged_in_status")){
 						
-						print_r($this->session->userdata());
-						
 						$name = explode(" ",$this->session->userdata('fullname'));
 						if(count($name) > 1){
 							$fname = $name[0]; 
@@ -837,8 +836,8 @@ echo "</pre>";
 						}else{
 							$name = $name;
 						}
-						echo $email = $this->session->userdata('email');
-						$phone = $this->session->userdata('phone');
+						 $email = $this->session->userdata('email');
+						 $phone = $this->session->userdata('phone');
  
 						
 					} ?>

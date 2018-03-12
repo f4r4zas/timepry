@@ -1,3 +1,5 @@
+<?php /* $this->session->unset_userdata("dataStepOne"); 
+ $this->session->unset_userdata("dataStepTwo"); */ ?>
 <style>
 .registration-tabs input.update4[type=text], .registration-tabs input.update4[type=password], .registration-tabs textarea.update4, .select2-container{
     background: #ddd;
@@ -53,32 +55,44 @@
                 <div class="tab-content">
                     <div id="step1" class="tab-pane <?php echo($step == 1 ?'in active ':'');?>fade ">
                         <form id="update1" method="post" action="<?php echo base_url();?>register/dentist-registration/2" role="form">
-                        
+                        <?php 
+						/* Setting the user step one data */
+						if($this->session->userdata('dataStepOne')){
+				
+							$stepOneData = $this->session->userdata('dataStepOne');
+							
+							$firstName = $stepOneData['firstname'];
+							$lastName = $stepOneData['lastname'];
+							$email =  $stepOneData['email'];
+							$phone = $stepOneData['mobile'];
+				
+						}
+					?>
             <div class="row">
                 <div class="col-sm-6">
-                    <input placeholder="First Name" value="" name="fname" id="fname" type="text" class="form-control update1">
+                    <input  placeholder="First Name" value="<?php if(!empty($firstName)){ echo $firstName; } ?>" name="fname" id="fname" type="text" class="form-control update1">
                     
-                        <span class="help-block"><?php echo _l('Please enter your first name just with alphabet and space.', $this); ?></span>
+                        <span class="help-block"></span>
                     
                 </div>
                 <div class="col-sm-6">
-                    <input placeholder="Last Name" value="" name="lname" id="lname" type="text" class="form-control update1">
+                    <input placeholder="Last Name" value="<?php if(!empty($lastName)){ echo $lastName; } ?>" name="lname" id="lname" type="text" class="form-control update1">
                     
-                        <span class="help-block"><?php echo _l('Please enter your last name just with alphabet and space.', $this); ?></span>
+                        <span class="help-block"></span>
                                      
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-6">
-                    <input placeholder="Email" value="" name="email" id="email" type="text" class="form-control update1">
+                    <input placeholder="Email" value="<?php if(!empty($email)){ echo $email; } ?>" name="email" id="email" type="text" class="form-control update1">
                     
-                        <span class="help-block"><?php echo _l('Please enter your email address. It should be unique in this system.', $this); ?></span>
+                        <span class="help-block"></span>
                                         
                 </div>
                 <div class="col-sm-6">
-                    <input placeholder="Phone" value="" name="mobile" id="mobile" type="text" class="form-control update1">
+                    <input placeholder="Phone" value="<?php if(!empty($phone)){ echo $phone; } ?>" name="mobile" id="mobile" type="text" class="form-control update1">
                     
-                        <span class="help-block"><?php echo _l('Please enter your mobile number.', $this); ?></span>
+                        <span class="help-block"></span>
                                       
                 </div>
             </div>
@@ -87,21 +101,30 @@
                 <div class="col-sm-6">
                     <input placeholder="Password" value="" name="password" id="password" type="password" class="form-control update1">
                     
-                        <span class="help-block"><?php echo _l('Please enter a password between 6 and 16 character for your account.', $this); ?></span>
+                        <span class="help-block"></span>
                                       
                 </div>
                 
                 <div class="col-sm-6">
                     <input placeholder="Confirm Password" value="" name="cpassword" id="cpassword" type="password" class="form-control update1">
                     
-                        <span class="help-block"><?php echo _l('Please re-enter password.', $this); ?></span>
+                        <span class="help-block"></span>
                                      
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="submit-btn">
-                    <button type="submit" class="greyButton">Submit</button>
+					<?php if($this->session->userdata('dataStepOne')){ ?>
+						<button type="button" OnClick="next()" class="greyButton">Submit</button>
+						<script>
+						function next(){
+							jQuery("[href='#step2']").click()
+						}
+						</script>
+					<?php }else{ ?>
+						<button type="submit" class="greyButton">Submit</button>
+					<?php  } ?>   
                     </div>
                 </div>
             </div>
@@ -112,43 +135,61 @@
 
                     <div id="step2" class="tab-pane <?php echo($step == 2 ?'in active ':'');?>fade">
                      <form id="update2" method="post" action="<?php echo base_url();?>register/dentist-registration/3" role="form">
+					 
+					 <?php if($this->session->userdata("dataStepTwo")){ 
+							echo "worked";
+						$dataStepTwo = $this->session->userdata("dataStepTwo"); 
+						
+						$provider_name = $dataStepTwo['providerDetails']["provider_name"];
+						$provider_username = $dataStepTwo['providerDetails']["provider_username"];
+						$provider_email = $dataStepTwo['providerDetails']["provider_email"];
+						$providerPhone = $dataStepTwo['providerDetails']["phone"];
+						$providerDescription = $dataStepTwo['providerDetails']["description"];
+						$website = $dataStepTwo['providerDetails']["website"];
+						
+						$doctors =  $dataStepTwo["doctors"];
+						$timePeriod =  $dataStepTwo["timePeriod"];
+						$providerTime =  $dataStepTwo["providerTime"];
+		
+					  } ?>
+					 
                         <div class="row">
                             <div class="col-md-6">
-                                <input placeholder="Name of the Dental Office *" value="" name="dental_officename" id="dental_officename" type="text" class="form-control update2">
+                                <input placeholder="Name of the Dental Office *" value="<?php if(!empty($provider_name)){echo $provider_name; } ?>" name="dental_officename" id="dental_officename" type="text" class="form-control update2">
                                 
-                                    <span class="help-block"><?php echo _l('Please enter dental office name just with alphabet and space.', $this); ?></span>
+                                    <span class="help-block"></span>
                                 
 
                             </div>
                             <div class="col-md-6">
                             
-                                <input placeholder="Website of Dental Office" value="" name="dental_officewebsite" id="dental_officewebsite" type="text" class="form-control update2">
+                                <input placeholder="Website of Dental Office" value="<?php if(!empty($website)){echo $website; } ?>" name="dental_officewebsite" id="dental_officewebsite" type="text" class="form-control update2">
                                 
-                                    <span class="help-block"><?php echo _l('Please enter dental office website if any with http:// or https://', $this); ?></span>
+                                    <span class="help-block"></span>
                                 
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6">
-                                <input placeholder="Email of Dental Office" value="" name="dental_officeemail" id="dental_officeemail" type="text" class="form-control update2">
+                                <input placeholder="Email of Dental Office" value="<?php if(!empty($provider_email)){echo $provider_email; } ?>" name="dental_officeemail" id="dental_officeemail" type="text" class="form-control update2">
                                 
-                                    <span class="help-block"><?php echo _l('Please enter dental office email address.', $this); ?></span>
+                                    <span class="help-block"></span>
                                 
                             </div>
                             <div class="col-md-6">
-                                <input placeholder="Phone of Dental Office *" value="" name="dental_officephone" id="dental_officephone" type="text" class="form-control update2">
+                                <input placeholder="Phone of Dental Office *" value="<?php if(!empty($providerPhone)){echo $providerPhone; } ?>" name="dental_officephone" id="dental_officephone" type="text" class="form-control update2">
                                 
-                                    <span class="help-block"><?php echo _l('Please enter dental office username for page url.', $this); ?></span>
+                                    <span class="help-block"></span>
                                 
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-12">
-                                <textarea placeholder="Description of Dental Office *" rows="6" name="dental_officedescription" id="dental_officedescription" class="form-control update2"></textarea>
+                                <textarea placeholder="Description of Dental Office *" rows="6" name="dental_officedescription" id="dental_officedescription" class="form-control update2"><?php if(!empty($providerDescription)){echo $providerDescription; } ?></textarea>
                                 
-                                    <span class="help-block"><?php echo _l('Please enter description of dental office.', $this); ?></span>
+                                    <span class="help-block"></span>
                                 
                                 
                             </div>
@@ -159,7 +200,40 @@
                         <div id="practioners">
                             <h1>Name of practioners who work in Dental Office (minimum 1)</h1>
                             
-                            <div class="row">
+                            
+							<?php if(!empty($doctors)){ ?>
+								<?php foreach($doctors as $all_doctors){ ?>
+								<?php 
+									$dName = explode("  ",$all_doctors["service_name"]);
+									$docTitle = $dName[0];
+									$docName = $dName[1];
+								?>
+									<div class="row">
+										<div class="col-xs-12 col-sm-6">
+											<select name="practitioners_title[]" id="practitioners_title" class="form-control update2">
+												<option <?php if($docTitle == "Dr."){echo "selected";} ?> value="Dr.">Dr.</option>
+												<option <?php if($docTitle == "Prof. Dr." || $docTitle == "Prof."){echo "selected";} ?> value="Prof. Dr.">Prof. Dr.</option>
+												<option <?php if($docTitle == "Assistant"){echo "selected";} ?> value="Assistant">Assistant</option>
+												<option <?php if($docTitle == "Dental Hygienist"){echo "selected";} ?> value="Dental Hygienist">Dental Hygienist</option>
+											</select>
+										   
+											
+												<span class="help-block"></span>
+										   
+										</div>
+										<div class="col-xs-8 col-sm-5">
+											<input type="text" placeholder="Name and Surname *" name="practitioner_name[]" value="<?php echo $docName; ?>" id="practitioner_name" class="form-control update2">
+											
+												<span class="help-block"></span>
+											
+										</div>
+										<div class="col-xs-4 col-sm-1 add_practitioner_main">
+											<div class="remove_practitioner_row"><i style="display:block; margin-top: 15px;" class="fa fa-times"></i></div>
+										</div>
+									</div>
+										<?php } ?>
+							<?php }else{ ?>
+							<div class="row">
                                 <div class="col-xs-12 col-sm-6">
                                     <select name="practitioners_title[]" id="practitioners_title" class="form-control update2">
                                         <option value="Dr.">Dr.</option>
@@ -167,7 +241,7 @@
                                         <option value="Assistant">Assistant</option>
                                         <option value="Dental Hygienist">Dental Hygienist</option>
                                     </select>
-                                    <!--<input type="text" placeholder="Title *" name="practitioners_title[]" value="" id="practitioners_title" class="form-control update2">-->
+                                   
                                     
                                         <span class="help-block"></span>
                                    
@@ -184,6 +258,9 @@
                                     </div>
                                 </div>
                             </div>
+							<?php } ?>
+							
+							
                         </div>
                         
                         <script>
@@ -213,15 +290,35 @@
                             
                             
                             <?php 
+							
                             $days = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
-                            foreach($days as $k => $day):?>
-
+							$start = 0;
+                            foreach($days as $k => $day): ?>
+							
+							<?php 
+							
+							if(!empty($timePeriod)){
+								$timeData = $timePeriod[$start]; 
+									
+								if($timeData['day_no'] == $start){
+									$savedStart =  $timeData['staticStartTime'];
+									$savedEnd =  $timeData['staticEndtartTime'];
+								}else{
+									$savedStart = "";
+									$savedEnd = "";
+								}
+							}
+							
+							
+						
+						
+							?>
                             <div class="row">
                                 <div class="col-xs-8 col-sm-4">
                                     <input class="update2" disabled="disabled" type="text" value="<?=$day;?>" name="opening_day[]" placeholder="<?=$day;?>">
                                 </div>
                                 <div class="col-xs-12 col-sm-3 input-append">
-                                    <input class="time update2 timePicker-from" id="timePicker-from-<?=$k?>" type="text" style="width: 80%;" placeholder="Opening hours * 08:00" name="openingHours[]">
+                                    <input value="<?php if(!empty($savedStart)){ echo $savedStart; } ?>"									class="time update2 timePicker-from" id="timePicker-from-<?=$k?>" type="text" style="width: 80%;" placeholder="Opening hours * 08:00" name="openingHours[]">
                                     
                                     <!--<span class="add-on">
                                       <i data-time-icon="icon-time" data-date-icon="icon-calendar" class="icon-time">
@@ -230,7 +327,7 @@
                                     <span class="help-block"></span>
                                 </div>
                                 <div class="col-xs-12 col-sm-3 input-append">
-                                    <input class="time update2 timePicker-to" id="timePicker-to-<?=$k?>" type="text" style="width: 80%;" placeholder="Closing hours * 14:00" data-format="hh:mm" name="closingHours[]">
+                                    <input value="<?php if(!empty($savedEnd)){ echo $savedEnd; } ?>" class="time update2 timePicker-to" id="timePicker-to-<?=$k?>" type="text" style="width: 80%;" placeholder="Closing hours * 14:00" data-format="hh:mm" name="closingHours[]">
                                     
                                     <!--<span class="add-on">
                                       <i data-time-icon="icon-time" data-date-icon="icon-calendar" class="icon-time">
@@ -251,7 +348,7 @@
                                     </div>-->
                                 </div>
                             </div>
-                            
+                            <?php $start++; ?>
                             <?php endforeach;?>
                             
                             <script type="text/javascript">
@@ -299,27 +396,30 @@
                     
                     <div id="step3" class="tab-pane <?php echo($step == 3 ?'in active ':'');?>fade">
                     <form id="update3" method="post" action="<?php echo base_url();?>register/dentist-registration/4" role="form">
+					<?php if($this->session->userdata("dataStepThree")){ ?>
+						<?php $addressData=  $this->session->userdata("dataStepThree")["address"]; ?>
+					<?php } ?>
                         <div class="row">
                             <div class="col-md-12">
-                                <input type="text" id="pac-input" placeholder="Search Your Location *" name="location">
+                                <input type="text" value="<?php if(!empty($addressData)){ echo $addressData['address'].", ".$addressData['street'].", ".$addressData['city'].", ".$addressData['state']; } ?>" id="pac-input" placeholder="Search Your Location *" name="location">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-2">
-                                <input class="field update3" id="street_number" type="text" placeholder="Address *" name="address">
+                                <input class="field update3" id="street_number" type="text" placeholder="Address *" value="<?php if(!empty($addressData)){ echo $addressData['address']; } ?>" name="address">
                                 <span class="help-block"></span>
                             </div>
                             <div class="col-md-3">
-                                <input class="field update3" id="route" type="text" placeholder="Street *" name="street">
+                                <input class="field update3" value="<?php if(!empty($addressData)){ echo $addressData['street']; } ?>" id="route" type="text" placeholder="Street *" name="street">
                                 <span class="help-block"></span>
                             </div>
                             
                             <div class="col-md-3">
-                                <input class="field update3" disabled="true" id="locality" type="text" placeholder="City *" name="city">
+                                <input class="field update3" value="<?php if(!empty($addressData)){ echo $addressData['city']; } ?>" disabled="true" id="locality" type="text" placeholder="City *" name="city">
                                 <span class="help-block"></span>
                             </div>
                             <div class="col-md-2">
-                                <input class="field update3" disabled="true" id="administrative_area_level_1"  type="text" placeholder="State *" name="state">
+                                <input class="field update3" disabled="true" id="administrative_area_level_1" value="<?php if(!empty($addressData)){ echo $addressData['state']; } ?>" type="text" placeholder="State *" name="state">
                                 <span class="help-block"></span>
                             </div>
                             <div class="col-md-2">
@@ -391,6 +491,13 @@
                     
                     
                     <form id="update4" method="post" action="<?php echo base_url();?>register/dentist-registration/5" role="form">
+					<?php if(!empty($this->session->userdata("dataStepFour"))){ 
+						/* echo "<pre>";
+						print_r($this->session->userdata("dataStepFour"));
+					
+						echo "</pre>"; */
+							$dataStepFour = $this->session->userdata("dataStepFour");
+					 } ?>
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="treatment-tabs">
@@ -450,6 +557,8 @@
                                                     
                                                     foreach($all_subcats as $all_subcat):
                                                         if($all_subcat->cat_id == $all_cat->cat_id):
+														
+														
                                                     ?>
 
                                                     <div id="treatment-service<?php echo $subcats_content;?>" class="<?php echo ($subcats_content==1)?'tab-pane fade in active':'tab-pane fade';?>">
@@ -497,6 +606,76 @@
                                                             <hr class="mod" style="margin:0px 0px 20px 0;border-color:#b7b7b7;">
                                                             
                                                             </div>
+															<?php if(!empty($dataStepFour)){ 
+																
+																foreach($dataStepFour as $tPrice){
+																	if($tPrice['subcategory'] == $all_subcat->subcat_id){
+																		
+																		?>
+																<div class="cloned">
+																<span class="fa fa-times remove_treatment"></span>
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <input value="<?php echo $tPrice['title']; ?>" type="text" class="update_4 form-control" placeholder="Treatment title" name="treatment_name[]" style="width: 28%; display: inline-block; vertical-align: top; margin: 0 2px;"/>
+                                                                    <select class="update_4 form-control" name="treatment_duration[]" style="width: 24%; display: inline-block; vertical-align: top; height: 40px; margin: 0 2px;">
+                                                                    <option value="">Duration in min</option>
+                                                                        <?php
+                                                                        for ($row=1; $row <= 8; $row++) { 
+																			$selected = "";
+																		
+                                                                    		   $p = 15 * $row;
+																			   
+																			   if($tPrice['period_min'] == $p){
+																				   $selected = "selected";
+																			   }
+																			   
+                                                                echo "<option ".$selected.">$p</option>";
+                                                                		}?>
+                                                                        
+                                                                    </select>
+                                                                    <input class="update_4" type="text" value="<?php echo $tPrice['price']; ?>" placeholder="Price($)" name="treatment_price[]" style="width: 15%; display: inline-block; vertical-align: top; height: 40px; margin: 0 2px;"/>
+                                                                    <div style="width: 29%; display: inline-block; vertical-align: top; height: 40px;">
+                                                                    <?php 
+                                                                    $this->db->select('*');
+                                                                    $this->db->from('practitioners');
+                                                                    $this->db->where('provider_id',$this->session->userdata('provider_id'));
+                                                                    $query = $this->db->get();
+                                                                    $practitioners = $query->result();?>
+																	
+																	<?php $doctorer_array = explode(",",$tPrice['dentists_id']); ?>
+																	
+                                                                        <select id="" class="update_4 e9" name="treatment_practitioner[]" multiple="">
+                                                                            <?php foreach($practitioners as $practitioner):?>
+                                                                            <option <?php if(in_array($practitioner->practitioner_id,$doctorer_array)){echo "selected"; } ?> value="<?= $practitioner->practitioner_id;?>"><?= $practitioner->practitioner_title;?> <?= $practitioner->practitioner_fullname;?></option>
+                                                                            <?php endforeach;?>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            <div class="row">
+                                                                
+                                                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                                                    <input class="update_4" type="text" value="<?php echo $tPrice['service_description'] ?>" placeholder="Description" name="treatment_desc[]">
+                                                                    <span class="help-block"></span>
+                                                                </div>
+                                                                
+                                                            </div>
+
+
+                                                            <hr class="mod" style="margin:0px 0px 20px 0;border-color:#b7b7b7;">
+                                                            
+                                                            </div>
+																		<?php
+																	}
+																}
+																
+															}	
+															?>
+																	
+														
+															
+															
 
                                                             <div class="add_new_treatment_inside_tab">
                                                                 <!--<a href="javascript:void(0)" class="greyButton">Add treatment</a>-->
@@ -796,13 +975,13 @@ $(document).ready(function(){
                   var keyIndexEq = parseInt(keyIndex[1]);
                   
                   $('html, body').animate({
-                        scrollTop: $("[name='"+keyIndex[0]+"']").offset().top
+                      //  scrollTop: $("[name='"+keyIndex[0]+"']").offset().top
                     }, 1000);
                 
                     return false;
                 }else if(value != "" && $("body").find("[name='"+key+"']").length > 0) {
                     $('html, body').animate({
-                        scrollTop: $("[name='"+key+"']").offset().top
+                        //scrollTop: $("[name='"+key+"']").offset().top
                     }, 1000);
                     return false;
                 }

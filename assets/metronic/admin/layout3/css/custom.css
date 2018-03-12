@@ -175,6 +175,7 @@ a{
     margin: 0;
     margin-top: 2px;
     font-size: 12px;
+	color:red;
 }
 .registration-tabs input[type=text],
 .registration-tabs input[type=password],
