@@ -195,7 +195,6 @@
                         </a>
                     </li>
                 <?php } ?>
-				<?php echo "Worked"; ?>
                 <?php if(isset($reservation_menu) && count($reservation_menu) != 0){ ?>
 	
                     <?php foreach($reservation_menu as $item){ ?>
