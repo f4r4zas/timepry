@@ -1,8 +1,10 @@
 <link href="<?php echo base_url(); ?>assets/metronic/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet"/>
-<div class="note note-warning">
-    <h4 class="title"><i class="icon-info font-red"></i> <?php echo _l('Change date & times with drag & drop!',$this); ?></h4>
-    <p><?php echo _l('If you want change date or time an appointment, you need just drag it to a new date or time section.',$this); ?></p>
-</div>
+<style>
+.banner_wrapper{
+	    height: 138px !important;
+}
+</style>
+
 <div class="portlet box blue-hoki calendar">
     <div class="portlet-title">
         <div class="caption">

@@ -218,48 +218,7 @@ class Registration extends NodCMS_Controller {
                 $this->session->set_flashdata('form_error', $form_error);
                 
                 $status = false;
-		          $error = $form_error;
-                
-                //$optional_fields = array();
-			 //print_r($_POST['phone']);
-			 //exit();
-            /*foreach($this->input->post() as $key => $value)
-	        {
-	           	           
-			
-				if(in_array($key,$optional_fields)){
-					
-					continue;
-				}
-                 else {
-					
-					if(is_array($value)){
-						
-						foreach($value as $row_val){
-						  
-							if(empty($row_val)){
-								$status = FALSE;
-								$error[$key] = form_error($key);
-							}
-						}
-					}
-                    elseif(empty($value)){
-						
-				        $status = FALSE;
-				        $error[$key] = form_error($key);
-				    }
-                    else{
-						//do nothing
-					
-					}
-                    
-                    
-				}
-				
-			  
-	        	
-	        }*/
-                
+		        $error = $form_error;
                 
             }else{
                 
@@ -330,7 +289,9 @@ class Registration extends NodCMS_Controller {
             
         }
         
-        elseif($this->input->post("step")=="update2"){            
+        elseif($this->input->post("step")=="update2"){        
+
+		
             
             $this->form_validation->set_rules('dental_officename', _l('Name of the Dental Office',$this), 'required|xss_clean|callback_formRulesName');
             $this->form_validation->set_rules('dental_officedescription', _l('Description of Dental Office',$this), 'required|xss_clean|callback_formRulesName');
@@ -414,6 +375,24 @@ class Registration extends NodCMS_Controller {
                 $status == FALSE;
                 
             }else{
+				
+				//If form resaved remove previous values
+				
+				/* 
+					$this->db->where('id', $id);
+					$this->db->delete('testimonials'); 
+					
+					$this->db->where('id', $id);
+					$this->db->delete('testimonials'); 
+					
+					$this->db->where('id', $id);
+					$this->db->delete('testimonials'); 
+					
+					$this->db->where('id', $id);
+					$this->db->delete('testimonials'); 
+				*/
+				
+				
                 $time_start = time();
                 $time_start = $time_start + (7 * 24 * 60 * 60 * 60);
                 

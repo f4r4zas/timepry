@@ -164,7 +164,7 @@
         <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
         <div class="page-sidebar navbar-collapse collapse" style="background: #131313;">
             <!-- BEGIN SIDEBAR MENU -->
-            <ul style="margin: 0 auto; float: none; max-width: 900px;" class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+            <ul style="margin: 0 auto;float: none;width: auto;text-align: center;" class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                 <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
                 <?php /*<li class="sidebar-toggler-wrapper">
                     <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
@@ -249,7 +249,7 @@
                             <li <?=($page == "service")?'class="star active"':''?>>
                                 <a href="<?php echo APPOINTMENT_ADMIN_URL; ?>services/">
                                     <i class="icon-briefcase"></i>
-                                    <span class="title"><?php echo _l('Practitionerss',$this); ?></span>
+                                    <span class="title"><?php echo _l('Practitioners',$this); ?></span>
                                     <?php if($page == "service"){ ?>
                                         <span class="selected"></span>
                                     <?php } ?>
@@ -258,8 +258,8 @@
                                     <li <?=($page == "holidays")?'class="star active"':''?>>
                                         <a href="<?php echo APPOINTMENT_ADMIN_URL; ?>holidays/">
                                             <i class="icon-calendar"></i>
-                                            <span class="title"><?php echo _l('Holidays',$this); ?></span>
-                                            <?php if($page == "holidays"){ ?>
+                                            <span class="title"><?php echo _l('Holidayss',$this); ?></span>
+                                            <?php if($page == "holidayss"){ ?>
                                                 <span class="selected"></span>
                                             <?php } ?>
                                         </a>

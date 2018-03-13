@@ -49,7 +49,7 @@ class Appointment_admin extends NodCMS_Controller
         if($this->session->userdata('group') != 1 && $this->session->userdata('group') != 100){
             $this->frameTemplate .= '_staff';
         }
-        if(!in_array($this->router->fetch_method(), array('index', 'accountSetting'))){
+        if(!in_array($this->router->fetch_method(), array('index', 'accountSettings'))){
             // Check admin access pages
             if(!in_array($this->session->userdata('group'), array(1, 100)) || !in_array($this->router->fetch_method(), $adminPages)){
                 // Check Selected a provider
@@ -603,7 +603,6 @@ class Appointment_admin extends NodCMS_Controller
     }
 
 	function treatment(){
-		
 		$provider_id = $this->session->userdata("provider_id");
 		$all_treatments =  $this->Appointment_admin_model->getAllTreatment($provider_id);
 		
@@ -629,13 +628,17 @@ class Appointment_admin extends NodCMS_Controller
                 }
             }
         } */
+		
         $this->data['title']=_l("All Treatment",$this);
+		
         $this->data['sub_title']=_l("Treatments list",$this);
         $this->data['breadcrumb']=array(
             array('title'=>$this->data['sub_title'])
         );
         $this->data['page']='treatment';
         $this->data['content']=$this->load->view($this->mainTemplate."/appointment/".$this->data['page'],$this->data,TRUE);
+		
+		
         $this->loadView();
 	}
 	
@@ -750,6 +753,7 @@ class Appointment_admin extends NodCMS_Controller
         );
         $this->data['page']='service';
         $this->data['content']=$this->load->view($this->mainTemplate."/appointment/".$this->data['page'],$this->data,TRUE);
+		
         $this->loadView();
     }
 
@@ -1196,7 +1200,7 @@ class Appointment_admin extends NodCMS_Controller
         }elseif($this->Appointment_admin_model->getCountReservation()){
             $this->data['content']=$this->load->view($this->mainTemplate."/appointment/reservation",$this->data,TRUE);
         }else{
-            $this->data['content']=$this->load->view($this->mainTemplate."/appointment/reservation_empty",$this->data,TRUE);;
+             $this->data['content']=$this->load->view($this->mainTemplate."/appointment/reservation_emty",$this->data,TRUE);;
         }
         $this->loadView();
     }
@@ -1793,6 +1797,7 @@ class Appointment_admin extends NodCMS_Controller
         $this->data['content']=$this->load->view($this->mainTemplate.'/account_setting',$this->data,true);
         $this->data['title'] = _l("Account setting",$this);
         $this->data['page'] = "account";
+		
         $this->loadView();
     }
 
@@ -1891,19 +1896,24 @@ class Appointment_admin extends NodCMS_Controller
                     ),
                 ),
             ),
-            'holidays'=>array(
-                'url'=>APPOINTMENT_ADMIN_URL.'holidays',
-                'icon'=>'icon-calendar',
-                'title'=>_l('Holidays',$this),
-                'class'=>'',
-                'addOn'=>'',
-            ),
             'service'=>array(
                 'url'=>APPOINTMENT_ADMIN_URL.'services',
                 'icon'=>'icon-briefcase',
                 'title'=>_l('Practitioners',$this),
                 'class'=>'',
                 'addOn'=>'',
+				'sub_menu'=>array(
+                    'Holidays'=>array(
+                        'url'=>APPOINTMENT_ADMIN_URL.'holidays',
+                        'title'=>_l('Holidays',$this),
+                        'class'=>'',
+                    ),
+                    'reservation_list'=>array(
+                        'url'=>APPOINTMENT_ADMIN_URL.'services',
+                        'title'=>_l('All Practitioners',$this),
+                        'class'=>'',
+                    ),
+                ),
             ),
 			'dental-office'=>array(
                 'url'=>'/timepry/Dental/addDentalOffice',
@@ -1940,11 +1950,6 @@ class Appointment_admin extends NodCMS_Controller
                 'class'=>'',
                 'addOn'=>'',
                 'sub_menu'=>array(
-                    'provider_manager'=>array(
-                        'url'=>APPOINTMENT_ADMIN_URL.'myProviderManager',
-                        'title'=>_l('Managers',$this),
-                        'class'=>'',
-                    ),
                     'provider'=>array(
                         'url'=>APPOINTMENT_ADMIN_URL.'myProviderEdit',
                         'title'=>_l('Details',$this),
@@ -2038,6 +2043,7 @@ class Appointment_admin extends NodCMS_Controller
                 'title'=>_l('Practitioners',$this),
                 'class'=>'',
                 'addOn'=>'',
+				
             ),
             'extra_fields'=>array(
                 'url'=>APPOINTMENT_ADMIN_URL.'extraFields',

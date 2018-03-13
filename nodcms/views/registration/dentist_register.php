@@ -139,7 +139,7 @@
                      <form id="update2" method="post" action="<?php echo base_url();?>register/dentist-registration/3" role="form">
 					 
 					 <?php if($this->session->userdata("dataStepTwo")){ 
-							echo "worked";
+							
 						$dataStepTwo = $this->session->userdata("dataStepTwo"); 
 						
 						$provider_name = $dataStepTwo['providerDetails']["provider_name"];
