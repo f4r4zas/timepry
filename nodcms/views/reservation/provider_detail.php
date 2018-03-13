@@ -6,6 +6,12 @@
     height:370px;
 }
 
+#beforeCheckout_popout .selservice_box.selected {
+    background: #eee;
+    border: 6px double #00958c !important;
+    color: #518ed2;
+}
+
 #beforeCheckout_popout .schedule_calender{
     padding-top: 0px;
 }
@@ -455,7 +461,18 @@ echo "</pre>";
 <div class="modal-box" id="beforeCheckout_popout">
     <div class="modal-inner">
         <div class="row">
-        <h1 style="text-align: center; font-family: 'Lato', sans-serif; font-size: 17px; padding-left: 2px; font-weight: 400; color: #fff; padding-bottom: 20px;">Click on treatment on right then select dentist from dropdown and select start time for your appointment</h1>
+        <div class="col-md-6" style="text-align: center;">
+        <img style="max-width: 165px;" src="http://techopialabs.com/timepry/assets/front/images/timepry_footer_logo.png" alt="Timepry" title="Timepry" class="logo-default">
+        </div>
+        
+        <div class="col-md-6">
+        <ol>
+        <li style="color: #fff;">1. Click on treatment on left</li>
+        <li style="color: #fff;">2. Select dentist from dropdown on right</li>
+        <li style="color: #fff;">3. Select start time for your appointment</li>
+        </ol>
+        </div>
+        
             <div class="col-md-6 pull-right">
             
              <div class="schedule_calender">
@@ -556,7 +573,14 @@ echo "</pre>";
             }                         
             
             
+            $.selecttreat = function(){
+                $(this).addClass("selected");
+            }
+            
+            
             $.selectprac = function(treatment_id) {
+                $(".selservice_box").removeClass("selected");
+                $('#treat'+treatment_id+'').addClass("selected");
                 $("option.dentist_name").remove();
                 $('#step1').slideUp(500);
                 $.backTo('step1');

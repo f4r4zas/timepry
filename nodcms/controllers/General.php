@@ -48,6 +48,79 @@ class General extends CI_Controller
         $this->load->view("footer", $this->data);
     }
     
+    function get_location_matrix(){
+        
+        $this-> db->select('*');
+		$this->db->from('r_providers');
+        $this->db->like('address', $this->input->post('company'));
+		
+		$query = $this->db->get();
+		$result = $query->result();
+        $output = "";
+        
+        if(!empty($result)) {
+        //$fetched = array();    
+            $output .= '<ul class="amazetal_companies">';
+        $fetched = array();
+        foreach($result as $location) {
+        
+        $location_city = explode(",",$location->address);
+        end($location_city);
+        $location_city = prev($location_city);
+        if(!in_array($location_city,$fetched)):
+                $output .= '<li class="fetched_companies" data-val="'.urlencode($location_city).'">'.$location_city.'</li>';
+        $fetched[] = $location_city;
+        endif;
+        } 
+            $output .= '</ul>';
+            
+        } else {
+            
+            $output = "";
+            /*$output .= '<ul id="beneficiary-list">';
+                $output .= '<li onClick="selectbeneficiary(\'\',\'\');">No beneficiary found</li>';
+            $output .= '</ul>';*/    
+        } 
+        
+        echo $output; 
+    }
+    
+    
+    function get_treatment_matrix(){
+        
+        $this-> db->select('*');
+		$this->db->from('subcategory');
+        $this->db->like('subcat_name', $this->input->post('company'));
+		
+		$query = $this->db->get();
+		$result = $query->result();
+        $output = "";
+        
+        if(!empty($result)) {
+        //$fetched = array();    
+            $output .= '<ul class="amazetal_companies">';
+        $fetched = array();
+        foreach($result as $location) {
+        
+        
+        if(!in_array($location->subcat_name,$fetched)):
+                $output .= '<li class="fetched_treats" data-val="'.urlencode($location->subcat_name).'">'.$location->subcat_name.'</li>';
+        $fetched[] = $location->subcat_name;
+        endif;
+        } 
+            $output .= '</ul>';
+            
+        } else {
+            
+            $output = "";
+            /*$output .= '<ul id="beneficiary-list">';
+                $output .= '<li onClick="selectbeneficiary(\'\',\'\');">No beneficiary found</li>';
+            $output .= '</ul>';*/    
+        } 
+        
+        echo $output; 
+    }
+    
     
     function about_us(){
         if(isset($_SESSION['language'])){

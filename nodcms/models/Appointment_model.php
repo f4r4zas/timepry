@@ -344,9 +344,10 @@ class Appointment_model extends CI_Model
 		if(!empty($conditions['search_dental_clinic'])){
 			$this->db->like('provider_name',urldecode($conditions['search_dental_clinic']));		
 		}else if(!empty($conditions['provider_location']) && !empty($conditions['treatment_cat'])){
-			$this->db->like('address',urldecode($conditions['provider_location']));
 			$this->db->join('treatments','r_providers.provider_id = treatments.provider_id');
-			$this->db->where('treatments.subcategory',$conditions['treatment_cat']);
+            $this->db->join('subcategory','treatments.subcategory = subcategory.subcat_id');
+            $this->db->like('address',urldecode($conditions['provider_location']));
+			$this->db->like('subcategory.subcat_name',urldecode($conditions['treatment_cat']));
 		}
 
         $this->db->where('active',1);

@@ -26,7 +26,7 @@
                         <div id="tabcontent-one" class="tab_content active">
 						<form action="appointment" id="search_by_location" method="get">
                             <div class="input_field fa fa-search">
-                                <?php 
+                                <?php /* 
                                 $this->db->select('provider_id,address');
                                 $this->db->from('r_providers');
                                 $query = $this->db->get();
@@ -45,13 +45,16 @@
                                         endif;
                                         endforeach;?>
                                     </select>
-                                <!--<input type="text" placeholder="Location" name="search_location">-->
+                                    */?>
+                                    
+                                    <div class="company-box" style="display:none; top: 50px; position: absolute; background: white; width: 100%; padding: 10px; line-height: 26px;"></div>
+                                <input type="text" placeholder="Location" class="company_matrix" name="search_location"><!--<input type="text" placeholder="Location" name="search_location">-->
 
                             </div>
 
                             <div class="input_field">
                             
-                                <?php 
+                                <?php /* 
                                 $this->db->select('subcat_id,subcat_name');
                                 $this->db->from('subcategory');
                                 $query = $this->db->get();
@@ -67,13 +70,15 @@
                                         endif;
                                         endforeach;?>
                                     </select>
-
-                                <!--<input type="text" placeholder="Treatment" name="search_treatment">-->                        
+                                    
+                                    */?>
+                                <div class="treat-box" style="display:none; top: 50px; position: absolute; background: white; width: 100%; padding: 10px; line-height: 26px;"></div>
+                                <input type="text" placeholder="Treatment" class="treat_matrix" name="search_treatment">                        
 
                             </div>
 
                             <div class="input_field">
-
+                                
                                 <input type="text" name="search_date" id="search_date">                        
 
                             </div>
@@ -83,6 +88,114 @@
                                     format: "dd/MM/yyyy"
                                 });
                             </script>
+                            
+                            
+                            <script>
+                              $("body").on('click',".fetched_companies",function(){
+                              //function selectamazetal_companies(val){
+                                var val = $(this).attr("data-val");
+                                $(this).closest(".company-box").siblings(".company_matrix").val(val);
+                                $(".company-box").hide();
+                              });
+                              
+                              $("body").on('blur',".company_matrix",function(){
+                                setTimeout(function(){
+                                    $(".company-box").hide();    
+                                },300);
+                                
+                              });
+                              
+                              $("body").on('keyup',".company_matrix",function(){
+                                var thisinput = $(this);
+                                
+                                if($(this).val().length >= 2){
+                                    var formData = new FormData();
+                                    formData.append('company',$(this).val()); 
+                                    
+                                    
+                                    url = "<?php echo site_url('General/get_location_matrix');?>";
+                            			 $.ajax({
+                            				  url: url,
+                            				  type: "POST",
+                            				  data: formData,
+                            				  beforeSend:function()
+                            				  {
+                            					thisinput.css("background","url(https://amazetal.com/assets/images/LoaderIcon.gif) right center #fff no-repeat");
+                            				  },
+                            				  processData: false,
+                            				  contentType: false,
+                            				  success: function (data) {
+                            				    thisinput.css("background","#fff");
+                            					//var data_msg=$.parseJSON(data);
+                                                //thisinput.prev().show();
+                            			        //thisinput.prev().html(data);
+                                                $(".company-box").show();
+                                                $(".company-box").html(data);
+                            				  },
+                            				  error: function (jqXHR, textStatus, errorThrown) {
+                            					$(".se-pre-con").fadeOut("slow");
+                            					alert('Error adding / update data');
+                            				  }
+                            				});
+                                }else{
+                                    $(".company-box").hide();
+                                }
+                              });
+                              
+                              
+                              
+                              
+                              $("body").on('click',".fetched_treats",function(){
+                              //function selectamazetal_companies(val){
+                                var val = $(this).attr("data-val");
+                                $(this).closest(".treat-box").siblings(".treat_matrix").val(val);
+                                $(".treat-box").hide();
+                              });
+                              
+                              $("body").on('blur',".treat_matrix",function(){
+                                setTimeout(function(){
+                                    $(".treat-box").hide();    
+                                },300);
+                                
+                              });
+                              
+                              $("body").on('keyup',".treat_matrix",function(){
+                                var thisinput = $(this);
+                                
+                                if($(this).val().length >= 1){
+                                    var formData = new FormData();
+                                    formData.append('company',$(this).val()); 
+                                    
+                                    
+                                    url = "<?php echo site_url('General/get_treatment_matrix');?>";
+                            			 $.ajax({
+                            				  url: url,
+                            				  type: "POST",
+                            				  data: formData,
+                            				  beforeSend:function()
+                            				  {
+                            					thisinput.css("background","url(https://amazetal.com/assets/images/LoaderIcon.gif) right center #fff no-repeat");
+                            				  },
+                            				  processData: false,
+                            				  contentType: false,
+                            				  success: function (data) {
+                            				    thisinput.css("background","#fff");
+                            					//var data_msg=$.parseJSON(data);
+                                                //thisinput.prev().show();
+                            			        //thisinput.prev().html(data);
+                                                $(".treat-box").show();
+                                                $(".treat-box").html(data);
+                            				  },
+                            				  error: function (jqXHR, textStatus, errorThrown) {
+                            					$(".se-pre-con").fadeOut("slow");
+                            					alert('Error adding / update data');
+                            				  }
+                            				});
+                                }else{
+                                    $(".treat-box").hide();
+                                }
+                              });
+                              </script>
 
                             <!-- <div class="input_field range">
 

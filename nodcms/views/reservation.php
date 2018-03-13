@@ -487,7 +487,7 @@
         });
 
         $('#services_booknow').click(function() {
-            $('.black_overlay').show();
+            //$('.black_overlay').show();
 
             var selectedServices = $('.tab-content').find('.fa-check-square-o');
             var bodyToAppend = '';
@@ -509,7 +509,7 @@
                 var serviceRates = selectedServices.eq(i).parents('.treatment-box').find('.prices').text().replace('$', '');
                 var serviceID = selectedServices.eq(i).parents('.treatment-box').find('.serviceID').text();
 
-                bodyToAppend += '<div class="selservice_box" onclick="$(function(){ $.selectprac('+serviceID+'); });">'
+                bodyToAppend += '<div class="selservice_box" id="treat'+serviceID+'" onclick="$(function(){ $.selectprac('+serviceID+'); });">'
                         + '<div class="row">'
                         + '<div class="col-md-8">'
                         + '<div class="service_title">'+ serviceName +'</div>'
