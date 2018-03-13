@@ -125,7 +125,7 @@
 
                                     </div>
 
-                                </td>
+                                </td>	
                                 
                                 
 
@@ -141,7 +141,7 @@
 
                             <td colspan="4">
 
-                                <div class="note note-warning"><p><i class="icon-info"></i> <?php echo _l('Not set any time!',$this); ?></p></div>
+                                <div class="note note-warning"><p><i class="icon-info"></i> <?php echo _l('Not set any time!',$this); ?></p><button type="button" class="btn btn-primary" data-toggle="modal" onClick="showInsertForm('<?php echo $days[$i]; ?>')" data-whatever="Set a time"><i class="fa fa-plus"></i> Set a time</button></div>
 
                             </td>
 
@@ -429,5 +429,16 @@
         }
 
     });
+	
+	function showInsertForm(insert){ 
+		jQuery("#insertForm").modal('show');
+		
+		var text1 = insert;
+		$("#day option").filter(function() {
+			//may want to use $.trim in here
+			return $(this).text() == text1; 
+		}).prop('selected', true);
+		
+	}
 
 </script>

@@ -95,7 +95,7 @@
                                             <i class="fa fa-angle-down"></i>
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-default">
-                                            <li><a href="<?php echo APPOINTMENT_ADMIN_URL; ?>accountSetting"><i class="icon-user"></i><?=_l('Account Setting',$this);?></a></li>
+                                            <li><a href="<?php echo APPOINTMENT_ADMIN_URL; ?>accountSetting"><i class="icon-user"></i><?=_l('Account Settings',$this);?></a></li>
                                             <li class="divider">
                                             <li><a href="<?php echo base_url(); ?>admin-sign/logout"><i class="icon-key"></i><?=_l('Log Out',$this);?></a></li>
                                         </ul>
@@ -167,7 +167,7 @@
         <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
         <div class="page-sidebar navbar-collapse collapse" style="background: #131313;">
             <!-- BEGIN SIDEBAR MENU -->
-            <ul style="margin: 0 auto; float: none; max-width: 850px;" class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+            <ul style="margin: 0 auto;float: none;width: auto;text-align: center;" class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                 <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
                 <?php /*<li class="sidebar-toggler-wrapper">
                     <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
@@ -195,7 +195,9 @@
                         </a>
                     </li>
                 <?php } ?>
+				<?php echo "Worked"; ?>
                 <?php if(isset($reservation_menu) && count($reservation_menu) != 0){ ?>
+	
                     <?php foreach($reservation_menu as $item){ ?>
                         <li class="<?php echo $item['class']; ?>">
                             <a href="<?php echo $item['url']; ?>">
@@ -220,11 +222,18 @@
                 <li <?=($page == "account")?'class="star active"':''?>>
                     <a href="<?php echo APPOINTMENT_ADMIN_URL; ?>accountSetting">
                         <i class="icon-settings"></i>
-                        <span class="title"><?=_l("Account Setting",$this)?></span>
+                        <span class="title"><?=_l("Account Settings",$this)?></span>
                         <?php if($page == "account"){ ?>
                             <span class="selected"></span>
                         <?php } ?>
                     </a>
+					
+					 <ul class="sub-menu">
+                                    <li <?php echo ($page == "reservation_calendar")?'class="star active"':''?>><a href="<?php echo APPOINTMENT_ADMIN_URL; ?>myProviderManager"><span class="title"><?php echo _l('Managers',$this); ?></span></a></li>
+                                    <li <?php echo ($page == "reservation_list")?'class="star active"':''?>><a href="<?php echo APPOINTMENT_ADMIN_URL; ?>accountSetting"><span class="title"><?php echo _l('Settings',$this); ?></span></a></li>
+                                </ul>
+
+					
                 </li>
             </ul>
             <!-- END SIDEBAR MENU -->
