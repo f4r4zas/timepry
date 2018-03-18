@@ -166,6 +166,7 @@ $(document).ready(function(){
                         $start_date = date('Y-m-d H:i', $reservation->reservation_date_time);
                         
                         $current_date = date('Y-m-d H:i');
+                        $currentDate = date('d/m/Y');
                         
                         $reservation_date = date('d/m/Y', $reservation->reservation_date);
                         
@@ -183,6 +184,16 @@ $(document).ready(function(){
                             <div class="status">
                                 <span class="action-<?php echo $status;?>"></span>
                             </div>
+							
+							<?php if($currentDate > $reservation_date){ ?>
+								
+								<div class="review">
+								<button data-providerId="<?php echo $reservation->provider_id; ?>" data-reviewId="<?php echo $reservation->reservation_id; ?>" id="reviewAppointment-<?php echo $reservation->reservation_id; ?>" class="btn btn-primary giveReview">Review</button>
+							</div>
+							
+							<?php } ?>
+							
+							
                         </div>
                         <?php endforeach;?>
                         
@@ -192,5 +203,136 @@ $(document).ready(function(){
         </div>
     </div>
 </section>
+
+<div class="reviewForm" style="display:none">
+
+
+</div>
+
+
+<script>
+
+var reviewStart="";
+reviewStart += "<form id=\"reviewForm\" class=\"form-horizontal\">";
+reviewStart += "	<div class=\"col-md-12\">";
+reviewStart += "		<h4>1) Would you recommend this dental office to a friend?<\/h4>";
+reviewStart += "		<div class=\"rateYo\" data-id=\"1\"><\/div>";
+reviewStart += "	<\/div>";
+reviewStart += "	";
+reviewStart += "	<div class=\"col-md-12\">";
+reviewStart += "		<h4>2) How clean is the dental office?<\/h4>";
+reviewStart += "		<div class=\"rateYo\" data-id=\"2\"><\/div>";
+reviewStart += "	<\/div>";
+reviewStart += "	";
+reviewStart += "	<div class=\"col-md-12\">";
+reviewStart += "		<h4>3) How would you rate the equipment used in the dental office?<\/h4>";
+reviewStart += "		<div class=\"rateYo\" data-id=\"3\"><\/div>";
+reviewStart += "	<\/div>";
+reviewStart += "	";
+reviewStart += "	<div class=\"col-md-12\">";
+reviewStart += "		<h4>4) How would you rate the service and the attention of the dentist\/staff to you?<\/h4>";
+reviewStart += "		<div class=\"rateYo\" data-id=\"4\"><\/div>";
+reviewStart += "	<\/div>";
+reviewStart += "	";
+reviewStart += "	<div class=\"col-md-12\">";
+reviewStart += "		<h4>5) How would you rate the location (e.g. parking availability, proximity to public transportation etc…)?<\/h4>";
+reviewStart += "		<div class=\"rateYo\" data-id=\"5\"><\/div>";
+reviewStart += "	<\/div>";
+reviewStart += "	";
+reviewStart += "	<div class=\"col-md-12\">";
+reviewStart += "		<h4>Leave A Comment<\/h4>";
+reviewStart += "		<textarea class=\"form-control\"><\/textarea>";
+reviewStart += "	<\/div>";
+reviewStart += "	<p class=\"clearfix\"><\/div>";
+reviewStart += "<\/form>";
+
+
+	jQuery(document).ready(function(){
+		
+		jQuery(".giveReview").click(function(){
+			var reservationId = jQuery(this).attr("data-reviewid");
+			var id = jQuery(this).attr("id");
+			var providerId = jQuery(this).attr('data-providerId');
+			
+			bootbox.alert({
+				message: reviewStart,
+				size: 'large',
+				  buttons: {
+					ok : {
+					  label: 'Send Review',
+					  className: "btn btn-primary appointment-review",
+					  
+					}  
+				  },
+				   callback: function(){ 
+				  
+		     		//Getting all the ratings on sumit
+					var yo = jQuery(".rateYo").rateYo();
+					var allRatings = yo.rateYo("rating");
+					var valid = true;
+					allRatings.forEach(function (item) {
+					  if(item < 1){
+						  
+						  valid = false;
+					  }
+					  
+					})
+					
+					if(valid == false){
+						bootbox.alert({ 
+							  size: "small",
+							  title: "Alert",
+							  message: "Kindly give rating for all questions!!"
+							  
+						  });
+						  return false;
+					}
+					
+					
+					
+					var commentBox  = jQuery("#reviewForm textarea").val();
+					/* $.each( allRatings, function( key, value ) {
+					  console.log( key + ": " + value );
+					}); */
+					
+					
+					  $.ajax({url: "appointment/saveRating",type:"POST",data:{rating:allRatings,reservation_id:reservationId,comments:commentBox,provider_id:providerId}, success: function(data){
+						  
+						  bootbox.alert({ 
+							  size: "small",
+							  title: "Alert",
+							  message: "Thank for the the rating!!",
+							  callback: function(){ window.location.href=""; }
+						  });
+							
+					  }});
+					
+					/* $.post("appointment/saveRating",{rating:allRatings,reservation_id:reservationId,comments:commentBox},TYPE:"POST",function(data){
+						console.log(data);
+						console.log("worked");
+						
+					}); */
+					
+						
+				   }
+			});			
+			
+			jQuery(".rateYo").rateYo({
+				rating: 0,
+				/* onSet: function (rating, rateYoInstance) { 
+					alert("Rating is set to: " + rating);
+					alert("Rating is set to: " + jQuery(this).attr("data-id"));
+				} */
+			});
+			
+			
+			var yo = jQuery(".rateYo").rateYo();
+			
+			console.log(yo);
+			
+		});
+		
+	});
+</script>
 
 <?php //include('footer.php'); ?>

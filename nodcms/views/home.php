@@ -1,30 +1,20 @@
 <section class="home-banner page-home">
-
     <div class="container">
-
         <div class="row">
-
             <div class="col-md-12">
-
                 <div class="section-text">
-
                     <p class="light-font">FREE ONLINE BOOKING WITH OVER</p>
-
                     <p class="heavy-font">3,500 NHS AND PRIVATE DENTISTS</p>
-
                 </div>
 
-
-				
                 <div class="search_div">
                     <div class="search_tabs">
                         <div class="s_tab active" data-tab="one" onclick="s_tab(event)">Search By Location</div>
                         <div class="s_tab" data-tab="two" onclick="s_tab(event)">Search By Dental Office</div>
                     </div>
                     <div class="search_bar">
-
                         <div id="tabcontent-one" class="tab_content active">
-						<form action="appointment" id="search_by_location" method="get">
+						<form autocomplete="off" action="appointment" id="search_by_location" method="get">
                             <div class="input_field fa fa-search">
                                 <?php /* 
                                 $this->db->select('provider_id,address');
@@ -47,7 +37,7 @@
                                     </select>
                                     */?>
                                     
-                                    <div class="company-box" style="display:none; top: 50px; position: absolute; background: white; width: 100%; padding: 10px; line-height: 26px;"></div>
+                                    <div  class="company-box" style="display:none; top: 50px; position: absolute; background: white; width: 100%; padding: 10px; line-height: 26px;"></div>
                                 <input type="text" placeholder="Location" class="company_matrix" name="search_location"><!--<input type="text" placeholder="Location" name="search_location">-->
 
                             </div>
@@ -74,7 +64,7 @@
                                     */?>
                                 <div class="treat-box" style="display:none; top: 50px; position: absolute; background: white; width: 100%; padding: 10px; line-height: 26px;"></div>
                                 <input type="text" placeholder="Treatment" class="treat_matrix" name="search_treatment">                        
-
+								<input type="hidden" name="treatmentSubcatId">
                             </div>
 
                             <div class="input_field">
@@ -148,7 +138,9 @@
                               $("body").on('click',".fetched_treats",function(){
                               //function selectamazetal_companies(val){
                                 var val = $(this).attr("data-val");
+								var subCatId = $(this).val();
                                 $(this).closest(".treat-box").siblings(".treat_matrix").val(val);
+                                $(this).closest(".treat-box").siblings("[name='treatmentSubcatId']").val(subCatId);
                                 $(".treat-box").hide();
                               });
                               

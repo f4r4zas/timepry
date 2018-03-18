@@ -385,10 +385,10 @@
         $.validate({
 
             onError: function($form){
-
+				console.log($form);
                 $form.submit(function (e) {
 
-                    e.preventDefault();
+                    //e.preventDefault();
 
                 });
 

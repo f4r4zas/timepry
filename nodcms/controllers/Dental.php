@@ -733,7 +733,7 @@ class Dental extends NodCMS_Controller {
             echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."Dental/addDentalOffice/3"));		
 		    die();
         }elseif($this->input->post("step")=="update4"){
-
+		
     
              $optional_fields = array();
             foreach($this->input->post() as $key => $value)
@@ -772,10 +772,19 @@ class Dental extends NodCMS_Controller {
             }else{
                 
                 foreach($_POST['treatment_name'] as $x => $oneTextFieldsValue) {
+					
+					$providerId = "";
+					
+					if($this->session->userdata('new_provider_id')){
+						$providerId = $this->session->userdata('new_provider_id');
+					}else{
+						$providerId = $this->session->userdata('provider_id');
+					}
+					
                 $data1 = array(
                     "title"=>$_POST['treatment_name'][$x],
                     "service_description"=>$_POST['treatment_desc'][$x],
-                    "provider_id"=>$this->session->userdata('new_provider_id'),
+                    "provider_id"=>$providerId,
                     "user_id"=>$this->session->userdata('user_id'),
                     "created_date"=>time(),
                     "price" => $_POST['treatment_price'][$x],
@@ -785,7 +794,7 @@ class Dental extends NodCMS_Controller {
                     
                 );
                 $treatment_id = $this->db->insert('treatments',$data1);
-                
+				
                 
                 }
                 

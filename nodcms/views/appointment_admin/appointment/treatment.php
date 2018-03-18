@@ -42,7 +42,7 @@
 
                     <th><?php echo _l("Price",$this); ?></th>
 
-                    <th><?php echo _l("service_description",$this); ?></th>
+                    <th><?php echo _l("Service Description",$this); ?></th>
 
                     <th><?php echo _l("Period Min",$this); ?></th>
 

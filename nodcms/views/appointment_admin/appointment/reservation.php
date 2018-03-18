@@ -13,7 +13,7 @@
                 <thead>
                 <tr class="gray-gallery">
                     <th><?php echo _l("ID",$this); ?></th>
-                    <th><?php echo _l("Appointment",$this); ?></th>
+                    <th><?php echo _l("Appointments",$this); ?></th>
                     <th><?php echo _l("Name & Family",$this); ?></th>
                     <th><?php echo _l("Service",$this); ?></th>
                     <th><?php echo _l("Price",$this); ?></th>
@@ -83,9 +83,12 @@
                         <tr class="<?php echo $item['color']; ?> loading-box-<?php echo $item['reservation_id']; ?>" id="row<?php echo $item['reservation_id']; ?>">
                             <td style="width: 80px;"><?php echo $item['reservation_id']; ?></td>
                             <td>
+							
                                 <?php if($item["reservation_date"] < mktime(0,0,0,date("m"),date("d"),date("Y"))){ ?>
+								
                                 <span class="font-red" title="<?php echo _l("Expired", $this); ?>">
                             <?php }elseif($item["reservation_date"] == mktime(0,0,0,date("m"),date("d"),date("Y"))){ ?>
+							
                                     <span class="font-yellow" title="<?php echo _l("Today", $this); ?>">
                             <?php }else{ ?>
                                         <span class="font-green">
@@ -94,7 +97,7 @@
                             </span>
                             </td>
                             <td><?php echo $item["fname"]; ?> <?php echo $item["lname"]; ?></td>
-                            <td><?php echo $item["service_name"]; ?></td>
+                            <td><?php echo $item["service_name"]; ?></o>
                             <td><?php echo $this->currency->format($item["price"]); ?></td>
                             <td>
                                 <?php echo my_int_date($item["created_date"]); ?>

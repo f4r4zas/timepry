@@ -111,7 +111,15 @@ var placeSearch, autocomplete;
         //country: 'long_name',
         postal_code: 'short_name'
       };
+	  
+	 jQuery(document).ready(function(){
+		 initAutocomplete();
+	 });
+	  
       function initAutocomplete() {
+		  
+		 
+		  
 		   var myLatLng = {lat: -25.363, lng: 131.044};
 		 
         var map = new google.maps.Map(document.getElementById('dentist_reg_map'), {

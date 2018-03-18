@@ -366,74 +366,68 @@ echo "</pre>";
                 </div>
             </div>
 
-            <!--<div class="listing-feedback">
+            <div class="listing-feedback">
                 <div class="section-heading">
                     <h1>Feedbacks for Users</h1>
                     <div class="cus-hr"></div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="feedback-box">
-                            <div class="feedback-header">
-                                <span class="title">John Deo</span>
-                                <span class="sep">-</span>
-                                <span class="date">November 15 2017</span>
-                            </div>
-                            <div class="feedback-content">
-                                <p>
-                                    This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="feedback-box">
-                            <div class="feedback-header">
-                                <span class="title">John Deo</span>
-                                <span class="sep">-</span>
-                                <span class="date">November 15 2017</span>
-                            </div>
-                            <div class="feedback-content">
-                                <p>
-                                    This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="feedback-box">
-                            <div class="feedback-header">
-                                <span class="title">John Deo</span>
-                                <span class="sep">-</span>
-                                <span class="date">November 15 2017</span>
-                            </div>
-                            <div class="feedback-content">
-                                <p>
-                                    This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="feedback-box">
-                            <div class="feedback-header">
-                                <span class="title">John Deo</span>
-                                <span class="sep">-</span>
-                                <span class="date">November 15 2017</span>
-                            </div>
-                            <div class="feedback-content">
-                                <p>
-                                    This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+					
+					<?php if(count($reviews) > 0){ ?>
+						
+						<?php foreach($reviews as $review){ ?>
+							
+							<div class="col-md-6">
+								<div class="feedback-box">
+									<div class="feedback-header">
+										<span class="title"><?php echo $review['commenter']; ?></span>
+										<span class="sep">-</span>
+										<span class="date"><?php echo $review['date_comment'] ?></span>
+										<p class="clearfix"></p>
+										<span class="sep">
+											<div class="ratings">
+												<div class="empty-stars"></div>
+												<?php $ratings = $review['ratings']*10; ?>
+												<div class="full-stars" style="width:<?php echo $ratings * 2; ?>%"></div>
+											</div>
+										</span>
+									
+									</div>
+									<div class="feedback-content">
+										<p>
+											<?php if(!empty($review['comment'])){ echo $review['comment']; } ?>.
+										</p>
+									</div>
+									
+									<?php if(!empty($review['comment_replay'])){ ?>
+										<div class="alert alert-info">
+											<p class="clearfix">Replay from provider: <strong><?php echo $review['comment_replay']; ?></strong></p>
+										</div>
+									<?php }else{ ?>
+										
+									
+										<?php if(!empty($this->session->userdata("provider_id"))){
+										
+										$loggedInProvider = $this->session->userdata("provider_id");
+										?>
+											<?php if($loggedInProvider == $review['provider_id']){ 
+											?>
+											
+											<a onClick="showReplay(<?php echo $review['id']; ?>)" href="#">Replay</a>
+											
+											<?php } ?>
+										<?php } ?>
+										
+									<?php } ?>
+								</div>
+							</div>
+						<?php } ?>
+						
+					<?php } ?>
+                    
                 </div>
-            </div>-->
+            </div>
 
             <div class="bottom-booknow" style="margin-top: 20px;">
                 <div class="row">
@@ -546,14 +540,40 @@ echo "</pre>";
 
     <script src="<?php echo base_url(); ?>assets/form-validator/jquery.form-validator.js"></script>
     <script>
+	function showReplay(id){
+		
+		bootbox.prompt({
+			title: "Add Replay!",
+			inputType: 'textarea',
+			callback: function (result) {
+				
+				if(result == "" ){
+					bootbox.alert({ size: "small",message:"Kindly fill all the fields"});
+					return false;
+				} else if(result == null){
+					
+				}else{
+					console.log("Result");
+					console.log(result);
+					var reviewId = id;
+					var commentReplay = result;
+				   $.ajax({url: "<?php echo base_url() ?>appointment/updateReviewReplay",type:"POST",data:{review_id:reviewId,comment_replay:commentReplay}, success: function(data){
+							
+							bootbox.alert("Feedback Successfull!", function(){ 
+							window.location.href=""; });	
+				 }}); 
+				}
+			}
+		});
+		
+	}
         $(function(){
+			
             var serviceID = 0;
             var allow_days = [];
             var disable_dates = [];
             var selectedtreatment_id = 0;            
             $('#dentist_name').change(function(){
-				
-				
                                 
                 if($(this).val() != ""){
                     
@@ -579,6 +599,7 @@ echo "</pre>";
             
             
             $.selectprac = function(treatment_id) {
+				console.log("workeds");
                 $(".selservice_box").removeClass("selected");
                 $('#treat'+treatment_id+'').addClass("selected");
                 $("option.dentist_name").remove();
@@ -586,6 +607,8 @@ echo "</pre>";
                 $.backTo('step1');
                     $("#beforeCheckout_popout").LoadingOverlay("show");   
                 $.post("<?php echo base_url().$lang.$this->provider_prefix ?>/get_practitioner/" + treatment_id ,{},function(data){
+					console.log("Data");
+					console.log(data);
 					$("#beforeCheckout_popout").LoadingOverlay("hide");
                         data = JSON.parse(data);
                         selectedtreatment_id = data.treatment_id;                        
@@ -618,6 +641,8 @@ echo "</pre>";
                     $('.final_treatment_field'+selectedtreatment_id+'.practitionername').text($("#dentist_name option:selected").text());                    
                     $('#post_form').attr("action","<?php echo base_url().$lang.$this->provider_prefix ?>/set_appointment/" + serviceID);
                     $.post("<?php echo base_url().$lang.$this->provider_prefix ?>/get_service/" + serviceId ,{},function(data){
+						console.log("data");
+						console.log(data);
 						$("#beforeCheckout_popout").LoadingOverlay("hide");
                         data = JSON.parse(data);
                         if(data.status=="success"){

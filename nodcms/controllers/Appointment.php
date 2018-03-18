@@ -28,11 +28,19 @@ class Appointment extends NodCMS_Controller {
 
     // Check system type (Multi-Owner or normal)
     function multiProviderSystem($method, $lang="en", $provider_username, $id = NULL){
+		
+		
+		
+		
         $provider = $this->Appointment_model->getProviderByUsername($provider_username);
         if(count($provider)!=0 && ($this->_website_info['appointment_multiowner'] || $provider[0]['default']!=0)){
             // # Dental Office exists and (multi provider system = TRUE or the provider default = 1)
             $this->provider_prefix = '/provider/'.$provider[0]['provider_username'];
             $this->provider = $provider[0];
+			/* echo "<pre>";
+				print_r($this->provider);
+			echo "</pre>"; */
+			
         }else{
             // Dental Office didn't exists
             if($this->input->is_ajax_request()){
@@ -79,14 +87,14 @@ class Appointment extends NodCMS_Controller {
 	
 		if(!empty($_GET)){
 
-			if(empty($this->input->get("search_location")) & empty($this->input->get("search_treatment")) & empty($this->input->get("search_dental_clinic")))
+			if(empty($this->input->get("search_location")) & empty($this->input->get("treatmentSubcatId")) & empty($this->input->get("search_dental_clinic")))
 			{	
 				redirect("/");
 			}
 			
 			 $provider_condition = array(
 				'provider_location' => $this->input->get("search_location"),
-				'treatment_cat' => $this->input->get("search_treatment"),
+				'treatment_cat' => $this->input->get("treatmentSubcatId"),
 				'search_dental_clinic' => $this->input->get("search_dental_clinic")
 			);
 				
@@ -197,6 +205,7 @@ class Appointment extends NodCMS_Controller {
     // A provider page (ready to make a reservation)
     function providerPage($lang="en"){
         $this->preset($lang);
+		$this->data['provider_id'] = $this->provider['provider_id']; 
         $providerExtension = $this->Appointment_model->getProviderExtensions($this->provider['provider_id']);
         if(count($providerExtension)!=0){
             $providerExtension = @reset($providerExtension);
@@ -240,7 +249,12 @@ class Appointment extends NodCMS_Controller {
         $this->data['extra_fields']= $this->Appointment_model->getAllExtraFields();
         $this->data['title'] = _l('Dental Office Page', $this);
         $this->data['sub_title'] = $this->provider['provider_name'];
-        $this->data['content']=$this->load->view('reservation/provider_detail',$this->data,true);
+        
+	
+		$this->data['reviews'] = $this->Appointment_model->getReviews($this->data['provider_id']);
+		
+		$this->data['content']=$this->load->view('reservation/provider_detail',$this->data,true);
+		
         $this->load->view($this->mainTemplate,$this->data);
     }
 
@@ -315,7 +329,8 @@ class Appointment extends NodCMS_Controller {
     function getPractitioner($lang="en",$id)
     {
         $this->preset($lang);
-        
+		
+		
         $this->session->set_userdata("treatment_id",$id);
          
         $this->db->select('*');
@@ -357,6 +372,7 @@ class Appointment extends NodCMS_Controller {
     {
         $this->preset($lang);
         $this->data['data'] =  @reset($this->Appointment_model->getServiceDetail($id));
+		//print_r($id);
         if(isset($this->data['data']["service_id"])){
             $this->data['disable_dates'] = array();
             $free_days =  $this->Appointment_model->getAllFreeDays();
@@ -854,7 +870,6 @@ class Appointment extends NodCMS_Controller {
                 $post_data = $this->input->post(NULL, TRUE);
                 
                 
-                
                 $day_no = date("N",strtotime($post_data["date"]))==7?0:date("N",strtotime($post_data["date"]));
                 $time_period =  $this->Appointment_model->getTimePeriod($day_no,$service_id);
                 //echo $time_period;
@@ -1149,4 +1164,46 @@ class Appointment extends NodCMS_Controller {
         $this->pagination->initialize($config);
         $this->data['pagination'] = $this->pagination->create_links();
     }
+	
+	public function saveRating(){
+	
+		if($this->input->post()){
+			$a = array_filter($this->input->post('rating'));
+			$average = array_sum($a)/count($a);
+			
+			$ratingAvg = $average;
+			$reservationId = $this->input->post('reservation_id');
+			$comment = $this->input->post('comments');
+			
+			$data = array(
+				'reservation_id' => $reservationId,
+				'ratings' => $ratingAvg,
+				'comment' => $comment,
+				'commenter' => $this->session->userdata('fullname'),
+				'date_comment' => date("Y-m-d"),
+				'provider_id' => $this->input->post('provider_id'),
+				'status' => 1
+			);	
+		
+			$this->db->insert('r_reviews',$data);
+			
+			echo $this->db->insert_id();
+		}
+		
+	}
+	
+	public function updateReviewReplay(){
+		
+		if($this->input->post()){
+
+			$replay = $this->input->post("comment_replay");
+			$id = $this->input->post("review_id");
+			$update_data = array("comment_replay"=>$replay);
+			$conditions = array("id"=>$id);
+			$this->db->update("r_reviews", $update_data, $conditions);
+		
+		}
+		
+	}
+	
 }

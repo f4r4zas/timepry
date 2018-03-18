@@ -42,7 +42,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/metronic/global/plugins/bootstrap-toastr/toastr.min.css"/>
     <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
     <link rel="stylesheet" href="<?php echo base_url()?>assets/metronic/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css">
-    <!-- END PAGE LEVEL PLUGIN STYLES -->
+    <!-- END PAGE LEVEL PLUGIN STYLESs -->
     <script src="<?php echo base_url(); ?>assets/metronic/global/plugins/jquery.min.js" type="text/javascript"></script>
 </head>
 <body class="">

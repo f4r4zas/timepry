@@ -1,5 +1,7 @@
 <?php /* $this->session->unset_userdata("dataStepOne"); 
- $this->session->unset_userdata("dataStepTwo"); */ ?>
+ $this->session->unset_userdata("dataStepTwo"); */
+//print_r($this->session->userdata('user_id_new'));
+ ?>
 <style>
 .registration-tabs input.update4[type=text], .registration-tabs input.update4[type=password], .registration-tabs textarea.update4, .select2-container{
     background: #ddd;
@@ -409,9 +411,11 @@ $(".closed_day").on("click", function(){
                     <div id="step3" class="tab-pane <?php echo($step == 3 ?'in active ':'');?>fade">
                     <form id="update3" method="post" action="<?php echo base_url();?>register/dentist-registration/4" role="form">
 					<?php if($this->session->userdata("dataStepThree")){ ?>
+					<?php print_r($this->session->userdata("dataStepThree")); ?>
 						<?php $addressData=  $this->session->userdata("dataStepThree")["address"]; ?>
 					<?php } ?>
                         <div class="row">
+						
                             <div class="col-md-12">
                                 <input type="text" value="<?php if(!empty($addressData)){ echo $addressData['address'].", ".$addressData['street'].", ".$addressData['city'].", ".$addressData['state']; } ?>" id="pac-input" placeholder="Search Your Location *" name="location">
                             </div>
@@ -737,7 +741,15 @@ $(".closed_day").on("click", function(){
                         
                         <script>
                         $(".add_treat").click(function(e){
+							
                             e.preventDefault();
+							
+							/* if($(".e9").data("select2")){
+								$(".e9").select2("destroy");
+							} */
+							
+							$(".select2-hidden-accessible").select2("destroy");
+							
 							var id = "unique-"+Math.floor((Math.random() * 100) + 1);
                             $("#selected_treat").hide();
                             var add_treat = $(this);
@@ -748,7 +760,6 @@ $(".closed_day").on("click", function(){
                                       v = $(v);
                                       if($(this).val()==""){
                                         filled = false;
-                                        //return false;
                                       }
                     
                                   }
@@ -762,8 +773,7 @@ $(".closed_day").on("click", function(){
                                   if($(this).prop("tagName") != "SPAN" && $(this).prop("tagName") != "DIV" && $(this).prop("tagName") != "BUTTON")
                                   {
                                       v = $(v);
-									   console.log("Go");
-									   console.log(v.val());
+									  
                                       var temp = v.attr('name');
                                       hiddenfields +='<input type="hidden" name="'+temp+'" class="update4 '+id+'" value="'+v.val()+'"/>';
                                         formData +="<td style='text-align: center; padding: 10px; border: 1px solid #ccc;'>"+v.val()+"</td>";      

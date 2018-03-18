@@ -28,7 +28,7 @@
                                                                     <?php 
 																	
 																	
-																	
+																	print_r($this->session->userdata());
                                                                     $this->db->select('*');
                                                                     $this->db->from('practitioners');
                                                                     $this->db->where('provider_id',$this->session->userdata('provider_id'));

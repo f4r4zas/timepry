@@ -633,3 +633,5 @@ $lang["All Practitioners"] = "All Practitioners";
 $lang["Account settingss"] = "Account settingss";
 $lang["Homes"] = "Homes";
 $lang["Holidayss"] = "Holidayss";
+$lang["service_descriptions"] = "service_descriptions";
+$lang["Service Description"] = "Service Description";

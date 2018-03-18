@@ -84,6 +84,13 @@
 		<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.6.0/src/loadingoverlay.min.js"></script>
 	
 		<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@1.6.0/extras/loadingoverlay_progress/loadingoverlay_progress.min.js"></script>
+		
+			<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 
     <script type="text/javascript">
             $('img').error(function(){
@@ -293,10 +300,17 @@
             <div class="fields">
                 <form class="login-form" action="<?php echo base_url(); ?>admin-sign/login" method="post">
                     <?php if($this->session->flashdata('message')){ ?>
-                    <div class="alert alert-danger">
-                        <button class="close" data-close="alert"></button>
-            			<span><?php echo $this->session->flashdata('message'); ?></span>
-                    </div>
+					
+						<?php if(!is_array($this->session->flashdata('message'))){ ?>
+						
+						<div class="alert alert-danger">
+							<button class="close" data-close="alert"></button>
+							
+								<span><?php echo $this->session->flashdata('message'); ?></span>
+							
+						</div>
+						
+						<?php } ?>
                     <?php } ?>
                     <div class="form-group input-field">
                         <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
@@ -488,7 +502,7 @@
 
         $('#services_booknow').click(function() {
             //$('.black_overlay').show();
-
+			console.log("worked");
             var selectedServices = $('.tab-content').find('.fa-check-square-o');
             var bodyToAppend = '';
             var final_treatment = '';

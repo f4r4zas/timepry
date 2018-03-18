@@ -122,6 +122,8 @@ class Appointment_model extends CI_Model
         $this->db->where('r_services.service_id',$id);
         $this->db->where('treatments.id',$this->session->userdata("treatment_id"));
         $query = $this->db->get();
+		
+		//	print_r($this->db->last_query());
         return $query->result_array();
     }
 
@@ -347,12 +349,13 @@ class Appointment_model extends CI_Model
 			$this->db->join('treatments','r_providers.provider_id = treatments.provider_id');
             $this->db->join('subcategory','treatments.subcategory = subcategory.subcat_id');
             $this->db->like('address',urldecode($conditions['provider_location']));
-			$this->db->like('subcategory.subcat_name',urldecode($conditions['treatment_cat']));
+			$this->db->where('subcategory.subcat_id',urldecode($conditions['treatment_cat']));
 		}
 
         $this->db->where('active',1);
         if($limit!=NULL) $this->db->limit($limit, $offset);
         $query = $this->db->get();
+		
 		
         return $query->result_array();
 	}
@@ -465,4 +468,14 @@ class Appointment_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+	
+	public function getReviews($providerId){
+		$this->db->select("*");
+        $this->db->from('r_reviews');
+		$this->db->where('provider_id',$providerId);
+        $query = $this->db->get();
+        return $query->result_array();
+	}
+	
+	
 }

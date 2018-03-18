@@ -56,18 +56,20 @@ class Registration extends NodCMS_Controller {
     // Register a new user
     function userRegistration($lang="en")
     {
-        
+       
         $this->preset($lang);
         $this->load->library('form_validation');
         if($this->input->raw_input_stream){
+			
             $this->form_validation->set_rules('fname', _l('First Name',$this), 'required|xss_clean|callback_formRulesName');
             $this->form_validation->set_rules('lname', _l('Last Name',$this), 'required|xss_clean|callback_formRulesName');
             $this->form_validation->set_rules('mobile', _l('Phone Number',$this), 'required|is_natural');
             $this->form_validation->set_rules('email', _l('Email Address',$this), 'required|valid_email|callback_userUniqueEmail');
             
-            $this->form_validation->set_rules('password', _l('Password',$this), 'trim|required||min_length[6]|callback_formRulesPassword');
+            $this->form_validation->set_rules('password', _l('Password',$this), 'trim|required|min_length[6]');
             $this->form_validation->set_rules('cpassword', _l('Confirm Password',$this), 'trim|required|matches[password]');
             if ($this->form_validation->run() == FALSE){
+				
                 $this->session->set_flashdata('error_message', _l('Errors:',$this).validation_errors());
                 $set_value = array(
                     'cpassword'=>'',
@@ -119,7 +121,7 @@ class Registration extends NodCMS_Controller {
 				
 				//Get Registered user id
 				
-				$this->session->setuserdata('registered_user_id',$registered_user_id);
+				$this->session->set_userdata('registered_user_id',$registered_user_id);
 				
                 $refurl = base_url().'register/user-registration/active/'.md5($email).'/'.$active_code;
 
@@ -262,6 +264,7 @@ class Registration extends NodCMS_Controller {
                 $this->session->set_userdata(array(
                     'user_id'  => $get_last_user_id[0]->user_id,
                 ));
+				//$this->session->set_userdata('user_id_new',$get_last_user_id[0]->user_id);
                 
                 $refurl = base_url().'register/user-registration/active/'.md5($email).'/'.$active_code;
 
@@ -291,8 +294,6 @@ class Registration extends NodCMS_Controller {
         
         elseif($this->input->post("step")=="update2"){        
 
-		
-            
             $this->form_validation->set_rules('dental_officename', _l('Name of the Dental Office',$this), 'required|xss_clean|callback_formRulesName');
             $this->form_validation->set_rules('dental_officedescription', _l('Description of Dental Office',$this), 'required|xss_clean|callback_formRulesName');
             $this->form_validation->set_rules('dental_officephone', _l('Phone of Dental Office',$this), 'required|is_natural');
@@ -422,8 +423,11 @@ class Registration extends NodCMS_Controller {
 				$dataStepTwo['providerDetails'] = $data;
 				
                 $provider_id = $this->db->insert_id();
-                
+				
+				
                 foreach($_POST['practitioners_title'] as $x => $oneTextFieldsValue) {
+					
+					
                 $data1 = array(
                     "practitioner_title"=>$_POST['practitioners_title'][$x],
                     "practitioner_fullname"=>$_POST['practitioner_name'][$x],
@@ -456,19 +460,21 @@ class Registration extends NodCMS_Controller {
                         $end_min = explode(":",$_POST['closingHours'][$y]);
                         $end_min = ((int) $end_min[0]*60) + (int) $end_min[1];
                         
-                        $data4["user_id"]=$get_last_user_id[0]->user_id;
+						$data4["user_id"]=$get_last_user_id[0]->user_id;
                         $data4["created_date"]=time();
-                        $data4["service_id"]=$service_id;
+						$data4["service_id"]=$service_id;
+					 
                         $data4["day_no"]=$y;
                         $data4["max_count"]=1;
                         $data4["period_start_time"]=$start_min;
                         $data4["period_end_time"]=$end_min;
                         $data4["period_min"]=30;
+							
                         $this->db->insert('r_time_period',$data4);
 						
-						$data4['staticStartTime'] = $_POST['openingHours'][$y];
-						$data4['staticEndtartTime']= $_POST['closingHours'][$y];
-						$dataStepTwo['timePeriod'][] = $data4;
+						$stepTwo['staticStartTime'] = $_POST['openingHours'][$y];
+						$stepTwo['staticEndtartTime']= $_POST['closingHours'][$y];
+						$dataStepTwo['timePeriod'][] = $stepTwo;
 						
                     }
                 }
@@ -657,13 +663,14 @@ class Registration extends NodCMS_Controller {
                 $error = array_filter($error); // Some might be empty
                 
             }else{
-                
+              
                 $address = $this->input->post('address').', '.$this->input->post('street').', '.$this->input->post('city').', '.$this->input->post('state');
                 
 				$dataStepThree['address']['address'] = $this->input->post('address');
 				$dataStepThree['address']['street'] = $this->input->post('street');
 				$dataStepThree['address']['city'] = $this->input->post('city');
 				$dataStepThree['address']['state'] = $this->input->post('state');
+				$dataStepThree['address']['full'] = $this->input->post('location');
 				
 				$this->session->set_userdata('dataStepThree',$dataStepThree);
 				
@@ -885,10 +892,14 @@ class Registration extends NodCMS_Controller {
         $this->session->unset_userdata('user_id');
         $this->session->unset_userdata('service_id');
         $this->session->unset_userdata('provider_id');
+		$this->session->unset_userdata("dataStepOne"); 
+		$this->session->unset_userdata("dataStepTwo");
+		$this->session->unset_userdata("dataStepThree");
+		$this->session->unset_userdata("dataStepFour");
         
         $this->preset($lang);
         $message = array(
-                    'title'=>_l('Your subscription was successful!', $this),
+                    'title'=>_l('Your subscription was successfull!', $this),
                     'body'=>_l('Please check your email and click on the link posted.', $this),
                     'class'=>'note note-success'
                 );

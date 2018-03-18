@@ -167,6 +167,7 @@ class Appointment_admin extends NodCMS_Controller
     function index($id=NULL)
     {
         if($id!=NULL){
+			
             if($this->session->userdata('group_id')!=1 && $this->session->userdata('group_id')!=100){
                 $where = NULL;
             }else{
@@ -238,6 +239,7 @@ class Appointment_admin extends NodCMS_Controller
                 }
                 $loadPage = "appointment_home";
             } else {
+				$this->data['reviewed'] = $this->Appointment_admin_model->getReviewed();
                 $loadPage = "user_dashboard";
             }
         }
@@ -2110,4 +2112,6 @@ class Appointment_admin extends NodCMS_Controller
             ),
         );
     }
+	
+	
 }

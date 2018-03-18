@@ -68,7 +68,7 @@ class General extends CI_Controller
         end($location_city);
         $location_city = prev($location_city);
         if(!in_array($location_city,$fetched)):
-                $output .= '<li class="fetched_companies" data-val="'.urlencode($location_city).'">'.$location_city.'</li>';
+                $output .= '<li class="fetched_companies" data-val="'.$location_city.'">'.$location_city.'</li>';
         $fetched[] = $location_city;
         endif;
         } 
@@ -104,7 +104,7 @@ class General extends CI_Controller
         
         
         if(!in_array($location->subcat_name,$fetched)):
-                $output .= '<li class="fetched_treats" data-val="'.urlencode($location->subcat_name).'">'.$location->subcat_name.'</li>';
+                $output .= '<li class="fetched_treats" value="'.$location->subcat_id.'" data-val="'.$location->subcat_name.'">'.$location->subcat_name.'</li>';
         $fetched[] = $location->subcat_name;
         endif;
         } 

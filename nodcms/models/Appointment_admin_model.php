@@ -1739,4 +1739,11 @@ class Appointment_admin_model extends CI_Model{
 			return true;
 	}
 	
+	public function getReviewed(){
+		$this->db->select("*");
+        $this->db->from('r_reviews');
+        $query = $this->db->get();
+        return $query->result_array();
+	}
+	
 }

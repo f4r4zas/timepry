@@ -104,10 +104,16 @@
             <div class="fields">
                 <form class="login-form" action="<?php echo base_url(); ?>admin-sign/login" method="post">
                     <?php if($this->session->flashdata('message')){ ?>
-                    <div class="alert alert-danger">
-                        <button class="close" data-close="alert"></button>
-            			<span><?php echo $this->session->flashdata('message'); ?></span>
-                    </div>
+                   <?php if(!is_array($this->session->flashdata('message'))){ ?>
+						
+						<div class="alert alert-danger">
+							<button class="close" data-close="alert"></button>
+							
+								<span><?php echo $this->session->flashdata('message'); ?></span>
+							
+						</div>
+						
+						<?php } ?>
                     <?php } ?>
                     <div class="form-group input-field">
                         <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
