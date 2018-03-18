@@ -113,7 +113,13 @@ var placeSearch, autocomplete;
       };
 	  
 	 jQuery(document).ready(function(){
-		 initAutocomplete();
+		 
+		 try{
+			 initAutocomplete();
+		 }catch(err){
+				
+		 }
+		 
 	 });
 	  
       function initAutocomplete() {
