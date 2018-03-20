@@ -512,7 +512,7 @@
         $('#services_booknow').click(function() {
             //$('.black_overlay').show();
 			console.log("worked");
-            var selectedServices = $('.tab-content').find('.fa-check-square-o');
+            var selectedServices = $('.tab-content').find('.fa-check-square');
             var bodyToAppend = '';
             var final_treatment = '';
             

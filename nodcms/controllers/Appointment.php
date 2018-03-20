@@ -328,6 +328,7 @@ class Appointment extends NodCMS_Controller {
 //  Get practitioner
     function getPractitioner($lang="en",$id)
     {
+		
         $this->preset($lang);
 		
 		

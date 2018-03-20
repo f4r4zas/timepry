@@ -150,7 +150,8 @@
                                 </div>
 
                                 <div class="opening-timings">
-                                    <div class="section-heading">
+                                   
+  								    <div class="section-heading">
                                         <h1>Timings</h1>
                                         <div class="cus-hr"></div>
                                     </div>
@@ -639,12 +640,10 @@ echo "</pre>";
                             $('#error').show().find('p').text("practitioner not found");
                         }
                     }).fail(function(e){
+						console.log("Fail");
 						$("#beforeCheckout_popout").LoadingOverlay("hide");
                         $('#error').show().find('p').text('<?php echo _l('There is some error from system! Please try later.',$this); ?>');
                     });
-                
-                
-                
             };
             
             $.chooseService = function( serviceId ) {
@@ -1006,6 +1005,7 @@ echo "</pre>";
    geocoder.geocode({
       'address': address
    }, 
+   
    function(results, status) {
       if(status == google.maps.GeocoderStatus.OK) {
          new google.maps.Marker({
