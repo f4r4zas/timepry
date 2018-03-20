@@ -58,7 +58,7 @@
         <div class="header_inner">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="site_branding">
                             <div class="logo">
                                 <a href="index.php">
@@ -71,10 +71,10 @@
                         </div>
                     </div>
 
-                    <div class="col-md-8">
+                    <div class="col-md-8 tex-center">
                         <div class="main_menu">
                             <nav class="menu_nav">
-                                <ul class="menu">
+                                <ul class="menu" style="text-align:center">
                                     <li>
                                         <a href="<?php echo base_url();?>">Home</a>
                                     </li>
@@ -90,7 +90,19 @@
                                     <li>
                                         <a href="<?php echo base_url();?>contact">Contact</a>
                                     </li>
-                                    <?php 
+                                  
+                                </ul>
+								
+                            </nav>
+                        </div>
+                    </div> <!-- End Menu -->
+					
+					 <div class="col-md-2">
+                        <div class="main_menu">
+                            <nav class="menu_nav">
+                             
+								<ul class="menu pull-right">
+									<?php 
                                     
                                     if(!$this->session->userdata('group')):?>
                                     <li>
@@ -107,11 +119,14 @@
                                     <li>
                                         <a href="<?php echo base_url(); ?>admin-sign/logout"><?=_l('Log Out',$this);?></a>
                                     </li>
+									
                                     <?php endif;?>
-                                </ul>
+								</ul>
                             </nav>
                         </div>
-                    </div>
+                    </div> <!-- End Menu -->
+					
+					
                 </div>
             </div>
         </div>

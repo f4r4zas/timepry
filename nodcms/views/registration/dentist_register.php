@@ -93,7 +93,7 @@
                 </div>
                 <div class="col-sm-6">
 
-                    <input placeholder="00398738927892" value="<?php if(!empty($phone)){ echo $phone; } ?>" name="mobile" id="mobile" type="text" class="form-control update1">
+                    <input placeholder="(e.g. 00398738927892)" value="<?php if(!empty($phone)){ echo $phone; } ?>" name="mobile" id="mobile" type="text" class="form-control update1">
 
                     
                         <span class="help-block"></span>
@@ -177,15 +177,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <input placeholder="Email of Dental Office" value="<?php if(!empty($provider_email)){echo $provider_email; } ?>" name="dental_officeemail" id="dental_officeemail" type="text" class="form-control update2">
-                                
+                                <span style="position: absolute;top: 15px;right: 22px;" class="help glyphicon glyphicon-info-sign" data-toggle="popover" data-placement="right" title="Insert the emial of the dental office. This email will be visible to your patients to give them the possibility to contact your directly. This email can be the same as the account email previously written or can be also different"></span>
                                     <span class="help-block"></span>
                                 
                             </div>
                             <div class="col-md-6">
-                                <input placeholder="Phone of Dental Office *" value="<?php if(!empty($providerPhone)){echo $providerPhone; } ?>" name="dental_officephone" id="dental_officephone" type="text" class="form-control update2">
-                                
+                                <input placeholder="Phone of Dental Office (e.g. 00398738927892) *" value="<?php if(!empty($providerPhone)){echo $providerPhone; } ?>" name="dental_officephone" id="dental_officephone" type="text" class="form-control update2">
                                     <span class="help-block"></span>
-                                
                             </div>
                         </div>
 
@@ -266,7 +264,6 @@
 							
 							
                         </div>
-                        
                         <script>
                                 $('.add_practitioner_row').click(function(){
                                     var main_row = $(this).parent().parent();
@@ -278,7 +275,7 @@
                                     cloned.find('input').val('');
                                     cloned.find('select').val('Dr.');
                                     
-                                    $(main_row).after(cloned);
+                                    $(main_row).before(cloned);
                                 });
                                 
                                 
@@ -295,7 +292,7 @@
                             
                             <?php 
 							
-                            $days = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+                            $days = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday');
 							$start = 0;
                             foreach($days as $k => $day): ?>
 							
@@ -312,9 +309,6 @@
 									$savedEnd = "";
 								}
 							}
-							
-							
-						
 						
 							?>
                             <div class="row daysRow">

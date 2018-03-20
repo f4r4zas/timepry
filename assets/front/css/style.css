@@ -1163,6 +1163,12 @@ section.listing-content .images {
     cursor: pointer;
 }
 
+.listing-content .treatment-box .add_service  .fa{
+	font-size: 34px;
+}
+
+
+
 .listing-content .treatment-box .rate {
     font-size: 28px;
     font-weight: 900;

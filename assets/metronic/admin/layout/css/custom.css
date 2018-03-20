@@ -105,3 +105,14 @@ select.select2{
 .table-responsive{
     padding-bottom: 250px;
 }
+
+a.dz-remove {
+    color: red;
+    font-weight: bold;
+}
+
+.note.note-success {
+    background-color: #518ed2;
+    border-color: #129b97;
+    color: #ffffff;
+}

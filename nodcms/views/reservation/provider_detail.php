@@ -32,6 +32,22 @@
 .se-pre-con{
     z-index: 9999999;
 }
+.email a {
+    font-size: 80%;
+}
+.website a {
+    font-size: 90%;
+}
+.dental-phone a {
+    font-size: 90%;
+}
+.question-mark{
+	color: #47a6ff;
+    font-size: 25px !important;
+    position: absolute;
+    right: 39px;
+    top: 16px;
+}
 </style>
 <section class="inner-page-banner">
     <div class="banner_wrapper">
@@ -123,7 +139,7 @@
                                     </div>
                                     <div class="email">
                                         <i class="fa fa-envelope"></i>
-                                        <a href="mailto:<?php echo $this->provider['provider_email']; ?>"><?php echo $this->provider['provider_email']; ?></a>
+                                        <a href="mailto:<?php echo $this->provider['provider_email']; ?>"><?php echo str_replace("@","",$this->provider['provider_email']); ?></a>
                                     </div>
                                     <?php if(!empty($this->provider['website'])):?>
                                     <div class="website">
@@ -245,15 +261,17 @@ echo "</pre>";
 
                                     <div class="col-md-8">
                                         <div class="treatment_content">
-                                            <div class="treatment-title"><?php echo $item['title']?></div>
-                                            <div class="duration"><?php echo $item['period_min']?> mins</div>
+                                            <div class="treatment-title"><?php echo $item['title']?> </div>
+                                            <div class="duration"><?php echo $item['period_min']; ?> mins</div>
                                             
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
-                                        <span class="rate">From <span class="prices"><?php echo $item['price']?></span></span>
+                                        <span class="rate">From <span class="prices"><?php echo $item['price']; ?></span></span>
+										<i class="fa fa-question-circle question-mark"></i>
                                         <span class="details_arrow">
+										
                                             <i class="fa fa-chevron-up"></i>
                                         </span>
                                     </div>
@@ -264,7 +282,7 @@ echo "</pre>";
                                             <div class="col-sm-10 col-md-10">
                                                 <div class="detail">
                                                     <p>
-                                                        <?php echo $item['service_description']?> 
+                                                        <?php echo $item['service_description']; ?> 
                                                     </p>
                                                 </div>
                                             </div>

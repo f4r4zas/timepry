@@ -128,7 +128,7 @@
         <div class="header_inner">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="site_branding">
                             <div class="logo">
                                 <a href="<?php echo base_url(); ?>">
@@ -144,7 +144,7 @@
                     <div class="col-md-8">
                         <div class="main_menu">
                             <nav class="menu_nav">
-                                <ul class="menu">
+                                <ul class="menu" style="text-align:center">
                                     <li>
                                         <a href="<?php echo base_url();?>">Home</a>
                                     </li>
@@ -159,8 +159,17 @@
                                         <a href="<?php echo base_url();?>faq">FAQ</a>
                                     </li>
                                     <li>
-                                        <a href="<?php echo base_url();?>">Contact</a>
+                                        <a href="<?php echo base_url();?>contact">Contact</a>
                                     </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div><!-- main Menu -->
+					
+					<div class="col-md-2">
+					   <div class="main_menu">
+                            <nav class="menu_nav">
+                                <ul class="menu">
                                     <?php 
                                     
                                     if(!$this->session->userdata('group')):?>
@@ -178,7 +187,7 @@
                                 </ul>
                             </nav>
                         </div>
-                    </div>
+					</div>
                 </div>
             </div>
         </div>
@@ -477,9 +486,9 @@
             var getPrice = $(this).parents('.treatment-box').find('.prices').text().replace('$', '');
             var price = $('#service_price').text();
             var servicesCount = $('#service_count').text();
-            $(this).find('i').toggleClass('fa-plus-square-o fa-check-square-o');
+            $(this).find('i').toggleClass('fa-plus-square-o fa-check-square');
 
-            if ( $(this).find('i').hasClass('fa-check-square-o') ) {
+            if ( $(this).find('i').hasClass('fa-check-square') ) {
                 $(this).css('font-size', '25px');
                 orderTotal =  Number(price) + Number(getPrice);
                 $('#service_price').text( orderTotal );
@@ -683,11 +692,37 @@
     </script>
     
     <script>
-    Dropzone.options.imageUpload = {
+	Dropzone.autoDiscover = true;
+
+     Dropzone.options.imageUpload = {
+		addRemoveLinks: true,
         maxFilesize:1,
         acceptedFiles: ".jpeg,.jpg,.png",
         addRemoveLinks: true
     };
+		
+		Dropzone.options.update5 = {
+		addRemoveLinks: true
+    };
+		
+	
+	/* jQuery(document).ready(function(){
+		
+		$(".dropzone").dropzone({
+			init: function() {
+				var $this = this;
+				 
+			},
+			paramName: "file",
+			addRemoveLinks: true,
+			maxFilesize: 5,
+			maxFiles : 1,
+			autoProcessQueue : false
+		});
+		
+	});
+	 */
+	
     
     //$("#my-awesome-dropzone").dropzone({  });
     </script>

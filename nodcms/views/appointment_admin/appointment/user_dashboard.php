@@ -185,6 +185,8 @@ $(document).ready(function(){
                                 <span class="action-<?php echo $status;?>"></span>
                             </div>
 							
+							<?php print_r($reviewed); ?>
+							
 							<?php if($currentDate > $reservation_date){ ?>
 								
 								<div class="review">
