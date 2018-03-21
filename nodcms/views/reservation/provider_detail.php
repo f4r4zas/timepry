@@ -572,8 +572,6 @@ echo "</pre>";
 				} else if(result == null){
 					
 				}else{
-					console.log("Result");
-					console.log(result);
 					var reviewId = id;
 					var commentReplay = result;
 				   $.ajax({url: "<?php echo base_url() ?>appointment/updateReviewReplay",type:"POST",data:{review_id:reviewId,comment_replay:commentReplay}, success: function(data){
@@ -618,7 +616,7 @@ echo "</pre>";
             
             
             $.selectprac = function(treatment_id) {
-				console.log("workeds");
+				
                 $(".selservice_box").removeClass("selected");
                 $('#treat'+treatment_id+'').addClass("selected");
                 $("option.dentist_name").remove();
@@ -626,8 +624,7 @@ echo "</pre>";
                 $.backTo('step1');
                     $("#beforeCheckout_popout").LoadingOverlay("show");   
                 $.post("<?php echo base_url().$lang.$this->provider_prefix ?>/get_practitioner/" + treatment_id ,{},function(data){
-					console.log("Data");
-					console.log(data);
+					
 					$("#beforeCheckout_popout").LoadingOverlay("hide");
                         data = JSON.parse(data);
                         selectedtreatment_id = data.treatment_id;                        
@@ -640,7 +637,7 @@ echo "</pre>";
                             $('#error').show().find('p').text("practitioner not found");
                         }
                     }).fail(function(e){
-						console.log("Fail");
+					
 						$("#beforeCheckout_popout").LoadingOverlay("hide");
                         $('#error').show().find('p').text('<?php echo _l('There is some error from system! Please try later.',$this); ?>');
                     });
@@ -658,8 +655,6 @@ echo "</pre>";
                     $('.final_treatment_field'+selectedtreatment_id+'.practitionername').text($("#dentist_name option:selected").text());                    
                     $('#post_form').attr("action","<?php echo base_url().$lang.$this->provider_prefix ?>/set_appointment/" + serviceID);
                     $.post("<?php echo base_url().$lang.$this->provider_prefix ?>/get_service/" + serviceId ,{},function(data){
-						console.log("data");
-						console.log(data);
 						$("#beforeCheckout_popout").LoadingOverlay("hide");
                         data = JSON.parse(data);
                         if(data.status=="success"){
@@ -767,6 +762,7 @@ echo "</pre>";
                 $('.steps:not(#' + stepName + ')').hide();
             };
             var reservationPOST = function(){
+
                 $('#error').hide();
                 
                                      $("#beforeCheckout_popout").LoadingOverlay("show");           
@@ -806,6 +802,7 @@ echo "</pre>";
                             Metronic.unblockUI('#reservation_wizard_form');
                         },
                         success: function(data){
+						
 							$("#beforeCheckout_popout").LoadingOverlay("hide");
                             $(".se-pre-con").fadeOut("slow");
                             data = JSON.parse(data);
@@ -843,7 +840,9 @@ echo "</pre>";
                         }
                     });
             };
+
             $.validate({
+			form : '#checkout',
                 onSuccess: function(){
                     reservationPOST();
                     return false;
