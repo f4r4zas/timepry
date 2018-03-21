@@ -3235,3 +3235,8 @@ section.edit_treatments {
         color: #ECBE24;
     }
 }
+
+nav.menu_nav .pull-right li a {
+    font-size: 12px !important;
+    font-weight: bold;
+}

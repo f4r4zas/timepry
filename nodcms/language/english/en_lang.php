@@ -223,3 +223,4 @@ $lang["Dentist doesn't exists!"] = "Dentist doesn't exists!";
 $lang["print Receipt"] = "print Receipt";
 $lang["asdss"] = "asdss";
 $lang["Your subscription was successfull!"] = "Your subscription was successfull!";
+$lang["Logout"] = "Logout";

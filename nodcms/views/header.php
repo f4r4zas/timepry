@@ -117,7 +117,7 @@
                                     
                                     </li>
                                     <li>
-                                        <a href="<?php echo base_url(); ?>admin-sign/logout"><?=_l('Log Out',$this);?></a>
+                                        <a href="<?php echo base_url(); ?>admin-sign/logout"><?=_l('Logout',$this);?></a>
                                     </li>
 									
                                     <?php endif;?>
