@@ -451,7 +451,7 @@ class Registration extends NodCMS_Controller {
                 $this->db->insert('r_services',$data3);
                 $service_id = $this->db->insert_id();
                 
-                $days = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+                $days = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday');
 
                 foreach($_POST['dayClosed'] as $y => $oneTextFieldsValue1) {
                     if($oneTextFieldsValue1 == '' && $_POST['openingHours'][$y] != "" && $_POST['closingHours'][$y] !=""){
@@ -472,6 +472,7 @@ class Registration extends NodCMS_Controller {
 							
                         $this->db->insert('r_time_period',$data4);
 						
+						$stepTwo["day_no"]=$y;
 						$stepTwo['staticStartTime'] = $_POST['openingHours'][$y];
 						$stepTwo['staticEndtartTime']= $_POST['closingHours'][$y];
 						$dataStepTwo['timePeriod'][] = $stepTwo;
@@ -483,7 +484,7 @@ class Registration extends NodCMS_Controller {
                 
 				}
                 
-                $days = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+                $days = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday');
                 foreach($days as $x => $day):
                  if($_POST['openingHours'][$x] != "" && $_POST['closingHours'][$x] !=""){   
                     $start_min = explode(":",$_POST["openingHours"][$x]);
