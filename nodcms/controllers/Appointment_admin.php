@@ -905,12 +905,13 @@ class Appointment_admin extends NodCMS_Controller
                     $this->data['data'][$i] =  $this->Appointment_admin_model->getAllPeriods($id, $i);
                 }
                 $this->data['days'] = array(
-                    _l('Sunday',$this),
+                   
                     _l('Monday',$this),
                     _l('Tuesday',$this),
                     _l('Wednesday',$this),
                     _l('Thursday',$this),
                     _l('Friday',$this),
+					 _l('Sunday',$this),
                     _l('Saturday',$this)
                 );
                 $this->data['service_data'] = $services;

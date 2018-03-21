@@ -471,6 +471,7 @@ $(".closed_day").on("click", function(){
                                 <input class="update_4" type="text" placeholder="Price($)" name="treatment_price[]" style="width: 15%; display: inline-block; vertical-align: top; height: 40px; margin: 0 2px;"/>
                                 <div style="width: 29%; display: inline-block; vertical-align: top; height: 40px;">
                                 <?php 
+								echo "pract id ".$this->session->userdata('provider_id');
                                 $this->db->select('*');
                                 $this->db->from('practitioners');
                                 $this->db->where('provider_id',$this->session->userdata('provider_id'));
