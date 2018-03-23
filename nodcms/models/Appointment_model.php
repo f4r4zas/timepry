@@ -340,6 +340,7 @@ class Appointment_model extends CI_Model
     }
     
     function getCustomProvider($conditions = NULL, $limit = NULL, $offset = NULL){
+		
 		$this->db->select("*");
         $this->db->from('r_providers');		
 		
@@ -355,7 +356,6 @@ class Appointment_model extends CI_Model
         $this->db->where('active',1);
         if($limit!=NULL) $this->db->limit($limit, $offset);
         $query = $this->db->get();
-		
 		
         return $query->result_array();
 	}

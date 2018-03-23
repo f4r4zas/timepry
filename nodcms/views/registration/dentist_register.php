@@ -1,6 +1,9 @@
 <?php /* $this->session->unset_userdata("dataStepOne"); 
- $this->session->unset_userdata("dataStepTwo"); */
-//print_r($this->session->userdata('user_id_new'));
+ $this->session->unset_userdata("dataStepTwo"); 
+$this->session->unset_userdata("dataStepThree"); 
+$this->session->unset_userdata("dataStepFour");  */
+
+//print_r($this->session->userdata("dataStepTwo"));
  ?>
 <style>
 .registration-tabs input.update4[type=text], .registration-tabs input.update4[type=password], .registration-tabs textarea.update4, .select2-container{
@@ -903,18 +906,18 @@ $(".closed_day").on("click", function(){
 
                                 <hr class="mod" style="margin:20px 0;border-color:#b7b7b7;">
 
-                                <form id="update5" enctype="multipart/form-data" action="<?php echo base_url();?>" role="form" class="dropzone" id="my-awesome-dropzone">
+        <form id="update5"  action="<?php echo base_url();?>Registration/imageUpload" enctype="multipart/form-data"  class="dropzone" id="my-awesome-dropzone">
                                     <div class="dz-message" data-dz-message><span>Click or Drop Images Here</span></div>
                                 
                                 <div class="fallback">
-                                <input class="update5" name="images" type="file" multiple />
-                              </div>
+									<input type="hidden" name="step" value="update5">
+									<input class="update5" name="images" type="file"  />
+								</div>
                                 <div class="add_new_treatment_inside_tab">
                                 <button type="submit" class="greyButton" style="margin:30px auto 0;">Submit</button>
                                     
                                 </div>
                                 </form>
-                                
                             </div>
                         </div>
                         
@@ -935,9 +938,14 @@ $(document).ready(function(){
 
 
             $('form').on('submit',function(e){
-                
+               
                 var formid = $(this).attr("id");
-    e.preventDefault();
+				
+				
+					e.preventDefault();
+				
+				
+    
     $('.help-block').html('');
     var formData = new FormData();
     
@@ -950,13 +958,14 @@ $(document).ready(function(){
         alert("must add atleast one treatment");
       } else{
       
-        
+                 
     $('.'+formid).each(function(i,v){
       v=$(v);
       formData.append(v.attr('name'),v.val());      
     });
 
      url = "<?php echo base_url();?>register/dentist-registration/<?php echo $step;?>";
+	 
      $.ajax({
           url: url,
           type: "POST",
@@ -967,6 +976,7 @@ $(document).ready(function(){
           },
           processData: false,
           contentType: false,
+		  
           success: function (data) {
               $(".se-pre-con").fadeOut("slow");
                var data_msg=$.parseJSON(data);
@@ -1024,6 +1034,7 @@ $(document).ready(function(){
         });
         
         }
+	
   });
         
         </script>
