@@ -61,7 +61,8 @@ class Registration extends NodCMS_Controller {
         $this->load->library('form_validation');
         if($this->input->raw_input_stream){
 			
-            $this->form_validation->set_rules('fname', _l('First Name',$this), 'required|xss_clean|callback_formRulesName');
+            $this->form_validation->set_rules('fname', _l('First Name',$this), 'required|xss_clean|callback_formRulesName');$this->form_validation->set_rules('address', _l('Address',$this), 'required|xss_clean');
+			$this->form_validation->set_rules('about', _l('About',$this), 'required|xss_clean');
             $this->form_validation->set_rules('lname', _l('Last Name',$this), 'required|xss_clean|callback_formRulesName');
             $this->form_validation->set_rules('mobile', _l('Phone Number',$this), 'required|is_natural');
             $this->form_validation->set_rules('email', _l('Email Address',$this), 'required|valid_email|callback_userUniqueEmail');
@@ -74,6 +75,8 @@ class Registration extends NodCMS_Controller {
                 $set_value = array(
                     'cpassword'=>'',
                     'email'=>set_value('email'),
+                    'address'=>set_value('address'),
+                    'about'=>set_value('about'),
                     'fname'=>set_value('fname'),
                     'lname'=>set_value('lname'),
                     'mobile'=>set_value('mobile'),
@@ -83,6 +86,8 @@ class Registration extends NodCMS_Controller {
                 $form_error = array(
                     'cpassword'=>form_error('cpassword'),
                     'email'=>form_error('email'),
+                    'about'=>form_error('about'),
+                    'name'=>form_error('name'),
                     'fname'=>form_error('fname'),
                     'lname'=>form_error('lname'),
                     'mobile'=>form_error('mobile'),
@@ -94,7 +99,11 @@ class Registration extends NodCMS_Controller {
                 $lastname = $this->input->post('lname', TRUE);
                 $mobile = $this->input->post('mobile', TRUE);
                 $email = $this->input->post('email', TRUE);
-                $time_start = time();
+                
+				$about = $this->input->post('about', TRUE);
+                $address = $this->input->post('address', TRUE);
+			
+			   $time_start = time();
                 $time_start = $time_start + (7 * 24 * 60 * 60 * 60);
                 //$username = $this->input->post('username', TRUE);
                 $password = $this->input->post('password', TRUE);
@@ -104,6 +113,8 @@ class Registration extends NodCMS_Controller {
                     "lastname"=>$lastname,
                     "fullname"=>$firstname.' '.$lastname,
                     "mobile"=>$mobile,
+                    "about"=>$about,
+                    "address"=>$address,
                     "email"=>$email,
                     "username"=>$time_start,
                     "password"=>md5($password),
@@ -116,7 +127,8 @@ class Registration extends NodCMS_Controller {
                     "active"=>1,
                     "status"=>1
                 );
-
+			
+			print_r($user);
               $registered_user_id = $this->Registration_model->insertUser($user);
 				
 				//Get Registered user id

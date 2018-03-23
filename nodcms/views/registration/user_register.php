@@ -111,6 +111,40 @@
                     <?php } ?>                   
 
                 </div>
+				
+				
+				<div class="col-sm-12">
+
+                    <input placeholder="Your address" value="<?php echo $set_value['address']; ?>" name="address" id="address" type="text" class="form-control <?php echo $set_value['address']!=''?'edited':''; ?>" data-validation="required">
+
+                    <?php if($form_error['address']!=''){ ?>
+
+                        <span class="help-block"><?php echo $form_error['address']; ?></span>
+
+                    <?php }else{ ?>
+
+                        <span class="help-block"></span>
+
+                    <?php } ?>                   
+
+                </div>
+				
+				
+				<div class="col-sm-12">
+				
+				<textarea placeholder="About yourself" class="form-control <?php echo $set_value['about']!=''?'edited':''; ?>" data-validation="required" name="about" ><?php echo $set_value['address']; ?></textarea>
+
+                    <?php if($form_error['address']!=''){ ?>
+
+                        <span class="help-block"><?php echo $form_error['address']; ?></span>
+
+                    <?php }else{ ?>
+
+                        <span class="help-block"></span>
+
+                    <?php } ?>                   
+
+                </div>
 
             </div>
 

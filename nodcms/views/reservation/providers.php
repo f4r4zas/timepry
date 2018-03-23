@@ -17,14 +17,17 @@
     <?php if(isset($data_list) && count($data_list)!=0){ $i = 0; ?>
         <div class="row">
             
-            <div class="col-md-8">
+            <div class="col-md-6 listing-provider">
                 <div class="res_wrapper">
                     <div class="row-not">
                         
             <?php 
             $addresses = array();
             $i = 0;
+			$total = 0;
+			$count = count($data_list);
             foreach($data_list as $item){ 
+			$total++;
             if ( $i == 0 ) {
                 echo '<div class="row rflex">';
             }
@@ -88,6 +91,15 @@
                 <?php if( ( ($i+1) % 3 ) !=0 ){ ?>
                     <!-- <div class="clearfix"></div> -->
                 <?php } 
+				
+				if($i== 1){
+					
+					if($count == $total){
+						echo '</div>';
+					}
+					
+				}
+				
                 if ( $i == 2 ) {
                     echo '</div>';
                     $i = 0;
@@ -95,6 +107,7 @@
                 ?>
             <?php 
             $addresses[] = '"'.$item['address'].'"';
+			
             }
             
             $comma_seperated = implode(",",$addresses);
@@ -106,17 +119,9 @@
         
         <?php echo isset($pagination)?$pagination:""; ?>
         </div>
-        
-        
-<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZ6v5rVNIY_XwJfCdIntpT1jNj0wLVReY&sensor=false&extension=.js"></script>-->
 
-
-    <div class="col-md-4">
-        <div class="row">
-            <div class="map_wrapper">
-                <div id="map_canvas" style="height:100%;"></div>
-            </div>
-        </div>
+    <div class="col-md-6 provider-map">
+            <div id="map_canvas" style="height:100%;"></div>
     </div>
 <script>
 /*$(document).ready(function () {
@@ -158,14 +163,18 @@ function initialize() {
     var addresses = [<?php echo $comma_seperated;?>];
 
     window.map = new google.maps.Map(document.getElementById('map_canvas'), {
+	    center: new google.maps.LatLng(45, -122),
+    zoom: 4,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
     var infowindow = new google.maps.InfoWindow();
 
     var bounds = new google.maps.LatLngBounds();
-
-    for (var x = 0; x < addresses.length-6; x++) {
+	
+    //for (var x = 0; x < addresses.length-6; x++) {
+    for (var x = 0; x < addresses.length; x++) {
+		console.log("worked");
        /* marker = new google.maps.Marker({
             position: new google.maps.LatLng(locations[i][1], locations[i][2]),
             map: map
@@ -180,6 +189,7 @@ function initialize() {
              } catch (error) {
                  console.log(error);         
              }
+			 console.log(latlng);
             marker = new google.maps.Marker({
                 position: latlng,
                 map: map,
@@ -209,13 +219,19 @@ function initialize() {
 function loadScript() {
     var script = document.createElement('script');
     script.type = 'text/javascript';
+	script.id = "bla";
     script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDZ6v5rVNIY_XwJfCdIntpT1jNj0wLVReY&v=3.exp&sensor=false&' + 'callback=initialize';
     document.body.appendChild(script);
 }
 
+jQuery(document).ready(function(){
+	loadScript();
+	console.log("scripted");
+});
+
 $(function() {
     // setTimeout(function() {
-        loadScript();
+        
     // }, 800);
 });
 </script>        
