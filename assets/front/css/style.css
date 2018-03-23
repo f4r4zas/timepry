@@ -3240,3 +3240,21 @@ nav.menu_nav .pull-right li a {
     font-size: 12px !important;
     font-weight: bold;
 }
+
+#map_canvas{
+	 height: 100% !important;
+    padding-bottom: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.listing-provider{
+overflow-y: scroll;
+    height: -webkit-fill-available;
+	 width: -moz-available;
+}
+
+.provider-map {
+    padding: 0;
+	
+}
