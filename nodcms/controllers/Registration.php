@@ -183,6 +183,8 @@ class Registration extends NodCMS_Controller {
     
     function dentistRegistration($step =1,$lang="en")
     {
+		print_r($_FILE);
+		
         $status = true;
 		$error = array();
         $this->preset($lang);
@@ -380,17 +382,17 @@ class Registration extends NodCMS_Controller {
 				//If form resaved remove previous values
 				
 				/* 
-					$this->db->where('id', $id);
-					$this->db->delete('testimonials'); 
+					$this->db->where('provider_id', $provider_id);
+					$this->db->delete('practitioners'); 
 					
-					$this->db->where('id', $id);
-					$this->db->delete('testimonials'); 
+					$this->db->where('user_id', $get_last_user_id[0]->user_id);
+					$this->db->delete('r_services'); 
 					
-					$this->db->where('id', $id);
-					$this->db->delete('testimonials'); 
+					$this->db->where('user_id', $get_last_user_id[0]->user_id);
+					$this->db->delete('r_time_period'); 
 					
-					$this->db->where('id', $id);
-					$this->db->delete('testimonials'); 
+					$this->db->where('provider_id', $provider_id);
+					$this->db->delete('r_provider_time'); 
 				*/
 				
 				
@@ -418,11 +420,48 @@ class Registration extends NodCMS_Controller {
                     "created_date"=>time(),
                     "user_id"=>$get_last_user_id[0]->user_id
                 );
-                $this->db->insert('r_providers',$data);
 				
-				$dataStepTwo['providerDetails'] = $data;
+				$provider_id = "";
 				
-                $provider_id = $this->db->insert_id();
+				if(!empty($this->session->userdata('dataStepTwo')['providerId'])){
+				
+
+					$this->db->where('provider_id',$this->session->userdata('dataStepTwo')['providerId']);
+
+					$this->db->update('r_providers',$data);
+
+					$dataStepTwo['providerDetails'] = $data;
+					
+					$provider_id = $this->session->userdata('dataStepTwo')['providerId'];
+					
+					
+					$dataStepTwo['providerId'] = $provider_id;
+					
+					$this->db->where('provider_id', $provider_id);
+					$this->db->delete('practitioners'); 
+					
+					$this->db->where('user_id', $get_last_user_id[0]->user_id);
+					$this->db->delete('r_services'); 
+					
+					$this->db->where('user_id', $get_last_user_id[0]->user_id);
+					$this->db->delete('r_time_period'); 
+					
+					$this->db->where('provider_id', $provider_id);
+					$this->db->delete('r_provider_time'); 
+									
+				}else{
+
+					$this->db->insert('r_providers',$data);
+					
+					$dataStepTwo['providerDetails'] = $data;
+					
+					$provider_id = $this->db->insert_id();
+					
+					$dataStepTwo['providerId'] = $provider_id;
+				
+				}
+
+				
 				
 				
                 foreach($_POST['practitioners_title'] as $x => $oneTextFieldsValue) {
@@ -753,7 +792,8 @@ class Registration extends NodCMS_Controller {
             echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."register/dentist-registration/4"));		
 		    die();
         }elseif($this->input->post("step")=="update5"){
-        
+			
+		
              $optional_fields = array();
             foreach($this->input->post() as $key => $value)
 	        {
@@ -786,32 +826,15 @@ class Registration extends NodCMS_Controller {
             
             if ($status == FALSE){
                 
-               
-                
                 $error = array_filter($error); // Some might be empty
                 
             }else{
-                
-                
-                /*$address = $this->input->post('address').','.$this->input->post('street').','.$this->input->post('city').','.$this->input->post('state');
-                
-                $data = array(
-                    "address"=>$address;
-                );
-                
-                $this->db->where('provider_id',$this->session->userdata('provider_id'));
-                $this->db->update('r_providers',$data);*/
-
-                
-                
-                //$this->session->set_flashdata('message', $message);
-                // Make confirm message
-                /*$message = array(
-                    'title'=>_l('Your subscription was successful!', $this),
-                    'body'=>_l('Please check your email and click on the link posted.', $this),
-                    'class'=>'note note-success'
-                );
-                $this->session->set_flashdata('message', $message);*/
+				
+				
+				
+				
+				
+				
                 echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."register/dentist-registration/message"));		
 		        die();
             }
@@ -1051,4 +1074,81 @@ class Registration extends NodCMS_Controller {
 
         return $config;
     }
+	
+	
+	public function imageUpload(){
+		
+		$time = time();
+		
+		$target_dir = "upload_file/images/";
+		$target_file = $target_dir.$time."-". basename($_FILES["file"]["name"]);
+		$uploadOk = 1;
+		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+		// Check if image file is a actual image or fake image
+		if(isset($_POST["submit"])) {
+			$check = getimagesize($_FILES["file"]["tmp_name"]);
+			if($check !== false) {
+				//echo "File is an image - " . $check["mime"] . ".";
+				$uploadOk = 1;
+			} else {	
+				echo json_encode(array( 'type' => 'failed',
+				'message' => 'File is not an image.'
+				));
+				die();
+				$uploadOk = 0;
+			}
+		}
+		// Check if file already exists
+		if (file_exists($target_file)) {
+			
+			echo json_encode(array( 'type' => 'failed',
+				'message' => 'Sorry, file already exists.'
+				));
+			
+			$uploadOk = 0;
+		}
+		// Check file size
+		if ($_FILES["file"]["size"] > 5000000) {
+			echo json_encode(array( 'type' => 'failed',
+				'message' => 'Sorry, your file is too large.'
+				));
+			die();
+			$uploadOk = 0;
+		}
+		// Allow certain file formats
+		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+		&& $imageFileType != "gif" ) {
+			//echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+			
+			echo json_encode(array( 'type' => 'failed',
+				'message' => 'Sorry, only JPG, JPEG, PNG & GIF files are allowed.'
+				));
+			die();
+			$uploadOk = 0;
+		}
+		// Check if $uploadOk is set to 0 by an error
+		if ($uploadOk == 0) {
+			return false;
+		// if everything is ok, try to upload file
+		} else {
+			if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+				
+				$provider_id = $this->session->userdata('dataStepTwo')['providerId'];
+		if($provider_id){
+		$provider_id = $this->session->userdata('dataStepTwo')['providerId'];			 
+		$this->db->where('provider_id', $provider_id);
+		$this->db->update('r_providers', array('image' => $target_file));
+		}		
+				
+			echo json_encode(array( 'type' => 'success',
+				'message' => 'File uploaded successfully'
+				));
+				
+				//echo  basename( $_FILES["file"]["name"]);
+			} else {
+				return false;
+			}
+		}
+	}
+	
 }

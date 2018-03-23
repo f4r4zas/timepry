@@ -34,7 +34,13 @@
             <div class="col-md-6">
                 <div class="search_content">
                     <div class="thumb_img">
+					<?php if(!empty($item['image'])){ ?>
+						<img src="<?php echo base_url(); ?><?php 
+						echo $item['image'];
+						?>" alt="Timepry">
+					<?php }else{ ?>
                         <img src="<?php echo base_url(); ?>/assets/front/images/search_re_thumb.png" alt="Timepry">
+					<?php } ?>
                     </div>
                     <div class="title"><?php echo $item['provider_name']; ?></div>
                     <!--<div class="ratings">

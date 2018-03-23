@@ -76,10 +76,14 @@ class General extends CI_Controller
             
         } else {
             
-            $output = "";
-            /*$output .= '<ul id="beneficiary-list">';
+            //$output = "sdsa";
+            $output .= '<ul id="beneficiary-list">';
                 $output .= '<li onClick="selectbeneficiary(\'\',\'\');">No beneficiary found</li>';
-            $output .= '</ul>';*/    
+            $output .= '</ul>';    
+			
+			$output = '<ul class="amazetal_companies"><li class="fetched_companies" value=0>Location not found</li></ul>';
+			
+			
         } 
         
         echo $output; 
@@ -94,6 +98,7 @@ class General extends CI_Controller
 		
 		$query = $this->db->get();
 		$result = $query->result();
+		
         $output = "";
         
         if(!empty($result)) {
@@ -113,9 +118,6 @@ class General extends CI_Controller
         } else {
             
             $output = "";
-            /*$output .= '<ul id="beneficiary-list">';
-                $output .= '<li onClick="selectbeneficiary(\'\',\'\');">No beneficiary found</li>';
-            $output .= '</ul>';*/    
         } 
         
         echo $output; 

@@ -702,29 +702,36 @@
     };
 		
 		Dropzone.options.update5 = {
-		addRemoveLinks: true
+			maxFiles: 1,
+		addRemoveLinks: true,
+		
+		 init: function () {
+			 
+			 this.on("maxfilesexceeded", function(file){
+        bootbox.alert("Only one file is allowed!");
+		 this.removeFile(file);
+    });
+			 
+        this.on("processing", function (file) {
+            
+        });
+
+        this.on("success", function (file, response) {
+				
+				var obj = JSON.parse(response);
+				if(obj.type == "success"){
+					bootbox.alert("Image uploaded successfully!");
+				}else{
+					bootbox.alert(obj.message);
+				}
+				
+        });
+
+        this.on("error", function (file, error, xhr) {
+
+        });
+	 }
     };
-		
-	
-	/* jQuery(document).ready(function(){
-		
-		$(".dropzone").dropzone({
-			init: function() {
-				var $this = this;
-				 
-			},
-			paramName: "file",
-			addRemoveLinks: true,
-			maxFilesize: 5,
-			maxFiles : 1,
-			autoProcessQueue : false
-		});
-		
-	});
-	 */
-	
-    
-    //$("#my-awesome-dropzone").dropzone({  });
     </script>
 </body>
 </html>

@@ -125,7 +125,7 @@
                         <input class="form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password" data-validation="required"/>
                     </div>
                     <div class="form-group forget_pass">
-                        <a href="javascript:void(0)" id="forgot_password-trigger">Forget Password!?</a>
+                        <a href="javascript:void(0)" id="forgot_password-trigger">Forget Password?</a>
                     </div>
                     <div class="form-actions submit-btn">
                         <input type="submit" value="<?php echo _l('Login',$this); ?>" class="greyButton">
