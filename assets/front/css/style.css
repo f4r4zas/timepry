@@ -568,8 +568,9 @@ section.search_body .res_wrapper  {
 .search_body .search_content .title {
     font-size: 22px;
     font-weight: 500;
-    padding: 8px 0 0;
+    padding: 0px 0 0;
     text-transform: uppercase;
+	margin-top: 1px;
 }
 
 .search_body .search_content .ratings {

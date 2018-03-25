@@ -52,6 +52,12 @@
 }
 #paymentForm {z-index: 99999999 !important;}
 .bootbox.modal {z-index: 99999999 !important;}
+
+.cross-checkout {
+    font-size: 34px !important;
+    color: white;
+}
+
 </style>
 <section class="inner-page-banner">
     <div class="banner_wrapper">
@@ -476,6 +482,19 @@ echo "</pre>";
 </div>
 
 <div class="modal-box" id="beforeCheckout_popout">
+
+<i class="fas fa fa-times pull-right cross-checkout"></i>
+
+<script>
+jQuery(document).ready(function(){
+	$(".cross-checkout").click(function(){
+	  $('.black_overlay').hide();
+      $('#beforeCheckout_popout').hide();
+	});
+	  
+})
+</script>
+
     <div class="modal-inner">
         <div class="row">
         <div class="col-md-6" style="text-align: center;">

@@ -326,12 +326,12 @@ class Registration extends NodCMS_Controller {
                     $end_min = ((int) $end_min[0]*60) + (int) $end_min[1];
                     if($start_min > $end_min){
                         $status = FALSE;
-    				    $error["closingHours[]|".$x] = 'Closing hours must be greater than opening hours.';
+    				    $error["closingHours[]"] = 'Closing hours must be greater than opening hours.';
                     }
                 }elseif($oneTextFieldsValue == '' && $_POST['openingHours'][$x] == "" && $_POST['closingHours'][$x] ==""){
                     $status = FALSE;
-			        $error["openingHours[]|".$x] = 'You must provide this field.';
-                    $error["closingHours[]|".$x] = 'You must provide this field.';
+			        $error["openingHours[]"] = 'You must provide this field.';
+                    $error["closingHours[]"] = 'You must provide this field.';
                 }
                 // Validate $oneTextFieldsValue...
               }

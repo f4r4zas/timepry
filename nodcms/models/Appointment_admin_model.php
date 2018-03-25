@@ -99,7 +99,6 @@ class Appointment_admin_model extends CI_Model{
             $data["provider_id"]=$this->session->userdata('provider_id');
 
             $data["created_date"]=time();
-
             $this->db->insert('r_services',$data);
 
             $id = $this->db->insert_id();

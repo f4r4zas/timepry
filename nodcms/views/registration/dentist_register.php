@@ -292,7 +292,7 @@ $this->session->unset_userdata("dataStepFour");  */
                         <div id="opening_days">
                             <h1>Opening hours</h1>
                             
-                            
+								
                             <?php 
 							
                             $days = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday');
@@ -321,21 +321,13 @@ $this->session->unset_userdata("dataStepFour");  */
                                 </div>
                                 <div class="col-xs-12 col-sm-3 input-append">
                                     <input value="<?php if(!empty($savedStart)){ echo $savedStart; } ?>"									class="time update2 timePicker-from" id="timePicker-from-<?=$k?>" type="text" style="width: 80%;" placeholder="Opening hours * 08:00" name="openingHours[]">
-                                    
-                                    <!--<span class="add-on">
-                                      <i data-time-icon="icon-time" data-date-icon="icon-calendar" class="icon-time">
-                                      </i>-->
-                                    </span>
-                                    <span class="help-block"></span>
+                                    <div class="">                                    <span id="bla" class="help-block"></span></div>
+
                                 </div>
                                 <div class="col-xs-12 col-sm-3 input-append">
                                     <input value="<?php if(!empty($savedEnd)){ echo $savedEnd; } ?>" class="time update2 timePicker-to" id="timePicker-to-<?=$k?>" type="text" style="width: 80%;" placeholder="Closing hours * 14:00" data-format="hh:mm" name="closingHours[]">
                                     
-                                    <!--<span class="add-on">
-                                      <i data-time-icon="icon-time" data-date-icon="icon-calendar" class="icon-time">
-                                      </i>-->
-                                    </span> 
-                                    <span class="help-block"></span>                                   
+                                    <a class="help-block"></a>                                   
                                 </div>
                                 <div class="col-xs-8 col-sm-2">
                                     <div class="closed_day">
@@ -966,6 +958,9 @@ $(document).ready(function(){
 
      url = "<?php echo base_url();?>register/dentist-registration/<?php echo $step;?>";
 	 
+	 var customMessage = "";
+	 var customkey = "";
+	 
      $.ajax({
           url: url,
           type: "POST",
@@ -978,6 +973,7 @@ $(document).ready(function(){
           contentType: false,
 		  
           success: function (data) {
+			  console.log(data);
               $(".se-pre-con").fadeOut("slow");
                var data_msg=$.parseJSON(data);
                 var canChange = true;
@@ -990,11 +986,32 @@ $(document).ready(function(){
                     $("[name='"+keyIndex[0]+"']").eq(keyIndexEq).siblings('.help-block').html(value);
                 }else{
                     $("[name='"+key+"']").siblings('.help-block').html(value);
-                    $("[name='"+key+"[]']").siblings('.help-block').html(value);      
-                }
+                    $("[name='"+key+"[]']").siblings('.help-block').html(value); 
+					
+			if(key == "openingHours" || "closingHours"){
+			
+				customkey = key;
+				if(value == "You must provide this field."){
+						customMessage = "You must provide openingHours/closingHours"
+				}else{
+					customMessage = value;
+				} 
+			}else{
+				customMessage = "";
+			}
+				
+					
+            }
                 
                canChange=false;
             }); 
+			
+			
+				if(customMessage){
+					bootbox.alert({ message: customMessage,   size: 'small'});
+				}
+			
+			
             
             $.each( data_msg.Error_Mess, function( key, value )
             {

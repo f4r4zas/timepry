@@ -69,7 +69,9 @@
                         <img src="<?php echo base_url(); ?>/assets/front/images/search_re_thumb.png" alt="Timepry">
 					<?php } ?>
                     </div>
-                    <div class="title"><?php echo $item['provider_name']; ?></div>
+					
+					<div class="col-md-8">
+						<div class="title"><?php echo $item['provider_name']; ?></div>
                     <!--<div class="ratings">
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
@@ -77,16 +79,22 @@
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                     </div>-->
-                    <div class="clinic_address"><?php echo $item['address']; ?></div>
-                    <div class="details">
-                        <p>
+						<div class="clinic_address"><?php echo $item['address']; ?></div>
+						<div class="details">
+								<?php echo $item['provider_description']; ?> 
+						</div>
+					</div>
+					<div class="col-md-4">
+					<br>
+					<br>
+						<div class="readMore_button">
 						
-                            <?php echo $item['provider_description']; ?> 
-                        </p>
-                    </div>
-                    <div class="readMore_button">
-                        <a href="<?php echo base_url().$lang.'/provider/'.$item['provider_username']; ?>" class="greyButton"><?php echo _l('Book a time', $this); ?></a>
-                    </div>
+							<a style="background-color: #518ed2;border: #518ed2;
+" href="<?php echo base_url().$lang.'/provider/'.$item['provider_username']; ?>" class="greyButton"><?php echo _l('Book a time', $this); ?></a>
+						</div>
+					</div>
+					
+                    
                 </div>
             </div>
             
