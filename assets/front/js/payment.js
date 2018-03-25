@@ -45,8 +45,7 @@ function payWithStripe(e) {
         number: $form.find('[name=cardNumber]').val().replace(/\s/g,''),
         cvc: $form.find('[name=cardCVC]').val(),
         exp_month: expiry.month, 
-        exp_year: expiry.year,
-		amount:100
+        exp_year: expiry.year
     };
     
     Stripe.card.createToken(ccData, function stripeResponseHandler(status, response) {
