@@ -288,12 +288,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 box">
-                        <div class="footer_logo">
-                            <img src="<?=base_url($settings["logo"])?>" alt="Timepry">
+                           <div class="footer_logo">
+                            <img src="http://techopialabs.com/timepry/assets/front/images/timepry_footer_logo.png" alt="Timepry">
                         </div>
                         <div class="details">
                             <p>
-                                <?php echo isset($description)?$description:''; ?>
+                                This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio.  Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate curs
                             </p>
                         </div>
                     </div>
@@ -826,7 +826,11 @@
    
 					
 				}else{
-					bootbox.alert(obj.message);
+					bootbox.alert({
+						className: "my-popup",
+						message : obj.message
+					});
+					//bootbox.alert( obj.message);
 				}
 				
         });
