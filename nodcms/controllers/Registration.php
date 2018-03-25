@@ -459,7 +459,11 @@ class Registration extends NodCMS_Controller {
 					$this->db->delete('r_time_period'); 
 					
 					$this->db->where('provider_id', $provider_id);
-					$this->db->delete('r_provider_time'); 
+					$this->db->delete('r_provider_time');
+					
+					$this->db->where('provider_id', $provider_id);
+					$this->db->delete('treatments'); 
+					
 									
 				}else{
 
@@ -473,8 +477,6 @@ class Registration extends NodCMS_Controller {
 				
 				}
 
-				
-				
 				
                 foreach($_POST['practitioners_title'] as $x => $oneTextFieldsValue) {
 					

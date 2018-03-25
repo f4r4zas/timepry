@@ -408,7 +408,7 @@ $(".closed_day").on("click", function(){
                     <div id="step3" class="tab-pane <?php echo($step == 3 ?'in active ':'');?>fade">
                     <form id="update3" method="post" action="<?php echo base_url();?>register/dentist-registration/4" role="form">
 					<?php if($this->session->userdata("dataStepThree")){ ?>
-					<?php print_r($this->session->userdata("dataStepThree")); ?>
+					
 						<?php $addressData=  $this->session->userdata("dataStepThree")["address"]; ?>
 					<?php } ?>
                         <div class="row">

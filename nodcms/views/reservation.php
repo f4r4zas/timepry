@@ -428,6 +428,11 @@
     <script src='<?php echo base_url();?>assets/front/js/jquery.mask.js'></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+	
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.2.3/jquery.payment.min.js"></script>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>assets/front/js/payment.js"></script>
     
     <!-- END PAGE LEVEL SCRIPTS -->
     <?php if(isset($calendar_i18n) && in_array($lang, $calendar_i18n)){ ?>
@@ -511,7 +516,8 @@
 
         $('#services_booknow').click(function() {
             //$('.black_overlay').show();
-			console.log("worked");
+			//console.log("worked");
+			$('#checkout').hide();
             var selectedServices = $('.tab-content').find('.fa-check-square');
             var bodyToAppend = '';
             var final_treatment = '';
@@ -733,5 +739,59 @@
 	 }
     };
     </script>
+	
+	<!-- Stripe Events -->
+   <script type="text/javascript">
+// This identifies your website in the createToken call below
+Stripe.setPublishableKey('pk_test_wYNVhacdiXdHg9lwJJ5bK33l');
+ 
+var stripeResponseHandler = function(status, response) {
+var $form = $('#payment-form');
+ 
+if (response.error) {
+// Show the errors on the form
+$form.find('.payment-errors').text(response.error.message);
+$form.find('button').prop('disabled', false);
+} else {
+	console.log("Payment was a success");
+// token contains id, last4, and card type
+var token = response.id;
+// Insert the token into the form so it gets submitted to the server
+$form.append($('<input type="hidden" name="stripeToken" />').val(token));
+// and re-submit
+//$form.get(0).submit();
+// Serialize the form
+var data=$('#payment-form').serialize(); 
+// Send form to server with POST method
+$(function() {
+	$.ajax({
+		type: "POST",
+		url: "testphp.php",
+		data: data,
+		success: function(){
+			$form.find('button').prop('disabled', false);
+		}
+	});
+});
+// Prevent page from refreshing
+return false;
+}
+};
+ 
+// ONCLICK RESPONSE 
+jQuery(function($) {
+$('#thebutton').on('click', function(e) {
+var $form = $('#payment-form');
+ 
+// Disable the submit button to prevent repeated clicks
+$form.find('button').prop('disabled', true);
+ 
+Stripe.card.createToken($form, stripeResponseHandler);
+ 
+// Prevent the form from submitting with the default action
+return false;
+});
+});
+</script>
 </body>
 </html>

@@ -1,3 +1,5 @@
+
+
 <style>
 #beforeCheckout_popout{
     position: absolute;
@@ -48,6 +50,8 @@
     right: 39px;
     top: 16px;
 }
+#paymentForm {z-index: 99999999 !important;}
+.bootbox.modal {z-index: 99999999 !important;}
 </style>
 <section class="inner-page-banner">
     <div class="banner_wrapper">
@@ -556,8 +560,9 @@ echo "</pre>";
         <button type="button" class="btn btn-default" onclick="$.backTo('step1');"><i class="fa fa-refresh"></i> <?php echo _l('Set new appointment',$this); ?></button>
         <button class="btn btn-success hidden-print" type="button" onclick="window.print();"><i class="fa fa-print"></i> <?php echo _l('print Receipt',$this); ?></button>
     </div>
-
-    <script src="<?php echo base_url(); ?>assets/form-validator/jquery.form-validator.js"></script>
+	
+	
+	
     <script>
 	function showReplay(id){
 		
@@ -589,7 +594,10 @@ echo "</pre>";
             var serviceID = 0;
             var allow_days = [];
             var disable_dates = [];
-            var selectedtreatment_id = 0;            
+            var selectedtreatment_id = 0;    
+			
+			$("#doPayment").hide();
+			
             $('#dentist_name').change(function(){
                                 
                 if($(this).val() != ""){
@@ -865,10 +873,18 @@ echo "</pre>";
                     }
                 });
                 
-                if(show_checkout == true){
+               /*  if(show_checkout == true){
                     $('#checkout').show();
                 } else {
                     $('#checkout').hide();
+                } */
+				
+				 if(show_checkout == true){
+                    $('#doPayment').show();
+					$('#checkout').hide();
+                } else {
+                    $('#doPayment').hide();
+					
                 }
                 
                             
@@ -939,9 +955,14 @@ echo "</pre>";
                                 <input value="<?php if(!empty($phone)){ echo $phone;}  ?>" name="tel" id="phone" type="text" class="form-control" data-validation="required number">
                             </div>
                         </div>
-                        <input type="submit" class="greyButton" value="Checkout"/>
+                        <input  type="submit" class="greyButton" value="Checkout"/>
+                       
+ 					  
                     
                     </form> 
+					
+					 <input id="doPayment" type="button" class="greyButton" value="Payment"/>
+					
                     <a style="display: none;" href="checkout.php" class="greyButton">Go to Checkout</a>
                 </div>
             </div>
@@ -988,7 +1009,9 @@ echo "</pre>";
     </div>
 </div>-->
 
+<?php $this->load->view("payment_form"); ?>
 
+    <script src="<?php echo base_url(); ?>assets/form-validator/jquery.form-validator.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZ6v5rVNIY_XwJfCdIntpT1jNj0wLVReY&sensor=false&extension=.js"></script> 
 <script type="text/javascript"> 
 

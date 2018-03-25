@@ -16,7 +16,7 @@ $(function () {
 });
 
 function initMap() {
-
+console.log("Yeah");
     var locations = [
         ['Eifel Tower', 48.8583701, 2.2944813],
         ['Hôtel The Peninsula Paris', 48.8626334, 2.2883873],
@@ -54,11 +54,12 @@ function initMap() {
             }
         })(marker, i));
     }
+	
 
 }
 
 function registerMap() {
-    
+   
     initAutocomplete();
     
     
@@ -100,6 +101,7 @@ function registerMap() {
 }
 
 
+	
 
 
 var placeSearch, autocomplete;
@@ -111,6 +113,7 @@ var placeSearch, autocomplete;
         //country: 'long_name',
         postal_code: 'short_name'
       };
+	   var markers = [];
 	  
 	 jQuery(document).ready(function(){
 		 
@@ -123,19 +126,18 @@ var placeSearch, autocomplete;
 	 });
 	  
       function initAutocomplete() {
-		  
 		 
-		  
-		   var myLatLng = {lat: -25.363, lng: 131.044};
-		 
-        var map = new google.maps.Map(document.getElementById('dentist_reg_map'), {
+		var myLatLng = {lat: -25.363, lng: 131.044};
+		var geocoder = new google.maps.Geocoder;
+		var markers = [];
+  var infowindow = new google.maps.InfoWindow();
+		
+		var map = new google.maps.Map(document.getElementById('dentist_reg_map'), {
           center: {lat: -33.8688, lng: 151.2195},
           zoom: 13,
           mapTypeId: 'roadmap'
         });
 		
-		
-
         // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
         var searchBox = new google.maps.places.SearchBox(input);
@@ -145,22 +147,25 @@ var placeSearch, autocomplete;
         map.addListener('bounds_changed', function() {
           searchBox.setBounds(map.getBounds());
         });
+		
+	
 
-        var markers = [];
+       
         // Listen for the event fired when the user selects a prediction and retrieve
         // more details for that place.
+		
+		
+		
         searchBox.addListener('places_changed', function() {
-          var places = searchBox.getPlaces();
+          console.log("Place");
+		  var places = searchBox.getPlaces();
 //fillInAddress();
           if (places.length == 0) {
             return;
           }
 
           // Clear out the old markers.
-          markers.forEach(function(marker) {
-            marker.setMap(null);
-          });
-          markers = [];
+          
 
           // For each place, get the icon, name and location.
           var bounds = new google.maps.LatLngBounds();
@@ -204,36 +209,64 @@ var placeSearch, autocomplete;
             });*/
 
             // Create a marker for each place.
-            markers.push(new google.maps.Marker({
+          /*   markers.push(new google.maps.Marker({
               map: map,
               
               title: place.name,
-              draggable:false,
+              draggable:true,
               position: place.geometry.location
             }));
+			 */
+			
+			
+			try {
+				markers.setMap(null);
+				markers = [];
+			}
+			catch(err) {
+				
+			}
+
+			
+			 
+			 
+			 
+		   markers = new google.maps.Marker({
+			  position: place.geometry.location,
+			  map: map,
+			  draggable: true,
+			  title: 'Hello World!'
+			});
             
             google.maps.event.addListener(markers, 'click', (function (marker, i) {
                 return function () {
-                    infowindow.setContent(locations[i][0]);
-                    infowindow.open(map, marker);
+					 infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+                place.formatted_address + '</div>');
+              infowindow.open(map, this);
                 }
             })(markers, i));
-            
-            /*google.maps.event.addListener(markers, 'dragend', function (event) {
-                var latlng = {lat: this.getPosition().lat(), lng: this.getPosition().lng()};
-                geocoder.geocode({'location': latlng}, function(results, status) {
+			
+			
+				google.maps.event.addListener(markers, 'dragend', (function (marker, i) {
+					
+					
+					var latlng = {lat: this.getPosition().lat(), lng: this.getPosition().lng()};
+					geocoder.geocode({'location': latlng}, function(results, status) {
                     if (status === 'OK') {
                         if (results[0]) {
                             map.setZoom(13);
-                            markers.forEach(function(marker) {
+                           /*  markers.forEach(function(marker) {
                                 marker.setMap(null);
-                              });
+                              }); */
+							  markers.setMap(null);
                               markers = [];
                             
                             var marker = new google.maps.Marker({
                                 position: latlng,
-                                map: map
+                                map: map,
+								draggable: true,
                             });
+							
                             
                             
                         document.getElementById('pac-input').value = results[0].formatted_address;
@@ -252,7 +285,47 @@ var placeSearch, autocomplete;
                     // window.alert('Geocoder failed due to: ' + status);
                   }
                 });
-            });*/
+             
+			 
+			 /* document.getElementById('pac-input').value = results[0].formatted_address;
+                        let test  =  document.getElementById('pac-input');
+                        autocomplete = new google.maps.places.Autocomplete(test);
+                        autocomplete.bindTo('bounds', map);
+                        let place = autocomplete.getPlace();
+                        infowindow.setContent(results[0].formatted_address); 
+                        infowindow.open(map, markers[0]); */
+                        
+			 
+			/* var latlng = {lat: this.getPosition().lat(), lng: this.getPosition().lng()};
+
+			markers.setMap(null);
+            markers = [];
+                            
+            var marker = new google.maps.Marker({
+             position: latlng,
+             map: map,
+			 draggable: true,
+            }); */
+			
+            }));
+			
+			console.log(markers);
+			/* markers.addListener('dragend', function(event){
+			console.log("dragg");
+			var latlng = {lat: this.getPosition().lat(), lng: this.getPosition().lng()};
+
+			markers.setMap(null);
+            markers = [];
+                            
+            var marker = new google.maps.Marker({
+             position: latlng,
+             map: map,
+			 draggable: true,
+            });
+			
+		 }); */
+			
+           
 			
 			/* var marker = new google.maps.Marker({
 				  position: place.geometry.location,
@@ -271,4 +344,9 @@ var placeSearch, autocomplete;
           });
           map.fitBounds(bounds);
         });
+		
+		
       }
+	  
+
+	  
