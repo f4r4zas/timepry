@@ -1867,10 +1867,7 @@ section.faq-page {
 .listing-provider {
 
 	width: 49% !important;
-	 overflow-y: scroll;
-	 height:1000px !important;
 }
-
 
 /* Media Queries */
 @media (max-width: 768px) {

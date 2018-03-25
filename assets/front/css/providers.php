@@ -4,30 +4,6 @@
         overflow: hidden;
         border-radius: 4px !important;
     }
-	.search_content div {
-	padding: 15px 20px;
-}
-.title {
-	margin: 20px;
-}
-.details p {
-	margin: 16px 25px;
-	max-width: 100%;
-	max-height: 40px;
-	overflow: hidden;
-	min-height: 12px;
-}
-.greyButton {
-	margin: 0px 20px;
-}
- #map_canvas {
-	 height: 100%;
-	 position: relative;
-	height: 100% !important;
-	padding-bottom: 150% !important;
-	width: 100%;
-}
- 
 </style>
 <section class="inner-page-banner">
     <div class="banner_wrapper">
@@ -39,9 +15,9 @@
 <section class="search_body">
 <div class="container-fluid">
     <?php if(isset($data_list) && count($data_list)!=0){ $i = 0; ?>
-        <div class="row athicating">
+        <div class="row athicating"  style="overflow-y: scroll; height:auto;">
            
-            <div class="col-md-6 listing-provider" >
+            <div class="col-md-6 listing-provider">
                 <div class="res_wrapper">
                     <div class="row-not">
                         
@@ -53,12 +29,12 @@
             foreach($data_list as $item){ 
 			$total++;
             if ( $i == 0 ) {
-                echo '<div class="row ">';
+                echo '<div class="row rflex">';
             }
             $i++;
             ?>
             
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="search_content">
                     <div class="thumb_img">
 					<?php if(!empty($item['image'])){ ?>
@@ -80,7 +56,6 @@
                     <div class="clinic_address"><?php echo $item['address']; ?></div>
                     <div class="details">
                         <p>
-						
                             <?php echo $item['provider_description']; ?> 
                         </p>
                     </div>
@@ -146,7 +121,7 @@
         </div>
 
     <div class="col-md-6 provider-map">
-            <div id="map_canvas" style=""></div>
+            <div id="map_canvas" style="height:100%;"></div>
     </div>
 <script>
 /*$(document).ready(function () {

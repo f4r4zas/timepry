@@ -119,6 +119,89 @@
       #dentist_reg_map #infowindow-content {
         display: inline;
       }
+.my-popup .modal-content {
+	opacity: 1;
+	text-align: center;
+	font-size: 21px;
+	text-transform: uppercase;
+	background-image: url("http://techopialabs.com/timepry/assets/front/images/gradient_banner_bg.jpg");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	color: #fff;
+}
+
+
+.my-popup .modal-footer {
+	border: none;
+	text-align: center;
+	color : #fff;
+}
+
+.my-popup .btn {
+	background-color: #323232;
+	border: 1px solid #323232;
+	color: #fff;
+	font-size: 18px;
+	width: 35%;
+	padding: 18px;
+	border-radius: 3px;
+	margin-top: 10px;
+	font-family: 'Lato', sans-serif;
+}
+
+.my-popup2 .modal-content {
+	opacity: 1;
+	text-align: center;
+	font-size: 21px;
+	text-transform: uppercase;
+	background-image: url("http://techopialabs.com/timepry/assets/front/images/gradient_banner_bg.jpg");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	color: #fff;
+}
+
+
+.my-popup2 .modal-footer {
+	border: none;
+	text-align: center;
+	color : #fff;
+}
+
+.my-popup2 .btn {
+	background-color: #F3A9AE;
+	border: 1px solid #323232;
+	color: #fff;
+	font-size: 18px;
+	width: 35%;
+	padding: 18px;
+	border-radius: 3px;
+	margin-top: 10px;
+	font-family: 'Lato', sans-serif;
+}
+
+
+#update4 > .row > .col-md-2 > .treatment-tabs .nav-tabs > li.active:last-child > a::after {
+	display: block;
+	border-left: 25px solid #47A6FF;
+	border-top: 52px solid transparent;
+	border-bottom: 56px solid transparent;
+	right: -25px;
+	content: "";
+	position: absolute;
+	top: 2px;
+	bottom: 0;
+	width: 0;
+	height: 0;
+}
+.form-control {
+	font-size: 13px !important;
+}
+.heading small {
+	font-size: 15px;
+}
+.heading h3 {
+	font-size: 26px !important;
+}
     </style>
     
 </head>
@@ -668,6 +751,9 @@
         jQuery(document).ready(function() {
             Metronic.init(); // init metronic core componets
             Layout.init(); // init layout
+			
+		
+			
         });
     </script>
     <!-- END JAVASCRIPTS -->
@@ -708,7 +794,12 @@
 		 init: function () {
 			 
 			 this.on("maxfilesexceeded", function(file){
-        bootbox.alert("Only one file is allowed!");
+		bootbox.alert({
+		title: '',
+		message: "Only One File Allowed",
+		className: "my-popup2"
+		});	
+		
 		 this.removeFile(file);
     });
 			 
@@ -720,7 +811,14 @@
 				
 				var obj = JSON.parse(response);
 				if(obj.type == "success"){
-					bootbox.alert("Image uploaded successfully!");
+		bootbox.alert({
+		title: '',
+		message: "Image uploaded successfully!",
+		className: "my-popup"
+		});		
+	
+   
+					
 				}else{
 					bootbox.alert(obj.message);
 				}
@@ -732,6 +830,8 @@
         });
 	 }
     };
+	
+
     </script>
 </body>
 </html>

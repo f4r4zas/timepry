@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-md-6 box">
                         <div class="footer_logo">
-                            <img src="images/timepry_footer_logo.png" alt="Timepry">
+                            <img src="http://techopialabs.com/timepry/assets/front/images/timepry_footer_logo.png" alt="Timepry">
                         </div>
                         <div class="details">
                             <p>
@@ -64,16 +64,16 @@
                                     <a href="index.php">Home</a>
                                 </li>
                                 <li>
-                                    <a href="about-us.php">About</a>
+                                    <a href="about">About</a>
                                 </li>
                                 <li>
-                                    <a href="faq.php">FAQ</a>
+                                    <a href="faq">FAQ</a>
                                 </li>
                                 <li>
-                                    <a href="contact-us.php">Contact</a>
+                                    <a href="contact">Contact</a>
                                 </li>
                                 <li>
-                                    <a href="register.php">Signup</a>
+                                    <a href="register">Signup</a>
                                 </li>
                                 <li>
                                     <a href="javascript:void(0)" class="showLogin">Login</a>
