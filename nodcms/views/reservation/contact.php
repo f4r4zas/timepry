@@ -14,41 +14,42 @@
 
 
 <!-- page start-->
+<style>
+#name {
+	width: 100%;
+	min-width: 100px;
+}
+.pado {
+	margin-top: 72px;
+}
 
-<div class="container">
-    <div class="row row-color">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <section class="panel">
-                <header class="panel-heading">
-                    <?=_l("Map",$this)?>
-                    <span class="tools pull-right">
-                                <a href="javascript:;" class="fa fa-chevron-down"></a>
-                                <a href="javascript:;" class="fa fa-remove"></a>
-                            </span>
-                </header>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                            <h4 style="margin-top: 0;padding-top: 0"><?=$settings["company"]?></h4>
-                            <p><i class="fa fa-phone-square"></i> <?=$settings["phone"]?></p>
-                            <p><i class="fa fa-location-arrow"></i> <?=$settings["address"]?></p>
-                        </div>
-                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                            <div id="gmap_marker" class="gmaps"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+</style>
+
+<section class="inner-page-banner">
+    <div class="banner_wrapper">
+        <div class="banner_content">
+            <h1>Contact</h1>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <section class="panel">
-                <header class="panel-heading">
-                    <?=_l('Contact form',$this);?>
-                </header>
-                <div class="panel-body">
-                    <?php if($this->session->flashdata('message_success')){?>
+</section>
+
+
+<div class="container">
+<div class="row">
+<div class="col-lg-6 col-md-6" >
+
+<section class="inner-page-body">
+<div class="">
+ <div class="">
+  <div class="col-md-12 box">
+                <div class="section-heading">
+                    <h1><?=_l('Contact form',$this);?></h1>
+					<div class="cus-hr"></div>
+                </div>
+		<div class="contact-form">
+                    <div class="form-fields">
+                        <form onsubmit="return check_request();" action="" method="post" enctype="multipart/form-data">
+						<?php if($this->session->flashdata('message_success')){?>
                         <div class="alert alert-success fade in">
                             <button type="button" class="close close-sm" data-dismiss="alert">
                                 <i class="fa fa-times"></i>
@@ -65,43 +66,92 @@
                             <strong><?=_l('Oh snap!',$this);?></strong><?=_l('Problem with messages. Please notify the site administrator via the phone numbers listed',$this);?>
                         </div>
                     <?php } ?>
+					
+					<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<section class="panel">
+					<div class="panel-body">
+					<?php if($this->session->flashdata('message_success')){?>
+					<div class="alert alert-success fade in">
+					<button type="button" class="close close-sm" data-dismiss="alert">
+					<i class="fa fa-times"></i>
+					</button>
+					<strong><?=_l('Success:',$this);?>  </strong> <?=_l('Your Request have been successfully sent!',$this);?>
+					</div>
+					<?php } ?>
 
-                    <form class="" id="contact" onsubmit="return check_request();" action="" method="post" enctype="multipart/form-data">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                <div class="form-group">
-                                    <label for="name" class="control-label"><?=_l('Full Name',$this);?></label>
-                                    <input type="text" id="name" name="data[name]" class="form-control require">
+					<?php if($this->session->flashdata('message_error')){?>
+					<div class="alert alert-block alert-danger fade in">
+					<button type="button" class="close close-sm" data-dismiss="alert">
+					<i class="fa fa-times"></i>
+					</button>
+					<strong><?=_l('Oh snap!',$this);?></strong><?=_l('Problem with messages. Please notify the site administrator via the phone numbers listed',$this);?>
+					</div>
+					<?php } ?>
 
-                                </div>
-                                <div class="form-group">
-                                    <label for="email" class="control-label"><?=_l('Email address',$this);?></label>
-                                    <input type="text" id="email" name="data[email]" class="form-control require" placeholder="example@webmail.com">
-                                </div>
+					<div class="contact-form">
+					<div class="form-fields">
+					<form class="" id="contact" onsubmit="return check_request();" action="" method="post" enctype="multipart/form-data">
+					<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                                <div class="form-group">
-                                    <label for="subject" class="control-label"><?=_l('Subject',$this);?></label>
-                                    <input type="text" id="subject" name="data[subject]" class="form-control require">
-                                </div>
-                            </div>
-                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                                <div class="form-group">
-                                    <label for="text" class="control-label"><?=_l('Request',$this);?></label>
-                                    <textarea id="text" class="form-control" rows="10" name="data[text]"></textarea>
-                                </div>
-                            </div>
-                        </div>
+					<div class="name">
+						  <input id="name" name="data[name]"  placeholder="Name" type="text" class="" required>
+
+					</div>
+					<div class="email">
+					   
+						<input type="text" id="email" name="data[email]" class="" placeholder="<?=_l('Email address',$this);?>" required>
+					</div>
+
+					<div class="subject">
+					   
+						<input type="text" id="subject" name="data[subject]" class="" placeholder="<?=_l('Subject',$this);?>" required>
+					</div>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="msg">
+						
+						<textarea id="text" class="" rows="10" name="data[text]" placeholder="<?=_l('Request',$this);?>" required></textarea>
+					</div>
+					</div>
+					</div>
 
 
-                        <div class="form-group text-center">
-                            <input type="submit" class="btn btn-danger" value="<?=_l('Send email',$this);?>"/>
-                        </div>
-                    </form>
-                </div>
-            </section>
-        </div>
+					<div class="form-group  form-btn-submit">
+						<input type="submit" class="btn btn-danger contactform-btn" value="<?=_l('Send email',$this);?>" />
+					</div>
+					</form>
+					</div>
+					</div>
+					</div>
+					</section>
+					</div>
+					</div>
+
+					</div>
     </div>
+	</div>
 </div>
+</div>
+</section>
+
+
+</div>
+
+<div class="col-md-6 box pado">
+                <div class="contact_map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9916256937604!2d2.2922926153727525!3d48.85837007928744!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sEiffel+Tower!5e0!3m2!1sen!2s!4v1509835230814" style="border:0" allowfullscreen="" width="100%" height="647px" frameborder="0"></iframe>
+                </div>
+            </div>
+
+
+
+
+</div>
+
+</div>
+
 <script>
 
     function initMap() {

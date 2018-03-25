@@ -199,7 +199,7 @@
 
                             <div class="input_field btn">
 
-                                <input type="submit" class="toothBtn">
+                                <input type="submit" class="toothBtn" value=" ">
 
                             </div>
 
