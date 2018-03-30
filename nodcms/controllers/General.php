@@ -212,7 +212,7 @@ class General extends CI_Controller
 			// set email data
 	    	
 			$this->email->from($this->input->post('email'), $this->input->post('name'));
-	    	$this->email->to('zeehan4971@gmail.com');
+	    	$this->email->to('zeeshan4971@gmail.com');
 	    	$this->email->reply_to($this->input->post('email'), $this->input->post('name'));
 	    	$this->email->subject($this->input->post('subject'));
 	    	$this->email->message($this->input->post('text'));
