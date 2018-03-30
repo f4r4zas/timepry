@@ -180,7 +180,7 @@ $this->session->unset_userdata("dataStepFour");  */
                         <div class="row">
                             <div class="col-md-6">
                                 <input placeholder="Email of Dental Office" value="<?php if(!empty($provider_email)){echo $provider_email; } ?>" name="dental_officeemail" id="dental_officeemail" type="text" class="form-control update2">
-                                <span style="position: absolute;top: 15px;right: 22px;" class="help glyphicon glyphicon-info-sign" data-toggle="popover" data-placement="right" title="Insert the emial of the dental office. This email will be visible to your patients to give them the possibility to contact your directly. This email can be the same as the account email previously written or can be also different"></span>
+                                <span style="position: absolute;top: 15px;color: #518ed2;right: 22px;font-size: 21px;" class="help glyphicon glyphicon-info-sign" data-toggle="popover" data-placement="right" title="Insert the emial of the dental office. This email will be visible to your patients to give them the possibility to contact your directly. This email can be the same as the account email previously written or can be also different"></span>
                                     <span class="help-block"></span>
                                 
                             </div>

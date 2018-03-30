@@ -135,6 +135,7 @@ class Appointment extends NodCMS_Controller {
 
     // Dental Office list to choose a provider
     private function providerList($lang="en",$condition = "", $page=1){
+		
         $this->preset($lang);
         // Dental Office search
         $searchConditions = array();
@@ -1206,5 +1207,10 @@ class Appointment extends NodCMS_Controller {
 		}
 		
 	}
+	
+
+
+
+	
 	
 }

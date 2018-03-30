@@ -91,6 +91,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+	
+	<script src="<?php echo base_url();?>assets/front/js/list.min.js"></script>
 
     <script type="text/javascript">
             $('img').error(function(){

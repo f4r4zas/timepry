@@ -1,15 +1,5 @@
 <script type="text/javascript">
-    function check_request(){
-        var input = $('#contact input.require');
-        for(var i=0;i<input.length;i++){
-            var each = input[i];
-            if($(each).val()==''){
-                alert('<?=_l('Please Fill Require Fealds',$this);?> '+ $(each).parent().parent().find('span.lbname').text()+'!');
-                $(each).focus();
-                return false;
-            }
-        }
-    }
+ 
 </script>
 
 
@@ -48,7 +38,7 @@
                 </div>
 		<div class="contact-form">
                     <div class="form-fields">
-                        <form onsubmit="return check_request();" action="" method="post" enctype="multipart/form-data">
+                        <form action="<?php echo base_url(); ?>contact" method="post" enctype="multipart/form-data">
 						<?php if($this->session->flashdata('message_success')){?>
                         <div class="alert alert-success fade in">
                             <button type="button" class="close close-sm" data-dismiss="alert">
@@ -91,28 +81,28 @@
 
 					<div class="contact-form">
 					<div class="form-fields">
-					<form class="" id="contact" onsubmit="return check_request();" action="" method="post" enctype="multipart/form-data">
+					<form class="" id="contact" action="" method="post" enctype="multipart/form-data">
 					<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
 					<div class="name">
-						  <input id="name" name="data[name]"  placeholder="Name" type="text" class="" required>
+						  <input id="name" name="name"  placeholder="Name" type="text" class="" required>
 
 					</div>
 					<div class="email">
 					   
-						<input type="text" id="email" name="data[email]" class="" placeholder="<?=_l('Email address',$this);?>" required>
+						<input type="text" id="email" name="email" class="" placeholder="<?=_l('Email address',$this);?>" required>
 					</div>
 
 					<div class="subject">
 					   
-						<input type="text" id="subject" name="data[subject]" class="" placeholder="<?=_l('Subject',$this);?>" required>
+						<input type="text" id="subject" name="subject" class="" placeholder="<?=_l('Subject',$this);?>" required>
 					</div>
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="msg">
 						
-						<textarea id="text" class="" rows="10" name="data[text]" placeholder="<?=_l('Request',$this);?>" required></textarea>
+						<textarea id="text" class="" rows="10" name="text" placeholder="<?=_l('Request',$this);?>" required></textarea>
 					</div>
 					</div>
 					</div>

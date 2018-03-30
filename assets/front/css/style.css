@@ -93,7 +93,7 @@ section.home-banner {
 .home-banner .search_bar {
     text-align: center;
     background-color: #fff;
-    max-width: 90%;
+    max-width: 72%;
     margin: 0 auto;
     border-radius: 3px;
     min-height: 70px;
@@ -576,6 +576,10 @@ section.search_body .res_wrapper  {
 .search_body .search_content .ratings {
     font-size: 18px;
     color: #d8c928;
+}
+
+ .no-ratings {
+    color: #c1c1c1;
 }
 
 .search_body .search_content .clinic_address {
@@ -1819,7 +1823,7 @@ section.faq-page {
     position: static;
 }
 .search_tabs {
-    width: 90%;
+      width: 72%;
     margin: 0 auto;
 }
 

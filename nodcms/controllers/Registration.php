@@ -64,7 +64,7 @@ class Registration extends NodCMS_Controller {
             $this->form_validation->set_rules('fname', _l('First Name',$this), 'required|xss_clean|callback_formRulesName');$this->form_validation->set_rules('address', _l('Address',$this), 'required|xss_clean');
 			$this->form_validation->set_rules('about', _l('About',$this), 'required|xss_clean');
             $this->form_validation->set_rules('lname', _l('Last Name',$this), 'required|xss_clean|callback_formRulesName');
-            $this->form_validation->set_rules('mobile', _l('Phone Number',$this), 'required|is_natural');
+           // $this->form_validation->set_rules('mobile', _l('Phone Number',$this), 'required|is_natural');
             $this->form_validation->set_rules('email', _l('Email Address',$this), 'required|valid_email|callback_userUniqueEmail');
             
             $this->form_validation->set_rules('password', _l('Password',$this), 'trim|required|min_length[6]');

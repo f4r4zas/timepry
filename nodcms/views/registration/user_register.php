@@ -98,8 +98,9 @@
 
                 <div class="col-sm-6">
 
-                    <input placeholder="Phone (e.g.00398738927892)" value="<?php echo $set_value['mobile']; ?>" name="mobile" id="mobile" type="text" class="form-control <?php echo $set_value['mobile']!=''?'edited':''; ?>" data-validation="required">
+                    <input placeholder="Phone (e.g.00398738927892)" value="<?php echo $set_value['mobile']; ?>" name="mobile" id="mobile" type="text" class="form-control <?php echo $set_value['mobile']!=''?'edited':''; ?>" >
 
+					<span style="position: absolute;top: 15px;color: #518ed2;right: 22px;font-size: 21px;"	 class="help glyphicon glyphicon-info-sign" data-toggle="popover" data-placement="right" title="Your number might be useful for the dentist to contact you directly"></span>
                     <?php if($form_error['mobile']!=''){ ?>
 
                         <span class="help-block"><?php echo $form_error['mobile']; ?></span>
