@@ -74,7 +74,7 @@ get_instance()->load->helper('distance');
 			<br>
 		   <div class="form-group">
 			   <select name="selectfilter" class="form-control">
-					<option >Most relevant</option>
+					<option value="">Most relevant</option>
 					<option value="desc" data-class="hiddenRating">Rating of the dental office</option>
 					<option value="asc" data-class="priceHidden">Lowest price on top</option>
 					<option value="desc" data-class="priceHidden">Highest price on top</option>
@@ -139,9 +139,8 @@ get_instance()->load->helper('distance');
 						
 						<?php  } ?>
    					    
-				<div style="display:none" class="hiddenRating"><?php echo $review; ?></div>
-						
-				<div style="display:none" class="priceHidden"><?php echo $item['price']; ?></div>
+				<div style="display:none" class="hiddenRating"><?php echo $review; ?></div>		
+				<div style="" class="priceHidden"><?php echo $item['price']; ?></div>
                     </div>
 						<div class="clinic_address"><?php echo $item['address']; ?></div>
 						<?php if($this->input->get("zip") & $this->input->get("distance")){ ?>
@@ -199,18 +198,25 @@ get_instance()->load->helper('distance');
              ?>
 			</ul><!-- List ID -->	
 			
-			<?php if($zipRecordsTotal < 1){ ?>
 			
-				<div class="note note-warning">
-                    <h4 class="title"><?php echo _l('No result!', $this); ?></h4>
-                    <p class="text-lg">
-                        <?php echo _l("Your search", $this); ?>
-                        - <strong><?php echo $search_word; ?></strong> -
-                        <?php echo _l("Cannot locate any nearby clinics try increasing distance.", $this); ?>
-                    </p>
-                </div>
+			<?php if($this->input->get("zip") & $this->input->get("distance")){ ?>
+			
+				<?php if($zipRecordsTotal < 1){ ?>
+				
+					<div class="note note-warning">
+						<h4 class="title"><?php echo _l('No result!', $this); ?></h4>
+						<p class="text-lg">
+							<?php echo _l("Your search", $this); ?>
+							- <strong><?php echo $search_word; ?></strong> -
+							<?php echo _l("Cannot locate any nearby clinics try increasing distance.", $this); ?>
+						</p>
+					</div>
+				
+				<?php } ?>
 			
 			<?php } ?>
+			
+			
 			
 			<ul class="pagination"></ul>
 		</div>
@@ -364,10 +370,19 @@ jQuery(document).ready(function(){
 	//listObj.sort('hiddenRating', { order: "asc" }); 
   
   jQuery("[name='selectfilter']").change(function(){
-	 var values =  $(this).val();
-	 var options =  $("option:selected",this).attr('data-class');
 	 
-	 listObj.sort(options, { order: values });
+	 console.log($(this).val());
+	 if($(this).val() == ""){
+		 console.log("redirect");
+		 window.location.href = window.location.href;
+		 
+	 }else{
+		var values =  $(this).val();
+		var options =  $("option:selected",this).attr('data-class');
+		listObj.sort(options, { order: values });	
+	 }
+
+	 
   });
   
   
