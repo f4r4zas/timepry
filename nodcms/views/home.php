@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <div class="section-text">
                     <p class="light-font">FREE ONLINE BOOKING</p>
-                    <p class="heavy-font">3,500 NHS AND PRIVATE DENTISTS</p>
+                   
                 </div>
 
                 <div class="search_div">
