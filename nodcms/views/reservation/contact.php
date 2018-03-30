@@ -29,6 +29,10 @@
 <div class="col-lg-6 col-md-6" >
 
 <section class="inner-page-body">
+<?php if($this->session->flashdata('message')){ ?>
+
+	<div class="alert alert-success"><?php echo $this->session->flashdata('message'); ?></div>
+<?php } ?>
 <div class="">
  <div class="">
   <div class="col-md-12 box">
@@ -141,7 +145,10 @@
 </div>
 
 </div>
+<script>
 
+
+</script>
 <script>
 
     function initMap() {
