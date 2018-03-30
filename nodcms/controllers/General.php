@@ -177,6 +177,9 @@ class General extends CI_Controller
 	
 	function contact(){
 		
+		
+	$this->load->library('email');
+
 	$this->load->helper('email');
 	$this->load->helper('form'); 
 		
@@ -207,9 +210,10 @@ class General extends CI_Controller
 			// you can also load email library here
 			// $this->load->library('email');
 			// set email data
-	    	$this->email->from($this->input->post('email'), $this->input->post('sender_name'));
+	    	
+			$this->email->from($this->input->post('email'), $this->input->post('name'));
 	    	$this->email->to('zeehan4971@gmail.com');
-	    	$this->email->reply_to($this->input->post('email'), $this->input->post('sender_name'));
+	    	$this->email->reply_to($this->input->post('email'), $this->input->post('name'));
 	    	$this->email->subject($this->input->post('subject'));
 	    	$this->email->message($this->input->post('text'));
 	    	$this->email->send();

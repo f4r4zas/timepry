@@ -235,3 +235,4 @@ $lang["Username"] = "Username";
 $lang["Password"] = "Password";
 $lang["Login"] = "Login";
 $lang["Timepry failed"] = "Timepry failed";
+$lang["Timepry success"] = "Timepry success";
