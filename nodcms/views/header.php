@@ -71,8 +71,19 @@
                         </div>
                     </div>
 
-                    <div class="col-md-8 tex-center">
-                        <div class="main_menu">
+                    
+                        
+					<?php if($this->session->userdata("group") == 21){ ?>
+					
+					<div class="col-md-7 tex-center">
+					
+					<?php }else{ ?>
+					 
+					 <div class="col-md-8 tex-center">
+					 
+					<?php } ?>
+						
+						<div class="main_menu">
                             <nav class="menu_nav">
                                 <ul class="menu" style="text-align:center">
                                     <li>
@@ -97,7 +108,17 @@
                         </div>
                     </div> <!-- End Menu -->
 					
+					
+					<?php if($this->session->userdata("group") == 21){ ?>
+					
+					<div class="col-md-3">
+					
+					<?php }else{ ?>
+					 
 					 <div class="col-md-2">
+					 
+					<?php } ?>
+					
                         <div class="main_menu">
                             <nav class="menu_nav">
                              
@@ -112,7 +133,16 @@
                                         <a href="javascript:void(0)" class="showLogin">Login</a>
                                     </li>
                                     <?php else:?>
-                                    <li>
+									
+									<?php if($this->session->userdata("group") == 21){ ?>
+									
+									<li>
+                                    <a href="<?php echo base_url(); ?>admin-appointment"><?php echo $this->session->userdata("firstname")  ?></a>
+                                    
+                                    </li>
+									<?php } ?>
+									
+								   <li>
                                     <a href="<?php echo base_url(); ?>admin-appointment"><?=_l('Dashboard',$this);?></a>
                                     
                                     </li>

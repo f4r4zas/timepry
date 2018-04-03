@@ -66,13 +66,14 @@ class Currency
     // Convert number to currency string
     function format($value){
         if(!is_int($value) && !is_float($value))
+            //$value = floatval($value);
             $value = floatval($value);
         $this->setParts($value);
 
         $format = $this->options["add_before"];
         $format .= $this->_bigPart;
         if($this->_smallPartDivider != "")
-            $format .= $this->_smallPartDivider.$this->_smallPart;
+            //$format .= $this->_smallPartDivider.$this->_smallPart;
         $format .= $this->options["add_after"];
         return $format;
     }

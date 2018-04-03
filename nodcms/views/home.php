@@ -101,7 +101,6 @@
                                     var formData = new FormData();
                                     formData.append('company',$(this).val()); 
                                     
-                                    
                                     url = "<?php echo site_url('General/get_location_matrix');?>";
                             			 $.ajax({
                             				  url: url,
@@ -130,6 +129,45 @@
                                     $(".company-box").hide();
                                 }
                               });
+
+								//Dental Office
+							  $("body").on('keyup',"[name='search_dental_clinic']",function(){
+                                var thisinput = $(this);
+                                
+                                if($(this).val().length >= 3){
+                                    var formData = new FormData();
+                                    formData.append('provider',$(this).val()); 
+                                    
+                                    
+                                    url = "<?php echo site_url('General/globalDentists');?>";
+                            			 $.ajax({
+                            				  url: url,
+                            				  type: "POST",
+                            				  data: formData,
+                            				  beforeSend:function()
+                            				  {
+                            					thisinput.css("background","url(https://amazetal.com/assets/images/LoaderIcon.gif) right center #fff no-repeat");
+                            				  },
+                            				  processData: false,
+                            				  contentType: false,
+                            				  success: function (data) {
+												  console.log(data);
+                            				    thisinput.css("background","#fff");
+                            					//var data_msg=$.parseJSON(data);
+                                                //thisinput.prev().show();
+                            			        //thisinput.prev().html(data);
+                                                $(".dental-box").show();
+                                                $(".dental-box").html(data);
+                            				  },
+                            				  error: function (jqXHR, textStatus, errorThrown) {
+                            					$(".se-pre-con").fadeOut("slow");
+                            					alert('Error adding / update data');
+                            				  }
+                            				});
+                                }else{
+                                    $(".company-box").hide();
+                                }
+                              });
                               
                               
                               
@@ -141,6 +179,16 @@
                                 $(this).closest(".treat-box").siblings(".treat_matrix").val(val);
                                 $(this).closest(".treat-box").siblings("[name='treatmentSubcatId']").val(subCatId);
                                 $(".treat-box").hide();
+                              });
+
+							  $("body").on('click',".fetched_providers",function(){
+                              //function selectamazetal_companies(val){
+                                var val = $(this).attr("data-val");
+								var subCatId = $(this).val();
+								
+								$("[name='search_dental_clinic']").val(val);
+							  
+                                $(".dental-box").hide();
                               });
                               
                               $("body").on('blur',".treat_matrix",function(){
@@ -211,7 +259,8 @@
                         <div id="tabcontent-two" class="tab_content">
 							<form action="appointment" id="search_by_dental" method="get">
                             <div class="input_field fa fa-search">
-                                <input required type="text" placeholder="Dental Clinic" name="search_dental_clinic">
+							 <div  class="dental-box" style="display:none; top: 50px; position: absolute; background: white; width: 100%; padding: 10px; line-height: 26px;"></div>
+                                <input required type="text" placeholder="Dental Clinic" autocomplete="off" name="search_dental_clinic">
                             </div>
 
                             <div class="input_field btn">

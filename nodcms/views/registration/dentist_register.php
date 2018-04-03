@@ -59,7 +59,7 @@ $this->session->unset_userdata("dataStepFour");  */
 
                 <div class="tab-content">
                     <div id="step1" class="tab-pane <?php echo($step == 1 ?'in active ':'');?>fade ">
-                        <form id="update1" method="post" action="<?php echo base_url();?>register/dentist-registration/2" role="form">
+                        <form id="update1"  method="post" action="<?php echo base_url();?>register/dentist-registration/2" role="form">
                         <?php 
 						/* Setting the user step one data */
 						if($this->session->userdata('dataStepOne')){
@@ -75,28 +75,25 @@ $this->session->unset_userdata("dataStepFour");  */
 					?>
             <div class="row">
                 <div class="col-sm-6">
-                    <input  placeholder="First Name" value="<?php if(!empty($firstName)){ echo $firstName; } ?>" name="fname" id="fname" type="text" class="form-control update1">
+                    <input  placeholder="First Name" value="<?php if(!empty($firstName)){ echo $firstName; } ?>" name="fname" id="fname" data-validation="required" type="text" class="form-control update1">
                     
-                        <span class="help-block"></span>
                     
                 </div>
                 <div class="col-sm-6">
-                    <input placeholder="Last Name" value="<?php if(!empty($lastName)){ echo $lastName; } ?>" name="lname" id="lname" type="text" class="form-control update1">
-                    
-                        <span class="help-block"></span>
+                    <input placeholder="Last Name" value="<?php if(!empty($lastName)){ echo $lastName; } ?>" name="lname" id="lname" data-validation="required" type="text" class="form-control update1">
                                      
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-6">
-                    <input placeholder="Email" value="<?php if(!empty($email)){ echo $email; } ?>" name="email" id="email" type="text" class="form-control update1">
+                    <input placeholder="Email" value="<?php if(!empty($email)){ echo $email; } ?>" name="email" id="email" type="text" data-validation="required" class="form-control update1">
                     
-                        <span class="help-block"></span>
+                       
                                         
                 </div>
                 <div class="col-sm-6">
 
-                    <input placeholder="(e.g. 00398738927892)" value="<?php if(!empty($phone)){ echo $phone; } ?>" name="mobile" id="mobile" type="text" class="form-control update1">
+                    <input placeholder="Phone (e.g. 00398738927892)" value="<?php if(!empty($phone)){ echo $phone; } ?>" name="mobile" id="mobile" type="text" class="form-control update1">
 
                     
                         <span class="help-block"></span>
@@ -106,16 +103,16 @@ $this->session->unset_userdata("dataStepFour");  */
             <div class="row">
                 
                 <div class="col-sm-6">
-                    <input placeholder="Password" value="" name="password" id="password" type="password" class="form-control update1">
+                    <input placeholder="Password" value="" name="password" id="password"  data-validation="required" type="password" class="form-control update1">
                     
-                        <span class="help-block"></span>
+                       
                                       
                 </div>
                 
                 <div class="col-sm-6">
-                    <input placeholder="Confirm Password" value="" name="cpassword" id="cpassword" type="password" class="form-control update1">
+                    <input placeholder="Confirm Password" value="" name="cpassword" id="cpassword"  data-validation="required" type="password" class="form-control update1">
                     
-                        <span class="help-block"></span>
+                       
                                      
                 </div>
             </div>
@@ -162,39 +159,34 @@ $this->session->unset_userdata("dataStepFour");  */
 					 
                         <div class="row">
                             <div class="col-md-6">
-                                <input placeholder="Name of the Dental Office *" value="<?php if(!empty($provider_name)){echo $provider_name; } ?>" name="dental_officename" id="dental_officename" type="text" class="form-control update2">
+                                <input placeholder="Name of the Dental Office *" value="<?php if(!empty($provider_name)){echo $provider_name; } ?>" name="dental_officename" id="dental_officename" data-validation="required" type="text" class="form-control update2">
                                 
-                                    <span class="help-block"></span>
+                                   
                                 
 
                             </div>
                             <div class="col-md-6">
                             
-                                <input placeholder="Website of Dental Office" value="<?php if(!empty($website)){echo $website; } ?>" name="dental_officewebsite" id="dental_officewebsite" type="text" class="form-control update2">
-                                
-                                    <span class="help-block"></span>
-                                
+                                <input placeholder="Website of Dental Office"  value="<?php if(!empty($website)){echo $website; } ?>" name="dental_officewebsite" id="dental_officewebsite" type="text" class="form-control update2">
+                                    
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6">
-                                <input placeholder="Email of Dental Office" value="<?php if(!empty($provider_email)){echo $provider_email; } ?>" name="dental_officeemail" id="dental_officeemail" type="text" class="form-control update2">
-                                <span style="position: absolute;top: 15px;color: #518ed2;right: 22px;font-size: 21px;" class="help glyphicon glyphicon-info-sign" data-toggle="popover" data-placement="right" title="Insert the emial of the dental office. This email will be visible to your patients to give them the possibility to contact your directly. This email can be the same as the account email previously written or can be also different"></span>
-                                    <span class="help-block"></span>
-                                
+                                <input placeholder="Email of Dental Office" data-validation="required" value="<?php if(!empty($provider_email)){echo $provider_email; } ?>" name="dental_officeemail" id="dental_officeemail" type="text" class="form-control update2">
+                                <span style="position: absolute;top: 15px;color: #518ed2;right: 22px;font-size: 21px;" class="help glyphicon glyphicon-question-sign" data-placement="top" data-toggle="tooltip"  title="Insert the emial of the dental office. This email will be visible to your patients to give them the possibility to contact your directly. This email can be the same as the account email previously written or can be also different"></span>
+                                   
                             </div>
                             <div class="col-md-6">
-                                <input placeholder="Phone of Dental Office (e.g. 00398738927892) *" value="<?php if(!empty($providerPhone)){echo $providerPhone; } ?>" name="dental_officephone" id="dental_officephone" type="text" class="form-control update2">
-                                    <span class="help-block"></span>
+                                <input placeholder="Phone (e.g. 00398738927892) *" value="<?php if(!empty($providerPhone)){echo $providerPhone; } ?>" data-validation="required" name="dental_officephone" id="dental_officephone" type="text" class="form-control update2">
+                                    
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-12">
-                                <textarea placeholder="Description of Dental Office *" rows="6" name="dental_officedescription" id="dental_officedescription" class="form-control update2"><?php if(!empty($providerDescription)){echo $providerDescription; } ?></textarea>
-                                
-                                    <span class="help-block"></span>
+                                <textarea data-validation="required" placeholder="Description of Dental Office *" rows="6" name="dental_officedescription" id="dental_officedescription" class="form-control update2"><?php if(!empty($providerDescription)){echo $providerDescription; } ?></textarea>
                                 
                                 
                             </div>
@@ -215,21 +207,18 @@ $this->session->unset_userdata("dataStepFour");  */
 								?>
 									<div class="row">
 										<div class="col-xs-12 col-sm-6">
-											<select name="practitioners_title[]" id="practitioners_title" class="form-control update2">
+											<select data-validation="required" name="practitioners_title[]" id="practitioners_title" class="form-control update2">
 												<option <?php if($docTitle == "Dr."){echo "selected";} ?> value="Dr.">Dr.</option>
 												<option <?php if($docTitle == "Prof. Dr." || $docTitle == "Prof."){echo "selected";} ?> value="Prof. Dr.">Prof. Dr.</option>
 												<option <?php if($docTitle == "Assistant"){echo "selected";} ?> value="Assistant">Assistant</option>
 												<option <?php if($docTitle == "Dental Hygienist"){echo "selected";} ?> value="Dental Hygienist">Dental Hygienist</option>
 											</select>
 										   
-											
-												<span class="help-block"></span>
 										   
 										</div>
 										<div class="col-xs-8 col-sm-5">
-											<input type="text" placeholder="Name and Surname *" name="practitioner_name[]" value="<?php echo $docName; ?>" id="practitioner_name" class="form-control update2">
+											<input data-validation="required" type="text" placeholder="Name and Surname *" name="practitioner_name[]" value="<?php echo $docName; ?>" id="practitioner_name" class="form-control update2">
 											
-												<span class="help-block"></span>
 											
 										</div>
 										<div class="col-xs-4 col-sm-1 add_practitioner_main">
@@ -240,21 +229,18 @@ $this->session->unset_userdata("dataStepFour");  */
 							<?php }else{ ?>
 							<div class="row">
                                 <div class="col-xs-12 col-sm-6">
-                                    <select name="practitioners_title[]" id="practitioners_title" class="form-control update2">
+                                    <select data-validation="required" name="practitioners_title[]" id="practitioners_title" class="form-control update2">
                                         <option value="Dr.">Dr.</option>
                                         <option value="Prof. Dr.">Prof. Dr.</option>
                                         <option value="Assistant">Assistant</option>
                                         <option value="Dental Hygienist">Dental Hygienist</option>
                                     </select>
                                    
-                                    
-                                        <span class="help-block"></span>
                                    
                                 </div>
                                 <div class="col-xs-8 col-sm-5">
-                                    <input type="text" placeholder="Name and Surname *" name="practitioner_name[]" value="" id="practitioner_name" class="form-control update2">
+                                    <input data-validation="required" type="text" placeholder="Name and Surname *" name="practitioner_name[]" value="" id="practitioner_name" class="form-control update2">
                                     
-                                        <span class="help-block"></span>
                                     
                                 </div>
                                 <div class="col-xs-4 col-sm-1 add_practitioner_main">
@@ -291,8 +277,11 @@ $this->session->unset_userdata("dataStepFour");  */
 
                         <div id="opening_days">
                             <h1>Opening hours</h1>
-                            
-								
+							<div class="col-md-12" style="padding-left:0;padding-right:0">
+								<div style='display:none' id="open-close" class="alert alert-danger text-center">
+									
+								</div>
+							</div>
                             <?php 
 							
                             $days = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday');
@@ -320,12 +309,14 @@ $this->session->unset_userdata("dataStepFour");  */
                                     <input class="update2" disabled="disabled" type="text" value="<?=$day;?>" name="opening_day[]" placeholder="<?=$day;?>">
                                 </div>
                                 <div class="col-xs-12 col-sm-3 input-append">
-                                    <input value="<?php if(!empty($savedStart)){ echo $savedStart; } ?>"									class="time update2 timePicker-from" id="timePicker-from-<?=$k?>" type="text" style="width: 80%;" placeholder="Opening hours * 08:00" name="openingHours[]">
-                                    <div class="">                                    <span id="bla" class="help-block"></span></div>
-
+								
+                                    <input value="<?php if(!empty($savedStart)){ echo $savedStart; } ?>"									class="time make-green update2 timePicker-from" id="timePicker-from-<?=$k?>" type="text" style="width: 80%;" placeholder="Opening hours" name="openingHours[]">
+									<i id="bla" class="help-block opening"></i>
+									
                                 </div>
+								
                                 <div class="col-xs-12 col-sm-3 input-append">
-                                    <input value="<?php if(!empty($savedEnd)){ echo $savedEnd; } ?>" class="time update2 timePicker-to" id="timePicker-to-<?=$k?>" type="text" style="width: 80%;" placeholder="Closing hours * 14:00" data-format="hh:mm" name="closingHours[]">
+                                    <input value="<?php if(!empty($savedEnd)){ echo $savedEnd; } ?>" class="time update2 timePicker-to" id="timePicker-to-<?=$k?>" type="text" style="width: 80%;" placeholder="Closing hours" data-format="hh:mm" name="closingHours[]">
                                     
                                     <a class="help-block"></a>                                   
                                 </div>
@@ -463,10 +454,10 @@ $(".closed_day").on("click", function(){
                             		}?>
                                     
                                 </select>
-                                <input class="update_4" type="text" placeholder="Price($)" name="treatment_price[]" style="width: 15%; display: inline-block; vertical-align: top; height: 40px; margin: 0 2px;"/>
+                                <input class="update_4" type="text" placeholder="Price(€)" name="treatment_price[]" style="width: 15%; display: inline-block; vertical-align: top; height: 40px; margin: 0 2px;"/>
                                 <div style="width: 29%; display: inline-block; vertical-align: top; height: 40px;">
                                 <?php 
-								echo "pract id ".$this->session->userdata('provider_id');
+								
                                 $this->db->select('*');
                                 $this->db->from('practitioners');
                                 $this->db->where('provider_id',$this->session->userdata('provider_id'));
@@ -576,15 +567,15 @@ $(".closed_day").on("click", function(){
                                                                 <div class="col-sm-12">
                                                                     <input type="text" class="update_4 form-control" placeholder="Treatment title" name="treatment_name[]" style="width: 28%; display: inline-block; vertical-align: top; margin: 0 2px;"/>
                                                                     <select class="update_4 form-control" name="treatment_duration[]" style="width: 24%; display: inline-block; vertical-align: top; height: 40px; margin: 0 2px;">
-                                                                    <option value="">Duration in min</option>
+                                                                    <option value="">Duration in mins</option>
                                                                         <?php
-                                                                        for ($row=1; $row <= 8; $row++) { 
+                                                                        for ($row=1; $row <= 12; $row++) { 
                                                                     		   $p = 15 * $row;
                                                                     		   echo "<option>$p</option>";
                                                                 		}?>
                                                                         
                                                                     </select>
-                                                                    <input class="update_4" type="text" placeholder="Price($)" name="treatment_price[]" style="width: 15%; display: inline-block; vertical-align: top; height: 40px; margin: 0 2px;"/>
+                                                                    <input class="update_4" type="text" placeholder="Price(€)" name="treatment_price[]" style="width: 15%; display: inline-block; vertical-align: top; height: 40px; margin: 0 2px;"/>
                                                                     <div style="width: 29%; display: inline-block; vertical-align: top; height: 40px;">
                                                                     <?php 
                                                                     $this->db->select('*');
@@ -641,7 +632,7 @@ $(".closed_day").on("click", function(){
                                                                 		}?>
                                                                         
                                                                     </select>
-                                                                    <input class="update_4" type="text" value="<?php echo $tPrice['price']; ?>" placeholder="Price($)" name="treatment_price[]" style="width: 15%; display: inline-block; vertical-align: top; height: 40px; margin: 0 2px;"/>
+                                                                    <input class="update_4" type="text" value="<?php echo $tPrice['price']; ?>" placeholder="Price(€)" name="treatment_price[]" style="width: 15%; display: inline-block; vertical-align: top; height: 40px; margin: 0 2px;"/>
                                                                     <div style="width: 29%; display: inline-block; vertical-align: top; height: 40px;">
                                                                     <?php 
                                                                     $this->db->select('*');
@@ -687,7 +678,7 @@ $(".closed_day").on("click", function(){
 
                                                             <div class="add_new_treatment_inside_tab">
                                                                 <!--<a href="javascript:void(0)" class="greyButton">Add treatment</a>-->
-                                                                <button type="button" class="greyButton add_treat" style="margin:0px; float:right;">Add Treatment</button>
+                                                                <button type="button" class="greyButton add_treat blue-button" style="margin:0px; float:right;">Save Treatment</button>
                                                             </div>
 
                                                     </div>
@@ -894,11 +885,12 @@ $(".closed_day").on("click", function(){
                                 <div class="heading">
                                     <h3>Submit your place</h3>
                                     <small>Add images</small>
+									<p style="color:red">First pic uploaded will be cover photo</p>
                                 </div>
 
                                 <hr class="mod" style="margin:20px 0;border-color:#b7b7b7;">
 
-        <form id="update5"  action="<?php echo base_url();?>Registration/imageUpload" enctype="multipart/form-data"  class="dropzone" id="my-awesome-dropzone">
+        <form id="update5"  action="<?php echo base_url();?>Registration/imageUpload" enctype="multipart/form-data"  class="dropzone update5" id="my-awesome-dropzone">
                                     <div class="dz-message" data-dz-message><span>Click or Drop Images Here</span></div>
                                 
                                 <div class="fallback">
@@ -909,6 +901,7 @@ $(".closed_day").on("click", function(){
                                 <button type="submit" class="greyButton" style="margin:30px auto 0;">Submit</button>
                                     
                                 </div>
+								<div class="uploadedImages"></div>
                                 </form>
                             </div>
                         </div>
@@ -919,21 +912,64 @@ $(".closed_day").on("click", function(){
         </div>
     </div>
 </section>
+<script src="http://localhost/timepry/assets/form-validator/jquery.form-validator.js"></script>
 
 <script>
 $(document).ready(function(){
   $(".e9").select2({
     placeholder: "Select practitioners",
 });  
+
+ $('[data-toggle="tooltip"]').tooltip(); 
+ 
+	$("input").change(function(){
+			
+		/* if(){
+			
+		}	 */
+	
+	});
+	
+	
+	 $.validate({
+
+            onError: function($form){
+				console.log($form);
+                $form.submit(function (e) {
+
+                    //e.preventDefault();
+
+                });
+
+            },
+
+            onElementValidate: function(rsu, element){
+
+                element.next().next().remove();
+
+//                element.parent().removeClass('has-info').addClass('has-error');
+
+            },
+            <?php if($lang!='en'){ ?>lang: '<?php echo $lang; ?>'<?php } ?>
+        });
+		
+		
+		$(".make-green").change(function(){
+			$(this).addClass("greener");
+		});
+		
+		$(".make-green").change(function(){
+			$(this).addClass("greener");
+		});
+	
+		
 });
-
-
 
             $('form').on('submit',function(e){
                
                 var formid = $(this).attr("id");
 				
-				
+
 					e.preventDefault();
 				
 				
@@ -949,18 +985,18 @@ $(document).ready(function(){
       if(formid == 'update4' && $('.'+formid).length == 0){
         alert("must add atleast one treatment");
       } else{
-      
                  
     $('.'+formid).each(function(i,v){
       v=$(v);
+	  console.log(v.attr('name'));
       formData.append(v.attr('name'),v.val());      
     });
 
+	console.log(formData);
      url = "<?php echo base_url();?>register/dentist-registration/<?php echo $step;?>";
 	 
 	 var customMessage = "";
 	 var customkey = "";
-	 
      $.ajax({
           url: url,
           type: "POST",
@@ -971,9 +1007,8 @@ $(document).ready(function(){
           },
           processData: false,
           contentType: false,
-		  
           success: function (data) {
-			  console.log(data);
+			  
               $(".se-pre-con").fadeOut("slow");
                var data_msg=$.parseJSON(data);
                 var canChange = true;
@@ -986,33 +1021,31 @@ $(document).ready(function(){
                     $("[name='"+keyIndex[0]+"']").eq(keyIndexEq).siblings('.help-block').html(value);
                 }else{
                     $("[name='"+key+"']").siblings('.help-block').html(value);
-                    $("[name='"+key+"[]']").siblings('.help-block').html(value); 
+                    $("[name='"+key+"[]']").siblings('.help-block').html(value); 	
+				}
+				
+               canChange=false;
+			   
+			   if(key == "openingHours" || "closingHours"){
+				   $("#open-close").show();
+					console.log("Opting");
+					console.log(value);
 					
-			if(key == "openingHours" || "closingHours"){
-			
-				customkey = key;
+						$("#open-close").html(value);
+				
+					
+				/* customkey = key;
 				if(value == "You must provide this field."){
 						customMessage = "You must provide openingHours/closingHours"
 				}else{
 					customMessage = value;
-				} 
+				}  */
 			}else{
-				customMessage = "";
+				$("#open-close").hide();
 			}
-				
-					
-            }
-                
-               canChange=false;
+			   
             }); 
 			
-			
-				if(customMessage){
-					bootbox.alert({ message: customMessage,   size: 'small'});
-				}
-			
-			
-            
             $.each( data_msg.Error_Mess, function( key, value )
             {
                 if (key.indexOf('|') > -1 && value != "" && $("body").find("[name='"+key+"']").length > 0)
@@ -1038,11 +1071,12 @@ $(document).ready(function(){
             {
                 console.log(data_msg);
                 location.href=data_msg.redirect;
-                /*$('html,body').animate({
-                scrollTop: 0
-                }, 700);*/
-				//profileTabOnSave();
+                
             }
+			
+			
+			
+			
           },
           error: function (jqXHR, textStatus, errorThrown) {
             $(".se-pre-con").fadeOut("slow");
@@ -1051,25 +1085,7 @@ $(document).ready(function(){
         });
         
         }
-	
+		
+		
   });
-        
         </script>
-
-<!--<script src="<?php echo base_url(); ?>assets/form-validator/jquery.form-validator.js"></script>
-<script>
-    $(function(){
-        $.validate({
-            onError: function($form){
-                $form.submit(function (e) {
-                    e.preventDefault();
-                });
-            },
-            onElementValidate: function(rsu, element){
-                element.next().next().remove();
-//                element.parent().removeClass('has-info').addClass('has-error');
-            },
-            <?php if($lang!='en'){ ?>lang: '<?php echo $lang; ?>'<?php } ?>
-        });
-    });
-</script>-->

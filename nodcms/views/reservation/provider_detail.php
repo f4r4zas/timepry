@@ -99,8 +99,108 @@
             </div>
         </div>-->
         <div class="container" style="margin-top: 20px;">
-
+			
             <div class="row">
+			<!-- Bootstrap Slider -->
+			<div class="col-md-12" style="
+    /* padding: 17px; */
+    padding-bottom: 27px;
+">  
+				  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+					<!-- Indicators -->
+					<ol class="carousel-indicators">
+					
+					  
+					 
+					  
+					  
+					  <?php if(!empty($this->provider['image'])){ ?>
+						<?php $images = json_decode($this->provider['image']); ?>
+						
+						<?php if(is_array($images)){ ?>
+							<?php $sliderNo = 0; ?>
+							<?php foreach($images as $allPics){ ?>
+									
+									<li data-target="#myCarousel" data-slide-to="<?php echo $sliderNo; ?>" class="<?php if($sliderNo < 1){ echo "active";} ?>"></li>
+									
+							<?php $sliderNo++; } ?>
+						
+						<?php }else{ ?>
+						
+							<li data-target="#myCarousel" class="active" data-slide-to="0"></li>
+							
+						<?php } ?>
+						
+						<!-- <img src="<?php echo base_url(); ?><?php 
+						//echo $item['image'];
+						?>" alt="Timepry"> -->
+					<?php }else{ ?>
+					
+					<li data-target="#myCarousel" class="active" data-slide-to="0"></li>
+                        
+					<?php } ?>
+					  
+					  
+					</ol>
+
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner">
+					  <?php if(!empty($this->provider['image'])){ ?>
+						<?php $images = json_decode($this->provider['image']); ?>
+						
+						<?php if(is_array($images)){ ?>
+							<?php $activeImg = 0; ?>
+							<?php foreach($images as $allPics){ ?>
+									<div class="item <?php if($activeImg < 1){ echo "active";} ?>">
+									
+									<img src="<?php echo base_url(); ?><?php 
+							echo $allPics;
+						?>" alt="Timepry" style="width:100%;">
+									
+									</div>
+							<?php $activeImg++; } ?>
+						
+						<?php }else{ ?>
+						
+							<div class="item active">
+							
+							<img src="<?php echo base_url(); ?><?php 
+							echo $this->provider['image'];
+						?>" alt="Timepry">
+							
+							</div>
+							
+						<?php } ?>
+						
+						<!-- <img src="<?php echo base_url(); ?><?php 
+						//echo $item['image'];
+						?>" alt="Timepry"> -->
+					<?php }else{ ?>
+					
+						<div class="item active">
+						
+						<img src="<?php echo base_url(); ?>/assets/front/images/search_re_thumb.png" alt="Timepry" style="width:100%;">
+						
+						</div>
+                        
+					<?php } ?>
+					</div>
+
+					<!-- Left and right controls -->
+					<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+					  <span class="glyphicon glyphicon-chevron-left"></span>
+					  <span class="sr-only">Previous</span>
+					</a>
+					<a class="right carousel-control" href="#myCarousel" data-slide="next">
+					  <span class="glyphicon glyphicon-chevron-right"></span>
+					  <span class="sr-only">Next</span>
+					</a>
+				  </div>
+							
+			</div><!-- End Bootstrap Slider -->
+			
+			
+			
                 <div class="col-md-4">
                     <div class="listing-leftside">
                         <div class="listing-map">
@@ -165,13 +265,14 @@
                                         <h1>Timings</h1>
                                         <div class="cus-hr"></div>
                                     </div>
-                                    
+                                  
                                     <?php foreach($do_time as $timming):?>
 
                                     <div class="timings">
                                         <span class="day"><?php echo $timming['day'];?></span>
                                         <?php if($timming['closed'] == 0):?>
-                                        <span class="time"><?php echo date("H:i",mktime(0,$timming['opening']));?> - <?php echo date("H:i",mktime(0,$timming['closing']));?></span>
+										
+                                        <span class="time"><?php echo date("H:i",mktime(0,$timming['opening'])); ?> - <?php echo date("H:i",mktime(0,$timming['closing']));?></span>
                                         <?php else:?>
                                         <span class="time">Closed</span>
                                         <?php endif;?>
@@ -250,16 +351,6 @@
                     <div class="tab-content">
 
                         <div class="tab-pane fade in active">
-                            
-                            <?php
-
-            /*                echo "<pre>";
-print_r($data_list);
-echo "</pre>";
-
-*/
-
-?>
                             
                         
                         <?php $fetched = array(); $i=0; foreach($data_list as $item){ $i++; $right_pic=($i>2)?1:0; if($i>4){ $i=1; } 
@@ -529,7 +620,7 @@ jQuery(document).ready(function(){
                 <div id="error">
             <p style="color: red; text-align: center;"></p>
             </div>
-                    
+                  
                     
                     <div class="steps" id="step2" style="display: none;">
         <div class="note note-info">
@@ -548,7 +639,7 @@ jQuery(document).ready(function(){
         <?php echo form_open('',array('id'=>'post_form')); ?>
         <input name="date" id="date_pick_input" type="hidden">
         <div class="form-group">
-            <label><?php echo _l("Date",$this)?></label>
+            <label><?php echo _l("Dates",$this)?></label>
             <p id="date_pick_label"></p>
         </div>
         <div class="form-group">
@@ -560,6 +651,9 @@ jQuery(document).ready(function(){
         </div>
         
         <?php
+		
+	
+		
         if(isset($extra_fields) && count($extra_fields)!=0){
             foreach($extra_fields as $item){
                 $input_form =  'input_'.strtolower($item['type_name']).'_form_validation';
@@ -925,7 +1019,12 @@ jQuery(document).ready(function(){
                 <div class="addmore_services">
                     <i class="fa fa-plus-square-o"></i>Add another service
                 </div>
-                <div class="order_total">
+                
+            </div>
+            <div id="step1"></div>
+			
+			<div class="col-md-12 text-center">
+			<div class="order_total">
                     <p>Order Total</p>   
 					<?php if($this->session->userdata("logged_in_status")){
 						
@@ -938,7 +1037,6 @@ jQuery(document).ready(function(){
 						}
 						 $email = $this->session->userdata('email');
 						 $phone = $this->session->userdata('phone');
- 
 						
 					} ?>
                     <p class="total_prices">$ <span class="rates">0</span></p>
@@ -980,12 +1078,11 @@ jQuery(document).ready(function(){
                     
                     </form> 
 					
-					 <input id="doPayment" type="button" class="greyButton" value="Payment"/>
+					 <input id="doPayment" type="button" class="greyButton" value="Checkout"/>
 					
                     <a style="display: none;" href="checkout.php" class="greyButton">Go to Checkout</a>
-                </div>
-            </div>
-            <div id="step1"></div>
+                </div><!-- Order Total -->
+			</div>
         </div>
     </div>
 </div>
@@ -1059,3 +1156,24 @@ jQuery(document).ready(function(){
    });
 
    </script>
+   
+   <script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";  
+  }
+  x[slideIndex-1].style.display = "block";  
+}
+</script>
+   

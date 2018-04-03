@@ -21,7 +21,34 @@
         </p>
     </div>
 <?php } ?>
-<?php if(isset($reservation_count) && $reservation_count!=0){ ?>
+
+<?php if(!isset($reservation_count) && $reservation_count==0){ ?>
+
+  <div class="note note-info">
+        <h4 class="title"><?php echo _l('Empty requests!', $this); ?></h4>
+        <p>
+            <?php echo _l("You don't have any appointment requests.", $this); ?>
+            <?php echo _l("Please set all your options and wait until your customer send you requests.", $this); ?>
+        </p>
+    </div>
+
+<?php } ?>
+
+
+<?php if(1+1){ ?>
+
+<?php if(isset($reservation_count) && $reservation_count==0){ ?>
+
+  <div class="note note-info">
+        <h4 class="title"><?php echo _l('Empty requests!', $this); ?></h4>
+        <p>
+            <?php echo _l("You don't have any appointment requests.", $this); ?>
+            <?php echo _l("Please set all your options and wait until your customer send you requests.", $this); ?>
+        </p>
+    </div>
+
+<?php } ?>
+
     <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <div class="dashboard-stat blue-madison">
@@ -176,7 +203,30 @@
                     fillOpacity: 0.5,
                     smooth: true
                 });
-                <?php } ?>
+                <?php }else{ ?>
+				
+				Morris.Line({
+                    element: 'reservation-area',
+                    data: [
+
+                        {"period": '<?php echo date(); ?>',
+                            'lbl1':0,
+                        },
+                        
+                    ],
+
+                    xkey: 'period',
+                    ykeys: ['lbl1','lbl2','lbl3','lbl4'],
+                    labels: ['ALL','Accepted', 'Closed','In Trash'],
+                    hideHover: 'auto',
+                    lineWidth: 1,
+                    pointSize: 5,
+                    lineColors: ['#333333','#4a8bc2', '#009933','#ff6c60'],
+                    fillOpacity: 0.5,
+                    smooth: true
+                });
+				
+				<?php } ?>
             });
         }();
     </script>

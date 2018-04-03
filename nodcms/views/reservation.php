@@ -532,7 +532,7 @@
     
     <script>
 
-    $('.time').mask('00:00');
+   // $('.time').mask('00:00');
         $(document).ready(function() {
             $(".se-pre-con").css("display", "none");
             if ( $('.home-banner').length > 0 ) {
@@ -786,6 +786,9 @@
     </script>
     
     <script>
+	
+	var images = [];
+
 	Dropzone.autoDiscover = true;
 
      Dropzone.options.imageUpload = {
@@ -796,7 +799,7 @@
     };
 		
 		Dropzone.options.update5 = {
-			maxFiles: 1,
+			maxFiles: 5,
 		addRemoveLinks: true,
 		
 		 init: function () {
@@ -804,7 +807,7 @@
 			 this.on("maxfilesexceeded", function(file){
 		bootbox.alert({
 		title: '',
-		message: "Only One File Allowed",
+		message: "Maximum 5 Files Allowed",
 		className: "my-popup2"
 		});	
 		
@@ -815,18 +818,29 @@
             
         });
 
+		this.on("complete", function (file) {
+			
+        });
+
         this.on("success", function (file, response) {
+
+var obj = JSON.parse(response);
+
+if(obj.type == "success"){
+	$(".uploadedImages").append("<input type='hidden' class='update5' name='imageName[]' value="+obj.imageName+">");
+}
+
+
+		if (this.getUploadingFiles().length === 0 && 
+			this.getQueuedFiles().length === 0) {
+				console.log(response);
 				
-				var obj = JSON.parse(response);
 				if(obj.type == "success"){
-		bootbox.alert({
-		title: '',
-		message: "Image uploaded successfully!",
-		className: "my-popup"
-		});		
-	
-   
-					
+					bootbox.alert({
+						title: '',
+						message: "Image uploaded successfully!",
+						className: "my-popup"
+					});	
 				}else{
 					bootbox.alert({
 						className: "my-popup",
@@ -834,12 +848,17 @@
 					});
 					//bootbox.alert( obj.message);
 				}
-				
+		}
+
+		console.log(images);
+
         });
 
         this.on("error", function (file, error, xhr) {
 
         });
+		
+
 	 }
     };
 	

@@ -117,9 +117,21 @@ get_instance()->load->helper('distance');
                 <div class="search_content">
                     <div class="thumb_img">
 					<?php if(!empty($item['image'])){ ?>
-						<img src="<?php echo base_url(); ?><?php 
-						echo $item['image'];
+						<?php $images = json_decode($item['image']); ?>
+						
+						<?php if(is_array($images)){ ?>
+								<img src="<?php echo base_url(); ?><?php 
+							echo $images[0];
 						?>" alt="Timepry">
+						<?php }else{ ?>
+							<img src="<?php echo base_url(); ?><?php 
+							echo $item['image'];
+						?>" alt="Timepry">
+						<?php } ?>
+						
+						<!-- <img src="<?php echo base_url(); ?><?php 
+						//echo $item['image'];
+						?>" alt="Timepry"> -->
 					<?php }else{ ?>
                         <img src="<?php echo base_url(); ?>/assets/front/images/search_re_thumb.png" alt="Timepry">
 					<?php } ?>
@@ -140,7 +152,7 @@ get_instance()->load->helper('distance');
 						<?php  } ?>
    					    
 				<div style="display:none" class="hiddenRating"><?php echo $review; ?></div>		
-				<div style="" class="priceHidden"><?php echo $item['price']; ?></div>
+				<div style="display:none" class="priceHidden"><?php echo $item['price']; ?></div>
                     </div>
 						<div class="clinic_address"><?php echo $item['address']; ?></div>
 						<?php if($this->input->get("zip") & $this->input->get("distance")){ ?>

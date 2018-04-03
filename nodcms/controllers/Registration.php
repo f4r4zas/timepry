@@ -61,9 +61,13 @@ class Registration extends NodCMS_Controller {
         $this->load->library('form_validation');
         if($this->input->raw_input_stream){
 			
-            $this->form_validation->set_rules('fname', _l('First Name',$this), 'required|xss_clean|callback_formRulesName');$this->form_validation->set_rules('address', _l('Address',$this), 'required|xss_clean');
-			$this->form_validation->set_rules('about', _l('About',$this), 'required|xss_clean');
-            $this->form_validation->set_rules('lname', _l('Last Name',$this), 'required|xss_clean|callback_formRulesName');
+            $this->form_validation->set_rules('fname', _l('First Name',$this), 'required|xss_clean|callback_formRulesName');
+			
+/* $this-> form_validation->set_rules('address', _l('Address',$this), 'required|xss_clean');
+			$this->form_validation->set_rules('about', _l('About',$this), 'required|xss_clean'); */
+            
+			
+			$this->form_validation->set_rules('lname', _l('Last Name',$this), 'required|xss_clean|callback_formRulesName');
            // $this->form_validation->set_rules('mobile', _l('Phone Number',$this), 'required|is_natural');
             $this->form_validation->set_rules('email', _l('Email Address',$this), 'required|valid_email|callback_userUniqueEmail');
             
@@ -75,8 +79,8 @@ class Registration extends NodCMS_Controller {
                 $set_value = array(
                     'cpassword'=>'',
                     'email'=>set_value('email'),
-                    'address'=>set_value('address'),
-                    'about'=>set_value('about'),
+                    // 'address'=>set_value('address'),
+                    // 'about'=>set_value('about'),
                     'fname'=>set_value('fname'),
                     'lname'=>set_value('lname'),
                     'mobile'=>set_value('mobile'),
@@ -86,7 +90,7 @@ class Registration extends NodCMS_Controller {
                 $form_error = array(
                     'cpassword'=>form_error('cpassword'),
                     'email'=>form_error('email'),
-                    'about'=>form_error('about'),
+                    /* 'about'=>form_error('about'), */
                     'name'=>form_error('name'),
                     'fname'=>form_error('fname'),
                     'lname'=>form_error('lname'),
@@ -100,8 +104,8 @@ class Registration extends NodCMS_Controller {
                 $mobile = $this->input->post('mobile', TRUE);
                 $email = $this->input->post('email', TRUE);
                 
-				$about = $this->input->post('about', TRUE);
-                $address = $this->input->post('address', TRUE);
+				/* $about = $this->input->post('about', TRUE);
+                $address = $this->input->post('address', TRUE); */
 			
 			   $time_start = time();
                 $time_start = $time_start + (7 * 24 * 60 * 60 * 60);
@@ -113,8 +117,8 @@ class Registration extends NodCMS_Controller {
                     "lastname"=>$lastname,
                     "fullname"=>$firstname.' '.$lastname,
                     "mobile"=>$mobile,
-                    "about"=>$about,
-                    "address"=>$address,
+                   /*  "about"=>$about,
+                    "address"=>$address, */
                     "email"=>$email,
                     "username"=>$time_start,
                     "password"=>md5($password),
@@ -128,7 +132,7 @@ class Registration extends NodCMS_Controller {
                     "status"=>1
                 );
 			
-			print_r($user);
+			
               $registered_user_id = $this->Registration_model->insertUser($user);
 				
 				//Get Registered user id
@@ -208,7 +212,7 @@ class Registration extends NodCMS_Controller {
             
             $this->form_validation->set_rules('fname', _l('First Name',$this), 'required|xss_clean|callback_formRulesName');
             $this->form_validation->set_rules('lname', _l('Last Name',$this), 'required|xss_clean|callback_formRulesName');
-            $this->form_validation->set_rules('mobile', _l('Phone Number',$this), 'required|is_natural');
+            $this->form_validation->set_rules('mobile', _l('Phone Number',$this), 'is_natural');
             $this->form_validation->set_rules('email', _l('Email Address',$this), 'required|valid_email|callback_userUniqueEmail');
             $this->form_validation->set_rules('password', _l('Password',$this), 'trim|required|min_length[6]|callback_formRulesPassword');
             $this->form_validation->set_rules('cpassword', _l('Confirm Password',$this), 'trim|required|matches[password]');
@@ -304,11 +308,9 @@ class Registration extends NodCMS_Controller {
             echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."register/dentist-registration/"));		
 		    die();
             
-        }
-        
-        elseif($this->input->post("step")=="update2"){        
+        }elseif($this->input->post("step")=="update2"){        
 
-            $this->form_validation->set_rules('dental_officename', _l('Name of the Dental Office',$this), 'required|xss_clean|callback_formRulesName');
+            $this->form_validation->set_rules('dental_officename', _l('Name of the Dental Office',$this), 'required|xss_clean');
             $this->form_validation->set_rules('dental_officedescription', _l('Description of Dental Office',$this), 'required|xss_clean|callback_formRulesName');
             $this->form_validation->set_rules('dental_officephone', _l('Phone of Dental Office',$this), 'required|is_natural');
             //$this->form_validation->set_rules('dental_officeemail', _l('Email of Dental Office',$this), '');
@@ -807,6 +809,18 @@ class Registration extends NodCMS_Controller {
 		    die();
         }elseif($this->input->post("step")=="update5"){
 			
+			if($this->input->post("imageName")){
+				$imageName = $this->input->post("imageName");
+			
+			$provider_id = $this->session->userdata('provider_id');
+			$imageName = json_encode($imageName);
+				if($provider_id){
+					$provider_id = $this->session->userdata('provider_id');$this->db->where('provider_id', $provider_id);
+					$this->db->update('r_providers', array('image' => $imageName));
+				}
+			}
+			
+			
 		
              $optional_fields = array();
             foreach($this->input->post() as $key => $value)
@@ -843,10 +857,6 @@ class Registration extends NodCMS_Controller {
                 $error = array_filter($error); // Some might be empty
                 
             }else{
-				
-				
-				
-				
 				
 				
                 echo json_encode(array("status" => $status,"Error_Mess" => $error,'Posted_data'=>$this->input->post(),'redirect'=>base_url()."register/dentist-registration/message"));		
@@ -1010,6 +1020,17 @@ class Registration extends NodCMS_Controller {
             return TRUE;
         }
     }
+	
+	public function formRulesDentalName(){
+		 if (preg_match('/[\'\/~`\!@#\$£€%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\0-9]/', $value) == TRUE) {
+            $this->form_validation->set_message('formRulesName', '{field} must contain letters and spaces only.');
+            $errors[] = 'Name must contain letters and spaces only';
+            return FALSE;
+        }else{
+            return TRUE;
+        }
+	}
+	
     // Validation password format function
     public function formRulesPassword($value)
     {
@@ -1132,13 +1153,13 @@ class Registration extends NodCMS_Controller {
 		// Allow certain file formats
 		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
 		&& $imageFileType != "gif" ) {
-			//echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
 			
 			echo json_encode(array( 'type' => 'failed',
 				'message' => 'Sorry, only JPG, JPEG, PNG & GIF files are allowed.'
 				));
 			die();
 			$uploadOk = 0;
+			
 		}
 		// Check if $uploadOk is set to 0 by an error
 		if ($uploadOk == 0) {
@@ -1146,16 +1167,11 @@ class Registration extends NodCMS_Controller {
 		// if everything is ok, try to upload file
 		} else {
 			if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
-				
-				$provider_id = $this->session->userdata('dataStepTwo')['providerId'];
-		if($provider_id){
-		$provider_id = $this->session->userdata('dataStepTwo')['providerId'];			 
-		$this->db->where('provider_id', $provider_id);
-		$this->db->update('r_providers', array('image' => $target_file));
-		}		
-				
-			echo json_encode(array( 'type' => 'success',
-				'message' => 'File uploaded successfully'
+						
+			echo json_encode(array( 
+				'type' => 'success',
+				'message' => 'File uploaded successfully',
+				'imageName' => $target_file,
 				));
 				
 				//echo  basename( $_FILES["file"]["name"]);

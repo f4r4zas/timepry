@@ -102,6 +102,7 @@ class Nodcms_general_admin extends NodCMS_Controller{
             $this->data['date_format'] = array(
                 array("format"=>"d.m.Y", "name"=>"dd.mm.yy"),
                 array("format"=>"m/d/Y", "name"=>"mm/dd/yy"),
+                array("format"=>"d/m/Y", "name"=>"dd/mm/yy"),
                 array("format"=>"Y-m-d", "name"=>"yy-mm-dd"),
             );
             $this->data['time_format'] = array(

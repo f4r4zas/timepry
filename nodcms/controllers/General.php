@@ -242,4 +242,34 @@ class General extends CI_Controller
         $this->load->view("footer", $this->data);
 	}
     
+	 function globalDentists(){
+        
+        $this-> db->select('*');
+		$this->db->from('r_providers');
+        $this->db->like('provider_name', $this->input->post('provider'));
+		$query = $this->db->get();
+		$result = $query->result();
+		
+        $output = "";
+        
+        if(!empty($result)) {
+        //$fetched = array();    
+            $output .= '<ul class="amazetal_companies">';
+        $fetched = array();
+        foreach($result as $location) {
+        
+        if(!in_array($location->provider_name,$fetched)):
+                $output .= '<li class="fetched_providers" value="'.$location->provider_id.'" data-val="'.$location->provider_name.'">'.$location->provider_name.'</li>';
+        $fetched[] = $location->provider_name;
+        endif;
+        } 
+            $output .= '</ul>';
+            
+        } else {
+            
+            $output = "";
+        } 
+        
+        echo $output; 
+    }
 }

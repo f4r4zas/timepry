@@ -812,7 +812,7 @@ section.register-dentist .section-heading {
 .registration-tabs input[type=password],
 .registration-tabs textarea,
 .registration-tabs select {
-    border: 0;
+    
     background-color: #f2f2f2;
     font-family: 'Lato', sans-serif;
     font-size: 16px;
@@ -1660,10 +1660,12 @@ section.listing-content .images {
 
 #beforeCheckout_popout .order_total .greyButton {
     display: block;
-    width: 100%;
+    width: 50%;
     text-align: center;
     font-size: 22px;
     text-transform: uppercase;
+	margin: 0 auto;
+	float: none;
 }
 
 #beforeCheckout_popout .order_total {
@@ -3310,5 +3312,26 @@ overflow-y: scroll;
 
 .provider-map {
     padding: 0;
-	
+}
+
+.tooltip {
+   
+}
+.tooltip > .tooltip-inner {width:500px;height:100%;background-color: #ffffff;color:#333;padding-top:15px;text-align:justify;padding:20px;font-size:12px}
+
+
+
+.blue-button{
+    background-color: #518ed2;
+    border: 1px solid #518ed2;
+	text-transform: capitalize !important;
+}
+
+.has-success .form-control{
+	border-color: #3c763d !important;
+}
+
+
+.greener{
+	border-color: #3c763d !important;
 }

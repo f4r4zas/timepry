@@ -15,49 +15,22 @@
 
 
 <section class="register-user">
-
     <div class="container">
-
         <div class="section-heading">
-
             <h1>Register As A User</h1>
-
             <div class="cus-hr"></div>
-
         </div>
 
-        <?php if($this->session->flashdata('error_message')){ ?>
-
-            <div class="note note-danger">
-
-                <p>
-
-                    <?php echo $this->session->flashdata('error_message'); ?>
-
-                </p>
-
-            </div>
-
-        <?php } ?>
-
-        <form method="post" action="" role="form">
-
+        <form method="post" action="" role="form" class="has-validation-callback">
             <div class="row">
-
                 <div class="col-sm-6">
-
                     <input placeholder="First Name" value="<?php echo $set_value['fname']; ?>" name="fname" id="fname" type="text" class="form-control <?php echo $set_value['fname']!=''?'edited':''; ?>" data-validation="required">
 
                     <?php if($form_error['fname']!=''){ ?>
-
                         <span class="help-block"><?php echo $form_error['fname']; ?></span>
-
                     <?php }else{ ?>
-
                         <span class="help-block"></span>
-
                     <?php } ?>
-
                 </div>
 
                 <div class="col-sm-6">
@@ -100,7 +73,7 @@
 
                     <input placeholder="Phone (e.g.00398738927892)" value="<?php echo $set_value['mobile']; ?>" name="mobile" id="mobile" type="text" class="form-control <?php echo $set_value['mobile']!=''?'edited':''; ?>" >
 
-					<span style="position: absolute;top: 15px;color: #518ed2;right: 22px;font-size: 21px;"	 class="help glyphicon glyphicon-info-sign" data-toggle="popover" data-placement="right" title="Your number might be useful for the dentist to contact you directly"></span>
+					<span style="position: absolute;top: 15px;color: #518ed2;right: 22px;font-size: 21px;" class="help glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" data-original-title="Your number might be useful for the dentist to contact you directly"></span>
                     <?php if($form_error['mobile']!=''){ ?>
 
                         <span class="help-block"><?php echo $form_error['mobile']; ?></span>
@@ -114,7 +87,7 @@
                 </div>
 				
 				
-				<div class="col-sm-12">
+			<?php /*	<div class="col-sm-12">
 
                     <input placeholder="Your address" value="<?php echo $set_value['address']; ?>" name="address" id="address" type="text" class="form-control <?php echo $set_value['address']!=''?'edited':''; ?>" data-validation="required">
 
@@ -128,10 +101,10 @@
 
                     <?php } ?>                   
 
-                </div>
+                </div> */ ?>
 				
 				
-				<div class="col-sm-12">
+			<?php /*	<div class="col-sm-12">
 				
 				<textarea placeholder="About yourself" class="form-control <?php echo $set_value['about']!=''?'edited':''; ?>" data-validation="required" name="about" ><?php echo $set_value['address']; ?></textarea>
 
@@ -145,7 +118,7 @@
 
                     <?php } ?>                   
 
-                </div>
+                </div> */ ?>
 
             </div>
 
@@ -416,7 +389,7 @@
 <script>
 
     $(function(){
-
+$('[data-toggle="tooltip"]').tooltip(); 
         $.validate({
 
             onError: function($form){

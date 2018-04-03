@@ -96,8 +96,9 @@
                                     <li class="dropdown dropdown-user dropdown-dark">
                                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                             <?php if($this->session->userdata('avatar')){ ?> <img alt="" class="img-circle" src="<?=base_url().$this->session->userdata('avatar')?>"/><?php } ?>
+											
                                             <span class="username username-hide-on-mobile">
-                    					<?=$this->session->userdata('username')?> </span>
+                    					<?=$this->session->userdata('firstname')?> </span>
                                             <i class="fa fa-angle-down"></i>
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-default">
@@ -224,7 +225,7 @@
                         </li>
                     <?php } ?>
                 <?php } ?>
-                <li <?=($page == "account")?'class="star active"':''?>>
+             <?php /*  <li <?=($page == "account")?'class="star active"':''?>>
                     <a href="<?php echo APPOINTMENT_ADMIN_URL; ?>accountSetting">
                         <i class="icon-settings"></i>
                         <span class="title"><?=_l("Account Settings",$this)?></span>
@@ -239,7 +240,7 @@
                                 </ul>
 
 					
-                </li>
+                </li> */ ?>
             </ul>
             <!-- END SIDEBAR MENU -->
         </div>

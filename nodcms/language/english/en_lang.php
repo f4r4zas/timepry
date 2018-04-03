@@ -236,3 +236,5 @@ $lang["Password"] = "Password";
 $lang["Login"] = "Login";
 $lang["Timepry failed"] = "Timepry failed";
 $lang["Timepry success"] = "Timepry success";
+$lang["Welcome"] = "Welcome";
+$lang["Dates"] = "Dates";

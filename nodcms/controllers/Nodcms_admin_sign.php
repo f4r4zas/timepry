@@ -36,6 +36,7 @@ class Nodcms_admin_sign extends CI_Controller {
             $data = array(
                 'fullname'  => $result['firstname']." ".$result['firstname'],
                 'username'  => $result['username'],
+                'firstname'  => $result['firstname'],
                 'user_id' => $result['user_id'],
                 'group'   => $result['group_id'],
                 'avatar'   => $result['avatar'],
