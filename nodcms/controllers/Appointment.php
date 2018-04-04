@@ -29,9 +29,6 @@ class Appointment extends NodCMS_Controller {
     // Check system type (Multi-Owner or normal)
     function multiProviderSystem($method, $lang="en", $provider_username, $id = NULL){
 		
-		
-		
-		
         $provider = $this->Appointment_model->getProviderByUsername($provider_username);
         if(count($provider)!=0 && ($this->_website_info['appointment_multiowner'] || $provider[0]['default']!=0)){
             // # Dental Office exists and (multi provider system = TRUE or the provider default = 1)
@@ -427,6 +424,10 @@ class Appointment extends NodCMS_Controller {
 //    Set an appointment request from compact page with ajax
     function setAppointment($lang="en",$id)
     {
+		  //Method for user no of reservations 
+		   get_instance()->load->helper('user'); 
+
+		
         $this->preset($lang);
         
         $extra_fields = $this->Appointment_model->getAllExtraFields();
@@ -471,6 +472,19 @@ class Appointment extends NodCMS_Controller {
                     $appointmentValidation = $this->setAppointmentValidation($id, $post_data);
                     
                     $service =  @reset($this->Appointment_model->getServiceDetail($id));
+					
+					
+					 if(!empty($this->session->userdata("email"))){ 
+					 $totalReservations = getNoReservations($this->session->userdata("email"));
+						if($totalReservations >= 10){
+							
+							$discounted = $service["price"] * 20 / 100;
+							
+								$service["price"] = $service['price'] - $discounted;
+						}
+					} 
+					
+					
                     if($appointmentValidation["status"] == "success"){
                         $start_time = $appointmentValidation["start_time"];
                         $time_period = $appointmentValidation["time_period"];

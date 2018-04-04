@@ -3335,3 +3335,7 @@ overflow-y: scroll;
 .greener{
 	border-color: #3c763d !important;
 }
+.drates{
+	font-size: 38px;
+    font-weight: 900;
+}

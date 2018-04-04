@@ -610,6 +610,7 @@
             //console.log(selectedServices.length);
 
             console.log(orderTotal);
+			
             if ( orderTotal == '0' || orderTotal == '' ) {
                 $('#beforeCheckout_popout').find('.order_total').find('.greyButton').addClass('disabledAction');
             }else{
@@ -665,17 +666,22 @@
 
             }
             
+			
+			
             //console.log(bodyToAppend);
             $('#selected_services').html(bodyToAppend);
             $('#final_treatment').html(final_treatment);
             $('#beforeCheckout_popout').find('.order_total').find('.total_prices .rates').text( orderTotal );
             $('#beforeCheckout_popout').find('.selservice_box').eq(0).trigger("click");
             $('#beforeCheckout_popout').show();
-            
+            getDiscount();
             
             $('html, body').animate({
                 scrollTop: $(".modal-box").offset().top
             }, 1000);
+			
+			
+			
         });
 
         $('.addmore_services').click(function() {
@@ -692,6 +698,8 @@
             setTimeout(function () {
                 registerMap();
             }, 1300);
+			
+			
         });
     </script>
 

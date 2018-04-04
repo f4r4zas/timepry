@@ -2383,3 +2383,7 @@ section.edit_treatments {
         position: absolute;
     }
 }
+.drates{
+	font-size: 38px;
+    font-weight: 900;
+}

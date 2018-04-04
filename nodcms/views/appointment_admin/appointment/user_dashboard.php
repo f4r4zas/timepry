@@ -130,10 +130,12 @@ $(document).ready(function(){
 
                             <div class="r-full-card">
                                 <div class="inner">
-                                    <div class="tooth">
+                                    <div class="tooth" style="
+    margin: 0 auto;
+">
                                         <img src="<?php echo base_url()?>assets/reservation/img/tooth-pic.png" alt="Free Card">
                                     </div>
-                                    <div class="text">Free</div>
+                                    <div class="text">20% OFF</div>
                                 </div>
                             </div>
                         </div>

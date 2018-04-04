@@ -912,7 +912,7 @@ $(".closed_day").on("click", function(){
         </div>
     </div>
 </section>
-<script src="http://localhost/timepry/assets/form-validator/jquery.form-validator.js"></script>
+<script src="<?php echo base_url(); ?>assets/form-validator/jquery.form-validator.js"></script>
 
 <script>
 $(document).ready(function(){

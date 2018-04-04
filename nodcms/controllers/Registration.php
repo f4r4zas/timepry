@@ -904,21 +904,28 @@ class Registration extends NodCMS_Controller {
     }
     // Reservation messages page after any active
     function userRegistrationMessage($lang="en"){
+		
+		
+		
         $this->db->set('status', 1);
         $this->db->set('active_register', 1);
         $this->db->where('user_id', $this->session->userdata('user_id'));
         $this->db->update('users');
-        
+       
 
         $this->db->set('active', 1);
         $this->db->where('user_id', $this->session->userdata('user_id'));
         $this->db->update('r_providers');
-        
+		
+		 
+		
         $this->session->unset_userdata('user_id');
         $this->session->unset_userdata('service_id');
         $this->session->unset_userdata('provider_id');
         
-        $this->preset($lang);
+		
+        //$this->preset($lang);
+		
         if($this->session->flashdata('message')){
             $message = $this->session->flashdata('message');
             $this->data['title'] = _l('User Registration', $this);

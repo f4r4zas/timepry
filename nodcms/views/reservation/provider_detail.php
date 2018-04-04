@@ -1,4 +1,8 @@
+<?php  get_instance()->load->helper('user'); ?> 
 
+<?php if(!empty($this->session->userdata("email"))){ ?>
+	<?php $totalReservations = getNoReservations($this->session->userdata("email")); ?>
+<?php  } ?>
 
 <style>
 #beforeCheckout_popout{
@@ -332,6 +336,8 @@
                         <ul class="nav nav-tabs">
                             <li class="active">
                                 <a data-toggle="tab" href="#step1">Hygiene Procedure <span class="count"></span></a>
+
+								<a data-toggle="tab" href="#step1">Hygiene Procedure <span class="count"></span></a>
                             </li>
                             <!--<li>
                                 <a data-toggle="tab" href="#step2">Dental sealants <span class="count">(2)</span></a>
@@ -1039,7 +1045,23 @@ jQuery(document).ready(function(){
 						 $phone = $this->session->userdata('phone');
 						
 					} ?>
-                    <p class="total_prices">$ <span class="rates">0</span></p>
+					
+					<?php if(!empty($this->session->userdata("email"))){ ?>
+						<?php if($totalReservations >=10){ ?>
+						<p class="total_prices"><span class="">20%</span> OFF</p>
+						
+						<p style="display:none" class="total_prices">€ <span class="rates">0</span></p>
+						<p class="discountedTotal">€ <span class="drates">0</span></p>
+						<?php } ?>
+					<?php }else{ ?>
+						<p class="total_prices">€ <span class="rates">0</span></p>
+					<?php } ?>
+					
+					
+                    
+
+					
+					
                     <form id="checkout" style="display: none;">
                         <div id="final_treatment"></div>                    
                         <div class="form-group">
@@ -1175,5 +1197,18 @@ function showDivs(n) {
   }
   x[slideIndex-1].style.display = "block";  
 }
+
+//Get a discount of 20%
+function getDiscount(){
+	var amount = parseInt(jQuery(".rates").text());
+	
+	var discountAmount = amount * 20 / 100;
+		
+	total = amount - discountAmount;
+	console.log("Total");
+	jQuery(".drates").text(total);
+	
+}
+
 </script>
    
