@@ -730,6 +730,7 @@ $(".closed_day").on("click", function(){
 							} */
 							
 							$(".select2-hidden-accessible").select2("destroy");
+							//$(".select2-hidden-accessible").select2();
 							
 							var id = "unique-"+Math.floor((Math.random() * 100) + 1);
                             $("#selected_treat").hide();
@@ -777,7 +778,12 @@ $(".closed_day").on("click", function(){
                                clone.removeAttr("id");
                                clone.removeAttr("style");
                                clone.attr("custom-class",id);
-                               first_div.before(clone);
+                               							   
+							    add_treat.parent().parent().prepend(clone);
+							   
+							  //first_div.before(clone);
+							   
+                               //jQuery(".notto").before(clone);
                                 
                                 setTimeout(function(){
                                 var total_treatments = add_treat.parent().siblings('.cloned').length;//$(".customform.skillform:visible").length;
@@ -799,6 +805,7 @@ $(".closed_day").on("click", function(){
                            } else {
                                 alert("please fill all above fields");
                             }
+							
                         });
                         
                         

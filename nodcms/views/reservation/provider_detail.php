@@ -336,8 +336,6 @@
                         <ul class="nav nav-tabs">
                             <li class="active">
                                 <a data-toggle="tab" href="#step1">Hygiene Procedure <span class="count"></span></a>
-
-								<a data-toggle="tab" href="#step1">Hygiene Procedure <span class="count"></span></a>
                             </li>
                             <!--<li>
                                 <a data-toggle="tab" href="#step2">Dental sealants <span class="count">(2)</span></a>
