@@ -37,7 +37,7 @@
  <div class="">
   <div class="col-md-12 box">
                 <div class="section-heading">
-                    <h1><?=_l('Contact form',$this);?></h1>
+                    <h1><?php echo _l('Contact form',$this);?></h1>
 					<div class="cus-hr"></div>
                 </div>
 		<div class="contact-form">
@@ -57,7 +57,7 @@
                             <button type="button" class="close close-sm" data-dismiss="alert">
                                 <i class="fa fa-times"></i>
                             </button>
-                            <strong><?=_l('Oh snap!',$this);?></strong><?=_l('Problem with messages. Please notify the site administrator via the phone numbers listed',$this);?>
+                            <strong><?= _l('Oh snap!',$this);?></strong><?=_l('Problem with messages. Please notify the site administrator via the phone numbers listed',$this);?>
                         </div>
                     <?php } ?>
 					
@@ -167,6 +167,6 @@
     }
 </script>
 <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfkzWoPeDKw-RbhGbYp3-RWGgzCVaHvZU&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCX-o--0klF4hW11lyYPhMuFoR5LrHW6LI&callback=">
 </script>
 

@@ -7,14 +7,18 @@
  * Project: NodCMS
  * Website: http://www.nodcms.com
  */
+
 if ( ! function_exists('_l')){
     function _l($label, $obj)
     {
+
         $label = str_replace('"','&quot;',$label);
         $return = $obj->lang->line($label, FALSE);
         if ($return){
+
             return $return;
         }elseif(isset($_SESSION['language'])){
+
             if(isset($obj->controllerType) && $obj->controllerType == "backend"){
                 if(!in_array($label,$obj->langArray)){
                     $file = getcwd()."/nodcms/language/".$_SESSION["language"]["language_name"]."/backend_lang.php";
@@ -31,8 +35,12 @@ if ( ! function_exists('_l')){
                 file_put_contents($file, $current);
                 $obj->langArray[$label] = $label;
             }
+
+            return $label;
+        }else{
             return $label;
         }
+
     }
 }
 if ( ! function_exists('substr_string')){
