@@ -87,7 +87,7 @@ $this->session->unset_userdata("dataStepFour");  */
             <div class="row">
                 <div class="col-sm-6">
                     <input placeholder="Email" value="<?php if(!empty($email)){ echo $email; } ?>" name="email" id="email" type="text" data-validation="required" class="form-control update1">
-                    
+                    <span class="help-block"></span>
                        
                                         
                 </div>
@@ -953,14 +953,19 @@ $(document).ready(function(){
                 });
 
             },
-
-            onElementValidate: function(rsu, element){
+         errorPlacement: function(error, element) {
+             element.siblings('.help-block').html(error);
+             element.siblings('.help-block').html(error);
+             console.log("custom error");
+         },
+         onElementValidate: function(rsu, element){
 
                 element.next().next().remove();
 
-//                element.parent().removeClass('has-info').addClass('has-error');
+                //element.parent().removeClass('has-info').addClass('has-error');
 
-            },
+         },
+
             <?php if($lang!='en'){ ?>lang: '<?php echo $lang; ?>'<?php } ?>
         });
 		
@@ -1084,9 +1089,6 @@ $(document).ready(function(){
                 location.href=data_msg.redirect;
                 
             }
-			
-			
-			
 			
           },
           error: function (jqXHR, textStatus, errorThrown) {

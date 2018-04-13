@@ -49,12 +49,14 @@ class General extends CI_Controller
     }
     
     function get_location_matrix(){
-        
+
+       $locationKey =  $this->input->post('company');
         $this-> db->select('*');
 		$this->db->from('r_providers');
-        $this->db->like('address', $this->input->post('company'));
+        $this->db->like('address',$locationKey);
 		
 		$query = $this->db->get();
+		//echo $this->db->last_query();
 		$result = $query->result();
         $output = "";
         
@@ -67,6 +69,11 @@ class General extends CI_Controller
         $location_city = explode(",",$location->address);
         end($location_city);
         $location_city = prev($location_city);
+
+            if (strpos(strtolower($location_city), strtolower($locationKey)) === FALSE) {
+                continue;
+            }
+
         if(!in_array($location_city,$fetched)):
                 $output .= '<li class="fetched_companies" data-val="'.$location_city.'">'.$location_city.'</li>';
         $fetched[] = $location_city;

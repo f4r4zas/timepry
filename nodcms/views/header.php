@@ -142,14 +142,14 @@
                                     </li>
 									<?php } ?>
 									
-								   <li>
-                                    <a href="<?php echo base_url(); ?>admin-appointment"><  ?=_l('Dashboard',$this);?></a>
-                                    
-                                    </li>
+								   <!--<li>
+                                    <a href="<?php /*echo base_url(); */?>admin-appointment"><?/*=_l('Dashboard',$this);*/?></a>
+
+                                    </li>-->
                                     <li>
                                         <a href="<?php echo base_url(); ?>admin-sign/logout"><?=_l('Logout',$this);?></a>
                                     </li>
-									
+
                                     <?php endif;?>
 								</ul>
                             </nav>
