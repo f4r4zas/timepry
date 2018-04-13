@@ -7,7 +7,7 @@
 
 
 function getDayByDate($date){
-echo $date;
+
     $daysno = [
         'Sunday',
         'Monday',
@@ -17,6 +17,7 @@ echo $date;
         'Friday',
         'Saturday',
     ];
+
 
     $ymd = DateTime::createFromFormat('d/m/Y', $date)->format('Y-m-d');
 

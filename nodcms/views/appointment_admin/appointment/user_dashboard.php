@@ -11,7 +11,7 @@ $(document).ready(function(){
 <section class="inner-page-banner user">
     <div class="banner_wrapper">
         <div class="banner_content">
-            <h1>Dashboard</h1>
+            <h1 style="font-size: 35px;">Dashboard</h1>
         </div>
     </div>
 </section>
@@ -84,6 +84,7 @@ $(document).ready(function(){
                         </div>
                     </div>
                 </div>
+
                 
                 <div class="col-md-12">
                     <div class="week_appointments">
@@ -147,7 +148,7 @@ $(document).ready(function(){
         <div class="last_appointments">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="heading">Last Appointments</div>
+                    <div class="heading">Appointments</div>
                     <div class="appointment-header">
                         <div class="cell-c">
                             <span class="t-img"><img src="<?php echo base_url()?>assets/reservation/img/tooth-pic.png" alt="Tooth"></span>

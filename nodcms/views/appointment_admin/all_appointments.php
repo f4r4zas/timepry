@@ -1,7 +1,5 @@
-<?php //include('header.php'); ?>
 
-<?php //include('login_menu.php'); ?>
-    <script>
+<script>
         $(document).ready(function(){
             $(".inner-page-banner").hide();
             $(".inner-page-banner.user").show();
@@ -90,8 +88,9 @@
                             <div class="reservation-cards">
                                 <?php
                                 $this->db->select('*');
-                                $this->db->from('r_reservation');
+                                $this->db->from('r_reservation')->join('r_providers', 'r_reservation.provider_id = r_providers.provider_id');;
                                 $this->db->where('email',$user_info[0]->email);
+
                                 $query = $this->db->get();
                                 $user_reservation = $query->result();
                                 $total_reservation = count($user_reservation);
@@ -161,7 +160,10 @@
 
                         <div class="appointments-list">
                             <!-- appointment 1 -->
-                            <?php foreach($user_reservation as $reservation):
+
+                            <?php
+
+                            foreach($user_reservation as $reservation):
                                 $end_date = date('Y-m-d H:i', $reservation->reservation_edate_time);
 
                                 $start_date = date('Y-m-d H:i', $reservation->reservation_date_time);
@@ -186,6 +188,10 @@
                                         <span class="action-<?php echo $status;?>"></span>
                                     </div>
 
+                                    <div class="dental-office-link">
+
+                                        <a href="<?php echo base_url()."en/provider/".$reservation->provider_username; ?>">View Dental Office Office</a>
+                                    </div>
 
 
                                     <?php if($currentDate > $reservation_date){ ?>
@@ -338,5 +344,3 @@
         });
     </script>
 </div>
-
-<?php //include('footer.php'); ?>

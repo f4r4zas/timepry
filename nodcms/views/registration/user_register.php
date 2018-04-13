@@ -24,7 +24,7 @@
         <form method="post" action="" role="form" class="has-validation-callback">
             <div class="row">
                 <div class="col-sm-6">
-                    <input placeholder="First Name" value="<?php echo $set_value['fname']; ?>" name="fname" id="fname" type="text" class="form-control <?php echo $set_value['fname']!=''?'edited':''; ?>" data-validation="required">
+                    <input placeholder="First Name *" value="<?php echo $set_value['fname']; ?>" name="fname" id="fname" type="text" class="form-control <?php echo $set_value['fname']!=''?'edited':''; ?>" data-validation="required">
 
                     <?php if($form_error['fname']!=''){ ?>
                         <span class="help-block"><?php echo $form_error['fname']; ?></span>
@@ -35,7 +35,7 @@
 
                 <div class="col-sm-6">
 
-                    <input placeholder="Last Name" value="<?php echo $set_value['lname']; ?>" name="lname" id="lname" type="text" class="form-control <?php echo $set_value['lname']!=''?'edited':''; ?>" data-validation="required">
+                    <input placeholder="Last Name *" value="<?php echo $set_value['lname']; ?>" name="lname" id="lname" type="text" class="form-control <?php echo $set_value['lname']!=''?'edited':''; ?>" data-validation="required">
 
                     <?php if($form_error['lname']!=''){ ?>
 
@@ -55,7 +55,7 @@
 
                 <div class="col-sm-6">
 
-                    <input placeholder="Email" value="<?php echo $set_value['email']; ?>" name="email" id="email" type="text" class="form-control <?php echo $set_value['email']!=''?'edited':''; ?>" data-validation="required email">
+                    <input placeholder="Email *" value="<?php echo $set_value['email']; ?>" name="email" id="email" type="text" class="form-control <?php echo $set_value['email']!=''?'edited':''; ?>" data-validation="required email">
 
                     <?php if($form_error['email']!=''){ ?>
 
@@ -142,7 +142,7 @@
 
                 <div class="col-sm-6">
 
-                    <input placeholder="Password" value="<?php echo $set_value['password']; ?>" name="password" id="password" type="password" class="form-control <?php echo $set_value['password']!=''?'edited':''; ?>" data-validation="required">
+                    <input placeholder="Password *" value="<?php echo $set_value['password']; ?>" name="password" id="password" type="password" class="form-control <?php echo $set_value['password']!=''?'edited':''; ?>" data-validation="required">
 
                     <?php if($form_error['password']!=''){ ?>
 
@@ -160,7 +160,7 @@
 
                 <div class="col-sm-6">
 
-                    <input placeholder="Confirm Password" value="<?php echo $set_value['cpassword']; ?>" name="cpassword" id="cpassword" type="password" class="form-control <?php echo $set_value['cpassword']!=''?'edited':''; ?>" data-validation="required">
+                    <input placeholder="Confirm Password *" value="<?php echo $set_value['cpassword']; ?>" name="cpassword" id="cpassword" type="password" class="form-control <?php echo $set_value['cpassword']!=''?'edited':''; ?>" data-validation="required">
 
                     <?php if($form_error['cpassword']!=''){ ?>
 

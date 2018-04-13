@@ -134,7 +134,7 @@
                                     </li>
                                     <?php else:?>
 									
-									<?php if($this->session->userdata("group") == 21){ ?>
+									<?php if($this->session->userdata("group") == 21 || $this->session->userdata("group") == 20){ ?>
 									
 									<li>
                                     <a href="<?php echo base_url(); ?>admin-appointment"><?php echo $this->session->userdata("firstname")  ?></a>

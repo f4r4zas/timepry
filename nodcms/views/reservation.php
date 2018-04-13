@@ -254,7 +254,7 @@
 					<div class="col-md-2">
 					   <div class="main_menu">
                             <nav class="menu_nav">
-                                <ul class="menu">
+                                <ul class="menu pull-right">
                                     <?php 
                                     
                                     if(!$this->session->userdata('group')):?>
@@ -265,6 +265,10 @@
                                         <a href="javascript:void(0)" class="showLogin">Login</a>
                                     </li>
                                     <?php else:?>
+                                        <li>
+                                            <a href="<?php echo base_url(); ?>admin-appointment"><?php echo $this->session->userdata("firstname")  ?></a>
+
+                                        </li>
                                     <li>
                                         <a href="<?php echo base_url(); ?>admin-sign/logout"><?=_l('Logout',$this);?></a>
                                     </li>

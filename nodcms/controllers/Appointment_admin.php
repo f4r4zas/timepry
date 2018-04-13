@@ -2259,4 +2259,5 @@ class Appointment_admin extends NodCMS_Controller
         $this->loadView();
     }
 
+
 }

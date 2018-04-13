@@ -75,17 +75,17 @@ $this->session->unset_userdata("dataStepFour");  */
 					?>
             <div class="row">
                 <div class="col-sm-6">
-                    <input  placeholder="First Name" value="<?php if(!empty($firstName)){ echo $firstName; } ?>" name="fname" id="fname" data-validation="required" type="text" class="form-control update1">
+                    <input  placeholder="First Name *" value="<?php if(!empty($firstName)){ echo $firstName; } ?>" name="fname" id="fname" data-validation="required" type="text" class="form-control update1">
                     <span class="help-block"></span>
                 </div>
                 <div class="col-sm-6">
-                    <input placeholder="Last Name" value="<?php if(!empty($lastName)){ echo $lastName; } ?>" name="lname" id="lname"  type="text" class="form-control update1">
+                    <input placeholder="Last Name *" value="<?php if(!empty($lastName)){ echo $lastName; } ?>" name="lname" id="lname"  type="text" class="form-control update1">
                     <span class="help-block"></span>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-6">
-                    <input placeholder="Email" value="<?php if(!empty($email)){ echo $email; } ?>" name="email" id="email" type="text" data-validation="required" class="form-control update1">
+                    <input placeholder="Email *" value="<?php if(!empty($email)){ echo $email; } ?>" name="email" id="email" type="text" data-validation="required" class="form-control update1">
                     <span class="help-block"></span>
                        
                                         
@@ -102,14 +102,14 @@ $this->session->unset_userdata("dataStepFour");  */
             <div class="row">
                 
                 <div class="col-sm-6">
-                    <input placeholder="Password" value="" name="password" id="password"  data-validation="required" type="password" class="form-control update1">
+                    <input placeholder="Password *" value="" name="password" id="password"  data-validation="required" type="password" class="form-control update1">
 
                     <span class="help-block"></span>
                                       
                 </div>
                 
                 <div class="col-sm-6">
-                    <input placeholder="Confirm Password" value="" name="cpassword" id="cpassword"  data-validation="required" type="password" class="form-control update1">
+                    <input placeholder="Confirm Password *" value="" name="cpassword" id="cpassword"  data-validation="required" type="password" class="form-control update1">
 
                     <span class="help-block"></span>
                                      
@@ -173,7 +173,7 @@ $this->session->unset_userdata("dataStepFour");  */
 
                         <div class="row">
                             <div class="col-md-6">
-                                <input placeholder="Email of Dental Office" data-validation="required" value="<?php if(!empty($provider_email)){echo $provider_email; } ?>" name="dental_officeemail" id="dental_officeemail" type="text" class="form-control update2">
+                                <input placeholder="Email of Dental Office *" data-validation="required" value="<?php if(!empty($provider_email)){echo $provider_email; } ?>" name="dental_officeemail" id="dental_officeemail" type="text" class="form-control update2">
                                 <span class="help-block"></span>
                                 <span style="position: absolute;top: 15px;color: #518ed2;right: 22px;font-size: 21px;" class="help glyphicon glyphicon-question-sign" data-placement="top" data-toggle="tooltip"  title="Insert the emial of the dental office. This email will be visible to your patients to give them the possibility to contact your directly. This email can be the same as the account email previously written or can be also different"></span>
 
@@ -444,7 +444,7 @@ $(".closed_day").on("click", function(){
                         <span class="fa fa-times remove_treatment"></span>
                         <div class="row">
                             <div class="col-sm-12">
-                                <input type="text" class="update_4 form-control" placeholder="Treatment title" name="treatment_name[]" style="width: 28%; display: inline-block; vertical-align: top; margin: 0 2px;"/>
+                                <input type="text" class="update_4 form-control" placeholder="Treatment title *" name="treatment_name[]" style="width: 28%; display: inline-block; vertical-align: top; margin: 0 2px;"/>
                                 <select class="update_4 form-control" name="treatment_duration[]" style="width: 24%; display: inline-block; vertical-align: top; height: 40px; margin: 0 2px;">
                                 <option value="">Duration in min</option>
                                     <?php
@@ -454,7 +454,7 @@ $(".closed_day").on("click", function(){
                             		}?>
                                     
                                 </select>
-                                <input class="update_4" type="text" placeholder="Price(€)" name="treatment_price[]" style="width: 15%; display: inline-block; vertical-align: top; height: 40px; margin: 0 2px;"/>
+                                <input class="update_4" type="text" placeholder="Price(€) *" name="treatment_price[]" style="width: 15%; display: inline-block; vertical-align: top; height: 40px; margin: 0 2px;"/>
                                 <div style="width: 29%; display: inline-block; vertical-align: top; height: 40px;">
                                 <?php 
 								
@@ -477,7 +477,7 @@ $(".closed_day").on("click", function(){
                         <div class="row">
                             
                             <div class="col-xs-12 col-sm-12 col-md-12">
-                                <input class="update_4" type="text" placeholder="Description" name="treatment_desc[]">
+                                <input class="update_4" type="text" placeholder="Description *" name="treatment_desc[]">
                                 <span class="help-block"></span>
                             </div>
                             
@@ -565,9 +565,9 @@ $(".closed_day").on("click", function(){
                                                             <div class="notto">
                                                             <div class="row">
                                                                 <div class="col-sm-12">
-                                                                    <input type="text" class="update_4 form-control" placeholder="Treatment title" name="treatment_name[]" style="width: 28%; display: inline-block; vertical-align: top; margin: 0 2px;"/>
+                                                                    <input type="text" class="update_4 form-control" placeholder="Treatment title *" name="treatment_name[]" style="width: 28%; display: inline-block; vertical-align: top; margin: 0 2px;"/>
                                                                     <select class="update_4 form-control" name="treatment_duration[]" style="width: 24%; display: inline-block; vertical-align: top; height: 40px; margin: 0 2px;">
-                                                                    <option value="">Duration in mins</option>
+                                                                    <option value="">Duration in mins *</option>
                                                                         <?php
                                                                         for ($row=1; $row <= 12; $row++) { 
                                                                     		   $p = 15 * $row;
@@ -575,7 +575,7 @@ $(".closed_day").on("click", function(){
                                                                 		}?>
                                                                         
                                                                     </select>
-                                                                    <input class="update_4" type="text" placeholder="Price(€)" name="treatment_price[]" style="width: 15%; display: inline-block; vertical-align: top; height: 40px; margin: 0 2px;"/>
+                                                                    <input class="update_4" type="text" placeholder="Price(€) *" name="treatment_price[]" style="width: 15%; display: inline-block; vertical-align: top; height: 40px; margin: 0 2px;"/>
                                                                     <div style="width: 29%; display: inline-block; vertical-align: top; height: 40px;">
                                                                     <?php 
                                                                     $this->db->select('*');
@@ -595,7 +595,7 @@ $(".closed_day").on("click", function(){
                                                             <div class="row">
                                                                 
                                                                 <div class="col-xs-12 col-sm-12 col-md-12">
-                                                                    <input class="update_4" type="text" placeholder="Description" name="treatment_desc[]">
+                                                                    <input class="update_4" type="text" placeholder="Description *" name="treatment_desc[]">
                                                                     <span class="help-block"></span>
                                                                 </div>
                                                                 
@@ -722,7 +722,7 @@ $(".closed_day").on("click", function(){
                         
                         <script>
                         $(".add_treat").click(function(e){
-							
+
                             e.preventDefault();
 							
 							/* if($(".e9").data("select2")){
@@ -737,11 +737,15 @@ $(".closed_day").on("click", function(){
                             var add_treat = $(this);
                             var filled = true;
                             add_treat.parent().siblings().find('.notto .update_4').each(function(i,v){
+                               console.log("worked");
                                 if($(this).prop("tagName") != "SPAN" && $(this).prop("tagName") != "DIV" && $(this).prop("tagName") != "BUTTON")
                                   {
                                       v = $(v);
                                       if($(this).val()==""){
+                                          console.log("Empty");
                                         filled = false;
+                                      }else{
+                                          console.log("No EMpty");
                                       }
                     
                                   }
@@ -764,8 +768,7 @@ $(".closed_day").on("click", function(){
                               hiddenfields +='<input type="hidden" name="cat[]" class="update4 '+id+'" value="'+$(".cat.active a").attr("data-catid")+'"/>';
                               hiddenfields +='<input type="hidden" name="subcat[]" class="update4 '+id+'" value="'+$(".subcat.active a").attr("data-subcatid")+'"/>';
                               formData += "<td style='text-align: center; padding: 10px; border: 1px solid #ccc;'>"+$('.cat.active a').text()+"</td>";
-                               formData += "<td style='text-align: center; padding: 10px; border: 1px solid #ccc;'>"+$('.subcat.active a').text()+"</td>";
-                              
+                              formData += "<td style='text-align: center; padding: 10px; border: 1px solid #ccc;'>"+$('.subcat.active a').text()+"</td>";
                               formData += "</tr>";
                               
                               $("#selected_treat").prepend(formData);

@@ -161,7 +161,7 @@ get_instance()->load->helper('valid-date');
 
 
                             ?>
-                            <li class="row workedd <?php echo checkValidDate($this->input->get('search_date'), $item['provider_id']); ?>">
+                            <li class="row ">
                                 <div class="col-md-12">
 
                                     <div class="search_content">
@@ -233,27 +233,6 @@ get_instance()->load->helper('valid-date');
                                 </div>
 
 
-                                <!--<div class="col-md-6">
-                    <div class="portlet light">
-                        <div class="portlet-title">
-                            <h3 class="caption">
-                                <a class="caption-subject bold font-green" href="<?php echo base_url() . $lang . '/provider/' . $item['provider_username']; ?>"><?php echo $item['provider_name']; ?></a>
-                                <span class="caption-helper"><i class="fa fa-calendar"></i> <?php echo my_int_date($item['created_date']); ?></span>
-                            </h3>
-                        </div>
-                        <div class="portlet-body">
-                            <div>
-                                <?php echo $item['provider_description']; ?>
-                            </div>
-                            <p>
-                                <a href="<?php echo base_url() . $lang . '/provider/' . $item['provider_username']; ?>" class="btn blue">
-                                    <?php echo _l('Book a time', $this); ?> <i class="m-icon-swapright m-icon-white"></i>
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-                </div>-->
-
                             </li> <!-- Row List -->
                             <?php
                             $addresses[] = '"' . $item['address'] . '"';
@@ -306,34 +285,6 @@ get_instance()->load->helper('valid-date');
                 <div id="map_canvas" style=""></div>
             </div>
             <script>
-                /*$(document).ready(function () {
-                    var map;
-                    var elevator;
-                    var myOptions = {
-                        zoom: 10,
-                        center: new google.maps.LatLng(0, 0),
-                        mapTypeId: 'terrain'
-                    };
-                    map = new google.maps.Map($('#map_canvas')[0], myOptions);
-                    var bounds = new google.maps.LatLngBounds();
-                    var addresses = [<?php echo $comma_seperated;?>];
-
-    for (var x = 0; x < addresses.length; x++) {
-        $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address='+addresses[x]+'&sensor=false', null, function (data) {
-            var p = data.results[0].geometry.location
-            var latlng = new google.maps.LatLng(p.lat, p.lng);
-            new google.maps.Marker({
-                position: latlng,
-                map: map
-            });
-            bounds.extend(marker.position);
-        });
-    }
-    
-    map.fitBounds(bounds);
-    map.setZoom(3);
-
-});*/
 
                 function initialize() {
                     var locations = [
