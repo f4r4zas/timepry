@@ -1,8 +1,11 @@
+<?php get_instance()->load->helper('user'); ?>
+
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <h4 class="modal-title"><?php echo _l('Information',$this); ?>: <?php echo $data['reservation_id']; ?></h4>
 </div>
 <div class="modal-body">
+
     <div class="row">
         <div class="col-md-6">
             <div id="highlightElement" class="panel panel-<?php echo $data['color']!=''?$data['color']:'default'; ?>">
@@ -53,6 +56,15 @@
                         <div class="col-xs-5 name"><?php echo _l('Telephone',$this); ?></div>
                         <div class="col-xs-6 value"><?php echo $data["tel"]; ?></div>
                     </div>
+
+                    <div class="row static-info">
+                        <div class="col-xs-1"><input type="button" id="userDetails" class="btn btn-primary" value="User Details"></div>
+
+                    </div>
+
+
+
+
                     <?php if(isset($extra_fields) && count($extra_fields)!=0){ ?>
                         <?php foreach($extra_fields as $item){ ?>
                             <div class="row static-info">
@@ -157,8 +169,38 @@
     </a>
     <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo _l("Close",$this)?></button>
 </div>
+
+<div class="user-profile-details" style="display: none">
+
+    <?php
+
+    $userdata = getReservationUserId($data["email"]);
+
+                if(getUserProfile($userdata[0]['user_id'])){
+                    generateUserProfile($userdata[0]['user_id']);
+                }
+    ?>
+
+</div>
+
 <script>
     $(function(){
+
+            $("#userDetails").click(function(){
+
+                var html = $(".user-profile-details").html();
+
+                if(html){
+                    console.log(html);
+                    bootbox.alert(html);
+                }else{
+                    bootbox.alert("User has not finished his profile");
+                }
+
+            })
+        //
+
+
         $('#submitComment').submit(function(e){
             var thisElement = $(this);
             thisElement.find('.note').remove();

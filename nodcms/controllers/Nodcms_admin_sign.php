@@ -31,6 +31,8 @@ class Nodcms_admin_sign extends CI_Controller {
         $username = $this->input->post('username', TRUE);//$this->security->xss_clean($this->input->post('username', TRUE));
         $password = md5($this->input->post('password', TRUE));
         $result = $this->NodCMS_admin_sign_model->check_login($username, $password);
+
+
         if(count($result)!=0 && in_array($result[0]['group_id'], array(1, 20, 21, 100, 101))){
             $result = reset($result);
             $data = array(
@@ -44,6 +46,7 @@ class Nodcms_admin_sign extends CI_Controller {
                 'logged_in_status'   => true,
 
             );
+
             $this->session->set_userdata($data);
             $_SESSION['Session_Admin'] = $data['user_id'];
             redirect(base_url().'admin-appointment');

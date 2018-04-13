@@ -334,18 +334,15 @@
                 <div class="col-md-3">
                     <div class="treatment-tabs">
                         <ul class="nav nav-tabs">
-                            <li class="active">
-                                <a data-toggle="tab" href="#step1">Hygiene Procedure <span class="count"></span></a>
-                            </li>
-                            <!--<li>
-                                <a data-toggle="tab" href="#step2">Dental sealants <span class="count">(2)</span></a>
-                            </li>
-                            <li>
-                                <a data-toggle="tab" href="#step3">Sport Mouthguards <span class="count">(1)</span> </a>
-                            </li>
-                            <li>
-                                <a data-toggle="tab" href="#step4">Dental Space Maintainers <span class="count">(1)</span></a>
-                            </li>-->
+
+                            <?php
+                            $i=0;
+                            foreach($sub_cats as $cates){ ?>
+                                <li class="<?php if($i == 0){echo "active";} ?>">
+                                    <a data-toggle="tab" href="#subcat-<?php echo $cates['subcat_id']; ?>"><?php echo $cates['subcat_name'];  ?><span class="count"></span></a>
+                                </li>
+                            <?php $i++; ?>
+                            <?php } ?>
                         </ul>
                     </div>
 
@@ -354,138 +351,76 @@
                 <div class="col-md-offset-1 col-md-8">
                     <div class="tab-content">
 
-                        <div class="tab-pane fade in active">
-                            
-                        
-                        <?php $fetched = array(); $i=0; foreach($data_list as $item){ $i++; $right_pic=($i>2)?1:0; if($i>4){ $i=1; } 
-                        if(!in_array($item["title"],$fetched)){
-                        ?>
-                            <div class="treatment-box">
-                                <div class="row">
-                                
-                                <span style="display: none;" class="serviceID"><?php echo $item["id"];?></span>
+                        <?php
+                        $ii=0;
+                        foreach($sub_cats as $cates){ ?>
 
-                                    <div class="col-md-8">
-                                        <div class="treatment_content">
-                                            <div class="treatment-title"><?php echo $item['title']?> </div>
-                                            <div class="duration"><?php echo $item['period_min']; ?> mins</div>
-                                            
-                                        </div>
-                                    </div>
+                            <div class="tab-pane fade <?php if($ii == 0){echo "in active";} ?>" id="subcat-<?php echo $cates['subcat_id']; ?>" role="tabpanel" aria-labelledby="nav-home-tab">
 
-                                    <div class="col-md-4">
-                                        <span class="rate">From <span class="prices"><?php echo $item['price']; ?></span></span>
-										<i class="fa fa-question-circle question-mark"></i>
-                                        <span class="details_arrow">
-										
+                                <?php $fetched = array(); $i=0; foreach($data_list as $item){ $i++; $right_pic=($i>2)?1:0; if($i>4){ $i=1; }
+                                    if(!in_array($item["title"],$fetched)){
+                                        if($item['subcategory'] != $cates['subcat_id']){
+                                            continue;
+                                        }
+                                        ?>
+                                        <div class="treatment-box">
+                                            <div class="row">
+
+                                                <span style="display: none;" class="serviceID"><?php echo $item["id"];?></span>
+
+                                                <div class="col-md-8">
+                                                    <div class="treatment_content">
+                                                        <div class="treatment-title"><?php echo $item['title']?> </div>
+                                                        <div class="duration"><?php echo $item['period_min']; ?> mins</div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <span class="rate">From <span class="prices"><?php echo $item['price']; ?></span></span>
+                                                    <i class="fa fa-question-circle question-mark"></i>
+                                                    <span class="details_arrow">
+
                                             <i class="fa fa-chevron-up"></i>
                                         </span>
-                                    </div>
-                                </div>
-                                <div class="treatment-details">
-                                    <div class="row">
-                                        <div class="detailsDiv active">
-                                            <div class="col-sm-10 col-md-10">
-                                                <div class="detail">
-                                                    <p>
-                                                        <?php echo $item['service_description']; ?> 
-                                                    </p>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-2 col-md-2">
-                                                <div class="add_service">
-                                                    <i class="fa fa-plus-square-o"></i>
+                                            <div class="treatment-details">
+                                                <div class="row">
+                                                    <div class="detailsDiv active">
+                                                        <div class="col-sm-10 col-md-10">
+                                                            <div class="detail">
+                                                                <p>
+                                                                    <?php echo $item['service_description']; ?>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-2 col-md-2">
+                                                            <div class="add_service">
+                                                                <i class="fa fa-plus-square-o"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+
+                                        <?php
+                                        $fetched[] = $item["title"];
+                                    }
+                                }
+                                ?>
+
                             </div>
-                            
-                            
-                        <?php 
-                        $fetched[] = $item["title"];
-                            }
-                        }
-                         ?>
 
-                            
+                        <?php $ii++; ?>
 
-                            <!--<div class="treatment-box">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="treatment_content">
-                                            <div class="treatment-title">Cleaning Treatment</div>
-                                            <div class="duration">40 mins <span>-</span> 50 mins</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <span class="rate">From <span class="prices">$50</span></span>
-                                        <span class="details_arrow">
-                                            <i class="fa fa-chevron-down"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="treatment-details">
-                                    <div class="row">
-                                        <div class="detailsDiv">
-                                            <div class="col-sm-10 col-md-10">
-                                                <div class="detail active">
-                                                    <p>
-                                                        This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. 
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-2 col-md-2">
-                                                <div class="add_service">
-                                                    <i class="fa fa-plus-square-o"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="treatment-box">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="treatment_content">
-                                            <div class="treatment-title">Cleaning Treatment</div>
-                                            <div class="duration">40 mins <span>-</span> 50 mins</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <span class="rate">From <span class="prices">$50</span></span>
-                                        <span class="details_arrow">
-                                            <i class="fa fa-chevron-down"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="treatment-details">
-                                    <div class="row">
-                                        <div class="detailsDiv">
-                                            <div class="col-sm-10 col-md-10">
-                                                <div class="detail active">
-                                                    <p>
-                                                        This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. 
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-2 col-md-2">
-                                                <div class="add_service">
-                                                    <i class="fa fa-plus-square-o"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>-->
+                        <?php } ?>
 
-                        </div>
+                      <!--  <div class="tab-pane fade in active">
 
-                        <!--<div id="step2" class="tab-pane fade"></div>
-                        <div id="step3" class="tab-pane fade"></div>
-                        <div id="step4" class="tab-pane fade"></div>-->
+                        </div>-->
+
                     </div>
                 </div>
             </div>

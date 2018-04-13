@@ -635,3 +635,4 @@ $lang["Homes"] = "Homes";
 $lang["Holidayss"] = "Holidayss";
 $lang["service_descriptions"] = "service_descriptions";
 $lang["Service Description"] = "Service Description";
+$lang["Appointments Details"] = "Appointments Details";

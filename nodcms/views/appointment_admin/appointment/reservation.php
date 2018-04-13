@@ -97,7 +97,7 @@
                             </span>
                             </td>
                             <td><?php echo $item["fname"]; ?> <?php echo $item["lname"]; ?></td>
-                            <td><?php echo $item["service_name"]; ?></o>
+                            <td><?php echo $item["service_name"]; ?></td>
                             <td><?php echo $this->currency->format($item["price"]); ?></td>
                             <td>
                                 <?php echo my_int_date($item["created_date"]); ?>

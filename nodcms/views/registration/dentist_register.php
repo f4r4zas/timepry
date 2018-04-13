@@ -930,11 +930,15 @@ $(document).ready(function(){
  $('[data-toggle="tooltip"]').tooltip(); 
  
 	$("input").change(function(){
-			
-		/* if(){
-			
-		}	 */
-	
+
+        if(!$(this).attr("data-validation")){
+            $(this).addClass("greener");
+        }
+
+        if($(this).val() == ""){
+            $(this).removeClass("greener");
+        }
+
 	});
 	
 	

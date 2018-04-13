@@ -356,7 +356,7 @@ class Appointment_model extends CI_Model
         $this->db->where('active',1);
         if($limit!=NULL) $this->db->limit($limit, $offset);
         $query = $this->db->get();
-		
+
         return $query->result_array();
 	}
 
@@ -474,8 +474,32 @@ class Appointment_model extends CI_Model
         $this->db->from('r_reviews');
 		$this->db->where('provider_id',$providerId);
         $query = $this->db->get();
+
         return $query->result_array();
 	}
-	
+
+	public function checkIfquestions($userId){
+        $this->db->select("*");
+        $this->db->from('user_questions');
+        $this->db->where('user_id',$userId);
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function updateQuestion($data,$userId){
+
+        $this->db->where('user_id',$userId);
+        $this->db->update('user_questions',$data);
+         $this->db->last_query();
+
+    }
+
+    public function insertQuestions($data){
+
+        $this->db->insert('user_questions',$data);
+        return $this->db->insert_id();
+
+    }
 	
 }

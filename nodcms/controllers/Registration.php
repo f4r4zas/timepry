@@ -199,7 +199,7 @@ class Registration extends NodCMS_Controller {
     
     function dentistRegistration($step =1,$lang="en")
     {
-		print_r($_FILE);
+
 		
         $status = true;
 		$error = array();
@@ -905,8 +905,7 @@ class Registration extends NodCMS_Controller {
     // Reservation messages page after any active
     function userRegistrationMessage($lang="en"){
 		
-		
-		
+
         $this->db->set('status', 1);
         $this->db->set('active_register', 1);
         $this->db->where('user_id', $this->session->userdata('user_id'));
@@ -926,17 +925,15 @@ class Registration extends NodCMS_Controller {
 		
         //$this->preset($lang);
 		
-        if($this->session->flashdata('message')){
-            $message = $this->session->flashdata('message');
+
+            //$message = $this->session->flashdata('message');
             $this->data['title'] = _l('User Registration', $this);
-            $this->data['message_title'] = $message['title'];
-            $this->data['message'] = $message['body'];
-            $this->data['message_class'] = $message['class'];
+            $this->data['message_title'] = "User registration";
+            $this->data['message'] = "User registration successful";
+            $this->data['message_class'] = "alert alert-info";
             $this->data['content']=$this->load->view($this->mainTemplate.'/user_registration_message',$this->data,true);
             $this->load->view($this->frameTemplate, $this->data);
-        }else{
-            //redirect(base_url().$lang);
-        }
+
     }
     
     
@@ -1019,7 +1016,7 @@ class Registration extends NodCMS_Controller {
     // Validation name format function
     public function formRulesName($value)
     {
-        if (preg_match('/[\'\/~`\!@#\$£€%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\0-9]/', $value) == TRUE) {
+        if (preg_match('/[\'\/~`\!@#\$ï¿½ï¿½%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\0-9]/', $value) == TRUE) {
             $this->form_validation->set_message('formRulesName', '{field} must contain letters and spaces only.');
             $errors[] = 'Name must contain letters and spaces only';
             return FALSE;
@@ -1029,7 +1026,7 @@ class Registration extends NodCMS_Controller {
     }
 	
 	public function formRulesDentalName(){
-		 if (preg_match('/[\'\/~`\!@#\$£€%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\0-9]/', $value) == TRUE) {
+		 if (preg_match('/[\'\/~`\!@#\$ï¿½ï¿½%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\0-9]/', $value) == TRUE) {
             $this->form_validation->set_message('formRulesName', '{field} must contain letters and spaces only.');
             $errors[] = 'Name must contain letters and spaces only';
             return FALSE;

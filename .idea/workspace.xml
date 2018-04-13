@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="76756b0e-b532-4e55-ac91-c84e2195eb7c" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/timepry.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nodcms/helpers/valid-date_helper.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nodcms/views/appointment_admin/all_appointments.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nodcms/views/appointment_admin/public_profile.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/upload_file/images/1523586917-images.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/metronic/global/plugins/select2/select2.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/metronic/global/plugins/select2/select2.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nodcms/controllers/Appointment.php" beforeDir="false" afterPath="$PROJECT_DIR$/nodcms/controllers/Appointment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nodcms/controllers/Appointment_admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/nodcms/controllers/Appointment_admin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nodcms/controllers/Nodcms_admin_sign.php" beforeDir="false" afterPath="$PROJECT_DIR$/nodcms/controllers/Nodcms_admin_sign.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nodcms/controllers/Registration.php" beforeDir="false" afterPath="$PROJECT_DIR$/nodcms/controllers/Registration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nodcms/helpers/user_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/nodcms/helpers/user_helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nodcms/language/english/backend_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/nodcms/language/english/backend_lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nodcms/models/Appointment_admin_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/nodcms/models/Appointment_admin_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nodcms/models/Appointment_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/nodcms/models/Appointment_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nodcms/views/appointment_admin/appointment/ajax_admin_comments.php" beforeDir="false" afterPath="$PROJECT_DIR$/nodcms/views/appointment_admin/appointment/ajax_admin_comments.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nodcms/views/appointment_admin/appointment/reservation.php" beforeDir="false" afterPath="$PROJECT_DIR$/nodcms/views/appointment_admin/appointment/reservation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nodcms/views/registration/dentist_register.php" beforeDir="false" afterPath="$PROJECT_DIR$/nodcms/views/registration/dentist_register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nodcms/views/registration/user_registration_message.php" beforeDir="false" afterPath="$PROJECT_DIR$/nodcms/views/registration/user_registration_message.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nodcms/views/reservation/provider_detail.php" beforeDir="false" afterPath="$PROJECT_DIR$/nodcms/views/reservation/provider_detail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nodcms/views/reservation/providers.php" beforeDir="false" afterPath="$PROJECT_DIR$/nodcms/views/reservation/providers.php" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Appointment_admin.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nodcms/controllers/Appointment_admin.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="253">
+              <caret line="2240" column="9" lean-forward="true" selection-start-line="2235" selection-start-column="8" selection-end-line="2240" selection-end-column="9" />
+              <folding>
+                <element signature="e#25#32#1" expanded="true" />
+                <element signature="e#25#32#1" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ajax_admin_comments.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/nodcms/views/appointment_admin/appointment/ajax_admin_comments.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="180" column="17" lean-forward="true" selection-start-line="180" selection-start-column="17" selection-end-line="180" selection-end-column="17" />
+              <folding>
+                <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user_helper.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nodcms/helpers/user_helper.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Appointment_model.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nodcms/models/Appointment_model.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="493" column="7" selection-start-line="493" selection-start-column="7" selection-end-line="493" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="public_profile.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nodcms/views/appointment_admin/public_profile.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="141" column="39" lean-forward="true" selection-start-line="13" selection-start-column="8" selection-end-line="141" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Appointment_admin_model.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nodcms/models/Appointment_admin_model.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="297">
+              <caret line="1750" column="45" selection-start-line="1750" selection-start-column="45" selection-end-line="1750" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>inser</find>
+      <find>MM/DD/YYYY</find>
+      <find>Your request was wrong!</find>
+      <find>getAllUser</find>
+      <find>Details</find>
+      <find>reservation</find>
+      <find>20% OFF</find>
+      <find>user_D</find>
+      <find>$condition</find>
+      <find>treatment</find>
+      <find>condition</find>
+      <find>data_lis</find>
+      <find>getTreatments</find>
+      <find>update4</find>
+      <find>update3</find>
+      <find>address</find>
+      <find>reservationStaffPermission</find>
+      <find>$user_info</find>
+      <find>msgs-graph</find>
+      <find>$user_reservation</find>
+      <find>dashboard</find>
+      <find>Welcome</find>
+      <find>patien</find>
+      <find>include('footer.php');</find>
+      <find>$(&quot;input&quot;).change(function(){</find>
+      <find>userProfiles</find>
+      <find>updateQuestion</find>
+      <find>Appointment Details</find>
+      <find>success</find>
+      <find>user-profile-details</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/nodcms/helpers/avail_date_helper.php" />
+        <option value="$PROJECT_DIR$/nodcms/helpers/valid-date_helper.php" />
+        <option value="$PROJECT_DIR$/nodcms/views/reservation/providers.php" />
+        <option value="$PROJECT_DIR$/nodcms/views/registration/user_registration_message.php" />
+        <option value="$PROJECT_DIR$/nodcms/views/nodcms_admin_login.php" />
+        <option value="$PROJECT_DIR$/nodcms/controllers/Nodcms_admin_sign.php" />
+        <option value="$PROJECT_DIR$/nodcms/helpers/nodcms_form_helper.php" />
+        <option value="$PROJECT_DIR$/.htaccess" />
+        <option value="&lt;1f816d33-379c-4b13-ba4e-5dc2b65c8ee6&gt;/nodcms/controllers/Appointment_admin.php" />
+        <option value="$PROJECT_DIR$/nodcms/views/appointment_admin/account_setting.php" />
+        <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/Update/nodcms/views/appointment_admin/appointment/ajax_admin_comments.php" />
+        <option value="$PROJECT_DIR$/nodcms/views/appointment_admin/appointment/user_dashboard.php" />
+        <option value="$PROJECT_DIR$/nodcms/controllers/Appointment.php" />
+        <option value="$PROJECT_DIR$/nodcms/views/reservation/provider_detail.php" />
+        <option value="$PROJECT_DIR$/nodcms/controllers/Registration.php" />
+        <option value="$PROJECT_DIR$/nodcms/views/appointment_admin/appointment/reservation.php" />
+        <option value="$PROJECT_DIR$/nodcms/views/appointment_admin/appointment/all_appointments.php" />
+        <option value="$PROJECT_DIR$/nodcms/views/appointment_admin/all_appointments.php" />
+        <option value="$PROJECT_DIR$/nodcms/views/registration/dentist_register.php" />
+        <option value="$PROJECT_DIR$/nodcms/models/Appointment_admin_model.php" />
+        <option value="$PROJECT_DIR$/nodcms/views/appointment_admin/public_profile.php" />
+        <option value="$PROJECT_DIR$/nodcms/models/Appointment_model.php" />
+        <option value="$PROJECT_DIR$/nodcms/controllers/Appointment_admin.php" />
+        <option value="$PROJECT_DIR$/nodcms/logs/log-2018-04-13.php" />
+        <option value="$PROJECT_DIR$/nodcms/helpers/user_helper.php" />
+        <option value="$PROJECT_DIR$/nodcms/views/appointment_admin/appointment/ajax_admin_comments.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-152" />
+    <option name="y" value="-14" />
+    <option name="width" value="1346" />
+    <option name="height" value="688" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="timepry" type="b2602c69:ProjectViewProjectNode" />
+              <item name="timepry" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="timepry" type="b2602c69:ProjectViewProjectNode" />
+              <item name="timepry" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="timepry" type="b2602c69:ProjectViewProjectNode" />
+              <item name="timepry" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="nodcms" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="timepry" type="b2602c69:ProjectViewProjectNode" />
+              <item name="timepry" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="nodcms" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="timepry" type="b2602c69:ProjectViewProjectNode" />
+              <item name="timepry" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="nodcms" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="helpers" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="timepry" type="b2602c69:ProjectViewProjectNode" />
+              <item name="timepry" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="nodcms" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="logs" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="timepry" type="b2602c69:ProjectViewProjectNode" />
+              <item name="timepry" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="nodcms" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="models" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="timepry" type="b2602c69:ProjectViewProjectNode" />
+              <item name="timepry" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="nodcms" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="timepry" type="b2602c69:ProjectViewProjectNode" />
+              <item name="timepry" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="nodcms" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="appointment_admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="timepry" type="b2602c69:ProjectViewProjectNode" />
+              <item name="timepry" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="nodcms" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="reservation" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\xammp\htdocs\timepry\nodcms\views\appointment_admin" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="76756b0e-b532-4e55-ac91-c84e2195eb7c" name="Default" comment="" />
+      <created>1523033624912</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1523033624912</updated>
+      <workItem from="1523033637843" duration="20525000" />
+      <workItem from="1523136168816" duration="45000" />
+      <workItem from="1523296276260" duration="10224000" />
+      <workItem from="1523370188623" duration="16422000" />
+      <workItem from="1523444771484" duration="55766000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="102982000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <layout>
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="File Transfer" visible="true" weight="0.122112215" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="right" id="Remote Host" order="3" weight="0.18683812" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2065053" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/nodcms/controllers/Appointment_admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36669">
+          <caret line="2157" column="37" selection-start-line="2157" selection-start-column="29" selection-end-line="2157" selection-end-column="37" />
+          <folding>
+            <element signature="e#25#32#1" expanded="true" />
+            <element signature="e#25#32#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/models/Appointment_admin_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27200">
+          <caret line="1600" column="23" selection-start-line="1600" selection-start-column="13" selection-end-line="1600" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/controllers/Appointment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20672">
+          <caret line="1216" column="33" lean-forward="true" selection-start-line="1216" selection-start-column="33" selection-end-line="1216" selection-end-column="33" />
+          <folding>
+            <element signature="e#25#32#1" expanded="true" />
+            <element signature="e#25#32#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/views/appointment_admin/public_profile.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2023">
+          <caret line="119" column="32" lean-forward="true" selection-start-line="119" selection-start-column="32" selection-end-line="119" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/controllers/Appointment_admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31008">
+          <caret line="1824" column="3" selection-start-line="1824" selection-start-column="3" selection-end-line="1824" selection-end-column="3" />
+          <folding>
+            <element signature="e#25#32#1" expanded="true" />
+            <element signature="e#25#32#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/views/appointment_admin/account_setting.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/helpers/reviews_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="25" lean-forward="true" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/views/registration/user_registration_message.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="23" lean-forward="true" selection-start-column="23" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/helpers/valid-date_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="41" column="16" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/views/nodcms_admin_login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="77" column="63" selection-start-line="77" selection-start-column="63" selection-end-line="77" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/config/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/config/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="721">
+          <caret line="89" column="11" lean-forward="true" selection-start-line="89" selection-start-column="11" selection-end-line="89" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/controllers/General.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="238" column="9" lean-forward="true" selection-start-line="238" selection-start-column="9" selection-end-line="238" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/views/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="145" column="90" lean-forward="true" selection-start-line="145" selection-start-column="90" selection-end-line="145" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/views/appointment_admin/account_setting.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="35" lean-forward="true" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/models/Registration_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-357" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/helpers/nodcms_form_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="44" lean-forward="true" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="63" column="37" selection-start-line="63" selection-start-column="37" selection-end-line="63" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/controllers/Nodcms_admin_sign.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="51" column="50" selection-start-line="51" selection-start-column="33" selection-end-line="51" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/views/appointment_admin/appointment/reservation_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="30" lean-forward="true" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Update/nodcms/views/appointment_admin/appointment/ajax_admin_comments.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="8" column="38" lean-forward="true" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/views/reservation/providers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="40" lean-forward="true" selection-start-line="2" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/views/appointment_admin/appointment/reservation_print.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-95">
+          <caret line="14" column="48" lean-forward="true" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/views/appointment_admin/appointment/providers.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/views/reservation/provider_detail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="355" column="52" selection-start-line="355" selection-start-column="52" selection-end-line="355" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/controllers/Dental.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1030">
+          <caret line="668" column="55" lean-forward="true" selection-start-line="668" selection-start-column="55" selection-end-line="668" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/controllers/Registration.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="730" column="76" selection-start-line="730" selection-start-column="76" selection-end-line="730" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/controllers/Appointment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-409">
+          <caret line="232" column="23" selection-start-line="232" selection-start-column="19" selection-end-line="232" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/views/appointment_admin/all_appointments.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="339" selection-start-line="339" selection-end-line="339" />
+          <folding>
+            <element signature="e#495#518#0#HTML" expanded="true" />
+            <element signature="e#885#906#0#HTML" expanded="true" />
+            <element signature="e#6848#6877#0#HTML" expanded="true" />
+            <element signature="e#7428#7458#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/views/appointment_admin/appointment/user_dashboard.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="30" lean-forward="true" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/views/appointment_admin/appointment/reservation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="88" column="70" selection-start-line="88" selection-start-column="70" selection-end-line="88" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/views/registration/dentist_register.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="938" column="31" selection-start-line="938" selection-start-column="20" selection-end-line="938" selection-end-column="31" />
+          <folding>
+            <element signature="e#6#207#0#PHP" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/front/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="3334" column="8" selection-start-line="3334" selection-start-column="1" selection-end-line="3334" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/views/appointment_admin/setting.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/models/Appointment_admin_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="1750" column="45" selection-start-line="1750" selection-start-column="45" selection-end-line="1750" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/controllers/Appointment_admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="2240" column="9" lean-forward="true" selection-start-line="2235" selection-start-column="8" selection-end-line="2240" selection-end-column="9" />
+          <folding>
+            <element signature="e#25#32#1" expanded="true" />
+            <element signature="e#25#32#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/views/appointment_admin/public_profile.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="141" column="39" lean-forward="true" selection-start-line="13" selection-start-column="8" selection-end-line="141" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/models/Appointment_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="493" column="7" selection-start-line="493" selection-start-column="7" selection-end-line="493" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/logs/log-2018-04-13.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/helpers/user_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodcms/views/appointment_admin/appointment/ajax_admin_comments.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="180" column="17" lean-forward="true" selection-start-line="180" selection-start-column="17" selection-end-line="180" selection-end-column="17" />
+          <folding>
+            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

@@ -1744,5 +1744,13 @@ class Appointment_admin_model extends CI_Model{
         $query = $this->db->get();
         return $query->result_array();
 	}
+
+	public function getProfile($userId){
+        $this->db->select("*");
+        $this->db->from('user_questions');
+        $this->db->where("user_id", $userId);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 	
 }

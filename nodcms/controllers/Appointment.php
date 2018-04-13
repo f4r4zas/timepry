@@ -94,6 +94,11 @@ class Appointment extends NodCMS_Controller {
 				'treatment_cat' => $this->input->get("treatmentSubcatId"),
 				'search_dental_clinic' => $this->input->get("search_dental_clinic")
 			);
+			
+			if(!empty($this->input->get("search_dental_clinic"))){
+				$provider_condition['dateSearch'] = $this->input->get("search_dental_clinic"); 
+			}
+			
 				
 			 $this->preset($lang);
 			$count = $this->Appointment_model->countProvider();
@@ -175,7 +180,8 @@ class Appointment extends NodCMS_Controller {
 		if(!empty($condition)){
 				$this->data['data_list'] = $this->Appointment_model->getCustomProvider($condition, $config['per_page'], $config['per_page']*$page);
 		}
-		 
+
+		//$this->data['data_list']['subcats'] = $this->getTreatments();
 		
         if(count($this->data['data_list'])!=0){
             foreach($this->data['data_list'] as $key=>$item){
@@ -185,7 +191,7 @@ class Appointment extends NodCMS_Controller {
                     // Highlghte search words
                     $providerExtension['name'] = str_replace($str_search, $str_replace, $providerExtension['name']);
                     // Replace translated name and description
-                    $this->data['data_list'][$key]['provider_name'] = $providerExtension['name'];
+                    //$this->data['data_list'][$key]['provider_name'] = $providerExtension['name'];
                     $this->data['data_list'][$key]['provider_description'] = $providerExtension['full_description'];
                 }else{
                     $this->data['data_list'][$key]['provider_description'] = '<p><i class="fa fa-warning font-red"></i> '
@@ -250,6 +256,10 @@ class Appointment extends NodCMS_Controller {
         
 	
 		$this->data['reviews'] = $this->Appointment_model->getReviews($this->data['provider_id']);
+
+		$this->data['sub_cats'] = $this->getTreatments();
+
+
 		
 		$this->data['content']=$this->load->view('reservation/provider_detail',$this->data,true);
 		
@@ -1211,20 +1221,24 @@ class Appointment extends NodCMS_Controller {
 	public function updateReviewReplay(){
 		
 		if($this->input->post()){
-
 			$replay = $this->input->post("comment_replay");
 			$id = $this->input->post("review_id");
 			$update_data = array("comment_replay"=>$replay);
 			$conditions = array("id"=>$id);
 			$this->db->update("r_reviews", $update_data, $conditions);
-		
 		}
 		
 	}
 	
 
+	public function getTreatments(){
 
+        $this->db->select("*");
+        $this->db->from("subcategory");
+        $query = $this->db->get();
+        return $query->result_array();
 
+    }
 	
 	
 }

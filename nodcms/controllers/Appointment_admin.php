@@ -14,6 +14,10 @@ class Appointment_admin extends NodCMS_Controller
     function __construct(){
         // load construct with backend prepared function
         parent::__construct('backend');
+        if($this->session->userdata('group') == 20){
+            $this->reservationPatientPermission();
+        }
+
         // Stable Dental Office menu for single provider users
         if($this->_website_info["appointment_multiowner"] != 1
             && !$this->session->has_userdata("provider_id")
@@ -25,6 +29,7 @@ class Appointment_admin extends NodCMS_Controller
                 redirect(APPOINTMENT_ADMIN_URL."dashboard");
             }
         }
+
         /*
          * # Important: This part set user access
          *   1. Check admin access to manage managers
@@ -46,39 +51,57 @@ class Appointment_admin extends NodCMS_Controller
             'providerManagerRemove',
             'settings',
         );
+
         if($this->session->userdata('group') != 1 && $this->session->userdata('group') != 100){
             $this->frameTemplate .= '_staff';
         }
+
+        //$this->accountSetting();
+
         if(!in_array($this->router->fetch_method(), array('index', 'accountSettings'))){
+
+
+
             // Check admin access pages
             if(!in_array($this->session->userdata('group'), array(1, 100)) || !in_array($this->router->fetch_method(), $adminPages)){
                 // Check Selected a provider
+
+
                 if(!$this->session->has_userdata('provider_id')){
-                    redirect(APPOINTMENT_ADMIN_URL);
+                        //die();
+                        //redirect(APPOINTMENT_ADMIN_URL);
+                        //Normal user requesting edit option
+
                 }
                 $provider_id = $this->session->userdata('provider_id');
+
+                if($this->session->userdata('group') == 20){
+                    $this->provider_group = 20;
+                }
+
+
                 if($this->session->userdata('group_id')!=1 && $this->session->userdata('group_id')!=100){
                     $where = NULL;
                 }else{
                     $where = array('active'=>1);
                 }
                 $provider = $this->Appointment_admin_model->getProviderById($provider_id, $where);
-                if(count($provider)!=0){
+                if(count($provider)!=0 || $this->session->userdata('group')==20) {
                     $provider = reset($provider);
                     $this->provider = $provider;
                     // Get provider manager from DB
-                    $where = array('r_provider_admins.user_id'=>$this->session->userdata('user_id'));
+                    $where = array('r_provider_admins.user_id' => $this->session->userdata('user_id'));
                     $providerManager = $this->Appointment_admin_model->getProviderManagerById($provider_id, $where);
                     // Check admin access
-                    if(count($providerManager)==0 && in_array($this->session->userdata('group'), array(1, 100))){
+                    if (count($providerManager) == 0 && in_array($this->session->userdata('group'), array(1, 100))) {
                         // Set a message for admin
                         $this->data['admin_permission_warning'] = _l('This provider is not yours. You have access it because your account is admin.', $this);
                         // Set admin permissions
                         $this->provider_group = 1;
                         // Check no access
                     }elseif(count($providerManager)==0){
-                        $this->session->set_flashdata('error', _l('Your request was wrong!', $this));
-                        redirect(APPOINTMENT_ADMIN_URL);
+                        //$this->session->set_flashdata('error', _l('Your request was wrong!', $this));
+                        //redirect(APPOINTMENT_ADMIN_URL);
                         // Normal access
                     }else{
                         if($this->session->userdata('group')==1 && $providerManager[0]['group_id']!=1){
@@ -91,16 +114,20 @@ class Appointment_admin extends NodCMS_Controller
                                 $this->data['justOneDentalOffice'] = TRUE;
                             }
                             $this->provider_group = $providerManager[0]['group_id'];
-                        } 
+
+                        }
                     }
                     $this->data['provider_data'] = $provider;
                     // Check user access
+
                     if($this->provider_group==21) {
                         $this->reservationStaffPermission();
                     }elseif($this->provider_group==22) {
                         $this->reservationAssistantPermission();
                     }elseif($this->provider_group == 1) {
                         $this->reservationAdminPermission();
+                    }elseif($this->provider_group==20){
+                        $this->reservationPatientPermission();
                     }
                     else
                     {
@@ -133,8 +160,8 @@ class Appointment_admin extends NodCMS_Controller
         $this->pagination->initialize($config);
         $this->data['pagination'] = $this->pagination->create_links();
     }
-    
-    
+
+
     function getEmail(){
         if($this->input->input_stream('text')){
             $text = $this->input->post('text',TRUE);
@@ -146,7 +173,7 @@ class Appointment_admin extends NodCMS_Controller
             echo json_encode(array('status'=>'success', 'data'=>$result));
         }else{
             echo json_encode(array('status'=>'error', 'error'=>'Not Set'));
-        } 
+        }
     }
 
     function getUsername(){
@@ -160,14 +187,14 @@ class Appointment_admin extends NodCMS_Controller
             echo json_encode(array('status'=>'success', 'data'=>$result));
         }else{
             echo json_encode(array('status'=>'error', 'error'=>'Not Set'));
-        } 
+        }
     }
 
     // Admin Homepage (Choose a provider)
     function index($id=NULL)
     {
         if($id!=NULL){
-			
+
             if($this->session->userdata('group_id')!=1 && $this->session->userdata('group_id')!=100){
                 $where = NULL;
             }else{
@@ -230,9 +257,9 @@ class Appointment_admin extends NodCMS_Controller
             // # Users Home
             $where = array('r_provider_admins.user_id'=>$this->session->userdata('user_id'));
             $this->data['data'] = $this->Appointment_admin_model->getProviderManagers(NULL, $where);
-            
+
             //print_r(count($this->data['data']));
-            
+
             if(count($this->data['data']) != 0){
                 if(count($this->data['data'])==1){
                     redirect(APPOINTMENT_ADMIN_URL.'index/'.$this->data['data'][0]['provider_id']);
@@ -243,10 +270,12 @@ class Appointment_admin extends NodCMS_Controller
                 $loadPage = "user_dashboard";
             }
         }
-        
-        
+
+
         //print_r($loadPage);
+
         $this->data['content']=$this->load->view($this->mainTemplate."/appointment/".$loadPage,$this->data,TRUE);
+
         $this->loadView();
     }
 
@@ -607,7 +636,7 @@ class Appointment_admin extends NodCMS_Controller
 	function treatment(){
 		$provider_id = $this->session->userdata("provider_id");
 		$all_treatments =  $this->Appointment_admin_model->getAllTreatment($provider_id);
-		
+
 		$_SESSION["back_redirect"]=APPOINTMENT_ADMIN_URL."treatment";
         $days = array(
             _l('Sun',$this),
@@ -618,9 +647,9 @@ class Appointment_admin extends NodCMS_Controller
             _l('Fri',$this),
             _l('Sat',$this)
         );
-  
+
 		$this->data['data'] = $all_treatments;
-        
+
 		/* foreach($this->data['data'] as &$item){
             $item['languages'] = $this->Appointment_admin_model->getExistedServicesLanguage($item['service_id']);
             $item['work_times'] = array();
@@ -630,20 +659,20 @@ class Appointment_admin extends NodCMS_Controller
                 }
             }
         } */
-		
+
         $this->data['title']=_l("All Treatment",$this);
-		
+
         $this->data['sub_title']=_l("Treatments list",$this);
         $this->data['breadcrumb']=array(
             array('title'=>$this->data['sub_title'])
         );
         $this->data['page']='treatment';
         $this->data['content']=$this->load->view($this->mainTemplate."/appointment/".$this->data['page'],$this->data,TRUE);
-		
-		
+
+
         $this->loadView();
 	}
-	
+
 	 function treatmentEdit($id=null)
     {
         if($id!=null){
@@ -693,9 +722,9 @@ class Appointment_admin extends NodCMS_Controller
         $this->data['content']=$this->load->view($this->mainTemplate."/appointment/".$this->data['page'],$this->data,TRUE);
         $this->loadView();
     }
-	
+
 	function treatmentUpdate(){
-		
+
 		if($this->input->post()){
 			if($this->Appointment_admin_model->updateTreatment($this->input->post(),$this->input->post('id'))){
 				  $this->session->set_flashdata('success', _l('Treatment updated successfully!',$this));
@@ -707,10 +736,10 @@ class Appointment_admin extends NodCMS_Controller
 		}else{
 			redirect(APPOINTMENT_ADMIN_URL.'treatment');
 		}
-		
-	
+
+
 	}
-	
+
 	function treatmentRemove($id){
 			if($id){
 				if($this->Appointment_admin_model->treatmentRemove($id)){
@@ -724,7 +753,7 @@ class Appointment_admin extends NodCMS_Controller
 				redirect(APPOINTMENT_ADMIN_URL.'treatment');
 			}
 	}
-	
+
     // Services list
     function services()
     {
@@ -755,7 +784,7 @@ class Appointment_admin extends NodCMS_Controller
         );
         $this->data['page']='service';
         $this->data['content']=$this->load->view($this->mainTemplate."/appointment/".$this->data['page'],$this->data,TRUE);
-		
+
         $this->loadView();
     }
 
@@ -905,7 +934,7 @@ class Appointment_admin extends NodCMS_Controller
                     $this->data['data'][$i] =  $this->Appointment_admin_model->getAllPeriods($id, $i);
                 }
                 $this->data['days'] = array(
-                   
+
                     _l('Monday',$this),
                     _l('Tuesday',$this),
                     _l('Wednesday',$this),
@@ -923,13 +952,13 @@ class Appointment_admin extends NodCMS_Controller
                     array('title'=>$this->data['sub_title'])
                 );
                 $this->data['page']='period';
-                
+
                 $this->db->select('provider_id,service_id');
             $this->db->from('r_services');
             $this->db->where('service_id',$id);
             $provider_id = $this->db->get()->result();
             $this->data['this_provider_id'] = $provider_id[0]->provider_id;
-                
+
                 $this->data['content']=$this->load->view($this->mainTemplate."/appointment/".$this->data['page'],$this->data,TRUE);
                 $this->loadView();
             }
@@ -1211,7 +1240,7 @@ class Appointment_admin extends NodCMS_Controller
     // Appointment's request search page
     function reservation_search($search_text,$page=1)
     {
-        
+
         $search_text = urldecode($search_text);
         $conditions = array();
         $search = explode(' ',$search_text);
@@ -1506,7 +1535,7 @@ class Appointment_admin extends NodCMS_Controller
             redirect(APPOINTMENT_ADMIN_URL."holidays");
         }
     }
-    
+
     // Holidays get data for edit with ajax
     function holidaysEdit($id=null)
     {
@@ -1525,7 +1554,7 @@ class Appointment_admin extends NodCMS_Controller
             exit;
         }
     }
-    
+
     // Holidays remove action
     function holidaysRemove($id)
     {
@@ -1553,7 +1582,7 @@ class Appointment_admin extends NodCMS_Controller
             redirect(APPOINTMENT_ADMIN_URL."holidays/");
         }
     }
-    
+
     // Extra fields list
     function extraFields()
     {
@@ -1566,7 +1595,7 @@ class Appointment_admin extends NodCMS_Controller
         $this->data['content']=$this->load->view($this->mainTemplate.'/data_list',$this->data,TRUE);
         $this->loadView();
     }
-    
+
     // Extra-Fields add/edit form
     function extraFieldsEdit($id=null)
     {
@@ -1597,7 +1626,7 @@ class Appointment_admin extends NodCMS_Controller
         $this->data['content']=$this->load->view($this->mainTemplate.'/appointment/extra_fields_edit',$this->data,TRUE);
         $this->loadView();
     }
-    
+
     // Extra-Fields add/edit action
     function extraFieldsManipulate($id=null)
     {
@@ -1615,7 +1644,7 @@ class Appointment_admin extends NodCMS_Controller
         }
         redirect(APPOINTMENT_ADMIN_URL."extraFields");
     }
-    
+
     // Extra-Fields remove action
     function extraFieldsRemove($id=0)
     {
@@ -1630,8 +1659,8 @@ class Appointment_admin extends NodCMS_Controller
         }
         redirect(APPOINTMENT_ADMIN_URL."extraFields");
     }
-    
-    // Calendar page (Appointment's requests on calendar) 
+
+    // Calendar page (Appointment's requests on calendar)
     function calendar($date=null)
     {
         if($this->input->is_ajax_request()){
@@ -1689,7 +1718,7 @@ class Appointment_admin extends NodCMS_Controller
             $this->loadView();
         }
     }
-    
+
     // Appointment system settings form and action
     function settings()
     {
@@ -1748,26 +1777,39 @@ class Appointment_admin extends NodCMS_Controller
     // Users account setting page
     function accountSetting()
     {
+
         $this->load->library('form_validation');
-        if($this->input->input_stream('data')){
+
             // Check admin(group_id = 1), assistant(group_id = 22) and staff(group_id = 21) access
             if (in_array($this->session->userdata['group'],array(1, 20,21))) {
                 $this->form_validation->set_rules('data[username]', _l('Username',$this), 'required|callback_validateUsername');
                 $this->form_validation->set_rules('data[email]', _l('Email Address',$this), 'required|valid_email|callback_emailUnique');
                 $this->form_validation->set_rules('data[fullname]', _l('Full Name',$this), 'required|callback_formRulesName');
                 $this->form_validation->set_rules('data[password]', _l('Password',$this), 'xss_clean');
-                $this->form_validation->set_rules('data[language_id]', _l('Language',$this), 'required|is_natural');
+               // $this->form_validation->set_rules('data[language_id]', _l('Language',$this), 'required|is_natural');
+                $this->form_validation->set_rules('data[language_id]', _l('Language',$this), 'is_natural');
                 if ($this->form_validation->run() == FALSE){
                     $this->session->set_flashdata('static_error',validation_errors());
-                    redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
+                    //redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
                 }else{
+
                     $post_data = $this->input->post('data',TRUE);
-                    $data = array(
-                        'fullname'=>$post_data['fullname'],
-                        'username'=>$post_data['username'],
-                        'email'=>$post_data['email'],
-                        'language_id'=>$post_data['language_id']
-                    );
+                    if($this->session->userdata("group")){
+                        $data = array(
+                            'fullname'=>$post_data['fullname'],
+                            //'username'=>$post_data['username'],
+                            'email'=>$post_data['email'],
+                            //'language_id'=>$post_data['language_id']
+                        );
+                    }else{
+                        $data = array(
+                            'fullname'=>$post_data['fullname'],
+                            'username'=>$post_data['username'],
+                            'email'=>$post_data['email'],
+                            'language_id'=>$post_data['language_id']
+                        );
+                    }
+
                     if($post_data['password']!='') $data['password']=$post_data['password'];
                     if ($this->Nodcms_admin_model->user_manipulate($data,$this->session->userdata['user_id']))
                     {
@@ -1793,21 +1835,25 @@ class Appointment_admin extends NodCMS_Controller
             }else{
                 $this->session->set_flashdata('error', _l("Unfortunately you do not have permission to this part of system.",$this));
             }
-            redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
-        }
+            //redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
+
         $this->data['data'] = $this->userdata;
         $this->data['languages'] = $this->Nodcms_admin_model->get_all_language();
+
         $this->data['content']=$this->load->view($this->mainTemplate.'/account_setting',$this->data,true);
+
         $this->data['title'] = _l("Account setting",$this);
         $this->data['page'] = "account";
-		
+
         $this->loadView();
     }
 
     // End function for change
     private function loadView(){
+
         $this->selectedMenu($this->data['page']);
         $this->load->view($this->frameTemplate,$this->data);
+
     }
 
     // Add selected classes to menus
@@ -1867,6 +1913,8 @@ class Appointment_admin extends NodCMS_Controller
             'myProviderManagerNotificationEmail',
             'portableBtn',
             'reservationGroupReminder',
+            'accountSetting',
+            'userProfiles',
         );
         if(!in_array($this->router->fetch_method(),$acceptableMethods)){
             $this->session->set_flashdata('error', _l("Unfortunately you do not have permission to this part of system.",$this));
@@ -2001,6 +2049,8 @@ class Appointment_admin extends NodCMS_Controller
             'servicePeriodsManipulate',
             'servicePeriodRemove',
             'reservationGroupReminder',
+            'accountSetting',
+            'userProfiles',
         );
         if(!in_array($this->router->fetch_method(),$acceptableMethods)){
             $this->session->set_flashdata('error', _l("Unfortunately you do not have permission to this part of system.",$this));
@@ -2046,7 +2096,7 @@ class Appointment_admin extends NodCMS_Controller
                 'title'=>_l('Practitioners',$this),
                 'class'=>'',
                 'addOn'=>'',
-				
+
             ),
             'extra_fields'=>array(
                 'url'=>APPOINTMENT_ADMIN_URL.'extraFields',
@@ -2069,7 +2119,8 @@ class Appointment_admin extends NodCMS_Controller
             'reservationAction',
             'reservationSearch',
             'reservationGroupReminder',
-            'accountSetting'
+            'accountSetting',
+            'userProfiles',
         );
         if(!in_array($this->router->fetch_method(),$acceptableMethods)){
             $this->session->set_flashdata('error', _l("Unfortunately you do not have permission to this part of system.",$this));
@@ -2113,6 +2164,99 @@ class Appointment_admin extends NodCMS_Controller
             ),
         );
     }
-	
-	
+
+    private function reservationPatientPermission()
+    {
+        // Acceptable Methods for staffs
+        $acceptableMethods = array(
+            'index',
+            'dashboard',
+            'reservation',
+            'reservationDetails',
+            'reservationAction',
+            'reservationSearch',
+            'reservationGroupReminder',
+            'accountSetting',
+            'userProfiles',
+            'allAppointments',
+        );
+        if(!in_array($this->router->fetch_method(),$acceptableMethods)){
+            $this->session->set_flashdata('error', _l("Unfortunately you do not have permission to this part of system.",$this));
+            redirect(APPOINTMENT_ADMIN_URL);
+        }
+        $this->data['reservation_menu'] = array(
+
+            'reservation_new'=>array(
+                'url'=>APPOINTMENT_ADMIN_URL.'allAppointments',
+                'icon'=>'icon-star',
+               // 'title'=>_l('New Reservation',$this),
+                'title'=>'All Appointments',
+                'class'=>'',
+                'addOn'=>'',
+            ),
+            'reservation_now'=>array(
+                'url'=>APPOINTMENT_ADMIN_URL.'userProfiles',
+                'icon'=>'icon-clock',
+                'title'=>'Public Profile',
+                'class'=>'',
+                'addOn'=>'',
+            )
+        );
+    }
+
+    public function userProfiles(){
+        $this->load->model('Appointment_model');
+
+        if($this->input->post()){
+            $fields = array(
+                'dob' => date("Y-m-d",strtotime($this->input->post('dob'))),
+                'city' => $this->input->post('city'),
+                'q1' => $this->input->post('question1'),
+                'q2' => implode(",",$this->input->post('question2')),
+                'address' => $this->input->post('address'),
+                'about' => $this->input->post('about'),
+                'friends' => implode(",",$this->input->post('freinds')),
+                'user_id' => $this->session->userdata('user_id')
+        );
+
+        $checkIfQuestionsExist = $this->Appointment_model->checkIfquestions($this->session->userdata('user_id'));
+
+        if(!empty($checkIfQuestionsExist)){
+                //update
+                $this->Appointment_model->updateQuestion($fields,$this->session->userdata('user_id'));
+            }else{
+                //insert
+                $this->Appointment_model->insertQuestions($fields);
+            }
+
+            $this->session->set_flashdata('success', 'Profile Updated Sucessfully!');
+        }
+
+        $allUsers = $this->Appointment_admin_model->getAllUser();
+        $userProfile = $this->Appointment_admin_model->getProfile($this->session->userdata("user_id"));
+
+
+        if($userProfile){
+            $this->data['data']['currentProfile'] = $userProfile;
+        }
+
+
+       $this->data['data']['allUsers'] = $allUsers;
+
+        $this->data['languages'] = $this->Nodcms_admin_model->get_all_language();
+        $this->data['content']=$this->load->view($this->mainTemplate.'/public_profile',$this->data,true);
+        $this->data['title'] = "Public Profile";
+        $this->data['page'] = "account";
+        $this->loadView();
+
+    }
+
+    public function allAppointments(){
+        $this->data['languages'] = $this->Nodcms_admin_model->get_all_language();
+        $this->data['content']=$this->load->view($this->mainTemplate.'/all_appointments',$this->data,true);
+        $this->data['title'] = "Public Profile";
+        $this->data['page'] = "account";
+        $this->loadView();
+    }
+
 }
