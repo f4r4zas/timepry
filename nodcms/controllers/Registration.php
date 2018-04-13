@@ -313,7 +313,7 @@ class Registration extends NodCMS_Controller {
             $this->form_validation->set_rules('dental_officename', _l('Name of the Dental Office',$this), 'required|xss_clean');
             $this->form_validation->set_rules('dental_officedescription', _l('Description of Dental Office',$this), 'required|xss_clean|callback_formRulesName');
             $this->form_validation->set_rules('dental_officephone', _l('Phone of Dental Office',$this), 'required|is_natural');
-            //$this->form_validation->set_rules('dental_officeemail', _l('Email of Dental Office',$this), '');
+            $this->form_validation->set_rules('dental_officeemail', _l('Email of Dental Office',$this), 'required');
             
             
             $optional_fields = array('dental_officewebsite','dental_officeemail','openingHours','closingHours','dayClosed');
@@ -384,7 +384,7 @@ class Registration extends NodCMS_Controller {
                     'dental_officename'=>form_error('dental_officename'),
                     'dental_officedescription'=>form_error('dental_officedescription'),
                     'dental_officephone'=>form_error('dental_officephone'),
-                    //'dental_officeemail'=>form_error('dental_officeemail'),
+                    'dental_officeemail'=>form_error('dental_officeemail'),
                 );
                 $this->session->set_flashdata('form_error', $form_error);
                 

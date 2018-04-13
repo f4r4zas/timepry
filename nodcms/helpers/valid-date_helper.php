@@ -7,7 +7,7 @@
 
 
 function getDayByDate($date){
-
+echo $date;
     $daysno = [
         'Sunday',
         'Monday',
@@ -18,18 +18,19 @@ function getDayByDate($date){
         'Saturday',
     ];
 
-    $date = date_create($date);
-    $date =  date_format($date,"d/m/Y");
-    $no =  date('w', strtotime($date));
+    $ymd = DateTime::createFromFormat('d/m/Y', $date)->format('Y-m-d');
 
-    return $daysno[$no];
+
+    $no =  date('w', strtotime($ymd));
+   return $daysno[$no];
 
 }
 
 function checkValidDate($date,$providerId){
    // echo $date;
 
-    $getDay = getDayByDate($date);
+     $getDay = getDayByDate($date);
+
     $CI = get_instance();
 
     $CI->db->select("*");

@@ -113,12 +113,14 @@ get_instance()->load->helper('valid-date');
             <div class="col-md-6 listing-provider">
                 <div id="listId" class="res_wrapper">
                     <ul class="row-not list">
-
                         <?php
+
                         $addresses = array();
                         $i = 0;
                         $total = 0;
                         $zipRecordsTotal = 0;
+                        $totalDateRecords = 0;
+                        $addOnsTotal = 0;
                         $count = count($data_list);
                         foreach ($data_list as $item) {
 
@@ -149,6 +151,8 @@ get_instance()->load->helper('valid-date');
                                     $checkValid = $checkValid[0];
                                     if($checkValid['closed'] == 1){
                                         continue; // Dentist office is closed on this day
+                                    }else{
+                                        $totalDateRecords++;
                                     }
                                 } else {
                                     continue; // Does not have opening on this day
@@ -269,6 +273,23 @@ get_instance()->load->helper('valid-date');
                                     <?php echo _l("Your search", $this); ?>
                                     - <strong><?php echo $search_word; ?></strong> -
                                     <?php echo _l("Cannot locate any nearby clinics try increasing distance.", $this); ?>
+                                </p>
+                            </div>
+
+                        <?php } ?>
+
+                    <?php } ?>
+
+                    <?php  if (!empty($this->input->get('search_date'))) { ?>
+
+                        <?php if ($totalDateRecords < 1) { ?>
+
+                            <div class="note note-warning">
+                                <h4 class="title"><?php echo _l('No result!', $this); ?></h4>
+                                <p class="text-lg">
+                                    <?php echo _l("Your search", $this); ?>
+                                    - <strong><?php echo $search_word; ?></strong> -
+                                    <?php echo _l("No Clinics opened on this date.", $this); ?>
                                 </p>
                             </div>
 

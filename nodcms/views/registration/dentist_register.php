@@ -76,12 +76,11 @@ $this->session->unset_userdata("dataStepFour");  */
             <div class="row">
                 <div class="col-sm-6">
                     <input  placeholder="First Name" value="<?php if(!empty($firstName)){ echo $firstName; } ?>" name="fname" id="fname" data-validation="required" type="text" class="form-control update1">
-                    
-                    
+                    <span class="help-block"></span>
                 </div>
                 <div class="col-sm-6">
-                    <input placeholder="Last Name" value="<?php if(!empty($lastName)){ echo $lastName; } ?>" name="lname" id="lname" data-validation="required" type="text" class="form-control update1">
-                                     
+                    <input placeholder="Last Name" value="<?php if(!empty($lastName)){ echo $lastName; } ?>" name="lname" id="lname"  type="text" class="form-control update1">
+                    <span class="help-block"></span>
                 </div>
             </div>
             <div class="row">
@@ -104,15 +103,15 @@ $this->session->unset_userdata("dataStepFour");  */
                 
                 <div class="col-sm-6">
                     <input placeholder="Password" value="" name="password" id="password"  data-validation="required" type="password" class="form-control update1">
-                    
-                       
+
+                    <span class="help-block"></span>
                                       
                 </div>
                 
                 <div class="col-sm-6">
                     <input placeholder="Confirm Password" value="" name="cpassword" id="cpassword"  data-validation="required" type="password" class="form-control update1">
-                    
-                       
+
+                    <span class="help-block"></span>
                                      
                 </div>
             </div>
@@ -160,34 +159,35 @@ $this->session->unset_userdata("dataStepFour");  */
                         <div class="row">
                             <div class="col-md-6">
                                 <input placeholder="Name of the Dental Office *" value="<?php if(!empty($provider_name)){echo $provider_name; } ?>" name="dental_officename" id="dental_officename" data-validation="required" type="text" class="form-control update2">
-                                
-                                   
-                                
+
+
+                                <span class="help-block"></span>
 
                             </div>
                             <div class="col-md-6">
                             
                                 <input placeholder="Website of Dental Office"  value="<?php if(!empty($website)){echo $website; } ?>" name="dental_officewebsite" id="dental_officewebsite" type="text" class="form-control update2">
-                                    
+                                <span class="help-block"></span>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6">
                                 <input placeholder="Email of Dental Office" data-validation="required" value="<?php if(!empty($provider_email)){echo $provider_email; } ?>" name="dental_officeemail" id="dental_officeemail" type="text" class="form-control update2">
+                                <span class="help-block"></span>
                                 <span style="position: absolute;top: 15px;color: #518ed2;right: 22px;font-size: 21px;" class="help glyphicon glyphicon-question-sign" data-placement="top" data-toggle="tooltip"  title="Insert the emial of the dental office. This email will be visible to your patients to give them the possibility to contact your directly. This email can be the same as the account email previously written or can be also different"></span>
-                                   
+
                             </div>
                             <div class="col-md-6">
                                 <input placeholder="Phone (e.g. 00398738927892) *" value="<?php if(!empty($providerPhone)){echo $providerPhone; } ?>" data-validation="required" name="dental_officephone" id="dental_officephone" type="text" class="form-control update2">
-                                    
+                                <span class="help-block"></span>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-12">
                                 <textarea data-validation="required" placeholder="Description of Dental Office *" rows="6" name="dental_officedescription" id="dental_officedescription" class="form-control update2"><?php if(!empty($providerDescription)){echo $providerDescription; } ?></textarea>
-                                
+                                <span class="help-block"></span>
                                 
                             </div>
                         </div>
@@ -218,7 +218,7 @@ $this->session->unset_userdata("dataStepFour");  */
 										</div>
 										<div class="col-xs-8 col-sm-5">
 											<input data-validation="required" type="text" placeholder="Name and Surname *" name="practitioner_name[]" value="<?php echo $docName; ?>" id="practitioner_name" class="form-control update2">
-											
+                                            <span class="help-block"></span>
 											
 										</div>
 										<div class="col-xs-4 col-sm-1 add_practitioner_main">
@@ -240,7 +240,7 @@ $this->session->unset_userdata("dataStepFour");  */
                                 </div>
                                 <div class="col-xs-8 col-sm-5">
                                     <input data-validation="required" type="text" placeholder="Name and Surname *" name="practitioner_name[]" value="" id="practitioner_name" class="form-control update2">
-                                    
+                                    <span class="help-block"></span>
                                     
                                 </div>
                                 <div class="col-xs-4 col-sm-1 add_practitioner_main">
@@ -930,11 +930,9 @@ $(document).ready(function(){
  $('[data-toggle="tooltip"]').tooltip(); 
  
 	$("input").change(function(){
-
-        if(!$(this).attr("data-validation")){
             $(this).addClass("greener");
-        }
 
+        $(this).siblings('.help-block').html("")
         if($(this).val() == ""){
             $(this).removeClass("greener");
         }
@@ -942,16 +940,12 @@ $(document).ready(function(){
 	});
 	
 	
-	 $.validate({
-
+	 /*$.validate({
             onError: function($form){
 				console.log($form);
                 $form.submit(function (e) {
-
                     //e.preventDefault();
-
                 });
-
             },
          errorPlacement: function(error, element) {
              element.siblings('.help-block').html(error);
@@ -959,15 +953,12 @@ $(document).ready(function(){
              console.log("custom error");
          },
          onElementValidate: function(rsu, element){
-
                 element.next().next().remove();
-
                 //element.parent().removeClass('has-info').addClass('has-error');
-
          },
 
             <?php if($lang!='en'){ ?>lang: '<?php echo $lang; ?>'<?php } ?>
-        });
+        });*/
 		
 		
 		$(".make-green").change(function(){
@@ -1064,21 +1055,26 @@ $(document).ready(function(){
 			
             $.each( data_msg.Error_Mess, function( key, value )
             {
+                $('html, body').animate({
+                    scrollTop: $(".registration-tabs").offset().top
+                }, -2000);
+
                 if (key.indexOf('|') > -1 && value != "" && $("body").find("[name='"+key+"']").length > 0)
                 {
                   var keyIndex = key.split("|");
                   var keyIndexEq = parseInt(keyIndex[1]);
-                  
-                  $('html, body').animate({
-                      //  scrollTop: $("[name='"+keyIndex[0]+"']").offset().top
-                    }, 1000);
-                
+
+                  /*$('html, body').animate({
+                      scrollTop: $("[name='"+keyIndex[0]+"']:nth-child(1)").offset().top
+                    }, -2000);
+*/
+
                     return false;
                 }else if(value != "" && $("body").find("[name='"+key+"']").length > 0) {
-                    $('html, body').animate({
-                        //scrollTop: $("[name='"+key+"']").offset().top
-                    }, 1000);
-                    return false;
+  /*                  $('html, body').animate({
+                        scrollTop: $("[name='"+key+"']").offset().top
+                    }, -2000);
+                    return false;*/
                 }
             });
             

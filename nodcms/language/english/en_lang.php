@@ -248,3 +248,5 @@ $lang["Back to Home"] = "Back to Home";
 $lang["Username"] = "Username";
 $lang["Password"] = "Password";
 $lang["Login"] = "Login";
+$lang["Email of Dental Office"] = "Email of Dental Office";
+$lang["No Clinics opened on this date."] = "No Clinics opened on this date.";
