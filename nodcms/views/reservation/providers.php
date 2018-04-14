@@ -46,6 +46,8 @@ get_instance()->load->helper('valid-date');
         width: 100% !important;
         float: left;
         margin: 0 auto;
+        background-size: cover;
+        background-position: center;
     }
 
 </style>
