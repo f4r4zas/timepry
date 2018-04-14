@@ -452,7 +452,7 @@
 </div>
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
-    <section class="inner-page-banner">
+    <section class="inner-page-banner DASHBOARD">
             <div class="banner_wrapper">
                 <div class="banner_content">
                     <h1>

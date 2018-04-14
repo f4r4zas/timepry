@@ -1,3 +1,11 @@
+<section class="inner-page-bannes user">
+    <div class="banner_wrappes">
+        <div class="banner_contens"> 
+            <h1>Dashboard</h1>
+        </div>
+    </div>
+</section>
+
 <?php if(isset($services_count) && $services_count==0){ ?>
     <div class="note note-danger">
         <p>

@@ -7,10 +7,16 @@ $(document).ready(function(){
     $(".inner-page-banner.user").show();
 });
 </script>
+<style>
+.dashboard_area {
+	background: #F2F2F2;
 
-<section class="inner-page-banne user">
-    <div class="banner_wrappe">
-        <div class="banner_conten"> 
+} 
+
+</style>
+<section class="inner-page-bannes user">
+    <div class="banner_wrappes">
+        <div class="banner_contens"> 
             <h1>Dashboard</h1>
         </div>
     </div>

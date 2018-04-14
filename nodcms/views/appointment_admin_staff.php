@@ -47,46 +47,13 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
-	<style>
-	.menu-bar1 {
-	width: 100%;
-	margin: 0px 0px 0px 0px;
-	height: auto;
-	line-height: 100%;
-	border-radius: 0px;
-	-webkit-border-radius: 0px;
-	-moz-border-radius: 0px;
-	box-shadow: 0px 0px 0px #666666;
-	-webkit-box-shadow: 0px 0px 0px #666666;
-	-moz-box-shadow: 0px 0px 0px #666666;
-	background: #34425A;
-	border: solid 0px #34425A;
-	position: relative;
-	z-index: 999;
-}
-  .menu-bar1 li {
-	margin: 0px 0px 0px 0px;
-	padding: 0px 0px 0px 0px;
-	position: relative;
-	list-style: none;
-}
-.menu-bar1 a {
-	font-style: normal;
-	font-size: 13px;
-	color: #899DC1;
-	text-decoration: none;
-	display: block;
-	padding: 20px 30px 6px 30px;
-	margin: 0;
-	border-radius: 0px;
-	-webkit-border-radius: 0px;
-	-moz-border-radius: 0px;
-	text-shadow: 0px 0px 0px #000000;
-	text-align: center;
-	height: 70px;
-}
+	<script>
+
+
+
 	
-	</style>
+	
+	</script>
 </head>
 <!--page-header-fixed page-quick-sidebar-over-content-->
 <body class="">
@@ -214,7 +181,7 @@
         <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
         <div class="page-sidebar navbar-collapse collapse">
             <!-- BEGIN SIDEBAR MENU -->
-            <ul style="" class="page-sidebar-menu menu-bar1" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+            <ul style="" class="page-sidebar-menu menu-bar1" id="rmoveopen" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                 <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
                 <?php /*<li class="sidebar-toggler-wrapper">
                     <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
@@ -603,6 +570,10 @@
             btnCancelLabel: '<?php echo _l("No Stop!",$this); ?>'
         });
     });
+
+		
+
+	
 </script>
 </body>
 </html>

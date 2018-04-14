@@ -336,13 +336,36 @@ div#copyright {
     flex-direction: column;
     justify-content: center;
 }
+.input-group.you-radio {
+	text-align: center;
+	width: 100%;
+}
+.you-radio label {
+	font-size: 21px !important;
+}
+.checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"], .radio input[type="radio"], .radio-inline input[type="radio"] {
+	
+	margin-left: 1px !important;
+}
+.radio span {
+	margin-left: 5px !important;
+}
+div.radio {
+	margin-top: -8px !important;
+}
+div.radio, div.radio span, div.radio input {
+	width: 16px !important;
+}
 
+.form-group .you-radio:last-child .radio span {
+	margin-left: 7px !important;
+}
 .inner-page-banner .banner_wrapper .banner_content h1 {
 	text-transform: uppercase;
 	color: #ffffff;
 	font-family: 'Lato', sans-serif;
 	font-weight: 900;
-	text-align: left;
+	text-align: center;
 	font-size: 38px;
 	padding-left: 19px;
 }
@@ -1831,17 +1854,120 @@ section.faq-page {
 .page-sidebar .page-sidebar-menu>li {
     position: relative;
 }
-.page-sidebar .page-sidebar-menu>li>ul.sub-menu {
-    position: absolute;
-    z-index: 999;
-    background-color: #131313;
-    margin-top: 0;
-    width: calc(100% + 40px);
-    padding: 0px 0 10px;
+.page-sidebar .page-sidebar-menu > li > ul.sub-menu {
+	position: absolute;
+	z-index: 999;
+	background-color: #34425A;
+	margin-top: 12px;
+	width: 100%;
+	padding: 0px;
+	margin-left: -4px;
+
+}
+.inner-page-banne{
+	display:none;
+}
+.inner-page-bannes.user {
+	padding: 20px 6px;
+}
+.banner_contens h1 {
+	font-size: 26px !important;
+	font-weight: 500;
 }
 
-.page-sidebar .page-sidebar-menu>li>ul.sub-menu>li>a {
-    padding-left: 20px;
+#menu-bar11 {
+	width: 100%;
+	margin: 0px 0px 0px 0px;
+	height: auto;
+	line-height: 100%;
+	border-radius: 0px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	box-shadow: 0px 0px 0px #666666;
+	-webkit-box-shadow: 0px 0px 0px #666666;
+	-moz-box-shadow: 0px 0px 0px #666666;
+	background: #34425A;
+	border: solid 0px #34425A;
+	position: relative;
+	z-index: 999;
+	text-align: left !important;
+}
+	.menu-bar1 {
+	width: 100%;
+	margin: 0px 0px 0px 0px;
+	height: auto;
+	line-height: 100%;
+	border-radius: 0px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	box-shadow: 0px 0px 0px #666666;
+	-webkit-box-shadow: 0px 0px 0px #666666;
+	-moz-box-shadow: 0px 0px 0px #666666;
+	background: #34425A;
+	border: solid 0px #34425A;
+	position: relative;
+	z-index: 999;
+	height:62px;
+}
+.menu-bar1 li {
+	position: relative;
+	list-style: none;
+	text-align: center;
+	padding: 13px !important;
+}
+#menu-bar11 li {
+	position: relative;
+	list-style: none;
+	text-align: center;
+	padding: 13px !important;
+}
+.menu-bar1 .sub-menu li {
+	position: relative;
+	list-style: none;
+	/* padding: 13px 23px !important; */
+	text-align: center;
+	padding: 0px !important;
+}
+#menu-bar11 .sub-menu li {
+	position: relative;
+	list-style: none;
+	/* padding: 13px 23px !important; */
+	text-align: center;
+	padding: 0px !important;
+}
+.menu-bar1 li a {
+	padding: 0px 10px !important;
+}
+#menu-bar11 li a {
+	padding: 0px 10px !important;
+}
+
+.menu-bar1 i {
+	display: block;
+	padding: 0px;
+	/* text-align: center; */
+	margin: 0 auto !important;
+}
+#menu-bar11 i {
+	display: block;
+	padding: 0px;
+	/* text-align: center; */
+	margin: 0 auto !important;
+}
+.menu-bar1 .title {
+	display: inline-block;
+	margin-top: 10px;
+
+}
+#menu-bar11 .title {
+	display: inline-block;
+	margin-top: 10px;
+
+}
+
+#menu-bar11 a {
+	color: #fff;
+	font-size: 17px;
 }
 
 .page-sidebar .page-sidebar-menu>li>ul.sub-menu>li>a:hover {
@@ -3369,9 +3495,7 @@ overflow-y: scroll;
     font-weight: 900;
 }
 
-.sub-menu li a span {
-    padding: 31px;
-}
+
 .counter {
     font-size: 30px;
     margin-bottom: 14px;
@@ -3389,9 +3513,7 @@ overflow-y: scroll;
     margin-bottom: 10px;
     color: #B0B0B0;
 }
-.sub-menu li a span {
-    padding: 31px;
-}
+
 .counter {
     font-size: 30px;
     margin-bottom: 14px;
@@ -3409,7 +3531,7 @@ overflow-y: scroll;
     font-weight: 300;
 }
 .sub-menu li a span {
-    padding: 31px;
+    padding: 18px 0px;
 }
 #menu-bar {
 	width: 100%;
