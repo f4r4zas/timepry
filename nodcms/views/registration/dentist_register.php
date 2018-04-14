@@ -199,6 +199,8 @@ $this->session->unset_userdata("dataStepFour");  */
                             
                             
 							<?php if(!empty($doctors)){ ?>
+                                <?php  $total_doctors = count($doctors) ?>
+                                <?php $docs = 1; ?>
 								<?php foreach($doctors as $all_doctors){ ?>
 								<?php 
 									$dName = explode("  ",$all_doctors["service_name"]);
@@ -222,9 +224,17 @@ $this->session->unset_userdata("dataStepFour");  */
 											
 										</div>
 										<div class="col-xs-4 col-sm-1 add_practitioner_main">
-											<div class="remove_practitioner_row"><i style="display:block; margin-top: 15px;" class="fa fa-times"></i></div>
+                                            <?php if($total_doctors == $docs){ ?>
+                                                <div class="add_practitioner_row">
+                                                    <i style="display:block; margin-top: 15px;" class="fa fa-plus"></i>
+                                                </div>
+                                            <?php }else{ ?>
+                                                <div class="remove_practitioner_row"><i style="display:block; margin-top: 15px;" class="fa fa-times"></i></div>
+                                            <?php } ?>
+
 										</div>
 									</div>
+										<?php $docs++; ?>
 										<?php } ?>
 							<?php }else{ ?>
 							<div class="row">
