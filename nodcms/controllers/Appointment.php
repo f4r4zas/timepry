@@ -137,7 +137,7 @@ class Appointment extends NodCMS_Controller {
 
     // Dental Office list to choose a provider
     private function providerList($lang="en",$condition = "", $page=1){
-		
+
         $this->preset($lang);
         // Dental Office search
         $searchConditions = array();
@@ -180,8 +180,6 @@ class Appointment extends NodCMS_Controller {
 		if(!empty($condition)){
 				$this->data['data_list'] = $this->Appointment_model->getCustomProvider($condition, $config['per_page'], $config['per_page']*$page);
 		}
-
-		//$this->data['data_list']['subcats'] = $this->getTreatments();
 		
         if(count($this->data['data_list'])!=0){
             foreach($this->data['data_list'] as $key=>$item){
@@ -208,6 +206,7 @@ class Appointment extends NodCMS_Controller {
 
     // A provider page (ready to make a reservation)
     function providerPage($lang="en"){
+
         $this->preset($lang);
 		$this->data['provider_id'] = $this->provider['provider_id']; 
         $providerExtension = $this->Appointment_model->getProviderExtensions($this->provider['provider_id']);
@@ -247,7 +246,7 @@ class Appointment extends NodCMS_Controller {
         $this->data['do_time'] = $query->result_array();
                 
         
-        
+
         
         
         $this->data['extra_fields']= $this->Appointment_model->getAllExtraFields();
