@@ -279,4 +279,33 @@ class General extends CI_Controller
         
         echo $output; 
     }
+
+    function rightTreatment(){
+
+
+
+
+        if(isset($_SESSION['language'])){
+            $this->lang->load($_SESSION['language']['code'], $_SESSION['language']["language_name"]);
+            $homeURL = base_url().$_SESSION['language']['code'];
+        }else{
+            $homeURL = base_url();
+        }
+
+
+        $this->data['subCats'] = $this->getAllTreatments();
+        $this->data['title'] = _l('Timepry', $this);
+        $this->load->view("header", $this->data);
+        $this->load->view("right-treatment", $this->data);
+        $this->load->view("footer", $this->data);
+    }
+
+    public function getAllTreatments(){
+
+        $this->db->select("*");
+        $this->db->from("subcategory");
+        $query = $this->db->get();
+        return $query->result_array();
+
+    }
 }

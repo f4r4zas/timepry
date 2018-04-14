@@ -235,7 +235,7 @@
                                     </li>
                                     
                                     <li>
-                                        <a href="<?php echo base_url();?>">Find The Right Treatment</a>
+                                        <a href="<?php echo base_url();?>find-the-right-treatment">Find The Right Treatment</a>
                                     </li>
                                     <li>
                                         <a href="<?php echo base_url();?>about">About</a>

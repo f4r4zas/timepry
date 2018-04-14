@@ -62,6 +62,9 @@
     color: white;
 }
 
+.you-radio{
+    font-size: 21px;
+}
 </style>
 <section class="inner-page-banner">
     <div class="banner_wrapper">
@@ -350,7 +353,6 @@
 
                 <div class="col-md-offset-1 col-md-8">
                     <div class="tab-content">
-
                         <?php
                         $ii=0;
                         foreach($sub_cats as $cates){ ?>
@@ -990,13 +992,20 @@ jQuery(document).ready(function(){
 						<p class="total_prices">€ <span class="rates">0</span></p>
 					<?php } ?>
 					
-					
-                    
 
-					
-					
                     <form id="checkout" style="display: none;">
-                        <div id="final_treatment"></div>                    
+                        <div id="final_treatment"></div>
+
+                        <div class="form-group ">
+                            <label>Is it for you?</label>
+                            <div class="input-group you-radio">
+                                <labe>Yes<input type="radio" class="form-control"  name="you" value="Yes"></labe>
+                            </div>
+                            <div class="input-group you-radio">
+                                <label>No<input type="radio" class="form-control" name="you" value="No"></label>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label><?php echo _l("First Name",$this)?></label>
                             <div class="input-group">
@@ -1032,8 +1041,12 @@ jQuery(document).ready(function(){
  					  
                     
                     </form> 
-					
-					 <input id="doPayment" type="button" class="greyButton" value="Checkout"/>
+                    <?php if(!empty($this->session->userdata("logged_in_status"))){ ?>
+                        <input id="doPayment" type="button" class="greyButton" value="Checkout"/>
+                    <?php }else{ ?>
+                        <a href="<?php echo base_url(); ?>register" class="greyButton">Please register first</a>
+                    <?php } ?>
+
 					
                     <a style="display: none;" href="checkout.php" class="greyButton">Go to Checkout</a>
                 </div><!-- Order Total -->
@@ -1084,7 +1097,25 @@ jQuery(document).ready(function(){
 
     <script src="<?php echo base_url(); ?>assets/form-validator/jquery.form-validator.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZ6v5rVNIY_XwJfCdIntpT1jNj0wLVReY&sensor=false&extension=.js"></script> 
-<script type="text/javascript"> 
+<script type="text/javascript">
+
+    jQuery(document).ready(function(){
+        jQuery("[name='you']").change(function(){
+                console.log($(this).val());
+            <?php if(!empty($this->session->userdata("logged_in_status"))){ ?>
+            if(jQuery(this).val() == "No"){
+                jQuery("[name='fname']").val("");
+                jQuery("[name='lname']").val("");
+                jQuery("[name='email']").val("");
+            }else{
+                jQuery("[name='fname']").val("<?php echo $fname; ?>");
+                jQuery("[name='lname']").val("<?php echo $lname; ?>");
+                jQuery("[name='email']").val("<?php echo $email; ?>");
+            }
+            <?php } ?>
+
+        });
+    });
 
    var address = '<?php echo $this->provider['address']; ?>';
 
@@ -1100,7 +1131,7 @@ jQuery(document).ready(function(){
    }, 
    
    function(results, status) {
-      if(status == google.maps.GeocoderStatus.OK) {
+      if(status == google.maps.GeocoderStatus.OK){
          new google.maps.Marker({
             position: results[0].geometry.location,
             map: map,
@@ -1128,7 +1159,7 @@ function showDivs(n) {
   for (i = 0; i < x.length; i++) {
      x[i].style.display = "none";  
   }
-  x[slideIndex-1].style.display = "block";  
+  //x[slideIndex-1].style.display = "block";
 }
 
 //Get a discount of 20%

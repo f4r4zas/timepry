@@ -445,6 +445,7 @@ $(".closed_day").on("click", function(){
                         <div class="row">
                             <div class="col-sm-12">
                                 <input type="text" class="update_4 form-control" placeholder="Treatment title *" name="treatment_name[]" style="width: 28%; display: inline-block; vertical-align: top; margin: 0 2px;"/>
+
                                 <select class="update_4 form-control" name="treatment_duration[]" style="width: 24%; display: inline-block; vertical-align: top; height: 40px; margin: 0 2px;">
                                 <option value="">Duration in min</option>
                                     <?php
@@ -754,12 +755,39 @@ $(".closed_day").on("click", function(){
                             if(filled == true){
                                 var formData = "<tr class='"+id+"' >";
                                 var hiddenfields = "";
-				                
+                                var validFields = true;
+
+                                //Check validation
                                 add_treat.parent().siblings().last().find('.update_4').each(function(i,v){
+
+                                    if($(this).prop("tagName") != "SPAN" && $(this).prop("tagName") != "DIV" && $(this).prop("tagName") != "BUTTON")
+                                    {
+                                        v = $(v);
+                                        console.log("Values");
+                                        if(v.val()){
+
+                                        }else{
+                                           // alert("Please Fill all the fields");
+                                            validFields =  false;
+                                        }
+
+                                    }
+                                });
+
+                                if(validFields == false){
+                                    alert("Please fill all the fields");
+                                    $(".e9").select2();
+                                    return false;
+                                }
+
+
+                                add_treat.parent().siblings().last().find('.update_4').each(function(i,v){
+
                                   if($(this).prop("tagName") != "SPAN" && $(this).prop("tagName") != "DIV" && $(this).prop("tagName") != "BUTTON")
                                   {
                                       v = $(v);
-									  
+									  console.log("Values");
+									  console.log(v.val());
                                       var temp = v.attr('name');
                                       hiddenfields +='<input type="hidden" name="'+temp+'" class="update4 '+id+'" value="'+v.val()+'"/>';
                                         formData +="<td style='text-align: center; padding: 10px; border: 1px solid #ccc;'>"+v.val()+"</td>";      
@@ -782,9 +810,9 @@ $(".closed_day").on("click", function(){
                                clone.removeAttr("style");
                                clone.attr("custom-class",id);
                                							   
-							    add_treat.parent().parent().prepend(clone);
+							    //add_treat.parent().parent().append(clone);
 							   
-							  //first_div.before(clone);
+							  first_div.before(clone);
 							   
                                //jQuery(".notto").before(clone);
                                 

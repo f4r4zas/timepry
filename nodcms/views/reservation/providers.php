@@ -41,6 +41,13 @@ get_instance()->load->helper('valid-date');
         width: 100%;
     }
 
+    .listing-image{
+        height: 430px !important;
+        width: 100% !important;
+        float: left;
+        margin: 0 auto;
+    }
+
 </style>
 <section class="inner-page-banner">
     <div class="banner_wrapper">
@@ -165,27 +172,35 @@ get_instance()->load->helper('valid-date');
                                 <div class="col-md-12">
 
                                     <div class="search_content">
+
                                         <div class="thumb_img">
                                             <?php if (!empty($item['image'])) { ?>
                                                 <?php $images = json_decode($item['image']); ?>
 
                                                 <?php if (is_array($images)) { ?>
-                                                    <img src="<?php echo base_url(); ?><?php
-                                                    echo $images[0];
-                                                    ?>" alt="Timepry">
+                                                    <!--<img src="<?php /*echo base_url(); */?><?php
+/*                                                    echo $images[0];
+                                                    */?>" alt="Timepry">-->
+                                                    <span style="background-image:url(<?php echo base_url(); ?><?php
+                                                    echo $images[0];?>)" class="listing-image"></span>
                                                 <?php } else { ?>
-                                                    <img src="<?php echo base_url(); ?><?php
-                                                    echo $item['image'];
-                                                    ?>" alt="Timepry">
+                                                    <!--<img src="<?php /*echo base_url(); */?><?php
+/*                                                    echo $item['image'];
+                                                    */?>" alt="Timepry">-->
+
+                                                    <span style="background-image:url(<?php echo base_url(); ?><?php
+                                                    echo $item['image'];?>)" class="listing-image"></span>
                                                 <?php } ?>
 
-                                                <!-- <img src="<?php echo base_url(); ?><?php
+                                                <!-- <img src="<?php //echo base_url(); ?><?php
                                                 //echo $item['image'];
                                                 ?>" alt="Timepry"> -->
                                             <?php } else { ?>
-                                                <img src="<?php echo base_url(); ?>/assets/front/images/search_re_thumb.png"
+                                                <span style="background-image:url(<?php echo base_url(); ?>assets/front/images/search_re_thumb.png)" class="listing-image"></span>
+                                              <!--  <img src="<?php /*echo base_url(); */?>/assets/front/images/search_re_thumb.png"
                                                      alt="Timepry">
-                                            <?php } ?>
+                                            --><?php } ?>
+
                                         </div>
 
                                         <div class="col-md-8">
