@@ -45,7 +45,8 @@
     font-size: 90%;
 }
 .dental-phone a {
-    font-size: 90%;
+	font-size: 90%;
+	font-size: 16px !important;
 }
 .question-mark{
 	color: #47a6ff;
@@ -60,6 +61,25 @@
 .cross-checkout {
     font-size: 34px !important;
     color: white;
+}
+#listing-page .item > img {
+	width: 100% !important;
+	text-align: center !important;
+	height: 300px;
+	background: cover !important;
+	background-size: cover !important;
+	background-repeat: no-repeat !important;
+	background-position: 50% 50% !important;
+	 object-fit: contain;
+}
+.listing-rightside .dental-address {
+	font-size: 16px;
+}
+#listing-page .desc_content p {
+	font-size: 16px !important;
+}
+.listing-content .opening-timings .timings .time {
+font-size: 16px;
 }
 
 .you-radio{
@@ -107,7 +127,7 @@
         </div>-->
         <div class="container" style="margin-top: 20px;">
 			
-            <div class="row">
+            <div class="row adjustbaner">
 			<!-- Bootstrap Slider -->
 			<div class="col-md-12" style="
     /* padding: 17px; */
@@ -206,7 +226,7 @@
 							
 			</div><!-- End Bootstrap Slider -->
 			
-			
+				<div class="clearfix"></div>
 			
                 <div class="col-md-4">
                     <div class="listing-leftside">
