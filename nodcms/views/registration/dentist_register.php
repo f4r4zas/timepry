@@ -796,17 +796,20 @@ $(".closed_day").on("click", function(){
                                   if($(this).prop("tagName") != "SPAN" && $(this).prop("tagName") != "DIV" && $(this).prop("tagName") != "BUTTON")
                                   {
                                       v = $(v);
-									  console.log("Values");
-									  console.log(v.val());
+
                                       var temp = v.attr('name');
                                       hiddenfields +='<input type="hidden" name="'+temp+'" class="update4 '+id+'" value="'+v.val()+'"/>';
                                         formData +="<td style='text-align: center; padding: 10px; border: 1px solid #ccc;'>"+v.val()+"</td>";      
                                   }
-                			  }); 
+                			  });
+
+                                var subCatId = $(".cat.active a").attr("href");
+                                console.log("href "+subCatId);
+
                               hiddenfields +='<input type="hidden" name="cat[]" class="update4 '+id+'" value="'+$(".cat.active a").attr("data-catid")+'"/>';
-                              hiddenfields +='<input type="hidden" name="subcat[]" class="update4 '+id+'" value="'+$(".subcat.active a").attr("data-subcatid")+'"/>';
+                              hiddenfields +='<input type="hidden" name="subcat[]" class="update4 '+id+'" value="'+$(""+subCatId+" .subcat.active a").attr("data-subcatid")+'"/>';
                               formData += "<td style='text-align: center; padding: 10px; border: 1px solid #ccc;'>"+$('.cat.active a').text()+"</td>";
-                              formData += "<td style='text-align: center; padding: 10px; border: 1px solid #ccc;'>"+$('.subcat.active a').text()+"</td>";
+                              formData += "<td style='text-align: center; padding: 10px; border: 1px solid #ccc;'>"+$(""+subCatId+'.subcat.active a').text()+"</td>";
                               formData += "</tr>";
                               
                               $("#selected_treat").prepend(formData);
