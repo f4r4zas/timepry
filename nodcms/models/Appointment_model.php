@@ -360,7 +360,7 @@ class Appointment_model extends CI_Model
         $this->db->where('active',1);
         if($limit!=NULL) $this->db->limit($limit, $offset);
         $query = $this->db->get();
-        echo $this->db->last_query();
+
         return $query->result_array();
 	}
 
