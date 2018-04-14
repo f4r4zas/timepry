@@ -1268,6 +1268,7 @@ class Appointment_admin extends NodCMS_Controller
     // Page of all details of appointments
     function reservationDetails($id)
     {
+
         $reservation =  @reset($this->Appointment_admin_model->getReservationDetail($id));
         if(!isset($reservation["reservation_id"])){
             $result = array("status"=>"error","error"=>_l("Reservation not founded!",$this));
@@ -1285,6 +1286,8 @@ class Appointment_admin extends NodCMS_Controller
                 $this->session->set_flashdata('error', $result["error"]);
                 redirect(APPOINTMENT_ADMIN_URL."reservation/new");
             }
+            $allUsers = $this->Appointment_admin_model->getAllUser();
+            $this->data['data']['allUsers'] = $allUsers;
             $this->data['title']=_l("Appointments",$this);
             $this->data['sub_title']=_l("Details",$this);
             $this->data['page']='reservation_detail';

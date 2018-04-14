@@ -39,6 +39,9 @@ function generateUserProfile($userId){
 
     $CI = get_instance();
 
+    $allUsers = $CI->Appointment_admin_model->getAllUser();
+
+
     $userProfile = $CI->Appointment_admin_model->getProfile($userId);
 
 
@@ -148,9 +151,7 @@ function generateUserProfile($userId){
         </div>
 
         <div class="form-group ">
-            <label class="control-label " for="select">
-                Find freinds
-            </label>
+            <label class="control-label " for="select">Freinds</label>
 
             <?php $freinds = "";
 
@@ -160,20 +161,22 @@ function generateUserProfile($userId){
             ?>
 
             <select multiple="multiple" class="select freindUser form-control" id="freinds" name="freinds[]">
-                <?php foreach($data['allUsers'] as $allUser){ ?>
-                    <option <?php if(in_array($allUser['user_id'], $freinds)){ echo "selected"; } ?>  value="<?php echo $allUser['user_id']; ?>"><?php echo $allUser['fullname']; ?></option>
+                <?php foreach($allUsers as $allUsers){ ?>
+
+                    <?php if(in_array($allUsers['user_id'], $freinds)){ ?>
+
+                        <option <?php if(in_array($allUsers['user_id'], $freinds)){ echo "selected"; } ?>  value="<?php echo $allUsers['user_id']; ?>"><?php echo $allUsers['fullname']; ?></option>
+
+                   <?php } ?>
+
+
                 <?php } ?>
             </select>
         </div>
-
-        <div class="form-group">
-            <div>
-                <button class="btn btn-primary " name="submit" type="submit">
-                    Submit
-                </button>
-            </div>
-        </div>
     </form>
+    <script>
+
+    </script>
 <?php
 }
 
@@ -194,5 +197,8 @@ if(getReservationUserId($data["email"])){
     }
 
 }//User Details Popup
+
+
+
 
 ?>

@@ -793,6 +793,7 @@ class Registration extends NodCMS_Controller {
                     "period_min" =>$_POST['treatment_duration'][$x],
                     
                 );
+
                 $treatment_id = $this->db->insert('treatments',$data1);
 				$dataStepFour[] =  $data1;
                
