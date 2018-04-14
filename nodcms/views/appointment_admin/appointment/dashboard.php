@@ -49,83 +49,94 @@
 
 <?php } ?>
 
-    <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="dashboard-stat blue-madison">
-                <div class="visual">
-                    <i class=" fa fa-star"></i>
-                </div>
-                <div class="details">
-                    <div class="number">
+    <div class="row bcgrund">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 bgmove">
+            <div class="dashboard-stat">
+                 <p class="counter">
                         <?php echo isset($new_reservation_count)?$new_reservation_count:'-'; ?>
-                    </div>
-                    <div class="desc">
+                   </p>
                         <?php echo _l('New',$this); ?>
-                    </div>
-                </div>
+                <span class="info-box-title"> 
                 <a class="more" href="<?php echo APPOINTMENT_ADMIN_URL; ?>reservation?min_app_date=<?php echo my_int_date(time()); ?>&filters=unclosed">
                     <?php echo _l('View more',$this); ?> <i class="m-icon-swapright m-icon-white"></i>
                 </a>
+				</span>
             </div>
+			<div class="info-box-progress">
+			 <div class="progress progress-xs progress-squared bs-n">
+			 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+			  </div>
+			  </div>
+			  </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="dashboard-stat green-seagreen">
-                <div class="visual">
-                    <i class=" fa fa-clock-o"></i>
-                </div>
-                <div class="details">
-                    <div class="number">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 bgmove">
+            <div class="dashboard-stat ">
+                 <p class="counter">
                         <?php echo isset($today_reservation_count)?$today_reservation_count:'-'; ?>
-                    </div>
+                    </p>
                     <div class="desc">
                         <?=_l("Today",$this)?>
                     </div>
-                </div>
+					<span class="info-box-title"> 
+               
                 <a class="more" href="<?php echo APPOINTMENT_ADMIN_URL; ?>reservation?min_app_date=<?php echo my_int_date(time()); ?>&max_app_date=<?php echo my_int_date(strtotime("tomorrow")); ?>&filters=unclosed">
                     <?php echo _l('View more',$this); ?> <i class="m-icon-swapright m-icon-white"></i>
                 </a>
+				</span>
             </div>
+			<div class="info-box-progress">
+			 <div class="progress progress-xs progress-squared bs-n">
+			 <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%"> 
+			  </div>
+			  </div>
+			  </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="dashboard-stat purple-wisteria">
-                <div class="visual">
-                    <i class=" fa fa-check"></i>
-                </div>
-                <div class="details">
-                    <div class="number">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 bgmove">
+            <div class="dashboard-stat">
+                <p class="counter">
                         <?php echo isset($closed_reservation_count)?$closed_reservation_count:'-'; ?>
-                    </div>
+                  </p>
                     <div class="desc">
                         <?php echo _l('Closed',$this); ?>
                     </div>
-                </div>
+                <span class="info-box-title"> 
                 <a class="more" href="<?php echo APPOINTMENT_ADMIN_URL; ?>reservation?filters=closed">
                     <?php echo _l('View more',$this); ?> <i class="m-icon-swapright m-icon-white"></i>
                 </a>
+				</span>
             </div>
+			<div class="info-box-progress">
+			 <div class="progress progress-xs progress-squared bs-n">
+			 <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+			  </div> 
+			  </div>
+			  </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <div class="dashboard-stat blue-chambray">
-                <div class="visual">
-                    <i class=" fa fa-file"></i>
-                </div>
-                <div class="details">
-                    <div class="number">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 bgmove">
+            <div class="dashboard-stat ">
+               <p class="counter">
                         <?php echo isset($reservation_count)?$reservation_count:'-'; ?>
-                    </div>
+                    </p>
                     <div class="desc">
                         <?=_l("All Requests",$this)?>
                     </div>
-                </div>
+                <span class="info-box-title"> 
                 <a class="more" href="<?php echo APPOINTMENT_ADMIN_URL; ?>reservation">
                     <?php echo _l('View more',$this); ?> <i class="m-icon-swapright m-icon-white"></i>
                 </a>
+				</span>
             </div>
+			<div class="info-box-progress">
+			 <div class="progress progress-xs progress-squared bs-n">
+			 <div class="progress-bar  progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+			  </div> 
+			  </div>
+			  </div>
         </div>
-    </div>
+   
     <!-- END DASHBOARD STATS -->
     <div class="clearfix"></div>
-    <div class="row">
+    <div class="row bgpading">
         <div class="col-md-6">
             <div class="portlet light bg-inverse">
                 <div class="portlet-title"><?php echo _l('Online Requests',$this); ?></div>

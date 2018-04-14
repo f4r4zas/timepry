@@ -8,10 +8,10 @@ $(document).ready(function(){
 });
 </script>
 
-<section class="inner-page-banner user">
-    <div class="banner_wrapper">
-        <div class="banner_content">
-            <h1 style="font-size: 35px;">Dashboard</h1>
+<section class="inner-page-banne user">
+    <div class="banner_wrappe">
+        <div class="banner_conten"> 
+            <h1>Dashboard</h1>
         </div>
     </div>
 </section>
@@ -84,7 +84,6 @@ $(document).ready(function(){
                         </div>
                     </div>
                 </div>
-
                 
                 <div class="col-md-12">
                     <div class="week_appointments">
@@ -131,9 +130,7 @@ $(document).ready(function(){
 
                             <div class="r-full-card">
                                 <div class="inner">
-                                    <div class="tooth" style="
-    margin: 0 auto;
-">
+                                    <div class="tooth">
                                         <img src="<?php echo base_url()?>assets/reservation/img/tooth-pic.png" alt="Free Card">
                                     </div>
                                     <div class="text">20% OFF</div>
