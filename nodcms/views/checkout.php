@@ -505,9 +505,10 @@ parse_str($this->session->userdata("checkout"), $outputArray);
                                     <p class="total_prices text-center">
                                     <h2 class="text-center">€<span class="rates">24</span></h2></p>
 
-                                    <input type="button" class="greyButton"  id="doPayment" value="Place Order">
+
 
                                     <?php if (!empty($this->session->userdata("logged_in_status"))) { ?>
+                                        <input type="button" class="greyButton"  id="doPayment" value="Place Order">
                                         <input type="submit" style="display: none" class="greyButton" onClick="createResrvation()"  id="place-order" value="Place Order">
                                     <?php } else { ?>
                                         <input type="submit" class="greyButton showLogin" value="Login">
