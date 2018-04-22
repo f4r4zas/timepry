@@ -241,8 +241,6 @@ class General extends CI_Controller
             $homeURL = base_url();
         }
         
-        
-        
         $this->data['title'] = _l('Timepry', $this);
         $this->load->view("header", $this->data);
         $this->load->view("about", $this->data);
@@ -308,4 +306,57 @@ class General extends CI_Controller
         return $query->result_array();
 
     }
+
+    public function checkout(){
+
+        $this->data['subCats'] = $this->getAllTreatments();
+        $this->data['title'] = _l('Timepry', $this);
+        $this->load->view("header", $this->data);
+        $this->load->view("checkout", $this->data);
+        $this->load->view("footer", $this->data);
+    }
+
+    public function checkoutSession(){
+        if($this->input->post()){
+            $sessionData = $this->input->post("checkout");
+            $provider = $this->input->post("provider_prefix");
+
+            $this->session->set_userdata("checkout",$sessionData);
+            $this->session->set_userdata("provider_prefix",$provider);
+        }
+    }
+
+    public function checkoutSuccess(){
+
+
+        $this->session->unset_userdata('checkout');
+        $this->session->unset_userdata('provider_prefix');
+
+
+        $message = array(
+            'title'=>_l('Checkout successful!', $this),
+            'body'=>_l('Checkout successful!.', $this),
+            'class'=>'note note-success'
+        );
+        $this->session->set_flashdata('message', $message);
+
+
+        if($this->session->flashdata('message')){
+            $message = $this->session->flashdata('message');
+            $this->data['title'] = _l('User Registration', $this);
+            $this->data['message_title'] = $message['title'];
+            $this->data['message'] = $message['body'];
+            $this->data['message_class'] = $message['class'];
+
+            $this->load->view("header", $this->data);
+            $this->load->view('registration/user_registration_message',$this->data);
+            $this->load->view("footer", $this->data);
+
+
+        }else{
+            echo "df;ldsf";
+            //redirect(base_url().$lang);
+        }
+    }
+
 }

@@ -538,6 +538,7 @@
 
    // $('.time').mask('00:00');
         $(document).ready(function() {
+
             $(".se-pre-con").css("display", "none");
             if ( $('.home-banner').length > 0 ) {
                 setTimeout(function() {

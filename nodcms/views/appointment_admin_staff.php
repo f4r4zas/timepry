@@ -528,7 +528,20 @@
 
 <script src="<?php echo base_url(); ?>assets/metronic/global/plugins/bootstrap-toastr/toastr.min.js"></script>
 <script>
+    $(document).ready(function(){
+
+
+            $(".star.active").removeClass("open");
+            $("li ul.sub-menu").hide();
+            $(".sub-menu").css('display','none');
+            console.log("Chal");
+
+    });
+
     $(function(){
+
+
+
         toastr.options = {
             "closeButton": true,
             "debug": false,
@@ -555,7 +568,11 @@
     });
 </script>
 <script>
+
+
+
     $(function(){
+
         $('.btn-ask').confirmation({
             container: 'body',
             btnOkClass: 'btn-xs btn-success',

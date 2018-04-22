@@ -345,16 +345,16 @@ div#copyright {
 }
 .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"], .radio input[type="radio"], .radio-inline input[type="radio"] {
 	
-	margin-left: 1px !important;
+	margin-left: 1px ;
 }
 .radio span {
-	margin-left: 5px !important;
+	margin-left: 5px ;
 }
 div.radio {
-	margin-top: -8px !important;
+	margin-top: -8px ;
 }
 div.radio, div.radio span, div.radio input {
-	width: 16px !important;
+	width: 16px ;
 }
 
 .form-group .you-radio:last-child .radio span {
@@ -628,6 +628,8 @@ section.search_body .res_wrapper  {
 .search_body .search_content .ratings {
     font-size: 18px;
     color: #d8c928;
+    padding-top: 0px;
+    padding-left: 0px;
 }
 
  .no-ratings {
@@ -669,7 +671,7 @@ section.search_body .res_wrapper  {
 
 .search_body .search_content .details {
     font-size: 14px;
-    padding: 5px 0;
+    padding: 11px 0;
     color: #505050;
 }
 .search_content .readMore_button .greyButton {
@@ -681,9 +683,8 @@ section.search_body .res_wrapper  {
 .search_body .search_content .readMore_button {
     font-size: 18px;
     font-weight: 900;
-    padding: 5px 0 0;
-    position: absolute;
-    bottom: 0;
+    padding-top: 24px;
+    padding-bottom: 0px;
 }
 .search_body .search_pagination .page_no {
     display: inline-block;
@@ -2700,7 +2701,7 @@ section.edit_treatments {
   *margin-right: .3em;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url("http://localhost:8080/dental/assets/front/images/glyphicons-halflings.png");
+  background-image: url("/timepry/assets/front/images/glyphicons-halflings.png");
   background-position: 14px 14px;
   background-repeat: no-repeat;
 }
@@ -3634,4 +3635,24 @@ overflow-y: scroll;
 	text-transform: capitalize;
 	text-align: center;
 
+}
+.listing-page.banner_wrapper{
+    padding-top: 20px;
+}
+.listing-page h1{
+    text-transform: uppercase;
+    color: #ffffff;
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+    text-align: center;
+    font-size: 38px;
+    padding-left: 19px;
+}
+
+.filter-section{
+    padding-top: 26px;
+}
+
+.listing-row{
+    height: 207px;
 }

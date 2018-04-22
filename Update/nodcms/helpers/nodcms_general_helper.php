@@ -7,9 +7,12 @@
  * Project: NodCMS
  * Website: http://www.nodcms.com
  */
+
+
 if ( ! function_exists('_l')){
     function _l($label, $obj)
     {
+
         $label = str_replace('"','&quot;',$label);
         $return = $obj->lang->line($label, FALSE);
         if ($return){

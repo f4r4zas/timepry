@@ -624,13 +624,15 @@
                                         
                                   }
                                   
-                			  }); 
-                              hiddenfields +='<input type="hidden" name="cat[]" class="update4" value="'+$(".cat.active a").attr("data-catid")+'"/>';
-                              hiddenfields +='<input type="hidden" name="subcat[]" class="update4" value="'+$(".subcat.active a").attr("data-subcatid")+'"/>';
-                              formData += "<td style='text-align: center; padding: 10px; border: 1px solid #ccc;'>"+$('.cat.active a').text()+"</td>";
-                               formData += "<td style='text-align: center; padding: 10px; border: 1px solid #ccc;'>"+$('.subcat.active a').text()+"</td>";
-                              
-                              formData += "</tr>";
+                			  });
+
+                              var subCatId = $(".cat.active a").attr("href");
+
+                                hiddenfields +='<input type="hidden" name="cat[]" class="update4 " value="'+$(".cat.active a").attr("data-catid")+'"/>';
+                                hiddenfields +='<input type="hidden" name="subcat[]" class="update4 " value="'+$(""+subCatId+" .subcat.active a").attr("data-subcatid")+'"/>';
+                                formData += "<td style='text-align: center; padding: 10px; border: 1px solid #ccc;'>"+$('.cat.active a').text()+"</td>";
+                                formData += "<td style='text-align: center; padding: 10px; border: 1px solid #ccc;'>"+$(""+subCatId+'.subcat.active a').text()+"</td>";
+                                formData += "</tr>";
                               
                               $("#selected_treat").append(formData);
                               $('.hiddenfields').append(hiddenfields);

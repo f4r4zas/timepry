@@ -258,6 +258,7 @@
 
         jQuery(document).ready(function(){
 
+
             jQuery(".giveReview").click(function(){
                 var reservationId = jQuery(this).attr("data-reviewid");
                 var id = jQuery(this).attr("id");

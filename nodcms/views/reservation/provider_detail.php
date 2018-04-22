@@ -93,7 +93,9 @@ font-size: 16px;
         </div>
     </div>
 </section>
+<?php
 
+?>
 <div id="listing-page">
     <section class="listing-content">
 
@@ -360,10 +362,33 @@ font-size: 16px;
 
                             <?php
                             $i=0;
-                            foreach($sub_cats as $cates){ ?>
-                                <li class="<?php if($i == 0){echo "active";} ?>">
-                                    <a data-toggle="tab" href="#subcat-<?php echo $cates['subcat_id']; ?>"><?php echo $cates['subcat_name'];  ?><span class="count"></span></a>
-                                </li>
+                            foreach($sub_cats as $cates){
+
+                                $subCat = false;
+
+                                foreach($data_list as $item){ $i++; $right_pic=($i>2)?1:0; if($i>4){ $i=1; }
+                                    if(!in_array($item["title"],$fetched)){
+                                        if($item['subcategory'] == $cates['subcat_id']){
+
+
+                                            $subCat = true;
+
+                                            ?>
+
+
+                                            <?php
+
+                                        }
+                                    }
+                                }
+                                if($subCat == true){
+                                    ?>
+                                    <li class="<?php if($i == 0){echo "active";} ?>">
+                                        <a data-toggle="tab" href="#subcat-<?php echo $cates['subcat_id']; ?>"><?php echo $cates['subcat_name'];  ?><span class="count"></span></a>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
                             <?php $i++; ?>
                             <?php } ?>
                         </ul>
@@ -374,6 +399,7 @@ font-size: 16px;
                 <div class="col-md-offset-1 col-md-8">
                     <div class="tab-content">
                         <?php
+
                         $ii=0;
                         foreach($sub_cats as $cates){ ?>
 
@@ -389,7 +415,6 @@ font-size: 16px;
                                             <div class="row">
 
                                                 <span style="display: none;" class="serviceID"><?php echo $item["id"];?></span>
-
                                                 <div class="col-md-8">
                                                     <div class="treatment_content">
                                                         <div class="treatment-title"><?php echo $item['title']?> </div>
@@ -726,6 +751,7 @@ jQuery(document).ready(function(){
             };
             
             $.chooseService = function( serviceId ) {
+                console.log(serviceId);
 				    $("#beforeCheckout_popout").LoadingOverlay("show");   
                 $('#error').hide();
                 if(serviceId!=''){
@@ -851,7 +877,7 @@ jQuery(document).ready(function(){
                 
                 $.ajax("<?php echo base_url().$lang.$this->provider_prefix ?>/set_appointment/" + serviceID,
                     {
-                        data: $('#checkout').serialize() 
+                        data: $('#checkout').serialize()
                             //$("#myForm input").serialize(),
                             /*"date":$('#date_pick_input').val(),
                             "time":$('#time_pick').val(),
@@ -1057,17 +1083,15 @@ jQuery(document).ready(function(){
                             </div>
                         </div>
                         <input  type="submit" class="greyButton" value="Checkout"/>
-                       
- 					  
-                    
-                    </form> 
-                    <?php if(!empty($this->session->userdata("logged_in_status"))){ ?>
-                        <input id="doPayment" type="button" class="greyButton" value="Checkout"/>
-                    <?php }else{ ?>
-                        <a href="<?php echo base_url(); ?>register" class="greyButton">Please register first</a>
-                    <?php } ?>
 
-					
+                    </form>
+
+                <input type="button" id="gotoCheckout" value="Go to Checkout" class="greyButton" >
+
+                        <!--<input id="doPayment" type="button" class="greyButton" value="Checkout"/>
+
+                        <a href="<?php /*echo base_url(); */?>register" class="greyButton">Please register first</a>-->
+
                     <a style="display: none;" href="checkout.php" class="greyButton">Go to Checkout</a>
                 </div><!-- Order Total -->
 			</div>
@@ -1120,6 +1144,21 @@ jQuery(document).ready(function(){
 <script type="text/javascript">
 
     jQuery(document).ready(function(){
+
+        $("#gotoCheckout").click(function(){
+
+            var checkoutForm = $('#checkout').serialize();
+
+            $.ajax({url:"<?php echo base_url() ?>/checkoutData",type: "POST",data:{checkout:checkoutForm,provider_prefix:"<?php echo $this->provider_prefix; ?>"},function(data) {
+                    console.log("Redirect");
+                    window.location.href="<?php echo base_url(); ?>checkout";
+            }}).done(function() {
+                console.log("Redirect");
+                window.location.href="<?php echo base_url(); ?>checkout";
+            });
+        });
+
+
         jQuery("[name='you']").change(function(){
                 console.log($(this).val());
             <?php if(!empty($this->session->userdata("logged_in_status"))){ ?>
@@ -1193,6 +1232,8 @@ function getDiscount(){
 	jQuery(".drates").text(total);
 	
 }
+
+
 
 </script>
    

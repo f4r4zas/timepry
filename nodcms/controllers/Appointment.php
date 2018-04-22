@@ -176,7 +176,7 @@ class Appointment extends NodCMS_Controller {
         $page--;
 
         $this->data['data_list'] = $this->Appointment_model->getAllProvider($searchConditions, $config['per_page'], $config['per_page']*$page);
-		
+
 		if(!empty($condition)){
 				$this->data['data_list'] = $this->Appointment_model->getCustomProvider($condition, $config['per_page'], $config['per_page']*$page);
 		}
@@ -212,7 +212,7 @@ class Appointment extends NodCMS_Controller {
         $providerExtension = $this->Appointment_model->getProviderExtensions($this->provider['provider_id']);
         if(count($providerExtension)!=0){
             $providerExtension = @reset($providerExtension);
-            $this->provider['provider_name'] = $providerExtension['name'];
+            //$this->provider['provider_name'] = $providerExtension['name'];
             $this->provider['provider_description'] = $providerExtension['full_description'];
         }else{
             $this->provider['provider_description'] = '<i class="fa fa-warning font-red"></i> '
@@ -434,10 +434,8 @@ class Appointment extends NodCMS_Controller {
     function setAppointment($lang="en",$id)
     {
 		  //Method for user no of reservations 
-		   get_instance()->load->helper('user'); 
-
-		
-        $this->preset($lang);
+		   get_instance()->load->helper('user');
+           $this->preset($lang);
         
         $extra_fields = $this->Appointment_model->getAllExtraFields();
         //if(isset($service["service_id"])){
@@ -471,17 +469,14 @@ class Appointment extends NodCMS_Controller {
                                     );
                         $post_data = $newpost_data;
                         $id = $post_data1['practitioner'][$mainKey];
-                    
-                    
+
                     //print_r($post_data);
                     
                     //exit();
-                    
-                    
+
                     $appointmentValidation = $this->setAppointmentValidation($id, $post_data);
                     
                     $service =  @reset($this->Appointment_model->getServiceDetail($id));
-					
 					
 					 if(!empty($this->session->userdata("email"))){ 
 					 $totalReservations = getNoReservations($this->session->userdata("email"));
@@ -1238,6 +1233,7 @@ class Appointment extends NodCMS_Controller {
         return $query->result_array();
 
     }
-	
+
+
 	
 }

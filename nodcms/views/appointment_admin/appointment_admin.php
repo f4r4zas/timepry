@@ -765,6 +765,7 @@
 <script src="<?php echo base_url(); ?>assets/metronic/global/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js"></script>
 <script>
     $(function(){
+       
         $('.btn-ask').confirmation({
             container: 'body',
             btnOkClass: 'btn-xs btn-success',
