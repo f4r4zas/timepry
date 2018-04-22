@@ -150,6 +150,12 @@ class Registration extends NodCMS_Controller {
                     $this->sendEmailAutomatic($email, $autoEmailMSG['subject'], $email_content);
                 }
                 // Make confirm message
+
+
+                if($this->session->userdata('checkout')){
+                    redirect(base_url()."checkout");
+                }
+
                 $message = array(
                     'title'=>_l('Your subscription was successful!', $this),
                     'body'=>_l('Please check your email and click on the link posted.', $this),

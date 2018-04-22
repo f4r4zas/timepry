@@ -1,4 +1,6 @@
 <?php  get_instance()->load->helper('user'); ?> 
+<?php   $this->session->unset_userdata('checkout');
+        $this->session->unset_userdata('provider_prefix'); ?>
 
 <?php if(!empty($this->session->userdata("email"))){ ?>
 	<?php $totalReservations = getNoReservations($this->session->userdata("email")); ?>
@@ -824,13 +826,16 @@ jQuery(document).ready(function(){
 						$("#beforeCheckout_popout").LoadingOverlay("hide");
                         data = JSON.parse(data);
                         if(data.status=="success"){
+                            $("#gotoCheckout").hide();
                             $('#time_pick').html('');
                             $.each(data.times,function(key,value){
                                 $('<option/>').text(value).attr("value",value).appendTo('#time_pick');
                             });
+
                             $('#step2').hide();
                             $('#step3').slideDown(500);
-                            //                        $('#step3').addClass('pullDown');
+                            $('#step3').addClass('pullDown');
+
                         }else{
                             $('#time_pick').html('');
                             //                        $('#step3').removeClass('pullDown');
@@ -976,6 +981,7 @@ jQuery(document).ready(function(){
                 } */
 				
 				 if(show_checkout == true){
+                    $('#gotoCheckout').show();
                     $('#doPayment').show();
 					$('#checkout').hide();
                 } else {
@@ -1082,7 +1088,7 @@ jQuery(document).ready(function(){
 
                     </form>
 
-                <input type="button" id="gotoCheckout" value="Go to Checkout" class="greyButton" >
+                <input type="button" style="display:none" id="gotoCheckout" value="Go to Checkout" class="greyButton" >
 
                         <!--<input id="doPayment" type="button" class="greyButton" value="Checkout"/>
 
