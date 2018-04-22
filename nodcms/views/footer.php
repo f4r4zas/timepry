@@ -166,7 +166,7 @@
         </div>
     </div>
 
-    <div id="site_auto_popup">
+    <div id="   ">
         <div class="closepopup">
             <i class="fa fa-times"></i>
         </div>

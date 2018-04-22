@@ -461,7 +461,7 @@
         </div>
     </div>
 
-    <div id="site_auto_popup">
+    <div id="">
         <div class="closepopup">
             <i class="fa fa-times"></i>
         </div>
@@ -538,12 +538,12 @@
 
    // $('.time').mask('00:00');
         $(document).ready(function() {
-
+            $('.black_overlay').hide();
             $(".se-pre-con").css("display", "none");
             if ( $('.home-banner').length > 0 ) {
                 setTimeout(function() {
-                    $('#site_auto_popup').show();
-                    $('.black_overlay').show();
+                   // $('#site_auto_popup').show();
+                    //$('.black_overlay').show();
                 }, 2000);
             }
         });
