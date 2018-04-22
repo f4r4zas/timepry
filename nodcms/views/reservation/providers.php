@@ -322,8 +322,8 @@ get_instance()->load->helper('valid-date');
         <div class="row athicating">
 
             <div class="col-md-12 filter-section">
-                <div class="col-md-2"></div>
-                <div class="col-md-4">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
                     <form action="" id="zipform" method="get">
                         <div class="form-group">
                             <label>
