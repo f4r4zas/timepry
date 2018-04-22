@@ -138,10 +138,6 @@ font-size: 16px;
 				  <div id="myCarousel" class="carousel slide" data-ride="carousel">
 					<!-- Indicators -->
 					<ol class="carousel-indicators">
-					
-					  
-					 
-					  
 					  
 					  <?php if(!empty($this->provider['image'])){ ?>
 						<?php $images = json_decode($this->provider['image']); ?>

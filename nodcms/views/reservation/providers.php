@@ -386,15 +386,8 @@ get_instance()->load->helper('valid-date');
 
                 <div class="col-md-12">
                     <blockquote>
-                        <h3><strong>Rome</strong></h3>
-                        <footer>Capital of Italy</footer>
+                        <h3><strong><?php echo $this->input->get("search_location"); ?></strong></h3>
                     </blockquote>
-                    <p>Rome, Italy’s capital, is a sprawling, cosmopolitan city with nearly 3,000 years of globally
-                        influential art, architecture and culture on display. Ancient ruins such as the Forum and the
-                        Colosseum evoke the power of the former Roman Empire. Vatican City, headquarters of the Roman
-                        Catholic Church, has St. Peter’s Basilica and the Vatican Museums, which house masterpieces such
-                        as Michelangelo’s Sistine Chapel frescoes.
-                    </p>
                 </div>
 
                 <div id="listId" class="res_wrapper">
