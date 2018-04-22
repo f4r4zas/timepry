@@ -599,6 +599,7 @@ parse_str($this->session->userdata("checkout"), $outputArray);
         </div>
     </section>
     <?php $this->load->view("payment_form"); ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.2.3/jquery.payment.min.js"></script>
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
