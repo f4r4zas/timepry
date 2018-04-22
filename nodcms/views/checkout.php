@@ -600,7 +600,6 @@ parse_str($this->session->userdata("checkout"), $outputArray);
         </div>
     </section>
 
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
@@ -618,15 +617,21 @@ parse_str($this->session->userdata("checkout"), $outputArray);
             return false;
         }
 
+        var totalLoop = $("[name='service[]']").length;
+        var start = 0;
         $("[name='service[]']").each(function(){
             $.ajax("<?php echo base_url()."en".$this->session->userdata("provider_prefix"); ?>/set_appointment/" + $(this).val() ,{ data: $('#checkout').serialize() ,type:"POST",async:false },function(data){
-                console.log(data);
-            }).fail(function(e){
+
+            }).done(function(e){
+                start++;
+                if(start == totalLoop){
+                    window.location.href="<?php echo base_url(); ?>checkout-complete";
+                }
 
             });
         });
 
-        window.location.href="<?php echo base_url(); ?>checkout-complete";
+
     }
 
     $("#place-order").click(function(){
