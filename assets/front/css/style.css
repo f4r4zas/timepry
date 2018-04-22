@@ -3656,3 +3656,8 @@ overflow-y: scroll;
 .listing-row{
     height: 207px;
 }
+
+.portlet.light {
+    padding: 12px 20px 15px 20px;
+    background-color: #fff;
+}

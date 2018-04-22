@@ -335,8 +335,8 @@ class General extends CI_Controller
 
         $message = array(
             'title'=>_l('Checkout successful!', $this),
-            'body'=>_l('Checkout successful!.', $this),
-            'class'=>'note note-success'
+            'body'=>_l('Checkout Completed!', $this),
+            'class'=>'alert alert-info'
         );
         $this->session->set_flashdata('message', $message);
 
@@ -351,7 +351,6 @@ class General extends CI_Controller
             $this->load->view("header", $this->data);
             $this->load->view('registration/user_registration_message',$this->data);
             $this->load->view("footer", $this->data);
-
 
         }else{
             echo "df;ldsf";
