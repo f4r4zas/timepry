@@ -5,9 +5,11 @@ $CI = get_instance();
 // You may need to load the model if it hasn't been pre-loaded
 $CI->load->model('Appointment_model');
 
+if(!$this->session->userdata("checkout")){
+    redirect(base_url());
+}
 parse_str($this->session->userdata("checkout"), $outputArray);
 
-$this->session->set_userdata("provider_prefix","/provider/1560018932");
 ?>
     <style>
         .steps {
@@ -611,25 +613,20 @@ $this->session->set_userdata("provider_prefix","/provider/1560018932");
 
     function createResrvation(){
 
-
         if($("#phone").val() == ""){
             alert("Please fill the phone number");
             return false;
         }
 
-
         $("[name='service[]']").each(function(){
-
             $.ajax("<?php echo base_url()."en".$this->session->userdata("provider_prefix"); ?>/set_appointment/" + $(this).val() ,{ data: $('#checkout').serialize() ,type:"POST",async:false },function(data){
                 console.log(data);
             }).fail(function(e){
 
             });
-
         });
 
         window.location.href="<?php echo base_url(); ?>checkout-complete";
-
     }
 
     $("#place-order").click(function(){
