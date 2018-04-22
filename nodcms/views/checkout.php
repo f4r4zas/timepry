@@ -11,6 +11,8 @@ if(!$this->session->userdata("checkout")){
 parse_str($this->session->userdata("checkout"), $outputArray);
 
 ?>
+
+
     <style>
         .steps {
             margin-top: -41px;
@@ -411,12 +413,6 @@ parse_str($this->session->userdata("checkout"), $outputArray);
                                                 <span>Credit Card</span>
                                             </label>
                                         </div>
-                                        <div class="radio">
-                                            <label class="radio">
-                                                <input name="radio" type="radio" value="Paypal"/>
-                                                <span>Paypal</span>
-                                            </label>
-                                        </div>
                                     </div>
                                 </div>
 
@@ -509,8 +505,10 @@ parse_str($this->session->userdata("checkout"), $outputArray);
                                     <p class="total_prices text-center">
                                     <h2 class="text-center">€<span class="rates">24</span></h2></p>
 
+                                    <input type="button" class="greyButton"  id="doPayment" value="Place Order">
+
                                     <?php if (!empty($this->session->userdata("logged_in_status"))) { ?>
-                                        <input type="submit" class="greyButton" onClick="createResrvation()"  id="place-order" value="Place Order">
+                                        <input type="submit" style="display: none" class="greyButton" onClick="createResrvation()"  id="place-order" value="Place Order">
                                     <?php } else { ?>
                                         <input type="submit" class="greyButton showLogin" value="Login">
                                         <a href="<?php base_url() ?>register/user-registration"
@@ -599,11 +597,11 @@ parse_str($this->session->userdata("checkout"), $outputArray);
             </div>
         </div>
     </section>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
-
+    <?php $this->load->view("payment_form"); ?>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.2.3/jquery.payment.min.js"></script>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/front/js/payment.js"></script>
 <script>
 
     $(document).ready(function(){

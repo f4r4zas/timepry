@@ -66,13 +66,13 @@ function payWithStripe(e) {
             console.log(response.card);
             var token = response.id;
             // AJAX - you would send 'token' to your server here.
-            $.post('Payments/stripe_card_token', {
+            $.post('General/stripe_card_token', {
                     token: token
                 })
                 // Assign handlers immediately after making the request,
                 .done(function(data, textStatus, jqXHR) {
                     $form.find('.subscribe').html('Payment successful <i class="fa fa-check"></i>');
-					 $('#checkout').show();
+					 $('#place-order').show();
 					 $('#doPayment').hide();
 					 $('#paymentForm').modal('hide');
 					 
@@ -142,6 +142,8 @@ paymentFormReady = function() {
         return false;
     }
 }
+console.log("worked");
+console.log($form);
 
 $form.find('.subscribe').prop('disabled', true);
 var readyInterval = setInterval(function() {

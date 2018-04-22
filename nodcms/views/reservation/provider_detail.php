@@ -1139,7 +1139,7 @@ jQuery(document).ready(function(){
     </div>
 </div>-->
 
-<?php $this->load->view("payment_form"); ?>
+<?php //$this->load->view("payment_form"); ?>
 
     <script src="<?php echo base_url(); ?>assets/form-validator/jquery.form-validator.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZ6v5rVNIY_XwJfCdIntpT1jNj0wLVReY&sensor=false&extension=.js"></script> 
