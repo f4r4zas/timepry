@@ -49,7 +49,14 @@ class Nodcms_admin_sign extends CI_Controller {
 
             $this->session->set_userdata($data);
             $_SESSION['Session_Admin'] = $data['user_id'];
-            redirect(base_url().'admin-appointment');
+
+            if($this->session->userdata('checkout')){
+                redirect(base_url().'checkout');
+            }else{
+                redirect(base_url().'admin-appointment');
+            }
+
+
         }else{
             $this->session->set_flashdata('message', _l('Oopsie, Username or password is incorrect',$this));
             redirect(base_url().'admin-sign');
