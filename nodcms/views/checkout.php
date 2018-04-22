@@ -10,6 +10,10 @@ if(!$this->session->userdata("checkout")){
 }
 parse_str($this->session->userdata("checkout"), $outputArray);
 
+get_instance()->load->helper('user');
+
+$totalReservations = getNoReservations($this->session->userdata("email"));
+
 ?>
 
 
@@ -448,7 +452,6 @@ parse_str($this->session->userdata("checkout"), $outputArray);
                                             <input type="hidden" class="final_treatment_field<?php echo $outputArray['service'][$i] ?> time" value="<?php echo $outputArray['time'][$i]; ?>" name="time[]">
 
                                         <?php } ?>
-
                                     </div>
 
                                     <div class="form-group">
@@ -531,7 +534,15 @@ parse_str($this->session->userdata("checkout"), $outputArray);
                                             <?php
 
                                             $total = 0;
-                                            $discoutn = 0;
+                                            $discount = 0;
+
+                                            if(!empty($this->session->userdata("email"))){
+                                                $totalReservations = getNoReservations($this->session->userdata("email"));
+                                                if($totalReservations >=10){
+                                                    $discount = 20;
+                                                }
+                                            }
+
                                             $sizeOfarray = count($outputArray['service']) - 1;
                                             for ($i = 0; $i <= $sizeOfarray; $i++) {
 
@@ -573,7 +584,7 @@ parse_str($this->session->userdata("checkout"), $outputArray);
                                                 </div>
                                                 <div class="col-xs-12">
                                                     <small>discount</small>
-                                                    <div class="pull-right"><span><?php echo $discoutn; ?></span></div>
+                                                    <div class="pull-right"><span><?php echo $discount; ?></span></div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -583,7 +594,8 @@ parse_str($this->session->userdata("checkout"), $outputArray);
                                                 <div class="col-xs-12">
                                                     <strong>Order Total</strong>
                                                     <div class="pull-right">
-                                                        <span>$</span><span><?php echo $total - $discoutn; ?></span>
+                                                        <?php $dcAmount = $total * $discount / 100; ?>
+                                                        <span>$</span><span><?php echo $total - $dcAmount; ?></span>
                                                     </div>
                                                 </div>
                                             </div>
