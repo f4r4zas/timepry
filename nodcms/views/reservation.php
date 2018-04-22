@@ -460,25 +460,6 @@
             </div>
         </div>
     </div>
-
-    <div id="">
-        <div class="closepopup">
-            <i class="fa fa-times"></i>
-        </div>
-        <div class="doc-img">
-            <div class="popup_wrapper">
-                <div class="text">
-                    <p>FREE ONLINE BOOKING WITH</p>
-                    <p class="heavy-font">OVER 3,500 NHS AND PRIVATE DENTISTS</p>
-                </div>
-                <div class="learnmore_btn_wrraper">
-                    <a href="#" class="greyButton">Learn More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    
     <div class="scroll-to-top">
         <i class="icon-arrow-up"></i>
     </div>
