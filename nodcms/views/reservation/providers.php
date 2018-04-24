@@ -584,7 +584,7 @@ $CI = get_instance();
             <script>
 
                 function initialize() {
-                    setTimeout(3000)
+
                     var locations = [
                         ['DESCRIPTION', 41.926979, 12.517385, 10],
                         ['DESCRIPTION', 41.914873, 12.506486, 10],
@@ -595,7 +595,7 @@ $CI = get_instance();
 
                     window.map = new google.maps.Map(document.getElementById('map_canvas'), {
                         //center: new google.maps.LatLng(45, -122),
-                        zoom: 4,
+                        zoom: 1,
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     });
 
@@ -632,9 +632,12 @@ $CI = get_instance();
                             bounds.extend(marker.position);
                             bounds.extend(marker.position);
 
+
+
                             setTimeout(function(){
                                 bounds.extend(marker.position);
-                            },2000)
+                            },2000);
+                            map.fitBounds(bounds);
                         });
 
 
@@ -646,7 +649,7 @@ $CI = get_instance();
                         })(marker, i));*/
                     }
 
-                    map.fitBounds(bounds);
+
 
                     var listener = google.maps.event.addListener(map, "idle", function () {
                         map.setZoom(5);
@@ -663,7 +666,8 @@ $CI = get_instance();
                 }
 
                 jQuery(document).ready(function () {
-                    loadScript();
+                    //loadScript();
+
                     console.log("scripted");
                 });
 
@@ -689,11 +693,13 @@ $CI = get_instance();
             <?php } ?>
         </div>
 </section>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkNq8UF0mXsrDKPk6QbA976GWi5lZqprI&v=3.exp&sensor=false&callback=initialize"></script>
 <script>
 
 
     jQuery(document).ready(function () {
+
+
 
         var options = {
             valueNames: ['priceHidden', 'hiddenRating'],
