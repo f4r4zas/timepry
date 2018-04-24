@@ -530,7 +530,7 @@ $CI = get_instance();
                                             </div>
                                         </div>
                                         <div class="col-md-2">
-                                            <p class="price-listing">From : <span><h2>£<?php echo $item['price']; ?></h2></span></p>
+                                            <p class="price-listing">From : <span><h2>€<?php echo $item['price']; ?></h2></span></p>
                                         </div>
                                     </div>
                                 </div>

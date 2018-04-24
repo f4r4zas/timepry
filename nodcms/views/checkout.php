@@ -552,9 +552,10 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
 
 
                                 <div class="form-group text-center">
-                                    <h1 class="text-center">Order total</h1>
+                                    <!--<h1 class="text-center">Order total</h1>
                                     <p class="total_prices text-center">
-                                    <h2 class="text-center">€<span class="rates">24</span></h2></p>
+                                        <?php /*$dcAmount = $total * $discount / 100; */?>
+                                    <h2 class="text-center">€<span class="rates"><?php /*echo $total - $dcAmount; */?></span></h2></p>-->
 
 
 
@@ -620,7 +621,7 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                                                     </div>
                                                     <div class="col-md-6 text-right price">
                                                         <div class="col-md-12">&nbsp;</div>
-                                                        <div class="col-md-12"><strong>£<span><?php echo  $treatmentData['price']; ?></span></strong></div>
+                                                        <div class="col-md-12"><strong>€<span><?php echo  $treatmentData['price']; ?></span></strong></div>
                                                         <div class="col-md-12">&nbsp;</div>
 
                                                     </div>
@@ -636,7 +637,7 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                                             <strong>Order Total</strong>
                                             <div class="pull-right">
                                                 <?php $dcAmount = $total * $discount / 100; ?>
-                                                <span>£</span><span><?php echo $total - $dcAmount; ?></span>
+                                                <span>€</span><span><?php echo $total - $dcAmount; ?></span>
                                             </div>
                                         </div>
                                     </div>
