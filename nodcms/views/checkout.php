@@ -563,9 +563,8 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                                         <input type="button" class="greyButton"  id="doPayment" value="Place Order">
                                         <input type="submit" style="display: none" class="greyButton" onClick="createResrvation()"  id="place-order" value="Place Order">
                                     <?php } else { ?>
-                                        <input type="submit" class="greyButton showLogin" value="Login">
-                                        <a href="<?php base_url() ?>register/user-registration"
-                                           class="greyButton btn btn-md">Register</a>
+                                        <input type="submit" class="greyButton redirectToLogin" value="Login">
+                                        <input type="submit" class="greyButton redirectToRegister" value="Register" />
                                     <?php } ?>
 
                                 </div>
@@ -661,6 +660,13 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
 
     $(document).ready(function(){
 
+        $(".redirectToLogin").click(function(){
+            window.location.href="<?php echo base_url() ?>admin-sign";
+        });
+
+        $(".redirectToRegister").click(function(){
+                    window.location.href="<?php echo base_url() ?>register/user-registration";
+        });
     });
 
     function createResrvation(){

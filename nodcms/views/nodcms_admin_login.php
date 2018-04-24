@@ -71,7 +71,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <div class="content">
     <!-- BEGIN LOGIN FORM -->
     <form class="login-form" action="<?php echo base_url(); ?>admin-sign/login" method="post">
-        <h3 class="form-title"><?php echo _l('Admin Sign',$this); ?></h3>
+        <h3 class="form-title"><?php echo _l('Login',$this); ?></h3>
         <?php if($this->session->flashdata('message')){ ?>
         <div class="alert alert-danger">
             <button class="close" data-close="alert"></button>
