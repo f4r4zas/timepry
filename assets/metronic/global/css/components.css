@@ -10762,3 +10762,7 @@ Transparent Button
 .btn-transparent.btn {
   background: transparent;
   color: #888; }
+
+.remove-pic{
+  float: right;
+}

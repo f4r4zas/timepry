@@ -37,7 +37,7 @@
                 </div>
                 <div class="lang_value<?php echo $item['language_id']; ?>" <?php echo (isset($extensions[$item["language_id"]]['status']) && $extensions[$item["language_id"]]['status']==1)?'':'style="display:none;"'; ?>>
                     <?php
-                    mk_htext("extensions[".$item["language_id"]."][name]",_l('Dental Office Name',$this)." (".$item["language_name"].")",isset($extensions[$item["language_id"]])?$extensions[$item["language_id"]]["name"]:"");
+                    mk_htext("extensions[".$item["language_id"]."][name]",_l('Admin account name',$this),isset($extensions[$item["language_id"]])?$extensions[$item["language_id"]]["name"]:"");
                     mk_htexteditor("extensions[".$item["language_id"]."][full_description]",_l('Dental Office Description',$this)." (".$item["language_name"].")",isset($extensions[$item["language_id"]])?$extensions[$item["language_id"]]["full_description"]:"");
                     ?>
                 </div>

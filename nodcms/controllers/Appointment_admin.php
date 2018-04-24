@@ -12,6 +12,8 @@ class Appointment_admin extends NodCMS_Controller
 {
     private $provider_group = 0;
     function __construct(){
+
+
         // load construct with backend prepared function
         parent::__construct('backend');
         if($this->session->userdata('group') == 20){
@@ -26,6 +28,7 @@ class Appointment_admin extends NodCMS_Controller
             if(count($default_provider)!=0){
                 $this->session->set_userdata('provider_id',$default_provider[0]["provider_id"]);
                 $this->session->set_userdata('provider_name',$default_provider[0]["provider_name"]);
+
                 redirect(APPOINTMENT_ADMIN_URL."dashboard");
             }
         }
@@ -265,7 +268,9 @@ class Appointment_admin extends NodCMS_Controller
                     redirect(APPOINTMENT_ADMIN_URL.'index/'.$this->data['data'][0]['provider_id']);
                 }
                 $loadPage = "appointment_home";
-            } else {
+            } else if($this->input->get("showOption")){
+                $loadPage = "appointment_home";
+            }else {
 				$this->data['reviewed'] = $this->Appointment_admin_model->getReviewed();
                 $loadPage = "user_dashboard";
             }
@@ -337,8 +342,8 @@ class Appointment_admin extends NodCMS_Controller
         $this->data['languages'] = $this->Nodcms_admin_model->get_all_language();
         $this->data['title'] = _l("providers",$this);
         $this->data['breadcrumb']=array(
-            array('title'=>_l("Dental Offices", $this), 'url'=>APPOINTMENT_ADMIN_URL.'providers'),
-            array('title'=>$this->data['sub_title'])
+            array('title'=>_l("My Dental Office", $this), 'url'=>APPOINTMENT_ADMIN_URL.'providers'),
+            array('title'=>"Details")
         );
         $this->data['page'] = "provider";
         $this->data['content']=$this->load->view($this->mainTemplate.'/appointment/provider_edit',$this->data,TRUE);
@@ -443,6 +448,7 @@ class Appointment_admin extends NodCMS_Controller
 //                    if($setData["paypal_user_id"] == '') unset($setData["paypal_user_id"]);
 //                    if($setData["paypal_password"] == '') unset($setData["paypal_password"]);
 //                    if($setData["paypal_signature"] == '') unset($setData["paypal_signature"]);
+
                     $new_id = $this->Appointment_admin_model->providerManipulate($setData,$id,$extensions);
                     $result = array("status"=>"success","id",$new_id);
                 }
@@ -1842,6 +1848,8 @@ class Appointment_admin extends NodCMS_Controller
 
         $this->data['data'] = $this->userdata;
         $this->data['languages'] = $this->Nodcms_admin_model->get_all_language();
+        $this->data['userPictures'] = $this->getPictures();
+        $this->data['coverPic'] = $this->Appointment_admin_model->getCover();
 
         $this->data['content']=$this->load->view($this->mainTemplate.'/account_setting',$this->data,true);
 
@@ -1918,6 +1926,9 @@ class Appointment_admin extends NodCMS_Controller
             'reservationGroupReminder',
             'accountSetting',
             'userProfiles',
+            'imageUpload',
+            'changeCoverPic',
+            'removePic',
         );
         if(!in_array($this->router->fetch_method(),$acceptableMethods)){
             $this->session->set_flashdata('error', _l("Unfortunately you do not have permission to this part of system.",$this));
@@ -2009,6 +2020,11 @@ class Appointment_admin extends NodCMS_Controller
                         'title'=>_l('Details',$this),
                         'class'=>'',
                     ),
+                    'list_offices'=>array(
+                        'url'=>APPOINTMENT_ADMIN_URL.'?showOption',
+                        'title'=>"All Offices",
+                        'class'=>'',
+                    ),
                 ),
             ),
         );
@@ -2054,6 +2070,9 @@ class Appointment_admin extends NodCMS_Controller
             'reservationGroupReminder',
             'accountSetting',
             'userProfiles',
+            'imageUpload',
+            'changeCoverPic',
+            'removePic',
         );
         if(!in_array($this->router->fetch_method(),$acceptableMethods)){
             $this->session->set_flashdata('error', _l("Unfortunately you do not have permission to this part of system.",$this));
@@ -2124,6 +2143,9 @@ class Appointment_admin extends NodCMS_Controller
             'reservationGroupReminder',
             'accountSetting',
             'userProfiles',
+            'imageUpload',
+            'changeCoverPic',
+            'removePic',
         );
         if(!in_array($this->router->fetch_method(),$acceptableMethods)){
             $this->session->set_flashdata('error', _l("Unfortunately you do not have permission to this part of system.",$this));
@@ -2182,6 +2204,7 @@ class Appointment_admin extends NodCMS_Controller
             'accountSetting',
             'userProfiles',
             'allAppointments',
+            'changeCoverPic',
         );
         if(!in_array($this->router->fetch_method(),$acceptableMethods)){
             $this->session->set_flashdata('error', _l("Unfortunately you do not have permission to this part of system.",$this));
@@ -2262,5 +2285,153 @@ class Appointment_admin extends NodCMS_Controller
         $this->loadView();
     }
 
+    public function getPictures(){
+
+        $data = $this->Appointment_admin_model->getProviderImage($this->session->userdata('user_id'))[0];
+
+        if(!empty($data)){
+            return $data['image'];
+        }else{
+            echo "empty";
+        }
+    }
+
+    public function imageUpload(){
+
+        $time = time();
+
+       $totalFiles = count($_FILES["file"]['name']) - 1;
+
+
+
+      for($i=0;$i<=$totalFiles;$i++){
+
+          $target_dir = "upload_file/images/";
+          $target_file = $target_dir.$time."-". basename($_FILES["file"]["name"][$i]);
+          $uploadOk = 1;
+          $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+          // Check if image file is a actual image or fake image
+          if(isset($_POST["submit"])) {
+              $check = getimagesize($_FILES["file"]["tmp_name"][$i]);
+              if($check !== false) {
+                  //echo "File is an image - " . $check["mime"] . ".";
+                  $uploadOk = 1;
+              } else {
+                  echo json_encode(array( 'type' => 'failed',
+                      'message' => 'File is not an image.'
+                  ));
+                  $this->session->set_flashdata('error',"Sorry, your file ".$_FILES["file"]["name"][$i]." is not an image.");
+                  $uploadOk = 0;
+              }
+          }
+          // Check if file already exists
+          if (file_exists($target_file)) {
+
+              echo json_encode(array( 'type' => 'failed',
+                  'message' => 'Sorry, file already exists.'
+              ));
+
+              $uploadOk = 0;
+          }
+          // Check file size
+          if ($_FILES["file"]["size"][$i] > 5000000) {
+              echo json_encode(array( 'type' => 'failed',
+                  'message' => 'Sorry, your file is too large.'
+              ));
+              $this->session->set_flashdata('error',"Sorry, your file ".$_FILES["file"]["name"][$i]." is too large.");
+              $uploadOk = 0;
+          }
+          // Allow certain file formats
+
+
+          if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+              && $imageFileType != "gif" ) {
+
+               json_encode(array( 'type' => 'failed',
+                  'message' => 'Sorry, only JPG, JPEG, PNG & GIF files are allowed.'
+              ));
+              $this->session->set_flashdata('error',"Sorry, your file ".$_FILES["file"]["name"][$i]." only JPG, JPEG, PNG & GIF files are allowed.");
+              $uploadOk = 0;
+
+          }
+          // Check if $uploadOk is set to 0 by an error
+          if ($uploadOk == 0) {
+              //redirect(base_url()."admin-appointment/accountSetting");
+
+              return false;
+              // if everything is ok, try to upload file
+          } else {
+              if (move_uploaded_file($_FILES["file"]["tmp_name"][$i], $target_file)) {
+
+                   $currentProviderImage = $this->Appointment_admin_model->getProviderImage($this->session->userdata("user_id"));
+
+                   if($currentProviderImage[0]['image']){
+
+                       $allImages = json_decode($currentProviderImage[0]['image']);
+
+                       array_push($allImages,$target_file);
+
+                       $this->db->set("image", json_encode($allImages));
+                       $this->db->where('provider_id',$this->session->userdata('provider_id'));
+                       $this->db->update('r_providers');
+
+                   }else{
+
+                       $target_file = json_encode(array($target_file));
+
+                       $this->db->set("image", $target_file);
+                       $this->db->where('provider_id',$this->session->userdata('provider_id'));
+                       $this->db->update('r_providers');
+                   }
+
+              } else {
+                  return false;
+              }
+          }
+      }//For
+
+        $this->session->set_flashdata('success', 'Image(s) uploaded successfully!');
+        redirect(base_url()."admin-appointment/accountSetting");
+
+    }
+
+    public function changeCoverPic(){
+
+        $cover =  $this->Appointment_admin_model->getCover();
+
+        if($cover){
+                $this->Appointment_admin_model->updateCover($this->input->post("coverPic"));
+        }else{
+                $this->Appointment_admin_model->setCover($this->input->post("coverPic"));
+        }
+    }
+
+    public function removePic(){
+
+        //$picName = "upload_file/images/1523586917-images.jpg";
+
+        if($this->input->post("removePick")){
+
+            $picName = $this->input->post("removePick");
+            $this->db->select("*");
+            $this->db->from('r_providers');
+            $this->db->where("provider_id",$this->session->userdata('provider_id'));
+            $query = $this->db->get();
+
+            $data = $query->result_array();
+
+            $imagesData = json_decode($data[0]['image']);
+
+            if (($key = array_search($picName, $imagesData)) !== false) {
+                unset($imagesData[$key]);
+            }
+
+            $this->db->set("image", json_encode(array_values($imagesData)));
+            $this->db->where('provider_id',$this->session->userdata('provider_id'));
+            $this->db->update('r_providers');
+        }else{
+            echo "error";
+        }
+    }
 
 }

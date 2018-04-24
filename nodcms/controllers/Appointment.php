@@ -197,7 +197,8 @@ class Appointment extends NodCMS_Controller {
                 }
             }
         }
-		
+
+
         $this->data['title'] = isset($this->_website_info["options"]["site_title"])?$this->_website_info["options"]["site_title"]:$this->_website_info['company'];
         $this->data['keyword'] = isset($this->_website_info["options"]["site_keyword"])?$this->_website_info["options"]["site_keyword"]:"";
         $this->data['content'] = $this->load->view('reservation/providers',$this->data,true);

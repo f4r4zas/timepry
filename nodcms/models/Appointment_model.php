@@ -535,5 +535,14 @@ class Appointment_model extends CI_Model
 
         return $query->result_array();
     }
-	
+
+    public function getCovers($provider_id){
+        $this->db->select("*");
+        $this->db->from('cover_pic');
+        $this->db->where('status',1);
+        $this->db->where('provider_id',$provider_id);
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
 }

@@ -18,7 +18,7 @@
                 <tr>
                     <th><?php echo _l("Name",$this); ?></th>
                     <th><?php echo _l("Created Date",$this); ?></th>
-                    <th><?php echo _l("Your Permission",$this); ?></th>
+                    <th><?php echo _l("Yours Permission",$this); ?></th>
                     <th><?php echo _l("Active",$this); ?></th>
                     <th></th>
                 </tr>

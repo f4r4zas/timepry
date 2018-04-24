@@ -4,6 +4,8 @@ get_instance()->load->helper('reviews');
 get_instance()->load->helper('distance');
 get_instance()->load->helper('valid-date');
 
+$CI = get_instance();
+
 ?>
 <style>
     .search_content .thumb_img {
@@ -445,11 +447,34 @@ get_instance()->load->helper('valid-date');
                                     <div class="search_content">
                                         <div class="col-md-4">
                                             <div class="thumb_img">
-                                                <?php if (!empty($item['image'])) { ?>
-                                                    <?php $images = json_decode($item['image']); ?>
-                                                    <?php if (is_array($images)) { ?>
-                                                        <span style="background-image:url(<?php echo base_url(); ?><?php
+                                                <?php
+
+                                                    print_r($test);
+                                                ?>
+                                                <?php if (!empty($item['image'])){ ?>
+                                                    <?php $images = json_decode($item['image']);
+
+                                                    ?>
+                                                    <?php if (is_array($images)){
+
+                                                        $coverImage = $CI->Appointment_model->getCovers($item['provider_id'])[0];
+
+                                                        if(!empty($coverImage)){
+
+                                                            if(in_array($coverImage['pic_url'],$images)){
+                                                                ?>
+                                                                <span style="background-image:url(<?php echo base_url(); ?><?php
+                                                                echo $coverImage['pic_url']; ?>)" class="listing-image"></span>
+                                                                <?php
+                                                            }
+
+                                                        }else{
+
+                                                        ?>
+
+                                                            <span style="background-image:url(<?php echo base_url(); ?><?php
                                                         echo $images[0]; ?>)" class="listing-image"></span>
+                                                            <?php } ?>
                                                     <?php } else { ?>
                                                         <span style="background-image:url(<?php echo base_url(); ?><?php
                                                         echo $item['image']; ?>)" class="listing-image"></span>

@@ -269,7 +269,8 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
         }
 
         .panel-info {
-            border-color: #999;
+            border-color: #eee;
+            border-width: 3px;
         }
 
         .panel-heading {
@@ -283,7 +284,7 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
 
         .panel-info > .panel-heading {
             color: #eee;
-            border-color: #999;
+            border: none;
         }
 
         .panel-info > .panel-heading {
@@ -353,12 +354,48 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
 
         .radio {
             width: auto !important;
+            float: left;
         }
 
         .radio span {
             margin-left: 22px;
         }
 
+        .panel-heading {
+            background-color: #e5e5e5a6 !important;
+            background-image: none !important;
+            font-size: 18px;
+            padding: 20px 31px;
+        }
+        .panel-heading strong {
+            color:black;
+        }
+        .panel-heading span {
+            color:black;
+        }
+        .price {
+            font-size: 17px;
+        }
+        .date-treatment {
+            color: #4ba7ff;
+        }
+        .heading-treatment {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .section-heading .cus-hr {
+            width: 96%;
+            height: 5px;
+            margin: 0 auto;
+            margin-top: 18px;
+            background-color: #518ed2;
+        }
+        .faq-page .section-heading {
+            margin-bottom: 10px;
+        }
+        .radio-payment {
+            padding-left: 0;
+        }
     </style>
 
     <section class="inner-page-banner">
@@ -378,33 +415,39 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                             <div class="col-md-6">
 
                                 <div class="form-group">
-                                    <label class="control-label ">
-                                        Is it you
-                                    </label>
-                                    <div class="">
+                                    <div class="col-md-3 you_label">
+                                        <label class="control-label ">
+                                            Is this for you?
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6 you_radio">
                                         <div class="radio">
                                             <label class="radio">
-                                                <input name="radio" type="radio" value="First Choice"/>
+                                                <input name="you" type="radio" value="First Choice"/>
                                                 <span>Yes</span>
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label class="radio">
-                                                <input name="radio" type="radio" value="Second Choice"/>
+                                                <input name="you" type="radio" value="Second Choice"/>
                                                 <span>No</span>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="section-heading">
-                                    <h1>Payment</h1>
-                                    <div class="cus-hr"></div>
-                                </div>
+
 
                                 <div class="form-group ">
+                                <div class="col-md-12 text-left">
+                                    <div class="section-heading pull-left">
+                                        <h1>Payment</h1>
+                                        <div class="cus-hr"></div>
+                                    </div>
+                                </div>
 
-                                    <div class="">
+
+                                    <div class="col-md-12 radio-payment">
                                         <div class="radio">
                                             <label class="radio">
                                                 <input name="radio" type="radio" value="Pay at the dental office"/>
@@ -502,6 +545,10 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                                     </div>
                                 </form>
 
+                                <div class="form-group">
+                                    <hr/>
+                                </div>
+
 
                                 <div class="form-group text-center">
                                     <h1 class="text-center">Order total</h1>
@@ -526,9 +573,7 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                                 <!--REVIEW ORDER-->
                                 <form class="form-horizontal" method="post">
                                     <div class="panel panel-info">
-                                        <div class="panel-heading">
-                                            Review Order
-                                        </div>
+
                                         <div class="panel-body">
 
                                             <?php
@@ -549,58 +594,52 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                                                 $treatmentData = $CI->Appointment_model->getTreatmentName($outputArray['service'][$i])[0];
                                                 $total = $total + $treatmentData['price'];
                                                 ?>
+
+                                                <?php if($i>0){ ?>
                                                 <div class="form-group">
                                                     <hr/>
                                                 </div>
+                                                <?php } ?>
+
                                                 <div class="form-group">
 
-                                                    <div class="col-sm-6 col-xs-6">
-                                                        <div class="col-xs-12"><?php echo $treatmentData['title']; ?></div>
+                                                    <div class="col-sm-6 col-xs-6 heading-treatment">
+                                                        <div class="col-xs-12"><strong><?php echo $treatmentData['title']; ?></strong></div>
                                                         <div class="col-xs-12">
                                                             <small>
-                                                                Duration:<span><?php echo $treatmentData['period_min'] ?></span>
+                                                                <span><?php echo $treatmentData['period_min'] ?> mins</span>
                                                             </small>
                                                         </div>
-                                                        <div class="col-xs-12">
+                                                        <div class="col-xs-12 date-treatment">
                                                             <small><?php echo $outputArray['time'][$i]; ?>
                                                                 <span>|</span>
                                                                 <span><?php echo date("d M Y", strtotime($outputArray['date'][$i])); ?></span>
                                                             </small>
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-6 text-right price">
+                                                        <div class="col-md-12">&nbsp;</div>
+                                                        <div class="col-md-12"><strong>£<span><?php echo  $treatmentData['price']; ?></span></strong></div>
+                                                        <div class="col-md-12">&nbsp;</div>
+
+                                                    </div>
                                                 </div>
                                                 <?php
                                             }
                                             ?>
 
-                                            <div class="form-group">
-                                                <hr/>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-xs-12">
-                                                    <strong>Subtotal</strong>
-                                                    <div class="pull-right">
-                                                        <span>$</span><span><?php echo $total; ?></span></div>
-                                                </div>
-                                                <div class="col-xs-12">
-                                                    <small>discount</small>
-                                                    <div class="pull-right"><span><?php echo $discount; ?></span></div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <hr/>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-xs-12">
-                                                    <strong>Order Total</strong>
-                                                    <div class="pull-right">
-                                                        <?php $dcAmount = $total * $discount / 100; ?>
-                                                        <span>$</span><span><?php echo $total - $dcAmount; ?></span>
-                                                    </div>
-                                                </div>
+
+
+                                        </div>
+                                        <div class="panel-heading">
+                                            <strong>Order Total</strong>
+                                            <div class="pull-right">
+                                                <?php $dcAmount = $total * $discount / 100; ?>
+                                                <span>£</span><span><?php echo $total - $dcAmount; ?></span>
                                             </div>
                                         </div>
                                     </div>
+
                                     <!--REVIEW ORDER END-->
                                 </form>
                             </div>

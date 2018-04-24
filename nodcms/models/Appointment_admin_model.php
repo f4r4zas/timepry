@@ -78,29 +78,21 @@ class Appointment_admin_model extends CI_Model{
 
     // Insert/Update on "r_services" table
 
-    function serviceManipulate($data,$id,$extensions=null)
-
-    {
+    function serviceManipulate($data,$id,$extensions=null){
 
         if($id!=null)
-
         {
 
             $this->db->where('provider_id',$this->session->userdata('provider_id'));
-
             $this->db->where('service_id',$id);
-
             $this->db->update('r_services',$data);
 
         }else{
 
             $data["user_id"]=$this->session->userdata('user_id');
-
             $data["provider_id"]=$this->session->userdata('provider_id');
-
             $data["created_date"]=time();
             $this->db->insert('r_services',$data);
-
             $id = $this->db->insert_id();
 
         }
@@ -1349,31 +1341,23 @@ class Appointment_admin_model extends CI_Model{
     // Insert/Update on "r_providers" table
 
     function providerManipulate($data, $id, $extensions = NULL)
-
     {
 
         if($id!=null)
-
         {
-
             $this->db->where('provider_id',$id);
-
             $this->db->update('r_providers',$data);
 
+            echo $this->db->last_query();
+            die();
         }else{
-
             $data["user_id"]=$this->session->userdata('user_id');
-
             $data["created_date"]=time();
-
             $this->db->insert('r_providers',$data);
-
             $id = $this->db->insert_id();
-
         }
 
         $this->extensionUpToDate($extensions,$id,'r_providers');
-
     }
 
 
@@ -1717,27 +1701,25 @@ class Appointment_admin_model extends CI_Model{
         $query = $this->db->get();
         return $query->result_array();
 	}
-	
+
 	public function updateTreatment($data,$id){
-		
-		
+
 		$this->db->set("title", $data['title']);
 		$this->db->set("price", $data['price']);
 		$this->db->set("service_description", $data['description']);
 		$this->db->set("dentists_id", implode(",",$data['treatment_practitioner']));
         $this->db->where("id", (int)$id);
         $this->db->update("treatments");
-		
 
 		return true;
 	}
-	
+
 	public function treatmentRemove($id){
 		  $this->db->where('id', $id);
-		$this->db->delete('treatments'); 
+		$this->db->delete('treatments');
 			return true;
 	}
-	
+
 	public function getReviewed(){
 		$this->db->select("*");
         $this->db->from('r_reviews');
@@ -1752,5 +1734,40 @@ class Appointment_admin_model extends CI_Model{
         $query = $this->db->get();
         return $query->result_array();
     }
-	
+
+    public function getProviderImage($userId){
+        $this->db->select("*");
+        $this->db->from('r_providers');
+        $this->db->where("user_id", $userId);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function getCover(){
+        $this->db->select("*");
+        $this->db->from('cover_pic');
+        $this->db->where("provider_id",$this->session->userdata('provider_id'));
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function setCover($pickUrl){
+
+        $data = array(
+            'provider_id' => $this->session->userdata('provider_id'),
+            'pic_url' => $pickUrl,
+            'status' => 1,
+        );
+
+        $this->db->insert('cover_pic',$data);
+        $id = $this->db->insert_id();
+    }
+
+    public function updateCover($picUrl){
+        $this->db->set("pic_url", $picUrl);
+        $this->db->where('provider_id',$this->session->userdata('provider_id'));
+        $this->db->update('cover_pic');
+    }
+
+
 }
