@@ -629,6 +629,7 @@ $CI = get_instance();
                             });
 
                             bounds.extend(marker.position);
+                            bounds.extend(marker.position);
                         });
 
 

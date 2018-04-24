@@ -66,7 +66,7 @@
                 </header>
             </form>
         </section>
-        <div class="col-md-12">
+        <div class="col-md-12 images_uploader">
             <form action="<?php echo base_url() ?>admin-appointment/imageUpload" method="post" enctype="multipart/form-data">
                 Upload Pics:
                 <input type="file" multiple name="file[]" accept="image/*" id="fileToUpload">
