@@ -25,4 +25,13 @@ class Nodcms_admin_sign_model extends CI_Model
         $query = $this->db->get('users');
         return $query->result_array();
     }
+
+    function simulate_login($username){
+        $this->db->where('email',$username);
+        $this->db->where('active', 1);
+        $this->db->where('status', 1);
+        //$this->db->limit(1);
+        $query = $this->db->get('users');
+        return $query->result_array();
+    }
 }

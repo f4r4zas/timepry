@@ -131,14 +131,10 @@ class Registration extends NodCMS_Controller {
                     "active"=>1,
                     "status"=>1
                 );
-			
-			
+
               $registered_user_id = $this->Registration_model->insertUser($user);
-				
 				//Get Registered user id
-				
 				$this->session->set_userdata('registered_user_id',$registered_user_id);
-				
                 $refurl = base_url().'register/user-registration/active/'.md5($email).'/'.$active_code;
 
                 // Send auto email for user confirm
@@ -151,17 +147,18 @@ class Registration extends NodCMS_Controller {
                 }
                 // Make confirm message
 
-
-                if($this->session->userdata('checkout')){
-                    redirect(base_url()."checkout");
-                }
-
                 $message = array(
                     'title'=>_l('Your subscription was successful!', $this),
                     'body'=>_l('Please check your email and click on the link posted.', $this),
                     'class'=>'note note-success'
                 );
                 $this->session->set_flashdata('message', $message);
+
+
+                if($this->session->userdata('checkout')){
+                        $this->session->set_userdata('logging_email',$email);
+                }
+
                 redirect(base_url().'register/user-registration/message');
             }
             redirect(base_url()."register/user-registration");
@@ -931,6 +928,41 @@ class Registration extends NodCMS_Controller {
         
 		
         //$this->preset($lang);
+
+        if($this->session->userdata('checkout')){
+
+            $this->load->model("Nodcms_admin_model");
+            $this->load->model("NodCMS_admin_sign_model");
+
+            $result = $this->NodCMS_admin_sign_model->simulate_login($this->session->userdata('logging_email'));
+
+
+            if(count($result)!=0 && in_array($result[0]['group_id'], array(1, 20, 21, 100, 101))){
+                $result = reset($result);
+                $data = array(
+                    'fullname'  => $result['firstname']." ".$result['firstname'],
+                    'username'  => $result['username'],
+                    'firstname'  => $result['firstname'],
+                    'user_id' => $result['user_id'],
+                    'group'   => $result['group_id'],
+                    'avatar'   => $result['avatar'],
+                    'email'   => $result['email'],
+                    'phone'   => $result['mobile'],
+                    'logged_in_status'   => true,
+
+                );
+
+                $this->session->set_userdata($data);
+                $_SESSION['Session_Admin'] = $data['user_id'];
+
+                redirect(base_url().'checkout');
+
+            }else{
+                $this->session->set_flashdata('message', _l('Oopsie, Username or password is incorrect',$this));
+                redirect(base_url().'admin-sign');
+            }
+
+        }
 		
 
             //$message = $this->session->flashdata('message');
@@ -945,9 +977,7 @@ class Registration extends NodCMS_Controller {
     
     
     function dentistRegistrationMessage($lang="en"){
-        
-        
-        
+
         $this->session->unset_userdata('user_id');
         $this->session->unset_userdata('service_id');
         $this->session->unset_userdata('provider_id');
