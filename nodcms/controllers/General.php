@@ -365,6 +365,16 @@ class General extends CI_Controller
         if($_POST)
         {
             $_SESSION['token']=$_POST['stripeToken'];
+            /*
+             * curl https://api.stripe.com/v1/charges \
+   -u sk_test_BQokikJOvBiI2HlWgH4olfQ2: \
+   -d amount=999 \
+   -d currency=usd \
+   -d description="Example charge" \
+   -d source=tok_visa \
+   -d statement_descriptor="Custom descriptor"
+             *
+             */
         }
 
     }

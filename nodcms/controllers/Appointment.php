@@ -466,6 +466,7 @@ class Appointment extends NodCMS_Controller {
                                         'email' => $post_data1['email'],
                                         'lname' => $post_data1['lname'],
                                         'fname' => $post_data1['fname'],
+
                                         'treatment_id' => $post_data1['service'][$mainKey],
                                     );
                         $post_data = $newpost_data;
@@ -476,7 +477,9 @@ class Appointment extends NodCMS_Controller {
                     //exit();
 
                     $appointmentValidation = $this->setAppointmentValidation($id, $post_data);
-                    
+
+
+
                     $service =  @reset($this->Appointment_model->getServiceDetail($id));
 					
 					 if(!empty($this->session->userdata("email"))){ 
@@ -510,6 +513,7 @@ class Appointment extends NodCMS_Controller {
                             "reservation_date"=>$justDate,
                             "reservation_date_time"=>$start_time,
                             "reservation_edate_time"=>$end_time,
+                            'paypal_paid' => $post_data1['paymentType'],
                             "service_name"=>$service["service_name"],
                             "price"=>$service["price"],
                             "owner_user_id"=>$service["user_id"],
@@ -517,7 +521,7 @@ class Appointment extends NodCMS_Controller {
                             "lang"=>$lang,
                             "language_id"=>$_SESSION['language']['language_id']
                         );
-                        
+
                         
                         if($this->provider["payment_type"]==0 || $this->provider["payment_type"]==2 || $service["price"]==0){
                             // No need to payment

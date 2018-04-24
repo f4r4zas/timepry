@@ -437,7 +437,6 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                                 </div>
 
 
-
                                 <div class="form-group ">
                                 <div class="col-md-12 text-left">
                                     <div class="section-heading pull-left">
@@ -450,13 +449,13 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                                     <div class="col-md-12 radio-payment">
                                         <div class="radio">
                                             <label class="radio">
-                                                <input name="radio" type="radio" value="Pay at the dental office"/>
+                                                <input name="paymentMethod"  type="radio" value="1"/>
                                                 <span>Pay at the dental office</span>
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label class="radio">
-                                                <input name="radio" type="radio" value="Credit Card"/>
+                                                <input name="paymentMethod" checked type="radio" value="2"/>
                                                 <span>Credit Card</span>
                                             </label>
                                         </div>
@@ -478,6 +477,7 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                                     }
                                     $email = $this->session->userdata('email');
                                     $phone = $this->session->userdata('phone');
+
                                 }
                                 ?>
 
@@ -498,6 +498,7 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                                     </div>
 
                                     <div class="form-group">
+                                        <input type="hidden" name="paymentType" value="1">
                                         <label><?php echo _l("First Name", $this) ?></label>
                                         <div class="input-group">
                                             <div class="input-group-addon"><i class="fa fa-i-cursor"></i></div>
@@ -668,14 +669,17 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
             return false;
         }
 
+
         var totalLoop = $("[name='service[]']").length;
         var start = 0;
         $("[name='service[]']").each(function(){
             $.ajax("<?php echo base_url()."en".$this->session->userdata("provider_prefix"); ?>/set_appointment/" + $(this).val() ,{ data: $('#checkout').serialize() ,type:"POST",async:false },function(data){
 
-            }).done(function(e){
+            }).done(function(data){
+                console.log(data);
                 start++;
                 if(start == totalLoop){
+
                     window.location.href="<?php echo base_url(); ?>checkout-complete";
                 }
 
@@ -685,7 +689,17 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
 
     }
 
-    $("#place-order").click(function(){
+    $("[name='paymentMethod']").change(function(e){
+
+        if($(this).val() == 1){
+                $("[name='paymentType']").val(1);
+                $("#doPayment").hide();
+                $("#place-order").show();
+        }else{
+            $("[name='paymentType']").val(0);
+                $("#doPayment").show();
+                $("#place-order").hide();
+        }
 
 
     });

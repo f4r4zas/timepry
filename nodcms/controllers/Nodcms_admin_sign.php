@@ -43,6 +43,7 @@ class Nodcms_admin_sign extends CI_Controller {
                 'group'   => $result['group_id'],
                 'avatar'   => $result['avatar'],
                 'email'   => $result['email'],
+                'phone'   => $result['mobile'],
                 'logged_in_status'   => true,
 
             );

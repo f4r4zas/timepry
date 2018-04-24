@@ -1348,8 +1348,6 @@ class Appointment_admin_model extends CI_Model{
             $this->db->where('provider_id',$id);
             $this->db->update('r_providers',$data);
 
-            echo $this->db->last_query();
-            die();
         }else{
             $data["user_id"]=$this->session->userdata('user_id');
             $data["created_date"]=time();
