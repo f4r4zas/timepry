@@ -683,7 +683,7 @@ section.search_body .res_wrapper  {
 .search_body .search_content .readMore_button {
     font-size: 18px;
     font-weight: 900;
-    padding-top: 24px;
+    padding-top: 0;
     padding-bottom: 0px;
 }
 .search_body .search_pagination .page_no {
@@ -3660,4 +3660,15 @@ overflow-y: scroll;
 .portlet.light {
     padding: 12px 20px 15px 20px;
     background-color: #fff;
+}
+
+.company-box{
+    z-index: 99999;
+}
+.fetched_companies{
+    cursor: pointer;
+}
+.fetched_companies:hover{
+    background-color: #3379b5;
+    color: white;
 }

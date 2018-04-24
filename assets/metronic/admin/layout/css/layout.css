@@ -1839,7 +1839,7 @@ Page sidebar
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu {
 
   list-style: none;
-
+text-align: center;
   margin: 0;
 
   padding: 0;
@@ -4642,11 +4642,11 @@ Page footer
 
 .page-footer {
 
-  padding: 8px 20px 5px 20px;
+  /*padding: 8px 20px 5px 20px;
 
   font-size: 12px;
 
-  height: 33px;
+  height: 33px;*/
 
 }
 
@@ -4692,7 +4692,16 @@ Page footer
 
 }
 
+.page-sidebar-menu .selected{
+display: none !important;
+}
+.page-sidebar-menu .arrow{
+display: none !important;
+}
 
+ul.sub-menu span {
+  margin-top: 0px !important;
+}
 
 @media (min-width: 992px) {
 

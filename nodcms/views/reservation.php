@@ -226,7 +226,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         <div class="main_menu">
                             <nav class="menu_nav">
                                 <ul class="menu" style="text-align:center">
@@ -251,10 +251,10 @@
                         </div>
                     </div><!-- main Menu -->
 					
-					<div class="col-md-2">
+					<div class="col-md-3">
 					   <div class="main_menu">
                             <nav class="menu_nav">
-                                <ul class="menu pull-right">
+                                <ul class="menu">
                                     <?php 
                                     
                                     if(!$this->session->userdata('group')):?>
@@ -519,6 +519,7 @@
 
    // $('.time').mask('00:00');
         $(document).ready(function() {
+
             $('.black_overlay').hide();
             $(".se-pre-con").css("display", "none");
             if ( $('.home-banner').length > 0 ) {

@@ -41,12 +41,18 @@ $CI = get_instance();
     }
 
     .listing-image {
-        height: 430px !important;
+        height: 183px;
         width: 100% !important;
         float: left;
         margin: 0 auto;
-        background-size: cover;
-        background-position: center;
+        background-size: 100% auto;
+        background-position: initial;
+        background-repeat: no-repeat;
+    }
+
+    .listting-wrapper{
+        background-color: #eeeeee52;
+        margin-bottom: 20px;
     }
 
 </style>
@@ -443,9 +449,9 @@ $CI = get_instance();
 
                             ?>
                             <li class="row listing-row">
-                                <div class="col-md-12">
+                                <div class="col-md-12 listting-wrapper">
                                     <div class="search_content">
-                                        <div class="col-md-4">
+                                        <div class="col-md-5">
                                             <div class="thumb_img">
                                                 <?php
 
@@ -486,7 +492,7 @@ $CI = get_instance();
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                             <div class="title"><?php echo $item['provider_name']; ?></div>
                                             <div class="ratings">
 

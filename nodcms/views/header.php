@@ -79,7 +79,7 @@
 					
 					<?php }else{ ?>
 					 
-					 <div class="col-md-8 tex-center">
+					 <div class="col-md-7 tex-center">
 					 
 					<?php } ?>
 						
@@ -114,14 +114,14 @@
 					
 					<?php }else{ ?>
 					 
-					 <div class="col-md-2">
+					 <div class="col-md-3">
 					 
 					<?php } ?>
 					
                         <div class="main_menu">
                             <nav class="menu_nav">
                              
-								<ul class="menu pull-right">
+								<ul class="menu">
 									<?php 
                                     
                                     if(!$this->session->userdata('group')):?>
