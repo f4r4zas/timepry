@@ -584,6 +584,7 @@ $CI = get_instance();
             <script>
 
                 function initialize() {
+                    setTimeout(3000)
                     var locations = [
                         ['DESCRIPTION', 41.926979, 12.517385, 10],
                         ['DESCRIPTION', 41.914873, 12.506486, 10],
