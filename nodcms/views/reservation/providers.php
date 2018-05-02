@@ -55,6 +55,20 @@ $CI = get_instance();
         margin-bottom: 20px;
     }
 
+    #footer {
+        display: none;
+    }
+    .page-content {
+        height: 100vh;
+        overflow: hidden;
+    }
+    .inner-page-banner .banner_wrapper{
+        background: none;
+    }
+    body{
+        height: 100vh;
+        overflow: hidden;
+    }
 </style>
 <!--<section class="inner-page-banner">
     <div class="banner_wrapper">
@@ -67,11 +81,6 @@ $CI = get_instance();
 
 <section class="inner-page-banner">
     <div class="listing-page banner_wrapper">
-
-
-            <h1>Search Result</h1>
-
-        <br>
 
         <div class="home-banner">
 
@@ -315,7 +324,7 @@ $CI = get_instance();
 
                         <input type="button" class="searchBtnOnMobile" value="Search">
 
-                        <div class="clearfix"></div>
+
                     </form>
                 </div>
 
@@ -448,15 +457,12 @@ $CI = get_instance();
 
 
                             ?>
-                            <li class="row listing-row">
+                            <a class="listing-link" href="<?php echo base_url() . $lang . '/provider/' . $item['provider_username']; ?>"><li class="row listing-row">
                                 <div class="col-md-12 listting-wrapper">
                                     <div class="search_content">
                                         <div class="col-md-5">
                                             <div class="thumb_img">
-                                                <?php
 
-                                                    print_r($test);
-                                                ?>
                                                 <?php if (!empty($item['image'])){ ?>
                                                     <?php $images = json_decode($item['image']);
 
@@ -492,7 +498,7 @@ $CI = get_instance();
                                             </div>
                                         </div>
 
-                                        <div class="col-md-5">
+                                        <div class="col-md-5 listing-detail">
                                             <div class="title"><?php echo $item['provider_name']; ?></div>
                                             <div class="ratings">
 
@@ -523,20 +529,20 @@ $CI = get_instance();
                                             <div class="details">
                                                 <?php echo $item['provider_description']; ?>
                                             </div>
-                                            <div class="readMore_button">
+                                            <!--<div class="readMore_button">
                                                 <a style="background-color: #518ed2;border: #518ed2;
-" href="<?php echo base_url() . $lang . '/provider/' . $item['provider_username']; ?>"
-                                                   class="greyButton"><?php echo _l('Book a time', $this); ?></a>
-                                            </div>
+" href="<?php /*echo base_url() . $lang . '/provider/' . $item['provider_username']; */?>"
+                                                   class="greyButton"><?php /*echo _l('Book a time', $this); */?></a>
+                                            </div>-->
                                         </div>
                                         <div class="col-md-2">
-                                            <p class="price-listing">From : <span><h2>€<?php echo $item['price']; ?></h2></span></p>
+                                           <?php if($item['price']){ ?> <p class="price-listing">From : <span><h2>€<?php echo $item['price']; ?></h2></span></p> <?php } ?>
                                         </div>
                                     </div>
                                 </div>
 
 
-                            </li> <!-- Row List -->
+                            </li> </a> <!-- Row List -->
                             <?php
                             $addresses[] = '"' . $item['address'] . '"';
                         }
@@ -630,6 +636,7 @@ $CI = get_instance();
 
                             marker = new google.maps.Marker({
                                 // center: new google.maps.LatLng(45, 13),
+                                zoom:8,
                                 position: latlng,
                                 map: map,
                                 icon: '<?php echo base_url();?>assets/front/images/teeth_marker.png'
@@ -637,8 +644,6 @@ $CI = get_instance();
 
                             bounds.extend(marker.position);
                             bounds.extend(marker.position);
-
-
 
                             setTimeout(function(){
                                 bounds.extend(marker.position);

@@ -606,7 +606,6 @@ div#loginBox .fields,
 
 /* Search page */
 section.search_body .res_wrapper  {
-    padding: 80px 0;
 }
 .search_body .thumb_img img {
     width: 100%;
@@ -2027,11 +2026,9 @@ section.faq-page {
     font-weight: 700;
     font-size: 16px;
 }
-.listing-provider {
 
-	width: 49% !important;
-	 overflow-y: scroll;
-	 height:1000px !important;
+.listing-provider {
+    height: calc(91vh - 181px) !important;
 }
 
 
@@ -3468,6 +3465,7 @@ overflow-y: scroll;
 
 .provider-map {
     padding: 0;
+    height: calc(91vh - 181px) !important;
 }
 
 .tooltip {
@@ -3637,7 +3635,8 @@ overflow-y: scroll;
 
 }
 .listing-page.banner_wrapper{
-    padding-top: 20px;
+    padding-top: 0px;
+    height: 73px;
 }
 .listing-page h1{
     text-transform: uppercase;
@@ -3647,6 +3646,7 @@ overflow-y: scroll;
     text-align: center;
     font-size: 38px;
     padding-left: 19px;
+    color: black;
 }
 
 .filter-section{
@@ -3672,3 +3672,14 @@ overflow-y: scroll;
     background-color: #3379b5;
     color: white;
 }
+
+.listing-detail {
+    margin-top: 22px;
+}
+.listing-link {
+    color:black;
+}
+
+.home-banner .tab_content {
+    /* background-color: red; */
+    border: 1px solid #e5e5e5;
