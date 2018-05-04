@@ -175,7 +175,7 @@ $this->session->unset_userdata("dataStepFour");  */
                             <div class="col-md-6">
                                 <input placeholder="Email of Dental Office *" data-validation="required" value="<?php if(!empty($provider_email)){echo $provider_email; } ?>" name="dental_officeemail" id="dental_officeemail" type="text" class="form-control update2">
                                 <span class="help-block"></span>
-                                <span style="position: absolute;top: 15px;color: #518ed2;right: 22px;font-size: 21px;" class="help glyphicon glyphicon-question-sign" data-placement="top" data-toggle="tooltip"  title="Insert the emial of the dental office. This email will be visible to your patients to give them the possibility to contact your directly. This email can be the same as the account email previously written or can be also different"></span>
+                                <span style="position: absolute;top: 15px;color: #518ed2;right: 22px;font-size: 21px;" class="help glyphicon glyphicon-question-sign" data-placement="top" data-toggle="tooltip"  title="Please insert the dental office email address. This email will be visible to your patients and will allow them to contact you directly. This email can be the same as the account email previously written or different"></span>
 
                             </div>
                             <div class="col-md-6">
@@ -274,9 +274,10 @@ $this->session->unset_userdata("dataStepFour");  */
                                     cloned.find('input').val('');
                                     cloned.find('select').val('Dr.');
                                     
-                                    $(main_row).before(cloned);
+                                    //$(main_row).before(cloned);
+                                    $("#practioners h1").after(cloned);
+                                    console.log(main_row);
                                 });
-                                
                                 
                                 $('body').on('click','.remove_practitioner_row',function(){
                                     $(this).parent().parent().remove();

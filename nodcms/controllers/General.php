@@ -335,11 +335,11 @@ class General extends CI_Controller
 
         $message = array(
             'title'=>_l('Checkout successful!', $this),
-            'body'=>_l('Checkout Completed!', $this),
+            'body'=>_l('You do not need to do anything else. Your reservation is confirmed and you can directly go to the dental office. In case something will change the dental office will get in contact with you directly!', $this),
             'class'=>'alert alert-info'
         );
-        $this->session->set_flashdata('message', $message);
 
+        $this->session->set_flashdata('message', $message);
 
         if($this->session->flashdata('message')){
             $message = $this->session->flashdata('message');

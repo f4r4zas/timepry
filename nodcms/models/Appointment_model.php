@@ -39,7 +39,9 @@ class Appointment_model extends CI_Model
         $query = $this->db->get();
         
         //echo $this->db->last_query();
+
         return $query->result_array();
+
     }
 
     function checkExistsTimePeriod($day_no,$service_id,$startMin,$endMin,$period_id=null)

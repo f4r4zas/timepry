@@ -3683,3 +3683,16 @@ overflow-y: scroll;
 .home-banner .tab_content {
     /* background-color: red; */
     border: 1px solid #e5e5e5;
+}
+
+.loginHere {
+    background-color: #47a6ff;
+    border: none;
+    border-radius: 21px;
+    width: 100%;
+}
+
+.same-height{
+    height: 44px;
+}
+

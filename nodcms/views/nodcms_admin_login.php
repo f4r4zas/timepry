@@ -87,6 +87,9 @@ License: You must have a valid license purchased only from themeforest(the above
             <label class="control-label visible-ie8 visible-ie9"><?php echo _l('Password',$this); ?></label>
             <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password" data-validation="required"/>
         </div>
+        <div class="form-group">
+            <a href="#" class="reset-link pull-right">Reset password</a>
+        </div>
         <div class="form-actions">
             <button type="submit" class="btn btn-success uppercase"><?php echo _l('Login',$this); ?></button>
         </div>

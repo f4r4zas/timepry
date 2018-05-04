@@ -541,7 +541,7 @@ font-size: 16px;
                                 <div class="booknow_prices">
                                     <span class="service_count" id="service_count">0</span>
                                     <span class="service_title">service</span>
-                                    <span class="service_price">$<span id="service_price">0</span></span>
+                                    <span class="service_price">£<span id="service_price">0</span></span>
                                 </div>
                                 <div class="book_now_btn">
                                     <a href="javascript:void(0)" class="greyButton" id="services_booknow">Book Now</a>
@@ -749,7 +749,7 @@ jQuery(document).ready(function(){
             };
             
             $.chooseService = function( serviceId ) {
-                console.log(serviceId);
+
 				    $("#beforeCheckout_popout").LoadingOverlay("show");   
                 $('#error').hide();
                 if(serviceId!=''){
@@ -763,6 +763,7 @@ jQuery(document).ready(function(){
                     $.post("<?php echo base_url().$lang.$this->provider_prefix ?>/get_service/" + serviceId ,{},function(data){
 						$("#beforeCheckout_popout").LoadingOverlay("hide");
                         data = JSON.parse(data);
+                        console.log(data);
                         if(data.status=="success"){
                             allow_days = data.allow_days;
                             disable_dates = data.disable_dates;
@@ -770,6 +771,8 @@ jQuery(document).ready(function(){
                             $(".final_treatment_field"+data.treatment_id+".practitioner").val(serviceID);
                             $('#step1').slideUp(500);
                             $('#step2').slideDown(500);
+                            $('#date_pick').datepicker('option', 'firstDay', 1);
+
                             $( "#date_pick" ).datepicker('refresh');
                         }else{
                             $('#error').show().find('p').text(data.error);
@@ -855,6 +858,14 @@ jQuery(document).ready(function(){
                 minDate: 1,
                 dateFormat: "<?php echo str_replace(array("d","m","Y"),array("dd","mm","yy"), $this->_website_info["date_format"])?>",
                 beforeShowDay: function(date) {
+
+                    console.log();
+
+                    /*$.each(allow_days, function( index, value ) {
+                        allow_days[index] = value + 1;
+                        console.log(value);
+                    });*/
+
                     var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                     var availableDay = (allow_days.indexOf(date.getDay()) != -1) && (disable_dates.indexOf(string) == -1);
                     if(availableDay){
@@ -866,6 +877,7 @@ jQuery(document).ready(function(){
                 onSelect: setTimePick
             });
             //        $('#form_elements').hide();
+
             $.backTo = function(stepName){
                 $('#' + stepName).show();
                 $('.steps:not(#' + stepName + ')').hide();

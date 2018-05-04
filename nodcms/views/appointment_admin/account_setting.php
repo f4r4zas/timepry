@@ -13,7 +13,7 @@
                 <div class=" form">
                     <?php
                     mk_hpostform();
-                    mk_htext("data[username]", _l('Username', $this), isset($data['username']) ? $data['username'] : '');
+                    mk_htext("data[username]", _l('Username', $this), isset($data['username']) ? $data['username'] : '',"readonly");
                     mk_hemail("data[email]", _l('Email', $this), isset($data['email']) ? $data['email'] : '');
                     mk_htext("data[fullname]", _l('Full Name', $this), isset($data['fullname']) ? $data['fullname'] : '');
                     mk_hpassword("data[password]", _l('Password', $this));

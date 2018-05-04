@@ -391,6 +391,7 @@ class Appointment extends NodCMS_Controller {
             $this->data['allow_days'] = array();
             for($i=0;$i<=6;$i++){
                 $allow_days =  $this->Appointment_model->getTimePeriod($i,$id);
+
                 if(count($allow_days)!=0){
                     array_push($this->data['allow_days'],$i);
                     foreach ($allow_days as $item) {

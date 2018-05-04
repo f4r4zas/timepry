@@ -1,3 +1,9 @@
+<style>
+    div.checker {
+        margin-right: 0;
+        margin-left: -19px;
+    }
+</style>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-xs-12">
         <section class="panel">
@@ -113,25 +119,25 @@
                                         <textarea class="form-control" data-validation="required" cols="40" id="about" name="about" rows="10"><?php if($userProfile["about"]){ echo $userProfile["about"];} ?></textarea>
                                     </div>
 
-                                    <div class="form-group ">
+                                   <!-- <div class="form-group ">
                                         <label class="control-label " for="select">
                                             Find freinds
                                         </label>
 
-                                        <?php $freinds = "";
+                                        <?php /*$freinds = "";
 
                                         if(!empty($userProfile["friends"])){
                                                $freinds = explode(",",$userProfile["friends"]);
                                         }
-                                        ?>
+                                        */?>
 
                                         <select multiple="multiple" class="select freindUser form-control" id="freinds" name="freinds[]">
-                                            <?php foreach($data['allUsers'] as $allUser){ ?>
-                                                <option <?php if(in_array($allUser['user_id'], $freinds)){ echo "selected"; } ?>  value="<?php echo $allUser['user_id']; ?>"><?php echo $allUser['fullname']; ?></option>
-                                            <?php } ?>
+                                            <?php /*foreach($data['allUsers'] as $allUser){ */?>
+                                                <option <?php /*if(in_array($allUser['user_id'], $freinds)){ echo "selected"; } */?>  value="<?php /*echo $allUser['user_id']; */?>"><?php /*echo $allUser['fullname']; */?></option>
+                                            <?php /*} */?>
                                         </select>
                                     </div>
-
+-->
                                     <div class="form-group">
                                         <div>
                                             <button class="btn btn-primary " name="submit" type="submit">

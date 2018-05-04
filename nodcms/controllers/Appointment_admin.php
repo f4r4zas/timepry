@@ -2222,8 +2222,8 @@ class Appointment_admin extends NodCMS_Controller
             ),
             'reservation_now'=>array(
                 'url'=>APPOINTMENT_ADMIN_URL.'userProfiles',
-                'icon'=>'icon-clock',
-                'title'=>'Public Profile',
+                'icon'=>'icon-user',
+                'title'=>'User Info',
                 'class'=>'',
                 'addOn'=>'',
             )

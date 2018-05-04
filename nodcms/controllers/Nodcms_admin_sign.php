@@ -71,6 +71,6 @@ class Nodcms_admin_sign extends CI_Controller {
         $this->session->unset_userdata('avatar');
         $this->session->unset_userdata('email');
         $this->session->unset_userdata('logged_in_status');
-        redirect(base_url().'admin-sign');
+        redirect(base_url());
     }
 }

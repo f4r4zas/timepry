@@ -396,6 +396,22 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
         .radio-payment {
             padding-left: 0;
         }
+        .register-link {
+            border-top: 1px solid #c3baba;
+        }
+        .register-link a {
+            color: #47a6ff;
+            text-transform: uppercase;
+            font-weight: bold;
+            padding-top: 21px;
+            font-size: 16px;
+        }
+        .reset-link a{
+            color: #47a6ff;
+            font-weight: bold;
+            padding-top: 21px;
+            font-size: 16px;
+        }
     </style>
 
     <section class="inner-page-banner">
@@ -437,15 +453,13 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                                 </div>
 
 
-                                <div class="form-group ">
+                                <div class="form-group">
                                 <div class="col-md-12 text-left">
                                     <div class="section-heading pull-left">
                                         <h1>Payment</h1>
                                         <div class="cus-hr"></div>
                                     </div>
                                 </div>
-
-
                                     <div class="col-md-12 radio-payment">
                                         <div class="radio">
                                             <label class="radio">
@@ -481,71 +495,104 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                                 }
                                 ?>
 
-                                <form id="checkout">
-                                    <div id="final_treatment">
-                                        <?php
-                                        //print_r($outputArray);
-                                        $sizeOfarray = count($outputArray['service']) - 1;
-                                        for ($i = 0; $i <= $sizeOfarray; $i++) {
+                                <?php if($this->session->userdata("logged_in_status")){ ?>
 
-                                        ?>
-                                            <input type="hidden" class="final_treatment_field<?php echo $outputArray['service'][$i] ?> service" value="<?php echo $outputArray['service'][$i]; ?>" name="service[]">
-                                            <input type="hidden" class="final_treatment_field<?php echo $outputArray['service'][$i] ?> practitioner" value="<?php echo $outputArray['practitioner'][$i]; ?>" name="practitioner[]">
-                                            <input type="hidden" class="final_treatment_field<?php echo $outputArray['service'][$i] ?> date" value="<?php echo $outputArray['date'][$i]; ?>" name="date[]">
-                                            <input type="hidden" class="final_treatment_field<?php echo $outputArray['service'][$i] ?> time" value="<?php echo $outputArray['time'][$i]; ?>" name="time[]">
+                                    <form id="checkout">
+                                        <div id="final_treatment">
+                                            <?php
+                                            //print_r($outputArray);
+                                            $sizeOfarray = count($outputArray['service']) - 1;
+                                            for ($i = 0; $i <= $sizeOfarray; $i++) {
 
+                                                ?>
+                                                <input type="hidden" class="final_treatment_field<?php echo $outputArray['service'][$i] ?> service" value="<?php echo $outputArray['service'][$i]; ?>" name="service[]">
+                                                <input type="hidden" class="final_treatment_field<?php echo $outputArray['service'][$i] ?> practitioner" value="<?php echo $outputArray['practitioner'][$i]; ?>" name="practitioner[]">
+                                                <input type="hidden" class="final_treatment_field<?php echo $outputArray['service'][$i] ?> date" value="<?php echo $outputArray['date'][$i]; ?>" name="date[]">
+                                                <input type="hidden" class="final_treatment_field<?php echo $outputArray['service'][$i] ?> time" value="<?php echo $outputArray['time'][$i]; ?>" name="time[]">
+
+                                            <?php } ?>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="hidden" name="paymentType" value="1">
+                                            <label><?php echo _l("First Name", $this) ?></label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="fa fa-i-cursor"></i></div>
+                                                <input value="<?php if (!empty($fname)) {
+                                                    echo $fname;
+                                                } else if (!empty($name)) {
+                                                    echo $name;
+                                                } ?>" name="fname" id="fname" type="text" class="form-control"
+                                                       data-validation="required">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label><?php echo _l("Last Name", $this) ?></label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="fa fa-i-cursor"></i></div>
+                                                <input value="<?php if (!empty($lname)) {
+                                                    echo $lname;
+                                                } else if (!empty($name)) {
+                                                    echo $name;
+                                                } ?>" name="lname" id="lname" type="text" class="form-control"
+                                                       data-validation="required">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label><?php echo _l("Email Address", $this) ?></label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="fa fa-at"></i></div>
+
+                                                <input value="<?php if (!empty($email)) {
+                                                    echo $email;
+                                                } ?>" name="email" id="email" type="text" class="form-control"
+                                                       data-validation="required email">
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label><?php echo _l("Phone Number", $this) ?></label>
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="fa fa-phone"></i></div>
+                                                <input value="<?php if (!empty($phone)) {
+                                                    echo $phone;
+                                                } ?>" name="tel" id="phone" type="text" class="form-control"
+                                                       data-validation="required number">
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                <?php }else{ ?>
+                                    <form class="login-form" action="<?php echo base_url(); ?>admin-sign/login" method="post">
+                                        <h3 class="form-title"><?php echo _l('Login',$this); ?></h3>
+                                        <?php if($this->session->flashdata('message')){ ?>
+                                            <div class="alert alert-danger">
+                                                <button class="close" data-close="alert"></button>
+                                                <span><?php echo $this->session->flashdata('message'); ?></span>
+                                            </div>
                                         <?php } ?>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="hidden" name="paymentType" value="1">
-                                        <label><?php echo _l("First Name", $this) ?></label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon"><i class="fa fa-i-cursor"></i></div>
-                                            <input value="<?php if (!empty($fname)) {
-                                                echo $fname;
-                                            } else if (!empty($name)) {
-                                                echo $name;
-                                            } ?>" name="fname" id="fname" type="text" class="form-control"
-                                                   data-validation="required">
+                                        <div class="">
+                                            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                                            <input class="form-control same-height" type="text" autocomplete="off" placeholder="Username" name="username" data-validation="required"/>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label><?php echo _l("Last Name", $this) ?></label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon"><i class="fa fa-i-cursor"></i></div>
-                                            <input value="<?php if (!empty($lname)) {
-                                                echo $lname;
-                                            } else if (!empty($name)) {
-                                                echo $name;
-                                            } ?>" name="lname" id="lname" type="text" class="form-control"
-                                                   data-validation="required">
+                                        <div class="">
+                                            <input class="form-control same-height" type="password" autocomplete="off" placeholder="Password" name="password" data-validation="required"/>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label><?php echo _l("Email Address", $this) ?></label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon"><i class="fa fa-at"></i></div>
 
-                                            <input value="<?php if (!empty($email)) {
-                                                echo $email;
-                                            } ?>" name="email" id="email" type="text" class="form-control"
-                                                   data-validation="required email">
-
+                                        <div class="form-group reset-link">
+                                            <a href="#" class="pull-right">Reset Password</a>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label><?php echo _l("Phone Number", $this) ?></label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon"><i class="fa fa-phone"></i></div>
-                                            <input value="<?php if (!empty($phone)) {
-                                                echo $phone;
-                                            } ?>" name="tel" id="phone" type="text" class="form-control"
-                                                   data-validation="required number">
+                                        <div class="form-actions form-group ">
+                                            <input type="submit" class="greyButton loginHere" value="Login">
                                         </div>
-                                    </div>
-                                </form>
 
+                                        <div class="form-group register-link">
+                                            <a href="#" class="pull-right">Register</a>
+                                        </div>
+                                    </form>
+                                <?php } ?>
+
+                                <br>
                                 <div class="form-group">
                                     <hr/>
                                 </div>
@@ -562,9 +609,6 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                                     <?php if (!empty($this->session->userdata("logged_in_status"))) { ?>
                                         <input type="button" class="greyButton"  id="doPayment" value="Place Order">
                                         <input type="submit" style="display: none" class="greyButton" onClick="createResrvation()"  id="place-order" value="Place Order">
-                                    <?php } else { ?>
-                                        <input type="submit" class="greyButton redirectToLogin" value="Login">
-                                        <input type="submit" class="greyButton redirectToRegister" value="Register" />
                                     <?php } ?>
 
                                 </div>
