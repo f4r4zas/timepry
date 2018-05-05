@@ -26,9 +26,7 @@
         <label for="data[price]" class="control-label col-lg-2">practitioners</label>
         <div style="width: 50%; display: inline-block; vertical-align: top; height: 40px;">
                                                                     <?php 
-																	
-																	
-																	print_r($this->session->userdata());
+
                                                                     $this->db->select('*');
                                                                     $this->db->from('practitioners');
                                                                     $this->db->where('provider_id',$this->session->userdata('provider_id'));

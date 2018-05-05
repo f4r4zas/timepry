@@ -149,21 +149,23 @@
     </div>
 
     <div id="forget_pass">
-        <div class="box_wrapper">
-            <div class="section-heading">
-                <h1>Forgot Password</h1>
-                <div class="cus-hr"></div>
-            </div>
-            <div class="fields">
-                <div class="input-field">
-                    <input type="text" name="email" placeholder="Enter Your Email">
+        <form action="<?php echo base_url(); ?>General/sendpassword" method="post">
+            <div class="box_wrapper">
+                <div class="section-heading">
+                    <h1>Forgot Passwords</h1>
+                    <div class="cus-hr"></div>
                 </div>
-                <div class="submit-btn">
-                    <input type="button" value="Submit" class="greyButton">
+                <div class="fields">
+                    <div class="input-field">
+                        <input type="text" name="email" placeholder="Enter Your Email">
+                    </div>
+                    <div class="submit-btn">
+                        <input type="submit" value="Submit" class="greyButton">
+                    </div>
+                    <div id="errorMsg"></div>
                 </div>
-                <div id="errorMsg"></div>
             </div>
-        </div>
+        </form>
     </div>
 
 <div class="se-pre-con"></div>

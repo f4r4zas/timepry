@@ -3,6 +3,9 @@
 .banner_wrapper{
 	    height: 138px !important;
 }
+.portlet.box.blue-hoki {
+    padding-top: 82px !important;
+}
 </style>
 
 <div class="portlet box blue-hoki calendar">
@@ -220,7 +223,12 @@
             addEvent(title);
         });
 
+
         var makePopoverContent = function(data){
+
+            console.log("name");
+            console.log(data);
+
             var result = "";
             var contentTheme = $("#popoverTheme");
             contentTheme.find(".name").text("Name");
@@ -254,6 +262,7 @@
             result += contentTheme.html();
             result += '<small class="font-green"><?php echo _l("To see more info, double-click on the events", $this); ?></small>';
             return result;
+
         };
         //predefined events
         $('#event_box').html("");

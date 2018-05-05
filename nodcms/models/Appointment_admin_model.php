@@ -1767,5 +1767,13 @@ class Appointment_admin_model extends CI_Model{
         $this->db->update('cover_pic');
     }
 
+    public function getPractitionarName($practitioner_id){
+      $this->db->select('*');
+      $this->db->from('practitioners');
+      $this->db->where('practitioner_id',$practitioner_id);
+      $query = $this->db->get();
+      $practitioners = $query->result();
+      return $practitioners;
+    }
 
 }

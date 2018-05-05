@@ -438,14 +438,15 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                                     </div>
                                     <div class="col-md-6 you_radio">
                                         <div class="radio">
+
                                             <label class="radio">
-                                                <input name="you" type="radio" value="First Choice"/>
+                                                <input name="you" <?php if($this->session->userdata('radioYou') == 1){ echo "checked"; }else{  if(empty($this->session->userdata('radioYou'))){echo "checked";}else{echo "";}  } ?> type="radio" value=1 />
                                                 <span>Yes</span>
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label class="radio">
-                                                <input name="you" type="radio" value="Second Choice"/>
+                                                <input name="you" <?php if($this->session->userdata('radioYou') == 2){ echo "checked"; }else{ echo ""; } ?> type="radio" value=2 />
                                                 <span>No</span>
                                             </label>
                                         </div>
@@ -463,13 +464,14 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                                     <div class="col-md-12 radio-payment">
                                         <div class="radio">
                                             <label class="radio">
-                                                <input name="paymentMethod"  type="radio" value="1"/>
+
+                                                <input name="paymentMethod" <?php if($this->session->userdata('radioPayment') == "1"){ echo "checked"; }else{ if(empty($this->session->userdata('radioPayment'))){ echo "checked"; }else{echo "";}  } ?> type="radio" value="1"/>
                                                 <span>Pay at the dental office</span>
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label class="radio">
-                                                <input name="paymentMethod" checked type="radio" value="2"/>
+                                                <input name="paymentMethod" <?php if($this->session->userdata('radioPayment') == "2"){ echo "checked"; }else{echo "";} ?> type="radio" value="2"/>
                                                 <span>Credit Card</span>
                                             </label>
                                         </div>
@@ -580,7 +582,7 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                                         </div>
 
                                         <div class="form-group reset-link">
-                                            <a href="#" class="pull-right">Reset Password</a>
+                                            <a href="<?php echo base_url(); ?>change-password" class="pull-right">Reset Password</a>
                                         </div>
                                         <div class="form-actions form-group ">
                                             <input type="submit" class="greyButton loginHere" value="Login">
@@ -754,4 +756,26 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
 
 
     });
+
+
+    $("[name='paymentMethod'],[name='you']").change(function(e){
+
+        var paymentMod = $("[name='paymentMethod']:checked").val();
+        var you = $("[name='you']:checked").val();
+
+        saveCheckout(paymentMod,you);
+
+    });
+
+
+</script>
+<script>
+    function saveCheckout(payment,foryou){
+        $.ajax({url:"<?php echo base_url() ?>General/saveCheckout",async:false,type:"post",data:{payment:payment,you:foryou},function(data){
+
+            console.log(data);
+
+
+        }});
+    }
 </script>

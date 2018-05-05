@@ -213,7 +213,7 @@
                             
                             
                             <?php 
-                            $days = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
+                            $days = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday');
                             foreach($days as $k => $day):?>
 
                             <div class="row">
@@ -221,7 +221,7 @@
                                     <input class="update2" disabled="disabled" type="text" value="<?=$day;?>" name="opening_day[]" placeholder="<?=$day;?>">
                                 </div>
                                 <div class="col-xs-12 col-sm-3 input-append">
-                                    <input class="time update2 timePicker-from" id="timePicker-from-<?=$k?>" type="text" style="width: 80%;" placeholder="Opening hours * 08:00" name="openingHours[]">
+                                    <input class="time update2 timePicker-from" id="timePicker-from-<?=$k?>" type="text" style="width: 80%;" placeholder="Opening hours" name="openingHours[]">
                                     
                                     <!--<span class="add-on">
                                       <i data-time-icon="icon-time" data-date-icon="icon-calendar" class="icon-time">
@@ -230,7 +230,7 @@
                                     <span class="help-block"></span>
                                 </div>
                                 <div class="col-xs-12 col-sm-3 input-append">
-                                    <input class="time update2 timePicker-to" id="timePicker-to-<?=$k?>" type="text" style="width: 80%;" placeholder="Closing hours * 14:00" data-format="hh:mm" name="closingHours[]">
+                                    <input class="time update2 timePicker-to" id="timePicker-to-<?=$k?>" type="text" style="width: 80%;" placeholder="Closing hours" data-format="hh:mm" name="closingHours[]">
                                     
                                     <!--<span class="add-on">
                                       <i data-time-icon="icon-time" data-date-icon="icon-calendar" class="icon-time">
@@ -550,7 +550,7 @@
 
                                                             <div class="add_new_treatment_inside_tab">
                                                                 <!--<a href="javascript:void(0)" class="greyButton">Add treatment</a>-->
-                                                                <button type="button" class="greyButton add_treat" style="margin:0px; float:right;">Add Treatment</button>
+                                                                <button type="button" class="greyButton add_treat blue-button" style="margin:0px; float:right;">Save Treatment</button>
                                                             </div>
 
                                                     </div>

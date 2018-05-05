@@ -379,4 +379,109 @@ class General extends CI_Controller
 
     }
 
+    public function saveCheckout(){
+
+
+
+        if(!empty($this->input->post("payment")) && $this->input->post("you")){
+            print_r($this->input->post());
+            $payment = $this->input->post("payment");
+            $you = $this->input->post("you");
+
+            $this->session->set_userdata('radioPayment',$payment);
+            $this->session->set_userdata('radioYou',$you);
+        }
+    }
+
+    public function sendpassword()
+    {
+        print_r($_POST);
+        $email = $_POST['email'];
+        $query1=$this->db->query("SELECT *  from users where email = '".$email."'");
+        $row=$query1->result_array();
+
+        echo "<pre>";
+            print_r($query1);
+        echo "</pre>";
+
+        if ($query1->num_rows()>0){
+
+
+            $data = array(
+                'reset_pass_status' => 1
+            );
+            $this->db->where('user_id', $row[0]['user_id']);
+            $this->db->update("users", $data);
+
+
+            $resetLink =  base_url()."reset-pass/".$row[0]['reset_pass_exp'];
+
+            $passwordplain = "";
+            $passwordplain  = rand(999999999,9999999999);
+            $newpass['password'] = md5($passwordplain);
+            $this->db->where('email', $email);
+            $this->db->update('users', $newpass);
+            $mail_message='Dear '.$row[0]['first_name'].','. "\r\n";
+            $mail_message.='Thanks for contacting regarding to forgot password,<br> You can reset password using this '.'<a href="'.$resetLink.'">Link</a>'.'</b>'."\r\n";
+            $mail_message.='<br>Please Update your password.';
+            $mail_message.='<br>Thanks & Regards';
+            $mail_message.='<br>Your company name';
+
+
+            echo $mail_message;
+            mail($email,"Reset Password",$mail_message);
+
+            //redirect(base_url().'user/Login','refresh');
+        }
+        else
+        {
+            $this->session->set_flashdata('message','Email not found try again!');
+            redirect(base_url().'change-password','refresh');
+        }
+    }
+
+    public function changePassword($reset_pass_exp){
+        $query1=$this->db->query("SELECT *  from users where reset_pass_exp = '".$reset_pass_exp."'");
+
+        $row=$query1->result_array();
+
+        if ($query1->num_rows()>0){
+
+            $resetStatus = $row[0]['reset_pass_status'];
+            $userId = $row[0]['user_id'];
+
+            if($resetStatus){
+                //$this->load->
+                //$this->data['title'] = _l('Reset Password', $this);
+                $this->data['title'] = "Reset Password";
+                $this->data['userId'] = $userId;
+                $this->load->view("header", $this->data);
+                $this->load->view("change_pass", $this->data);
+                $this->load->view("footer", $this->data);
+            }
+        }
+    }
+
+    public function updatePassword(){
+
+        if($this->input->post()){
+            if($this->input->post("password_user_id")){
+                $newPassword = $this->input->post("password");
+                $this->db->where("user_id",$this->input->post("password_user_id"));
+                $this->db->update("users",array('password'=>md5($newPassword)));
+                $this->session->set_flashdata('message', 'Password reset successfully!!');
+
+                redirect(base_url()."admin-sign");
+            }
+        }
+
+    }
+
+    public function resetPasswordForm(){
+        $this->data['title'] = "Reset Password";
+        $this->load->view("header", $this->data);
+        $this->load->view("reset_password", $this->data);
+        $this->load->view("footer", $this->data);
+    }
 }
+

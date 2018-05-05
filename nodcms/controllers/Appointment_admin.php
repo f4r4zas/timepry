@@ -719,9 +719,9 @@ class Appointment_admin extends NodCMS_Controller
             }
         }
         $this->data['languages'] = $this->Nodcms_admin_model->get_all_language();
-        $this->data['title']=_l("Practitioners",$this);
+        $this->data['title']=_l("Treatments",$this);
         $this->data['breadcrumb']=array(
-            array('title'=>_l('Practitioners',$this),'url'=>APPOINTMENT_ADMIN_URL.'treatment'),
+            array('title'=>_l('Treatment',$this),'url'=>APPOINTMENT_ADMIN_URL.'treatment'),
             array('title'=>$this->data['sub_title'])
         );
         $this->data['page']='treatment_edit';
@@ -1793,8 +1793,11 @@ class Appointment_admin extends NodCMS_Controller
             if (in_array($this->session->userdata['group'],array(1, 20,21))) {
                 $this->form_validation->set_rules('data[username]', _l('Username',$this), 'required|callback_validateUsername');
                 $this->form_validation->set_rules('data[email]', _l('Email Address',$this), 'required|valid_email|callback_emailUnique');
-                $this->form_validation->set_rules('data[fullname]', _l('Full Name',$this), 'required|callback_formRulesName');
-                $this->form_validation->set_rules('data[password]', _l('Password',$this), 'xss_clean');
+                $this->form_validation->set_rules('data[firstname]', _l('First Name',$this), 'required|callback_formRulesName');
+                $this->form_validation->set_rules('data[lastname]', _l('Last Name',$this), 'required|callback_formRulesName');
+                $this->form_validation->set_rules('data[password]', _l('Password',$this), 'xss_clean|matches[data[confirmPassword]]');
+                $this->form_validation->set_rules('data[confirmPassword]', _l('Confirm Password',$this), 'xss_clean|matches[data[password]]');
+
                // $this->form_validation->set_rules('data[language_id]', _l('Language',$this), 'required|is_natural');
                 $this->form_validation->set_rules('data[language_id]', _l('Language',$this), 'is_natural');
                 if ($this->form_validation->run() == FALSE){
@@ -1805,14 +1808,16 @@ class Appointment_admin extends NodCMS_Controller
                     $post_data = $this->input->post('data',TRUE);
                     if($this->session->userdata("group")){
                         $data = array(
-                            'fullname'=>$post_data['fullname'],
+                            'lastname'=>$post_data['lastname'],
+                            'firstname'=>$post_data['firstname'],
                             //'username'=>$post_data['username'],
                             'email'=>$post_data['email'],
                             //'language_id'=>$post_data['language_id']
                         );
                     }else{
                         $data = array(
-                            'fullname'=>$post_data['fullname'],
+                            'lastname'=>$post_data['lastname'],
+                            'firstname'=>$post_data['firstname'],
                             'username'=>$post_data['username'],
                             'email'=>$post_data['email'],
                             'language_id'=>$post_data['language_id']
@@ -1963,7 +1968,7 @@ class Appointment_admin extends NodCMS_Controller
             ),
             'service'=>array(
                 'url'=>APPOINTMENT_ADMIN_URL.'services',
-                'icon'=>'icon-briefcase',
+                'icon'=>'icon-user',
                 'title'=>_l('Practitioners',$this),
                 'class'=>'',
                 'addOn'=>'',
@@ -1980,13 +1985,13 @@ class Appointment_admin extends NodCMS_Controller
                     ),
                 ),
             ),
-			'dental-office'=>array(
+			/*'dental-office'=>array(
                 'url'=>'/timepry/Dental/addDentalOffice',
                 'icon'=>'icon-briefcase',
                 'title'=>_l('Add Dental Office',$this),
                 'class'=>'',
                 'addOn'=>'',
-            ),
+            ),*/
 			'treatment'=>array(
                 'url'=>APPOINTMENT_ADMIN_URL.'treatment',
                 'icon'=>'icon-briefcase',
@@ -2024,6 +2029,13 @@ class Appointment_admin extends NodCMS_Controller
                         'url'=>APPOINTMENT_ADMIN_URL.'?showOption',
                         'title'=>"All Offices",
                         'class'=>'',
+                    ),
+                    'dental-office'=>array(
+                        'url'=>'/timepry/Dental/addDentalOffice',
+                        'icon'=>'icon-briefcase',
+                        'title'=>_l('Add Dental Office',$this),
+                        'class'=>'',
+                        'addOn'=>'',
                     ),
                 ),
             ),
@@ -2114,7 +2126,7 @@ class Appointment_admin extends NodCMS_Controller
             ),
             'service'=>array(
                 'url'=>APPOINTMENT_ADMIN_URL.'services',
-                'icon'=>'icon-briefcase',
+                'icon'=>'icon-user',
                 'title'=>_l('Practitioners',$this),
                 'class'=>'',
                 'addOn'=>'',
@@ -2234,6 +2246,7 @@ class Appointment_admin extends NodCMS_Controller
         $this->load->model('Appointment_model');
 
         if($this->input->post()){
+
             $fields = array(
                 'dob' => date("Y-m-d",strtotime($this->input->post('dob'))),
                 'city' => $this->input->post('city'),
@@ -2244,6 +2257,15 @@ class Appointment_admin extends NodCMS_Controller
                 'friends' => implode(",",$this->input->post('freinds')),
                 'user_id' => $this->session->userdata('user_id')
         );
+
+           $userTelephone = $this->input->post("telephone");
+
+            if(!empty($userTelephone)){
+
+                $this->db->where('user_id',$this->session->userdata('user_id'));
+                $this->db->update('users',array('mobile'=>$userTelephone));
+            }
+
 
         $checkIfQuestionsExist = $this->Appointment_model->checkIfquestions($this->session->userdata('user_id'));
 
@@ -2292,7 +2314,7 @@ class Appointment_admin extends NodCMS_Controller
         if(!empty($data)){
             return $data['image'];
         }else{
-            echo "empty";
+            return "empty";
         }
     }
 
@@ -2432,6 +2454,10 @@ class Appointment_admin extends NodCMS_Controller
         }else{
             echo "error";
         }
+    }
+
+    public function test(){
+        echo "worked";
     }
 
 }

@@ -45,7 +45,7 @@
             }
             mk_hnumber("data[phone]", _l('Phone',$this), isset($data['phone'])?$data['phone']:'');
             mk_htextarea("data[address]", _l('Address',$this), isset($data['address'])?$data['address']:'');
-            mk_hselect("data[payment_type]", _l('Services Type',$this), $payment_type, "code", "name", isset($data['payment_type'])?$data['payment_type']:NULL, NULL, "style='max-width:300px;'");
+            //mk_hselect("data[payment_type]", _l('Services Type',$this), $payment_type, "code", "name", isset($data['payment_type'])?$data['payment_type']:NULL, NULL, "style='max-width:300px;'");
             if($this->session->userdata('group')==1 || $this->session->userdata('group')==100){
                 mk_hcheckbox("data[active]",_l('Active',$this),(isset($data['active']) && $data['active']==1)?1:null);
             }

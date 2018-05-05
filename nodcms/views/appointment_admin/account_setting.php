@@ -15,8 +15,10 @@
                     mk_hpostform();
                     mk_htext("data[username]", _l('Username', $this), isset($data['username']) ? $data['username'] : '',"readonly");
                     mk_hemail("data[email]", _l('Email', $this), isset($data['email']) ? $data['email'] : '');
-                    mk_htext("data[fullname]", _l('Full Name', $this), isset($data['fullname']) ? $data['fullname'] : '');
+                    mk_htext("data[firstname]", _l('First Name', $this), isset($data['firstname']) ? $data['firstname'] : '');
+                    mk_htext("data[lastname]", _l('Last Name', $this), isset($data['lastname']) ? $data['lastname'] : '');
                     mk_hpassword("data[password]", _l('Password', $this));
+                    mk_hpassword("data[confirmPassword]", _l('Confirm Password', $this));
                     // mk_hselect("data[language_id]",_l('language',$this),$languages,"language_id","language_name",isset($data['language_id'])?$data['language_id']:null,null,'style="width:200px"');
                     mk_hsubmit(_l('Submit', $this), APPOINTMENT_ADMIN_URL, _l('Cancel', $this));
                     mk_closeform();

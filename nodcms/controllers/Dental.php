@@ -322,7 +322,7 @@ class Dental extends NodCMS_Controller {
         elseif($this->input->post("step")=="update2"){
            
             
-            $this->form_validation->set_rules('dental_officename', _l('Name of the Dental Office',$this), 'required|xss_clean|callback_formRulesName');
+            $this->form_validation->set_rules('dental_officename', _l('Name of the Dental Office',$this), 'required|xss_clean');
             $this->form_validation->set_rules('dental_officedescription', _l('Description of Dental Office',$this), 'required|xss_clean|callback_formRulesName');
             $this->form_validation->set_rules('dental_officephone', _l('Phone of Dental Office',$this), 'required|is_natural');
             //$this->form_validation->set_rules('dental_officeemail', _l('Email of Dental Office',$this), '');
@@ -1040,7 +1040,7 @@ class Dental extends NodCMS_Controller {
     // Validation name format function
     public function formRulesName($value)
     {
-        if (preg_match('/[\'\/~`\!@#\$£€%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\0-9]/', $value) == TRUE) {
+        if (preg_match('/[\'\/~`\!@#\$ï¿½ï¿½%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\0-9]/', $value) == TRUE) {
             $this->form_validation->set_message('formRulesName', '{field} must contain letters and spaces only.');
             $errors[] = 'Name must contain letters and spaces only';
             return FALSE;
@@ -1051,7 +1051,7 @@ class Dental extends NodCMS_Controller {
     // Validation password format function
     public function formRulesPassword($value)
     {
-        if (preg_match('/^[a-z0-9\/~`\!@#\$£€%\^&\*\(\)_\-\+=\{\}\[\]\|;:]{6,18}$/', $value) == FALSE) {
+        if (preg_match('/^[a-z0-9\/~`\!@#\$ï¿½ï¿½%\^&\*\(\)_\-\+=\{\}\[\]\|;:]{6,18}$/', $value) == FALSE) {
             $this->form_validation->set_message('formRulesPassword', '{field} must contain letters and spaces only.');
             $errors[] = 'Name must contain letters and spaces only';
             return FALSE;
