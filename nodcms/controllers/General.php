@@ -400,9 +400,6 @@ class General extends CI_Controller
         $query1=$this->db->query("SELECT *  from users where email = '".$email."'");
         $row=$query1->result_array();
 
-        echo "<pre>";
-            print_r($query1);
-        echo "</pre>";
 
         if ($query1->num_rows()>0){
 
@@ -419,8 +416,8 @@ class General extends CI_Controller
             $passwordplain = "";
             $passwordplain  = rand(999999999,9999999999);
             $newpass['password'] = md5($passwordplain);
-            $this->db->where('email', $email);
-            $this->db->update('users', $newpass);
+            /*$this->db->where('email', $email);
+            $this->db->update('users', $newpass);*/
             $mail_message='Dear '.$row[0]['first_name'].','. "\r\n";
             $mail_message.='Thanks for contacting regarding to forgot password,<br> You can reset password using this '.'<a href="'.$resetLink.'">Link</a>'.'</b>'."\r\n";
             $mail_message.='<br>Please Update your password.';
@@ -428,8 +425,11 @@ class General extends CI_Controller
             $mail_message.='<br>Your company name';
 
 
-            echo $mail_message;
+            //echo $mail_message;
             mail($email,"Reset Password",$mail_message);
+
+            $this->session->set_flashdata('message','Check email for password reset!');
+            redirect(base_url().'change-password','refresh');
 
             //redirect(base_url().'user/Login','refresh');
         }
