@@ -1672,6 +1672,7 @@ class Appointment_admin extends NodCMS_Controller
     // Calendar page (Appointment's requests on calendar)
     function calendar($date=null)
     {
+        $this->load->model('Appointment_model');
         if($this->input->is_ajax_request()){
             $start = $this->input->post("start", TRUE);
             $start = intval($start);
@@ -1681,9 +1682,20 @@ class Appointment_admin extends NodCMS_Controller
                 "min_app_time"=>$start,
                 "max_app_time"=>$end,
             );
+
+
+
             $data_list = $this->Appointment_admin_model->getReservation(NULL, NULL, $conditions);
+
+
             if(count($data_list)!=0){
                 foreach($data_list as $key=>$item){
+
+
+                    $treatmentName =  $this->Appointment_model->getTreatmentName($item["service_id"]);
+
+                    $data_list[$key]["treatment_title"] = $treatmentName[0]['title'];
+
                     $data_list[$key]["price"] = $this->currency->format($item["price"]);
                     $data_list[$key]["reservation_date_time"] = date("Y/m/d H:i", $item["reservation_date_time"]);
                     $data_list[$key]["reservation_edate_time"] = date("Y/m/d H:i", $item["reservation_edate_time"]);
@@ -1857,13 +1869,65 @@ class Appointment_admin extends NodCMS_Controller
         $this->data['coverPic'] = $this->Appointment_admin_model->getCover();
 
         $this->data['content']=$this->load->view($this->mainTemplate.'/account_setting',$this->data,true);
-
         $this->data['title'] = _l("Account setting",$this);
         $this->data['page'] = "account";
 
         $this->loadView();
     }
 
+    public function updatePassword(){
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('currentPassword', _l('Current Password',$this), 'required|xss_clean');
+        $this->form_validation->set_rules('newPassword', _l('New Password',$this), 'required|xss_clean|matches[confirmPassword]');
+        $this->form_validation->set_rules('confirmPassword', _l('Confirm Password',$this), 'required|xss_clean|matches[newPassword]');
+
+
+
+        if ($this->form_validation->run() == FALSE){
+            $this->session->set_flashdata('static_error',validation_errors());
+            //redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
+
+           $userProfile = $this->Appointment_admin_model->getUserData($this->session->userdata("user_id"));
+
+          if($userProfile){
+           $currentPassword = $userProfile[0]['password'];
+
+            if($currentPassword == md5($this->input->post('currentPassword'))){
+
+                $newPassword = $this->input->post("newPassword");
+                $confirmPassword = $this->input->post("confirmPassword");
+
+                if(empty($newPassword)){
+                    $this->session->set_flashdata('reset_error', _l('Enter your new password',$this));
+                    redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
+                }
+
+                if($newPassword == $confirmPassword){
+                    $this->db->where("user_id",$this->session->userdata("user_id"));
+                    $this->db->update("users",array('password'=>md5($newPassword)));
+                    $this->session->set_flashdata('reset_success', 'Password reset successfully');
+                    redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
+                }else{
+                    $this->session->set_flashdata('reset_error', _l('Confirm password dont match new password',$this));
+                    redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
+                }
+
+            }else{
+                $this->session->set_flashdata('reset_error', _l('Your current password does not match',$this));
+                redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
+            }
+
+          }
+
+        }else{
+            print_r(validation_errors());
+            $this->session->set_flashdata('reset_error',validation_errors());
+            //$this->session->set_flashdata('reset_error', _l('Please complete all the fields',$this));
+            redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
+
+        }
+    }
     // End function for change
     private function loadView(){
 
@@ -1934,6 +1998,9 @@ class Appointment_admin extends NodCMS_Controller
             'imageUpload',
             'changeCoverPic',
             'removePic',
+            'updatePassword',
+            'removeAppointment',
+            'showRecipt',
         );
         if(!in_array($this->router->fetch_method(),$acceptableMethods)){
             $this->session->set_flashdata('error', _l("Unfortunately you do not have permission to this part of system.",$this));
@@ -2085,6 +2152,9 @@ class Appointment_admin extends NodCMS_Controller
             'imageUpload',
             'changeCoverPic',
             'removePic',
+            'updatePassword',
+            'removeAppointment',
+            'showRecipt',
         );
         if(!in_array($this->router->fetch_method(),$acceptableMethods)){
             $this->session->set_flashdata('error', _l("Unfortunately you do not have permission to this part of system.",$this));
@@ -2158,6 +2228,9 @@ class Appointment_admin extends NodCMS_Controller
             'imageUpload',
             'changeCoverPic',
             'removePic',
+            'updatePassword',
+            'removeAppointment',
+            'showRecipt',
         );
         if(!in_array($this->router->fetch_method(),$acceptableMethods)){
             $this->session->set_flashdata('error', _l("Unfortunately you do not have permission to this part of system.",$this));
@@ -2217,6 +2290,9 @@ class Appointment_admin extends NodCMS_Controller
             'userProfiles',
             'allAppointments',
             'changeCoverPic',
+            'updatePassword',
+            'removeAppointment',
+            'showRecipt',
         );
         if(!in_array($this->router->fetch_method(),$acceptableMethods)){
             $this->session->set_flashdata('error', _l("Unfortunately you do not have permission to this part of system.",$this));
@@ -2323,8 +2399,6 @@ class Appointment_admin extends NodCMS_Controller
         $time = time();
 
        $totalFiles = count($_FILES["file"]['name']) - 1;
-
-
 
       for($i=0;$i<=$totalFiles;$i++){
 
@@ -2458,6 +2532,41 @@ class Appointment_admin extends NodCMS_Controller
 
     public function test(){
         echo "worked";
+    }
+
+
+    public function showRecipt(){
+
+        $appointmentId = $this->input->post("appointmentId");
+        $reservationDetails = $this->Appointment_admin_model->getReservationByIdDetail($appointmentId);
+        $reservationDetails = $reservationDetails[0];
+
+        $this->data['data']['service_name'] = $reservationDetails['service_name'];
+        $this->data['data']['service_description'] = "test";
+        $this->data['data']['reservation_date_time'] = $reservationDetails['reservation_date_time'];
+        $this->data['data']['reservation_edate_time'] = $reservationDetails['reservation_edate_time'];
+        $this->data['data']['Price'] = $reservationDetails['price'];
+        $this->data['data']['fname'] = $reservationDetails['fname'];
+        $this->data['data']['lname'] = $reservationDetails['lname'];
+        $this->data['data']['reservation_id'] =$appointmentId;
+
+        $content = "";
+        $content .= $this->load->view('reservation/show_reservation', $this->data, true);
+
+        echo $content;
+
+    }
+
+    public function removeAppointment(){
+
+        $appointmentId = $this->input->post("appointmentId");
+        $reservationDetails = $this->Appointment_admin_model->getReservationByIdDetail($appointmentId);
+        $reservationDetails = $reservationDetails[0];
+
+        if($reservationDetails){
+            $this->db->delete('r_reservation', array('reservation_id' => $appointmentId));
+        }
+
     }
 
 }

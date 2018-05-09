@@ -463,6 +463,7 @@ class Appointment extends NodCMS_Controller {
                         $newpost_data = array(
                                         'time' => $post_data1['time'][$mainKey],
                                         'date' => $post_data1['date'][$mainKey],
+                                        'title' => $post_data1['title'][$mainKey],
                                         'tel' => $post_data1['tel'],
                                         'email' => $post_data1['email'],
                                         'lname' => $post_data1['lname'],
@@ -513,6 +514,7 @@ class Appointment extends NodCMS_Controller {
                             "reservation_day_no"=>$dayNO,
                             "reservation_date"=>$justDate,
                             "reservation_date_time"=>$start_time,
+                            "title_treatment"=>$post_data['title'],
                             "reservation_edate_time"=>$end_time,
                             'paypal_paid' => $post_data1['paymentType'],
                             "service_name"=>$service["service_name"],
@@ -523,7 +525,6 @@ class Appointment extends NodCMS_Controller {
                             "language_id"=>$_SESSION['language']['language_id']
                         );
 
-                        
                         if($this->provider["payment_type"]==0 || $this->provider["payment_type"]==2 || $service["price"]==0){
                             // No need to payment
                             $reservationID = $this->Appointment_model->addToReservation($new_reservation);

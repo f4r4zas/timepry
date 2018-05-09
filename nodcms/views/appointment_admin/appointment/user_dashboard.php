@@ -187,8 +187,14 @@ $(document).ready(function(){
                             <div class="time"><?php echo date('H:i', $reservation->reservation_date_time);?> - <?php echo date('H:i', $reservation->reservation_edate_time);?></div>
                             <div class="patient_name"><?php echo $reservation->fname.' '.$reservation->lname;?></div>
                             <div class="booked_services"><?php echo $reservation->service_name.' - '.$reservation->reservation_number;?></div>
+
                             <div class="status">
+                                <i class="fa far fa-file-alt"> </i>
+                                <i class="fa fa-eye"></i>
+                                <a href="#" onclick="showRecipt(<?php echo $reservation->reservation_id; ?>)"><span class="fa fa-file"></span></a>
+                                <button name="removeReservation" class="btn btn-primary" onclick="removeAppointment(<?php echo $reservation->reservation_id; ?>)"  class="form-control">Remove Appointment</button>
                                 <span class="action-<?php echo $status;?>"></span>
+
                             </div>
 							
 					
@@ -343,4 +349,45 @@ reviewStart += "<\/form>";
 	});
 </script>
 
-<?php //include('footer.php'); ?>
+<script>
+    function removeAppointment(id){
+        $.ajax({url:"<?php echo base_url() ?>admin-appointment/removeAppointment",async:false,type:"post",data:{appointmentId:id},function(data){
+                //console.log(data);
+
+                bootbox.alert({
+                    message: data,
+                    callback: function () {
+                        console.log('This was logged in the callback!');
+                    }
+                })
+
+            }});
+    }
+
+    function showRecipt(id){
+        console.log(id);
+        $.ajax({url:"<?php echo base_url() ?>admin-appointment/showRecipt",async:true,type:"post",data:{appointmentId:id},function(data){
+
+                console.log(data);
+
+                bootbox.alert({
+                    message: data,
+                    callback: function (){
+                        console.log('This was logged in the callback!');
+                    }
+                })
+
+            }}).done(function(data){
+
+            bootbox.alert({
+                message: data,
+                callback: function (){
+                    console.log('This was logged in the callback!');
+                }
+            });
+
+        });
+        return false;
+    }
+
+</script>

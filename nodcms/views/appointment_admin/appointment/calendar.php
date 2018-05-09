@@ -3,8 +3,14 @@
 .banner_wrapper{
 	    height: 138px !important;
 }
-.portlet.box.blue-hoki {
-    padding-top: 82px !important;
+.portlet-title {
+    padding-top: 92px !important;
+}
+.fc-title {
+  //  padding-left: 15px;
+}
+span.fc-time {
+    display: none;
 }
 </style>
 
@@ -231,14 +237,14 @@
 
             var result = "";
             var contentTheme = $("#popoverTheme");
-            contentTheme.find(".name").text("Name");
-            contentTheme.find(".value").text(data.fname+' '+data.lname);
+            contentTheme.find(".name").text("Treatment");
+            contentTheme.find(".value").text(data.title_treatment);
             result += contentTheme.html();
-            contentTheme.find(".name").text("Service");
+            contentTheme.find(".name").text("Doctor");
             contentTheme.find(".value").text(data.service_name);
             result += contentTheme.html();
-            contentTheme.find(".name").text("Price");
-            contentTheme.find(".value").text(data.price);
+            contentTheme.find(".name").text("Patient");
+            contentTheme.find(".value").text(data.fname+" "+data.lname);
             result += contentTheme.html();
             contentTheme.find(".name").text("Email");
             contentTheme.find(".value").text(data.email);
@@ -246,20 +252,25 @@
             contentTheme.find(".name").text("Phone");
             contentTheme.find(".value").text(data.tel);
             result += contentTheme.html();
-            contentTheme.find(".name").text("Validated");
-            if(data.checked != 1){
-                contentTheme.find(".value").html('<i class="validate fa fa-times font-yellow"></i>');
-            }else{
-                contentTheme.find(".value").html('<i class="fa fa-check font-green"></i>');
-            }
-            result += contentTheme.html();
-            contentTheme.find(".name").text("PayPal Paid");
+
+
+            contentTheme.find(".name").text("Online paid");
             if(data.paypal_paid != 1){
-                contentTheme.find(".value").html('<i class="fa fa-times font-yellow"></i>');
+                contentTheme.find(".value").html('<i class="fa fa-times font-red"></i>');
             }else{
-                contentTheme.find(".value").html('<i class="fa fa-check font-green"></i>');
+                contentTheme.find(".value").html('<i class="fa fa-check font-green "></i>');
             }
             result += contentTheme.html();
+            contentTheme.find(".name").text("Pay at the dental office");
+            if(data.paypal_paid == 1){
+                contentTheme.find(".value").html('<i class="validate fa fa-times font-red"></i>');
+            }else{
+                contentTheme.find(".value").html('<i class="fa fa-check font-green"></i>');
+
+
+            }
+            result += contentTheme.html();
+
             result += '<small class="font-green"><?php echo _l("To see more info, double-click on the events", $this); ?></small>';
             return result;
 
@@ -308,6 +319,7 @@
                     success: function(data) {
                         var events = [];
                         data = JSON.parse(data);
+                        console.log(data);
                         if(data.status=="success"){
                             $.each(data.data, function(index, value){
                                 events.push({
@@ -315,7 +327,7 @@
                                     fn_dblclick: function(){
                                         $.showComments( value.reservation_id );
                                     },
-                                    title: value.fname + ' ' + value.lname,
+                                    title: value.reservation_date_time.slice(-6)+" "+value.reservation_edate_time.slice(-6)+" "+$.trim(value.title_treatment),
                                     start: new Date(value.reservation_date_time), // will be parsed
                                     end: new Date(value.reservation_edate_time), // will be parsed
                                     backgroundColor: Metronic.getBrandColor(value.bgcolor),

@@ -395,7 +395,6 @@ class General extends CI_Controller
 
     public function sendpassword()
     {
-        print_r($_POST);
         $email = $_POST['email'];
         $query1=$this->db->query("SELECT *  from users where email = '".$email."'");
         $row=$query1->result_array();

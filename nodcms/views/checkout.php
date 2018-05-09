@@ -511,6 +511,7 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                                                 <input type="hidden" class="final_treatment_field<?php echo $outputArray['service'][$i] ?> practitioner" value="<?php echo $outputArray['practitioner'][$i]; ?>" name="practitioner[]">
                                                 <input type="hidden" class="final_treatment_field<?php echo $outputArray['service'][$i] ?> date" value="<?php echo $outputArray['date'][$i]; ?>" name="date[]">
                                                 <input type="hidden" class="final_treatment_field<?php echo $outputArray['service'][$i] ?> time" value="<?php echo $outputArray['time'][$i]; ?>" name="time[]">
+                                                <input type="hidden" class="final_treatment_field<?php echo $outputArray['service'][$i] ?> title" value="<?php echo $outputArray['title'][$i]; ?>" name="title[]">
 
                                             <?php } ?>
                                         </div>
@@ -733,7 +734,7 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                 start++;
                 if(start == totalLoop){
 
-                    window.location.href="<?php echo base_url(); ?>checkout-complete";
+                    //window.location.href="<?php echo base_url(); ?>checkout-complete";
                 }
 
             });

@@ -3468,6 +3468,9 @@ overflow-y: scroll;
     height: calc(91vh - 181px) !important;
 }
 
+#map_canvas{
+    height: calc(91vh - 181px) !important;
+}
 .tooltip {
    
 }

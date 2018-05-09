@@ -651,7 +651,6 @@ $CI = get_instance();
                             map.fitBounds(bounds);
                         });
 
-
                         /*google.maps.event.addListener(marker, 'click', (function (marker, i) {
                             return function () {
                                 infowindow.setContent(locations[i][0]);
@@ -720,6 +719,27 @@ $CI = get_instance();
 
         var listObj = new List('listId', options);
 
+        <?php if($this->input->get("search_date")){ ?>
+
+         var dateFilterOrder = "desc";
+         var dateFilterOption = "priceHidden";
+
+        listObj.sort(dateFilterOption, {order: dateFilterOrder});
+
+        <?php } ?>
+
+        <?php if($this->input->get("zip")){ ?>
+
+         var dateFilterOrder = "desc";
+         var dateFilterOption = "priceHidden";
+
+        listObj.sort(dateFilterOption, {order: dateFilterOrder});
+
+        <?php } ?>
+
+
+
+
         //listObj.sort('hiddenRating', { order: "asc" });
 
         jQuery("[name='selectfilter']").change(function () {
@@ -737,6 +757,8 @@ $CI = get_instance();
 
 
         });
+
+
 
 
         jQuery("#zipform").submit(function (e) {

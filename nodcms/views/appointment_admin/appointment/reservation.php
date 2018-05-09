@@ -239,7 +239,7 @@
                 complete: function(){
                     Metronic.unblockUI('#row' + reservationID);
                 }
-            }).done(function(data) {
+            }).done(function(data){
                 data = JSON.parse(data);
                 if(data.status == 'success'){
                     if($('#reminded' + reservationID).length > 0){

@@ -204,9 +204,8 @@
                                 if($(this).val().length >= 1){
                                     var formData = new FormData();
                                     formData.append('company',$(this).val()); 
-                                    
-                                    
-                                    url = "<?php echo site_url('General/get_treatment_matrix');?>";
+
+                                    url = "<?php echo site_url('General/get_treatment_matrix'); ?>";
                             			 $.ajax({
                             				  url: url,
                             				  type: "POST",
@@ -487,6 +486,7 @@ jQuery("#search_by_dental").validate({
     error.appendTo('.errors_form');
 }
 });
+
 jQuery("#search_by_location").validate({
 		 ignore: [],
 		errorPlacement: function(error, element) {

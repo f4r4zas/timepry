@@ -636,25 +636,20 @@
                         + '</div>'
                         + '</div>'
                         + '</div>'
-                        + '</div>';                                                                                                
-                        
-                        
-                        
-                        
-                                                                                                                                                
-         
+                        + '</div>';
+
                 final_treatment += '<input type="hidden" class="final_treatment_field'+serviceID+' service" value="'+serviceID+'" name="service[]"/>'
                                 + '<input type="hidden" class="final_treatment_field'+serviceID+' practitioner" name="practitioner[]"/>'
                                 + '<input type="hidden" class="final_treatment_field'+serviceID+' date" name="date[]"/>'                                
-                                + '<input type="hidden" class="final_treatment_field'+serviceID+' time" name="time[]"/>';
+                                + '<input type="hidden" class="final_treatment_field'+serviceID+' time" name="time[]"/>'
+                                + '<input type="hidden" class="final_treatment_field'+serviceID+' title" value="'+serviceName+'" name="title[]"/>';
+
                                 //+ '<input type="hidden" class="final_treatment_field'+serviceID+' fname" name="fname[]"/>'
                                // + '<input type="hidden" class="final_treatment_field'+serviceID+' lname" name="lname[]"/>'
                                 //+ '<input type="hidden" class="final_treatment_field'+serviceID+' email" name="email[]"/>'
                                 //+ '<input type="hidden" class="final_treatment_field'+serviceID+' phone" name="phone[]"/>';
 
             }
-            
-			
 			
             //console.log(bodyToAppend);
             $('#selected_services').html(bodyToAppend);

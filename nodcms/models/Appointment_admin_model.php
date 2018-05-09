@@ -514,7 +514,6 @@ class Appointment_admin_model extends CI_Model{
     // Select a record from "r_reservation" table
 
     function getReservationDetail($id)
-
     {
 
         $this->db->select("*");
@@ -524,6 +523,25 @@ class Appointment_admin_model extends CI_Model{
         $this->db->where('trash',0);
 
         $this->db->where('provider_id',$this->session->userdata('provider_id'));
+
+        $this->db->where('reservation_id',$id);
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+
+    }
+
+    function getReservationByIdDetail($id)
+    {
+
+        $this->db->select("*");
+
+        $this->db->from('r_reservation');
+
+        $this->db->where('trash',0);
+
+
 
         $this->db->where('reservation_id',$id);
 
@@ -1728,6 +1746,14 @@ class Appointment_admin_model extends CI_Model{
 	public function getProfile($userId){
         $this->db->select("*");
         $this->db->from('user_questions');
+        $this->db->where("user_id", $userId);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function getUserData($userId){
+        $this->db->select("*");
+        $this->db->from('users');
         $this->db->where("user_id", $userId);
         $query = $this->db->get();
         return $query->result_array();
