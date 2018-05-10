@@ -1,3 +1,6 @@
+<?php get_instance()->load->helper('user'); ?>
+<div class="user-profile-details" style="display: none">
+</div>
 <div class="portlet">
     <div class="portlet-body">
         <p>
@@ -13,16 +16,16 @@
                 <thead>
                 <tr class="gray-gallery">
                     <th><?php echo _l("ID",$this); ?></th>
-                    <th><?php echo _l("Appointments",$this); ?></th>
-                    <th><?php echo _l("Name & Family",$this); ?></th>
-                    <th><?php echo _l("Service",$this); ?></th>
+                    <th><?php echo _l("Date and Time",$this); ?></th>
+                    <th><?php echo _l("Name",$this); ?></th>
+                    <th><?php echo _l("Practitioner",$this); ?></th>
+                    <th><?php echo _l("Treatment",$this); ?></th>
                     <th><?php echo _l("Price",$this); ?></th>
-                    <th><?php echo _l("Created",$this); ?></th>
-                    <th><i class="fa fa-language" title="<?php echo _l("Language",$this); ?>"></i></th>
-                    <th><i class="fa fa-paypal" title="<?php echo _l("PayPal Paid", $this); ?>"></i></th>
-                    <th><i class="fa fa-check-square-o" title="<?php echo _l("Validated",$this); ?>"></i></th>
-                    <th><i class="fa fa-flag-o" title="<?php echo _l("Closed", $this); ?>"></i></th>
-                    <th><i class="fa fa-bell-o" title="<?php echo _l("Reminded", $this); ?>"></i></th>
+                    <th><?php echo _l("Online Paid",$this); ?></th>
+                    <th><?php echo _l("To pay at dental office",$this); ?></th>
+                   <!-- <th><i class="fa fa-check-square-o" title="<?php /*echo _l("Validated",$this); */?>"></i></th>
+                    <th><i class="fa fa-flag-o" title="<?php /*echo _l("Closed", $this); */?>"></i></th>
+                    <th><i class="fa fa-bell-o" title="<?php /*echo _l("Reminded", $this); */?>"></i></th>-->
                     <th></th>
                 </tr>
                 <tr>
@@ -47,36 +50,18 @@
                         </select>
                     </td>
                     <td></td>
-                    <td style="width:110px;">
-                        <input placeholder="<?php echo _l("From", $this); ?>" class="my-datepicker form-control input-sm margin-bottom-5" id="min-date" readonly value="<?php echo isset($min_date)?$min_date:''; ?>">
-                        <input placeholder="<?php echo _l("To", $this); ?>" class="my-datepicker form-control input-sm" id="max-date" readonly value="<?php echo isset($max_date)?$max_date:''; ?>">
+                    <td></td>
+                    <td></td>
+                    <td></td>
 
-                    </td>
-                    <td colspan="5">
-                        <select class="form-control input-small input-sm margin-bottom-5 select2" id="language" multiple="multiple">
-                            <?php foreach($languages as $item){ ?>
-                                <option value="<?php echo $item["language_id"]; ?>" data-image="<?php echo base_url().$item["image"]; ?>" <?php echo (isset($language_id) && in_array($item["language_id"], $language_id))?'selected':''; ?>>
-                                    <?php echo $item["language_name"]; ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-                        <select id="filters" class="form-control input-small input-sm select2" multiple="multiple">
-                            <option value="validated" <?php echo (isset($filters) && in_array("validated", $filters))?'selected':''; ?>><?php echo _l("Validated", $this); ?></option>
-                            <option value="invalidated" <?php echo (isset($filters) && in_array("invalidated", $filters))?'selected':''; ?>><?php echo _l("Invalidated", $this); ?></option>
-                            <option value="closed" <?php echo (isset($filters) && in_array("closed", $filters))?'selected':''; ?>><?php echo _l("Closed", $this); ?></option>
-                            <option value="unclosed" <?php echo (isset($filters) && in_array("unclosed", $filters))?'selected':''; ?>><?php echo _l("Unclosed", $this); ?></option>
-                            <option value="paypal_paid" <?php echo (isset($filters) && in_array("paypal_paid", $filters))?'selected':''; ?>><?php echo _l("PayPal paid", $this); ?></option>
-                            <option value="paypal_unpaid" <?php echo (isset($filters) && in_array("paypal_unpaid", $filters))?'selected':''; ?>><?php echo _l("PayPal unpaid", $this); ?></option>
-                        </select>
-                    </td>
                     <td>
                         <button id="submit-search" class="btn btn-success btn-sm margin-bottom-5"><i class="fa fa-search"></i> <?php echo _l("Search", $this)?></button>
                         <button id="submit-print" class="btn btn-primary btn-sm margin-bottom-5"><i class="fa fa-print"></i> <?php echo _l("Print", $this)?></button>
                         <a href="<?php echo APPOINTMENT_ADMIN_URL; ?>reservation" class="btn btn-danger btn-sm btn-ask">
                             <i class="fa fa-times"></i>
                             <?php echo _l("Reset", $this); ?></a>
-                    </td>
-                </tr>
+                    </td></tr>
+
                 </thead>
                 <?php if(isset($data) && count($data)!=0){ $i=0; ?>
                     <?php foreach($data as $item){ $i++; ?>
@@ -96,28 +81,15 @@
                             <?php echo my_int_date($item["reservation_date_time"]).' '.my_int_justTime($item["reservation_date_time"]); ?>
                             </span>
                             </td>
-                            <td><?php echo $item["fname"]; ?> <?php echo $item["lname"]; ?></td>
+                            <td><a class="userDetails" href="#"><?php echo $item["fname"]; ?> <?php echo $item["lname"]; ?></a></td>
                             <td><?php echo $item["service_name"]; ?></td>
+                            <td><?php echo $item["title_treatment"]; ?></td>
                             <td><?php echo $this->currency->format($item["price"]); ?></td>
                             <td>
-                                <?php echo my_int_date($item["created_date"]); ?>
+                                <i class="<?php echo $item['paypal_paid']=0?'fa fa-times font-yellow':'fa fa-check font-green'; ?>"></i>
                             </td>
                             <td>
-                                <img src="<?php echo base_url().$item["image"]; ?>" style="width:16px;" alt="<?php echo $item["language_name"]; ?>" title="<?php echo $item["language_name"]; ?>">
-                            </td>
-                            <td>
-                                <i class="<?php echo $item['paypal_paid']!=1?'fa fa-times font-yellow':'fa fa-check font-green'; ?>"></i>
-                            </td>
-                            <td>
-                                <i class="validate-icon-<?php echo $item['reservation_id']; ?> <?php echo $item['checked']!=1?'fa fa-times font-yellow':'fa fa-check font-green'; ?>"></i>
-                            </td>
-                            <td>
-                                <i class="closed-icon-<?php echo $item['reservation_id']; ?> <?php echo $item['closed']!=1?'fa fa-times font-yellow':'fa fa-check font-green'; ?>"></i>
-                            </td>
-                            <td>
-                                <?php if($item['reminded']!=0){ ?>
-                                    <span id="reminded<?php echo $item['reservation_id']; ?>" class="badge bg-green-haze"><?php echo $item['reminded']; ?></span>
-                                <?php } ?>
+                                <i class="<?php echo $item['paypal_paid']=1?'fa fa-times font-yellow':'fa fa-check font-green'; ?>"></i>
                             </td>
                             <td>
                                 <a class="btn default btn-xs" href="javascript:;" onclick="$.showComments(<?php echo $item['reservation_id']; ?>)"><i class="fa fa-search"></i> <?php echo _l("View",$this); ?></a>
@@ -126,35 +98,37 @@
                                         <i class="fa fa-cog"></i> <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li>
-                                            <a href="<?php echo APPOINTMENT_ADMIN_URL."reservationDetails/".$item["reservation_id"]?>" target="_blank">
-                                                <i class="fa fa-external-link font-blue"></i> <?php echo _l("Open in new tab",$this); ?>
+                                        <!--<li>
+                                            <a href="<?php /*echo APPOINTMENT_ADMIN_URL."reservationDetails/".$item["reservation_id"]*/?>" target="_blank">
+                                                <i class="fa fa-external-link font-blue"></i> <?php /*echo _l("Open in new tab",$this); */?>
                                             </a>
-                                        </li>
-                                        <li>
-                                            <a id="validateLink<?php echo $item['reservation_id']; ?>"
-                                               class="validate-link-<?php echo $item['reservation_id']; ?>"
-                                               href="javascript: toggleValidate('<?php echo $item['reservation_id']; ?>');"
-                                               data-value="<?php echo $item["checked"]; ?>">
-                                                <i class="fa <?php echo $item["checked"]!=1?"fa-check font-green":"fa-times font-yellow"; ?>"></i>
-                                                <span><?php echo $item["checked"]!=1?_l("Make valid", $this):_l("Make invalid", $this); ?></span>
+                                        </li>-->
+                                       <!-- <li>
+                                            <a id="validateLink<?php /*echo $item['reservation_id']; */?>"
+                                               class="validate-link-<?php /*echo $item['reservation_id']; */?>"
+                                               href="javascript: toggleValidate('<?php /*echo $item['reservation_id']; */?>');"
+                                               data-value="<?php /*echo $item["checked"]; */?>">
+                                                <i class="fa <?php /*echo $item["checked"]!=1?"fa-check font-green":"fa-times font-yellow"; */?>"></i>
+                                                <span><?php /*echo $item["checked"]!=1?_l("Make valid", $this):_l("Make invalid", $this); */?></span>
                                             </a>
-                                        </li>
+                                        </li>-->
 
-                                        <li><a id="remindedLink<?php echo $item['reservation_id']; ?>" href="javascript: $.reminderRow('<?php echo $item['reservation_id']; ?>');"><i class="fa fa-bell font-green-haze"></i> <span><?php echo _l("Send reminder",$this); ?></span></a></li>
+                                        <!--<li><a id="remindedLink<?php /*echo $item['reservation_id']; */?>" href="javascript: $.reminderRow('<?php /*echo $item['reservation_id']; */?>');"><i class="fa fa-bell font-green-haze"></i> <span><?php /*echo _l("Send reminder",$this); */?></span></a></li>-->
 
-                                        <li>
-                                            <a class="closed-link-<?php echo $item['reservation_id']; ?> btn-ask"
-                                               data-msg="<?php echo _l("panel_reservation_closed_confirmation",$this); ?>"
-                                               href="javascript: toggleClosed('<?php echo $item["reservation_id"]; ?>');"
-                                               data-value="<?php echo $item["closed"]; ?>">
-                                                <i class="fa <?php echo $item["closed"]!=1?"fa-calendar-check-o font-purple-wisteria":"fa fa-undo"; ?>"></i>
-                                                <span><?php echo $item["closed"]!=1?_l("Close", $this):_l("Reopen", $this); ?></span>
+                                        <!--<li>
+                                            <a class="closed-link-<?php /*echo $item['reservation_id']; */?> btn-ask"
+                                               data-msg="<?php /*echo _l("panel_reservation_closed_confirmation",$this); */?>"
+                                               href="javascript: toggleClosed('<?php /*echo $item["reservation_id"]; */?>');"
+                                               data-value="<?php /*echo $item["closed"]; */?>">
+                                                <i class="fa <?php /*echo $item["closed"]!=1?"fa-calendar-check-o font-purple-wisteria":"fa fa-undo"; */?>"></i>
+                                                <span><?php /*echo $item["closed"]!=1?_l("Close", $this):_l("Reopen", $this); */?></span>
                                             </a>
-                                        </li>
+                                        </li>-->
+                                        <li><a><i class="fa fa-user"></i><?php echo _l("See Patient details",$this); ?></a></li>
                                         <li class="divider"></li>
-                                        <li><a class="btn-ask" data-msg="<?php echo _l("panel_reservation_cancel_confirmation",$this); ?>" href="<?php echo APPOINTMENT_ADMIN_URL."reservationAction/".$item["reservation_id"]."/cancel"; ?>"><i class="fa fa-ban font-red"></i> <?php echo _l("Cancel",$this); ?></a></li>
-                                        <li><a class="btn-ask" data-msg="<?php echo _l("panel_reservation_remove_confirmation",$this); ?>" href="<?php echo APPOINTMENT_ADMIN_URL."reservationAction/".$item["reservation_id"]."/remove"; ?>"><i class="fa fa-trash font-red"></i> <?php echo _l("Remove",$this); ?></a></li>
+                                        <li><a href="<?php echo base_url() ?>contact"><i class="fa fa-exclamation-triangle"></i><?php echo _l("Report a problem",$this); ?></a></li>
+                                     <!--   <li><a class="btn-ask" data-msg="<?php /*echo _l("panel_reservation_cancel_confirmation",$this); */?>" href="<?php /*echo APPOINTMENT_ADMIN_URL."reservationAction/".$item["reservation_id"]."/cancel"; */?>"><i class="fa fa-ban font-red"></i> <?php /*echo _l("Cancel",$this); */?></a></li>-->
+
                                     </ul>
                                 </div>
                             </td>

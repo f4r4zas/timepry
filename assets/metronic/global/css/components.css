@@ -10766,3 +10766,12 @@ Transparent Button
 .remove-pic{
   float: right;
 }
+
+#opening_days{
+  display: flex;
+  flex-direction: column;
+}
+
+div#opening_days div.row:nth-child(3) {
+  order: 1;
+}

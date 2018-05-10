@@ -295,7 +295,7 @@ $this->session->unset_userdata("dataStepFour");  */
 							</div>
                             <?php 
 							
-                            $days = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday');
+                            $days = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 							$start = 0;
                             foreach($days as $k => $day): ?>
 							

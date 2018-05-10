@@ -118,6 +118,8 @@
 
                                     <li><a href="<?php echo APPOINTMENT_ADMIN_URL."servicePeriodsEdit/".$item["service_id"]; ?>"><i class="fa fa-clock-o"></i> <?php echo _l("Set Program",$this); ?></a></li>
 
+                                    <li><a class="assign_treatment" href="#" onclick="return false;" data-id="<?php echo $item["service_id"]; ?>"><i class="fa fa-edit"></i> <?php echo _l("See assigned treatments",$this); ?></a></li>
+
                                     <li><a href="<?php echo APPOINTMENT_ADMIN_URL."serviceEdit/".$item["service_id"]; ?>"><i class="fa fa-edit"></i> <?php echo _l("Edit",$this); ?></a></li>
 
                                     <li class="divider"></li>
@@ -145,3 +147,25 @@
     </div>
 
 </div>
+
+<script>
+    $(document).ready(function(){
+        $(".assign_treatment").click(function(){
+
+            $.ajax({url:'<?php echo base_url() ?>admin-appointment/getAllTreatment',type:"POST",data:{dentist_id:$(this).attr('data-id')} ,function(data){
+                console.log(data);
+            }}).done(function(data){
+
+                bootbox.alert({
+                    title: "Doctors treatments",
+                    size: 'small',
+                    message: data,
+                    callback: function () {
+                        console.log('This was logged in the callback!');
+                    }
+                })
+            });
+
+        });
+    });
+</script>

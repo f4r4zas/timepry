@@ -55,23 +55,16 @@ class Appointment_admin_model extends CI_Model{
     // Select a record form "r_services" table
 
     function getServiceDetail($id)
-
     {
 
         $this->db->select("*");
-
         $this->db->from('r_services');
-
         $this->db->join('treatments','treatments.provider_id = r_services.provider_id');
-
         $this->db->where('r_services.provider_id',$this->session->userdata('provider_id'));
-
         $this->db->where('r_services.service_id',$id);
-
         $query = $this->db->get();
 
         return $query->result_array();
-
     }
 
 
@@ -1800,6 +1793,10 @@ class Appointment_admin_model extends CI_Model{
       $query = $this->db->get();
       $practitioners = $query->result();
       return $practitioners;
+    }
+
+    public function getDentistTreatments(){
+
     }
 
 }

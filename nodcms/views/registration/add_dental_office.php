@@ -212,8 +212,8 @@
                             <h1>Opening hours</h1>
                             
                             
-                            <?php 
-                            $days = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday');
+                            <?php
+                            $days = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
                             foreach($days as $k => $day):?>
 
                             <div class="row">

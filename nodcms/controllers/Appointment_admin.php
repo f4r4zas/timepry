@@ -53,6 +53,7 @@ class Appointment_admin extends NodCMS_Controller
             'providerManager',
             'providerManagerRemove',
             'settings',
+            'getAllTreatment',
         );
 
         if($this->session->userdata('group') != 1 && $this->session->userdata('group') != 100){
@@ -797,6 +798,7 @@ class Appointment_admin extends NodCMS_Controller
     // Services add/edit form
     function serviceEdit($id=null)
     {
+
         if($id!=null){
             $this->data['data'] =  $this->Appointment_admin_model->getServiceDetail($id);
             if(count($this->data['data'])!=0){
@@ -819,14 +821,14 @@ class Appointment_admin extends NodCMS_Controller
                 }else{
                     $data = array(
                         "name"=>$this->data['data']["service_name"],
-                        "price"=>$this->data['data']["price"],
-                        "description"=>$this->data['data']["service_description"]
+                        //"price"=>$this->data['data']["price"],
+                        //"description"=>$this->data['data']["service_description"]
                     );
                     echo json_encode(array("status"=>"success", "data"=>$data));
                 }
                 exit;
             }
-            $this->data['sub_title']=_l("Edit a service",$this);
+            $this->data['sub_title']=_l("Edit",$this);
         }else{
             $this->data['sub_title']=_l("Add new service",$this);
             if($this->input->is_ajax_request()){
@@ -861,6 +863,8 @@ class Appointment_admin extends NodCMS_Controller
                         $extensions = $this->input->post("extensions",TRUE);
                     else
                         $extensions = null;
+                    $setData["service_name"] =  $this->input->post("practitle")." ".$setData["service_name"];
+
                     $new_id = $this->Appointment_admin_model->serviceManipulate($setData,$id,$extensions);
                     $result = array("status"=>"success","id",$new_id);
                 }
@@ -2001,6 +2005,7 @@ class Appointment_admin extends NodCMS_Controller
             'updatePassword',
             'removeAppointment',
             'showRecipt',
+            'getAllTreatment',
         );
         if(!in_array($this->router->fetch_method(),$acceptableMethods)){
             $this->session->set_flashdata('error', _l("Unfortunately you do not have permission to this part of system.",$this));
@@ -2155,6 +2160,7 @@ class Appointment_admin extends NodCMS_Controller
             'updatePassword',
             'removeAppointment',
             'showRecipt',
+            'getAllTreatment',
         );
         if(!in_array($this->router->fetch_method(),$acceptableMethods)){
             $this->session->set_flashdata('error', _l("Unfortunately you do not have permission to this part of system.",$this));
@@ -2293,6 +2299,7 @@ class Appointment_admin extends NodCMS_Controller
             'updatePassword',
             'removeAppointment',
             'showRecipt',
+            'getAllTreatment',
         );
         if(!in_array($this->router->fetch_method(),$acceptableMethods)){
             $this->session->set_flashdata('error', _l("Unfortunately you do not have permission to this part of system.",$this));
@@ -2566,6 +2573,24 @@ class Appointment_admin extends NodCMS_Controller
         if($reservationDetails){
             $this->db->delete('r_reservation', array('reservation_id' => $appointmentId));
         }
+
+    }
+
+    public function getAllTreatment(){
+           $allTreatments = $this->Appointment_admin_model->getAllServices($this->session->userdata("provider_id"));
+
+
+           foreach($allTreatments as $treatment){
+
+               $dentist = explode(",",$treatment['dentists_id']);
+
+               if(in_array($this->input->post("dentist_id"),$dentist)){
+                   echo "<a href='#'>".$treatment['title']."</a>";
+                   echo "<p></p>";
+               }
+           }
+
+
 
     }
 

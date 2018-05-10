@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="row static-info">
-                        <div class="col-xs-1"><input type="button" id="userDetails" class="btn btn-primary" value="User Details"></div>
+                        <div class="col-xs-1"><input type="button" id="userDetails" class="btn btn-primary userDetails" value="User Details"></div>
 
                     </div>
 
@@ -186,7 +186,7 @@
 <script>
     $(function(){
 
-            $("#userDetails").click(function(){
+            $(".userDetails").click(function(){
 
                 var html = $(".user-profile-details").html();
 
