@@ -28,6 +28,10 @@
     cursor: pointer;
 }
 
+.timings:nth-child(2) {
+    order: 1;
+}
+
 .bottom-booknow{
     margin-top: 20px;
     position: fixed;
@@ -86,6 +90,10 @@ font-size: 16px;
 
 .you-radio{
     font-size: 21px;
+}
+.opening-timings {
+    display: flex;
+    flex-direction: column;
 }
 </style>
 <section class="inner-page-banner">

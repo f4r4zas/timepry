@@ -609,7 +609,7 @@
 
                 var serviceName = selectedServices.eq(i).parents('.treatment-box').find('.treatment-title').text();
                 var serviceDuration = selectedServices.eq(i).parents('.treatment-box').find('.duration').html();
-                var serviceRates = selectedServices.eq(i).parents('.treatment-box').find('.prices').text().replace('£', '');
+                var serviceRates = selectedServices.eq(i).parents('.treatment-box').find('.prices').text().replace('€', '');
                 var serviceID = selectedServices.eq(i).parents('.treatment-box').find('.serviceID').text();
 
                 bodyToAppend += '<div class="selservice_box" id="treat'+serviceID+'" onclick="$(function(){ $.selectprac('+serviceID+'); });">'
@@ -620,7 +620,7 @@
                         + '</div>'
 
                         + '<div class="col-md-4">'
-                        + '<div class="service_rates">£<span class="price">'+ serviceRates +'</span></div>'
+                        + '<div class="service_rates">€<span class="price">'+ serviceRates +'</span></div>'
                         + '</div>'
                         
                         

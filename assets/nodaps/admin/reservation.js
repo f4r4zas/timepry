@@ -142,12 +142,12 @@ var SearchReservationRow = function(URL, TIME_FORMAT){
         if($("#reservation-id").val()!=''){
             query_string += 'id=' + $("#reservation-id").val() + '&';
         }
-        if($("#min-date").val()!=''){
+        /*if($("#min-date").val()!=''){
             query_string += 'min_date=' + $("#min-date").val() + '&';
         }
         if($("#max-date").val()!=''){
             query_string += 'max_date=' + $("#max-date").val() + '&';
-        }
+        }*/
         if($("#min-app-date").val()!=''){
             query_string += 'min_app_date=' + $("#min-app-date").val() + '&';
         }
@@ -163,6 +163,11 @@ var SearchReservationRow = function(URL, TIME_FORMAT){
         if($("#filters").val() != 0 && $("#filters").val() != null){
             query_string += 'filters=' + $("#filters").val() + '&';
         }
+        if($("#treatmentFilter").val() != 0 && $("#treatmentFilter").val() != null){
+            query_string +=  $("#treatmentFilter").val() + '&';
+        }
+
+
         return query_string;
     };
 

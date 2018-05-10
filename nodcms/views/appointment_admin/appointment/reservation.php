@@ -49,7 +49,13 @@
                             <?php } ?>
                         </select>
                     </td>
-                    <td>Treatment</td>
+                    <td>
+                        <select name="treatmentFilter" id="treatmentFilter" class="form-control input-sm">
+                            <option value="new">New treatment</option>
+                            <option value="checked=1">Completed treatment</option>
+                            <option value="closed=1">Cancel treatment</option>
+                        </select>
+                    </td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -86,10 +92,10 @@
                             <td><?php echo $item["title_treatment"]; ?></td>
                             <td><?php echo $this->currency->format($item["price"]); ?></td>
                             <td>
-                                <i class="<?php echo $item['paypal_paid']=0?'fa fa-times font-yellow':'fa fa-check font-green'; ?>"></i>
+                                <i class="<?php echo $item['paypal_paid']=1?'fa fa-times font-yellow':'fa fa-check font-green'; ?>"></i>
                             </td>
                             <td>
-                                <i class="<?php echo $item['paypal_paid']=1?'fa fa-times font-yellow':'fa fa-check font-green'; ?>"></i>
+                                <i class="<?php echo $item['paypal_paid']=0?'fa fa-times font-yellow':'fa fa-check font-green'; ?>"></i>
                             </td>
                             <td>
                                 <a class="btn default btn-xs" href="javascript:;" onclick="$.showComments(<?php echo $item['reservation_id']; ?>)"><i class="fa fa-search"></i> <?php echo _l("View",$this); ?></a>
