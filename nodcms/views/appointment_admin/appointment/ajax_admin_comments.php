@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="row static-info">
-                        <div class="col-xs-1"><input type="button" id="userDetails" class="btn btn-primary userDetails" value="User Details"></div>
+                        <div class="col-xs-1"><input type="button" id="userDetails" class="btn btn-primary userDetails" value="User Public Profile"></div>
 
                     </div>
 
@@ -190,7 +190,7 @@
 
                 var html = $(".user-profile-details").html();
 
-                if(html){
+                if(html.trim()){
                     console.log(html);
                     bootbox.alert(html);
                 }else{

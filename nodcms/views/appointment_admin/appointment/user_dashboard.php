@@ -97,7 +97,7 @@ $(document).ready(function(){
                         <div class="reservation-cards">
                         <?php 
                         $this->db->select('*');
-                        $this->db->from('r_reservation');
+                        $this->db->from('r_reservation')->join('r_providers', 'r_reservation.provider_id = r_providers.provider_id');
                         $this->db->where('email',$user_info[0]->email);
                         $query = $this->db->get();
                         $user_reservation = $query->result();
@@ -160,7 +160,7 @@ $(document).ready(function(){
                         </div>
                         <div class="cell-c">
                             <span class="text">Average value of Treatments collected </span>
-                            <span class="price">$<?php echo ceil( $total_price / $total_reservation );?></span>
+                            <span class="price">€<?php echo ceil( $total_price / $total_reservation );?></span>
                         </div>
                     </div>
 
@@ -185,14 +185,15 @@ $(document).ready(function(){
                         <div class="appointment" status="<?php echo $status;?>">
                             <div class="date"><?php echo $reservation_date;?></div>
                             <div class="time"><?php echo date('H:i', $reservation->reservation_date_time);?> - <?php echo date('H:i', $reservation->reservation_edate_time);?></div>
+                            <?php $appTime = date('H:i', $reservation->reservation_date_time)." - ".date('H:i', $reservation->reservation_edate_time); ?>
                             <div class="patient_name"><?php echo $reservation->fname.' '.$reservation->lname;?></div>
                             <div class="booked_services"><?php echo $reservation->service_name.' - '.$reservation->reservation_number;?></div>
 
                             <div class="status">
                                 <i class="fa far fa-file-alt"> </i>
-                                <i class="fa fa-eye"></i>
+                                <a href="<?php echo base_url()."en/provider/".$reservation->provider_username; ?>"><i class="fa fa-eye"></i></a>
                                 <a href="#" onclick="showRecipt(<?php echo $reservation->reservation_id; ?>)"><span class="fa fa-file"></span></a>
-                                <button name="removeReservation" class="btn btn-primary" onclick="removeAppointment(<?php echo $reservation->reservation_id; ?>)"  class="form-control">Remove Appointment</button>
+                                <button name="removeReservation" class="btn btn-primary" <?php if($currentDate >= $reservation_date){echo "disabled";} ?> onclick="removeAppointment(<?php echo $reservation->reservation_id; ?>,'<?php echo $reservation_date; ?>','<?php echo $appTime; ?>','<?php echo $reservation->service_name; ?>','<?php echo $reservation->provider_email; ?>')"  class="form-control">Cancel Appointment</button>
                                 <span class="action-<?php echo $status;?>"></span>
 
                             </div>
@@ -350,8 +351,8 @@ reviewStart += "<\/form>";
 </script>
 
 <script>
-    function removeAppointment(id){
-        $.ajax({url:"<?php echo base_url() ?>admin-appointment/removeAppointment",async:false,type:"post",data:{appointmentId:id},function(data){
+    function removeAppointment(id,removeDate,time,doctor,doctorEmail){
+        $.ajax({url:"<?php echo base_url() ?>admin-appointment/removeAppointment",async:false,type:"post",data:{appointmentId:id,date:removeDate,appTime:time,yourdoc:doctor,doctorEmail:doctorEmail},function(data){
                 //console.log(data);
 
                 bootbox.alert({

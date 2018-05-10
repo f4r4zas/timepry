@@ -714,6 +714,17 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
         $(".redirectToRegister").click(function(){
                     window.location.href="<?php echo base_url() ?>register/user-registration";
         });
+
+        if($("[name='paymentMethod']").val() == 1){
+            $("[name='paymentType']").val(1);
+            $("#doPayment").hide();
+            $("#place-order").show();
+        }else{
+            $("[name='paymentType']").val(0);
+            $("#doPayment").show();
+            $("#place-order").hide();
+        }
+
     });
 
     function createResrvation(){
@@ -754,7 +765,6 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                 $("#doPayment").show();
                 $("#place-order").hide();
         }
-
 
     });
 

@@ -8,7 +8,6 @@
         <p><?php echo $data["service_description"]; ?></p>
     </div>
     <div class="col-sm-4 col-xs-12">
-        <p><?php echo _l('Date',$this); ?>: <b><?php echo my_int_date($data["created_date"]); ?></b></p>
     </div>
 </div>
 <?php if(isset($data)){ ?>
@@ -30,8 +29,8 @@
         <div class="col-xs-6 value">
             <mark>
 
-                <?php echo date("j F Y",$data["reservation_date_time"]); ?> -
-                <?php echo date("j F Y",$data["reservation_edate_time"]); ?>
+                <?php echo date("H:i",$data["reservation_date_time"]); ?> -
+                <?php echo date("H:i",$data["reservation_edate_time"]); ?>
 
             </mark>
         </div>

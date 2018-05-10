@@ -88,7 +88,7 @@
                             <div class="reservation-cards">
                                 <?php
                                 $this->db->select('*');
-                                $this->db->from('r_reservation')->join('r_providers', 'r_reservation.provider_id = r_providers.provider_id');;
+                                $this->db->from('r_reservation')->join('r_providers', 'r_reservation.provider_id = r_providers.provider_id');
                                 $this->db->where('email',$user_info[0]->email);
 
                                 $query = $this->db->get();
@@ -154,16 +154,13 @@
                             </div>
                             <div class="cell-c">
                                 <span class="text">Average value of Treatments collected </span>
-                                <span class="price">$<?php echo ceil( $total_price / $total_reservation );?></span>
+                                <span class="price">€<?php echo ceil( $total_price / $total_reservation );?></span>
                             </div>
                         </div>
 
                         <div class="appointments-list">
                             <!-- appointment 1 -->
-
-                            <?php
-
-                            foreach($user_reservation as $reservation):
+                            <?php foreach($user_reservation as $reservation):
                                 $end_date = date('Y-m-d H:i', $reservation->reservation_edate_time);
 
                                 $start_date = date('Y-m-d H:i', $reservation->reservation_date_time);
@@ -182,16 +179,19 @@
                                 <div class="appointment" status="<?php echo $status;?>">
                                     <div class="date"><?php echo $reservation_date;?></div>
                                     <div class="time"><?php echo date('H:i', $reservation->reservation_date_time);?> - <?php echo date('H:i', $reservation->reservation_edate_time);?></div>
+                                    <?php $appTime = date('H:i', $reservation->reservation_date_time)." - ".date('H:i', $reservation->reservation_edate_time); ?>
                                     <div class="patient_name"><?php echo $reservation->fname.' '.$reservation->lname;?></div>
                                     <div class="booked_services"><?php echo $reservation->service_name.' - '.$reservation->reservation_number;?></div>
+
                                     <div class="status">
+                                        <i class="fa far fa-file-alt"> </i>
+                                        <a href="<?php echo base_url()."en/provider/".$reservation->provider_username; ?>"><i class="fa fa-eye"></i></a>
+                                        <a href="#" onclick="showRecipt(<?php echo $reservation->reservation_id; ?>)"><span class="fa fa-file"></span></a>
+                                        <button name="removeReservation" class="btn btn-primary" <?php if($currentDate >= $reservation_date){echo "disabled";} ?> onclick="removeAppointment(<?php echo $reservation->reservation_id; ?>,'<?php echo $reservation_date; ?>','<?php echo $appTime; ?>','<?php echo $reservation->service_name; ?>','<?php echo $reservation->provider_email; ?>')"  class="form-control">Cancel Appointment</button>
                                         <span class="action-<?php echo $status;?>"></span>
+
                                     </div>
 
-                                    <div class="dental-office-link">
-
-                                        <a href="<?php echo base_url()."en/provider/".$reservation->provider_username; ?>">View Dental Office Office</a>
-                                    </div>
 
 
                                     <?php if($currentDate > $reservation_date){ ?>
@@ -219,129 +219,170 @@
     </div>
 
 
-    <script>
+<script>
 
-        var reviewStart="";
-        reviewStart += "<form id=\"reviewForm\" class=\"form-horizontal\">";
-        reviewStart += "	<div class=\"col-md-12\">";
-        reviewStart += "		<h4>1) Would you recommend this dental office to a friend?<\/h4>";
-        reviewStart += "		<div class=\"rateYo\" data-id=\"1\"><\/div>";
-        reviewStart += "	<\/div>";
-        reviewStart += "	";
-        reviewStart += "	<div class=\"col-md-12\">";
-        reviewStart += "		<h4>2) How clean is the dental office?<\/h4>";
-        reviewStart += "		<div class=\"rateYo\" data-id=\"2\"><\/div>";
-        reviewStart += "	<\/div>";
-        reviewStart += "	";
-        reviewStart += "	<div class=\"col-md-12\">";
-        reviewStart += "		<h4>3) How would you rate the equipment used in the dental office?<\/h4>";
-        reviewStart += "		<div class=\"rateYo\" data-id=\"3\"><\/div>";
-        reviewStart += "	<\/div>";
-        reviewStart += "	";
-        reviewStart += "	<div class=\"col-md-12\">";
-        reviewStart += "		<h4>4) How would you rate the service and the attention of the dentist\/staff to you?<\/h4>";
-        reviewStart += "		<div class=\"rateYo\" data-id=\"4\"><\/div>";
-        reviewStart += "	<\/div>";
-        reviewStart += "	";
-        reviewStart += "	<div class=\"col-md-12\">";
-        reviewStart += "		<h4>5) How would you rate the location (e.g. parking availability, proximity to public transportation etc…)?<\/h4>";
-        reviewStart += "		<div class=\"rateYo\" data-id=\"5\"><\/div>";
-        reviewStart += "	<\/div>";
-        reviewStart += "	";
-        reviewStart += "	<div class=\"col-md-12\">";
-        reviewStart += "		<h4>Leave A Comment<\/h4>";
-        reviewStart += "		<textarea class=\"form-control\"><\/textarea>";
-        reviewStart += "	<\/div>";
-        reviewStart += "	<p class=\"clearfix\"><\/div>";
-        reviewStart += "<\/form>";
-
-
-        jQuery(document).ready(function(){
+    var reviewStart="";
+    reviewStart += "<form id=\"reviewForm\" class=\"form-horizontal\">";
+    reviewStart += "	<div class=\"col-md-12\">";
+    reviewStart += "		<h4>1) Would you recommend this dental office to a friend?<\/h4>";
+    reviewStart += "		<div class=\"rateYo\" data-id=\"1\"><\/div>";
+    reviewStart += "	<\/div>";
+    reviewStart += "	";
+    reviewStart += "	<div class=\"col-md-12\">";
+    reviewStart += "		<h4>2) How clean is the dental office?<\/h4>";
+    reviewStart += "		<div class=\"rateYo\" data-id=\"2\"><\/div>";
+    reviewStart += "	<\/div>";
+    reviewStart += "	";
+    reviewStart += "	<div class=\"col-md-12\">";
+    reviewStart += "		<h4>3) How would you rate the equipment used in the dental office?<\/h4>";
+    reviewStart += "		<div class=\"rateYo\" data-id=\"3\"><\/div>";
+    reviewStart += "	<\/div>";
+    reviewStart += "	";
+    reviewStart += "	<div class=\"col-md-12\">";
+    reviewStart += "		<h4>4) How would you rate the service and the attention of the dentist\/staff to you?<\/h4>";
+    reviewStart += "		<div class=\"rateYo\" data-id=\"4\"><\/div>";
+    reviewStart += "	<\/div>";
+    reviewStart += "	";
+    reviewStart += "	<div class=\"col-md-12\">";
+    reviewStart += "		<h4>5) How would you rate the location (e.g. parking availability, proximity to public transportation etc…)?<\/h4>";
+    reviewStart += "		<div class=\"rateYo\" data-id=\"5\"><\/div>";
+    reviewStart += "	<\/div>";
+    reviewStart += "	";
+    reviewStart += "	<div class=\"col-md-12\">";
+    reviewStart += "		<h4>Leave A Comment<\/h4>";
+    reviewStart += "		<textarea class=\"form-control\"><\/textarea>";
+    reviewStart += "	<\/div>";
+    reviewStart += "	<p class=\"clearfix\"><\/div>";
+    reviewStart += "<\/form>";
 
 
-            jQuery(".giveReview").click(function(){
-                var reservationId = jQuery(this).attr("data-reviewid");
-                var id = jQuery(this).attr("id");
-                var providerId = jQuery(this).attr('data-providerId');
+    jQuery(document).ready(function(){
 
-                bootbox.alert({
-                    message: reviewStart,
-                    size: 'large',
-                    buttons: {
-                        ok : {
-                            label: 'Send Review',
-                            className: "btn btn-primary appointment-review",
+        jQuery(".giveReview").click(function(){
+            var reservationId = jQuery(this).attr("data-reviewid");
+            var id = jQuery(this).attr("id");
+            var providerId = jQuery(this).attr('data-providerId');
 
+            bootbox.alert({
+                message: reviewStart,
+                size: 'large',
+                buttons: {
+                    ok : {
+                        label: 'Send Review',
+                        className: "btn btn-primary appointment-review",
+
+                    }
+                },
+                callback: function(){
+
+                    //Getting all the ratings on sumit
+                    var yo = jQuery(".rateYo").rateYo();
+                    var allRatings = yo.rateYo("rating");
+                    var valid = true;
+                    allRatings.forEach(function (item) {
+                        if(item < 1){
+
+                            valid = false;
                         }
-                    },
-                    callback: function(){
 
-                        //Getting all the ratings on sumit
-                        var yo = jQuery(".rateYo").rateYo();
-                        var allRatings = yo.rateYo("rating");
-                        var valid = true;
-                        allRatings.forEach(function (item) {
-                            if(item < 1){
+                    })
 
-                                valid = false;
-                            }
+                    if(valid == false){
+                        bootbox.alert({
+                            size: "small",
+                            title: "Alert",
+                            message: "Kindly give rating for all questions!!"
 
-                        })
+                        });
+                        return false;
+                    }
 
-                        if(valid == false){
+
+
+                    var commentBox  = jQuery("#reviewForm textarea").val();
+                    /* $.each( allRatings, function( key, value ) {
+                      console.log( key + ": " + value );
+                    }); */
+
+
+                    $.ajax({url: "appointment/saveRating",type:"POST",data:{rating:allRatings,reservation_id:reservationId,comments:commentBox,provider_id:providerId}, success: function(data){
+
                             bootbox.alert({
                                 size: "small",
                                 title: "Alert",
-                                message: "Kindly give rating for all questions!!"
-
+                                message: "Thank for the the rating!!",
+                                callback: function(){ window.location.href=""; }
                             });
-                            return false;
-                        }
+
+                        }});
+
+                    /* $.post("appointment/saveRating",{rating:allRatings,reservation_id:reservationId,comments:commentBox},TYPE:"POST",function(data){
+                        console.log(data);
+                        console.log("worked");
+
+                    }); */
 
 
+                }
+            });
 
-                        var commentBox  = jQuery("#reviewForm textarea").val();
-                        /* $.each( allRatings, function( key, value ) {
-                          console.log( key + ": " + value );
-                        }); */
-
-
-                        $.ajax({url: "appointment/saveRating",type:"POST",data:{rating:allRatings,reservation_id:reservationId,comments:commentBox,provider_id:providerId}, success: function(data){
-
-                                bootbox.alert({
-                                    size: "small",
-                                    title: "Alert",
-                                    message: "Thank for the the rating!!",
-                                    callback: function(){ window.location.href=""; }
-                                });
-
-                            }});
-
-                        /* $.post("appointment/saveRating",{rating:allRatings,reservation_id:reservationId,comments:commentBox},TYPE:"POST",function(data){
-                            console.log(data);
-                            console.log("worked");
-
-                        }); */
+            jQuery(".rateYo").rateYo({
+                rating: 0,
+                /* onSet: function (rating, rateYoInstance) {
+                    alert("Rating is set to: " + rating);
+                    alert("Rating is set to: " + jQuery(this).attr("data-id"));
+                } */
+            });
 
 
+            var yo = jQuery(".rateYo").rateYo();
+
+            console.log(yo);
+
+        });
+
+    });
+</script>
+
+<script>
+    function removeAppointment(id,removeDate,time,doctor,doctorEmail){
+        $.ajax({url:"<?php echo base_url() ?>admin-appointment/removeAppointment",async:false,type:"post",data:{appointmentId:id,date:removeDate,appTime:time,yourdoc:doctor,doctorEmail:doctorEmail},function(data){
+                //console.log(data);
+
+                bootbox.alert({
+                    message: "Appointment Removed successfully",
+                    callback: function () {
+                        console.log('This was logged in the callback!');
                     }
-                });
+                })
 
-                jQuery(".rateYo").rateYo({
-                    rating: 0,
-                    /* onSet: function (rating, rateYoInstance) {
-                        alert("Rating is set to: " + rating);
-                        alert("Rating is set to: " + jQuery(this).attr("data-id"));
-                    } */
-                });
+            }});
+    }
 
+    function showRecipt(id){
+        console.log(id);
+        $.ajax({url:"<?php echo base_url() ?>admin-appointment/showRecipt",async:true,type:"post",data:{appointmentId:id},function(data){
 
-                var yo = jQuery(".rateYo").rateYo();
+                console.log(data);
 
-                console.log(yo);
+                bootbox.alert({
+                    message: data,
+                    callback: function (){
+                        console.log('This was logged in the callback!');
+                    }
+                })
 
+            }}).done(function(data){
+
+            bootbox.alert({
+                message: data,
+                callback: function (){
+                    console.log('This was logged in the callback!');
+                }
             });
 
         });
-    </script>
-</div>
+        return false;
+    }
+
+</script>

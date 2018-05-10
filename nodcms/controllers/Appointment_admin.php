@@ -1887,49 +1887,46 @@ class Appointment_admin extends NodCMS_Controller
         $this->form_validation->set_rules('confirmPassword', _l('Confirm Password',$this), 'required|xss_clean|matches[newPassword]');
 
 
-
         if ($this->form_validation->run() == FALSE){
-            $this->session->set_flashdata('static_error',validation_errors());
-            //redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
-
-           $userProfile = $this->Appointment_admin_model->getUserData($this->session->userdata("user_id"));
-
-          if($userProfile){
-           $currentPassword = $userProfile[0]['password'];
-
-            if($currentPassword == md5($this->input->post('currentPassword'))){
-
-                $newPassword = $this->input->post("newPassword");
-                $confirmPassword = $this->input->post("confirmPassword");
-
-                if(empty($newPassword)){
-                    $this->session->set_flashdata('reset_error', _l('Enter your new password',$this));
-                    redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
-                }
-
-                if($newPassword == $confirmPassword){
-                    $this->db->where("user_id",$this->session->userdata("user_id"));
-                    $this->db->update("users",array('password'=>md5($newPassword)));
-                    $this->session->set_flashdata('reset_success', 'Password reset successfully');
-                    redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
-                }else{
-                    $this->session->set_flashdata('reset_error', _l('Confirm password dont match new password',$this));
-                    redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
-                }
-
-            }else{
-                $this->session->set_flashdata('reset_error', _l('Your current password does not match',$this));
-                redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
-            }
-
-          }
-
-        }else{
             print_r(validation_errors());
             $this->session->set_flashdata('reset_error',validation_errors());
             //$this->session->set_flashdata('reset_error', _l('Please complete all the fields',$this));
             redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
+        }else{
 
+            $this->session->set_flashdata('static_error',validation_errors());
+            //redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
+
+            $userProfile = $this->Appointment_admin_model->getUserData($this->session->userdata("user_id"));
+
+            if($userProfile){
+                $currentPassword = $userProfile[0]['password'];
+
+                if($currentPassword == md5($this->input->post('currentPassword'))){
+
+                    $newPassword = $this->input->post("newPassword");
+                    $confirmPassword = $this->input->post("confirmPassword");
+
+                    if(empty($newPassword)){
+                        $this->session->set_flashdata('reset_error', _l('Enter your new password',$this));
+                        redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
+                    }
+
+                    if($newPassword == $confirmPassword){
+                        $this->db->where("user_id",$this->session->userdata("user_id"));
+                        $this->db->update("users",array('password'=>md5($newPassword)));
+                        $this->session->set_flashdata('reset_success', 'Password reset successfully');
+                        redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
+                    }else{
+                        $this->session->set_flashdata('reset_error', _l('Confirm password dont match new password',$this));
+                        redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
+                    }
+
+                }else{
+                    $this->session->set_flashdata('reset_error', _l('Your current password does not match',$this));
+                      redirect(APPOINTMENT_ADMIN_URL.'accountSetting');
+                }
+            }
         }
     }
     // End function for change
@@ -2569,6 +2566,46 @@ class Appointment_admin extends NodCMS_Controller
         $appointmentId = $this->input->post("appointmentId");
         $reservationDetails = $this->Appointment_admin_model->getReservationByIdDetail($appointmentId);
         $reservationDetails = $reservationDetails[0];
+
+        $appointmentDate = $this->input->post("date");
+        $doctorName = $this->input->post("yourdoc");
+        $appointmentTime = $this->input->post("appTime");
+        $doctorEmail  = $this->input->post("doctorEmail");
+
+        //appointmentId:id,date:removeDate,appTime:time,yourdoc:doctor
+
+
+
+        $this->load->library('email');
+
+        //Patient email
+        $this->email->from('timepry@techopialabs.com', 'Timepry');
+        $this->email->to($this->session->userdata('email'));
+        $this->email->subject('Booking Cancel');
+        $this->email->message("
+        Hey, there
+            You have canceled your appointment at ".$appointmentDate." ".$appointmentTime."  with doctor ".$doctorName."
+            Regards
+            Timepry
+        ");
+
+        $this->email->send();
+
+
+        $this->email->to($doctorEmail);
+        $this->email->subject('Booking Cancel');
+        $this->email->message("
+        Hey, there
+            You have canceled your appointment at ".$appointmentDate." ".$appointmentTime." 
+            Regards
+            Timepry
+        ");
+
+        $this->email->send();
+
+
+        //Doctor email
+
 
         if($reservationDetails){
             $this->db->delete('r_reservation', array('reservation_id' => $appointmentId));

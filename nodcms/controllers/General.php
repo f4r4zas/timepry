@@ -491,5 +491,19 @@ class General extends CI_Controller
         $this->load->view("reset_password", $this->data);
         $this->load->view("footer", $this->data);
     }
+
+    public function testMail(){
+        
+		    $this->load->library('email');
+			
+			$this->email->from('timepry@techopialabs.com', 'Timepry');
+            $this->email->to("zeeshan4971@gmail.com");
+
+            $this->email->subject('Password Reset');
+            $this->email->message("Bla Bla");
+
+            $this->email->send();
+		
+    }
 }
 

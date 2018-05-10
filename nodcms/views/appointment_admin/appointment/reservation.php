@@ -49,7 +49,7 @@
                             <?php } ?>
                         </select>
                     </td>
-                    <td></td>
+                    <td>Treatment</td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -81,7 +81,7 @@
                             <?php echo my_int_date($item["reservation_date_time"]).' '.my_int_justTime($item["reservation_date_time"]); ?>
                             </span>
                             </td>
-                            <td><a class="userDetails" href="#"><?php echo $item["fname"]; ?> <?php echo $item["lname"]; ?></a></td>
+                            <td><a href="javascript:;" onclick="$.showComments(<?php echo $item['reservation_id']; ?>)" class="userDetails" href="#"><?php echo $item["fname"]; ?> <?php echo $item["lname"]; ?></a></td>
                             <td><?php echo $item["service_name"]; ?></td>
                             <td><?php echo $item["title_treatment"]; ?></td>
                             <td><?php echo $this->currency->format($item["price"]); ?></td>
@@ -124,7 +124,7 @@
                                                 <span><?php /*echo $item["closed"]!=1?_l("Close", $this):_l("Reopen", $this); */?></span>
                                             </a>
                                         </li>-->
-                                        <li><a><i class="fa fa-user"></i><?php echo _l("See Patient details",$this); ?></a></li>
+                                        <li><a  href="javascript:;" onclick="$.showComments(<?php echo $item['reservation_id']; ?>)"><i class="fa fa-user"></i><?php echo _l("See Patient details",$this); ?></a></li>
                                         <li class="divider"></li>
                                         <li><a href="<?php echo base_url() ?>contact"><i class="fa fa-exclamation-triangle"></i><?php echo _l("Report a problem",$this); ?></a></li>
                                      <!--   <li><a class="btn-ask" data-msg="<?php /*echo _l("panel_reservation_cancel_confirmation",$this); */?>" href="<?php /*echo APPOINTMENT_ADMIN_URL."reservationAction/".$item["reservation_id"]."/cancel"; */?>"><i class="fa fa-ban font-red"></i> <?php /*echo _l("Cancel",$this); */?></a></li>-->

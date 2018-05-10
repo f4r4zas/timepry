@@ -9,9 +9,11 @@
                     <div class="panel-body">
 
                         <form id="register-form" role="form" action="<?php echo base_url(); ?>General/sendpassword" autocomplete="off" class="form" method="post">
-                            <div class="alert alert-success">
-                                <?php echo $this->session->flashdata('message','Email not found try again!'); ?>
-                            </div>
+                            <?php if($this->session->flashdata('message')){ ?>
+                                <div class="alert alert-success">
+                                    <?php echo $this->session->flashdata('message','Email not found try again!'); ?>
+                                </div>
+                            <?php } ?>
                             <div class="form-group">
                                 <div class="input-group">
 
