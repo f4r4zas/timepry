@@ -395,6 +395,7 @@ class General extends CI_Controller
 
     public function sendpassword()
     {
+        $this->load->library('email');
         $email = $_POST['email'];
         $query1=$this->db->query("SELECT *  from users where email = '".$email."'");
         $row=$query1->result_array();
@@ -421,11 +422,19 @@ class General extends CI_Controller
             $mail_message.='Thanks for contacting regarding to forgot password,<br> You can reset password using this '.'<a href="'.$resetLink.'">Link</a>'.'</b>'."\r\n";
             $mail_message.='<br>Please Update your password.';
             $mail_message.='<br>Thanks & Regards';
-            $mail_message.='<br>Your company name';
+            $mail_message.='<br>Timepry';
 
+
+            $this->email->from('timepry@techopialabs.com', 'Timepry');
+            $this->email->to($email);
+
+            $this->email->subject('Password Reset');
+            $this->email->message($mail_message);
+
+            $this->email->send();
 
             //echo $mail_message;
-            mail($email,"Reset Password",$mail_message);
+            //mail($email,"Reset Password",$mail_message);
 
             $this->session->set_flashdata('message','Check email for password reset!');
             redirect(base_url().'change-password','refresh');
