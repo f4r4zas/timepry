@@ -541,7 +541,7 @@ font-size: 16px;
                                 <div class="booknow_prices">
                                     <span class="service_count" id="service_count">0</span>
                                     <span class="service_title">service</span>
-                                    <span class="service_price">£<span id="service_price">0</span></span>
+                                    <span class="service_price">€<span id="service_price">0</span></span>
                                 </div>
                                 <div class="book_now_btn">
                                     <a href="javascript:void(0)" class="greyButton" id="services_booknow">Book Now</a>

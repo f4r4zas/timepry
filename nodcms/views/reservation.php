@@ -560,7 +560,7 @@
         $('.treatment-box .add_service').click(function() {
 
             orderTotal = '';
-            var getPrice = $(this).parents('.treatment-box').find('.prices').text().replace('£', '');
+            var getPrice = $(this).parents('.treatment-box').find('.prices').text().replace('€', '');
             var price = $('#service_price').text();
             console.log(price);
             var servicesCount = $('#service_count').text();
