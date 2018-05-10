@@ -448,7 +448,7 @@ class Appointment extends NodCMS_Controller {
                 $this->form_validation->set_rules('fname', _l('First Name',$this), 'required|xss_clean|callback_formRulesName');
                 $this->form_validation->set_rules('lname', _l('Last Name',$this), 'required|xss_clean|callback_formRulesName');
                 $this->form_validation->set_rules('email', _l('Email Address',$this), 'required|valid_email');
-                $this->form_validation->set_rules('tel', _l('Phone Number',$this), 'required|is_natural');
+                $this->form_validation->set_rules('tel', _l('Phone Number',$this), 'required');
                 foreach($extra_fields as $item){
                     $this->form_validation->set_rules('extra_field'.$item['id'], $item['title_caption'], ($item['require']==1?'required|':'').'callback_form_validation_'.strtolower($item['type_name']).'['.$item['min'].'|'.$item['max'].']');
                 }

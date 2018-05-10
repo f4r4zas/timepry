@@ -14,7 +14,7 @@ span.fc-time {
 }
 </style>
 
-<div class="portlet box blue-hoki calendar">
+<div class="portlet box blue-hoki calendar container">
     <div class="portlet-title">
         <div class="caption">
         </div>

@@ -33,11 +33,15 @@ $CI = get_instance();
     }
 
     #map_canvas {
-        height: 100%;
+
         position: relative;
-        height: 100% !important;
+
         padding-bottom: 150% !important;
         width: 100%;
+    }
+
+    div#map_canvas div {
+        max-height: calc(83vh - 176px) !important;
     }
 
     .listing-image {
@@ -607,7 +611,7 @@ $CI = get_instance();
 
                     window.map = new google.maps.Map(document.getElementById('map_canvas'), {
                         //center: new google.maps.LatLng(45, -122),
-                        zoom: 1,
+                        zoom:8,
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     });
 
@@ -635,7 +639,7 @@ $CI = get_instance();
                             }
 
                             marker = new google.maps.Marker({
-                                // center: new google.maps.LatLng(45, 13),
+                                // center: new google.maps.LatLng(p.lat, p.lng),
                                 zoom:8,
                                 position: latlng,
                                 map: map,

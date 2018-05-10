@@ -323,7 +323,7 @@ class Dental extends NodCMS_Controller {
            
             
             $this->form_validation->set_rules('dental_officename', _l('Name of the Dental Office',$this), 'required|xss_clean');
-            $this->form_validation->set_rules('dental_officedescription', _l('Description of Dental Office',$this), 'required|xss_clean|callback_formRulesName');
+            $this->form_validation->set_rules('dental_officedescription', _l('Description of Dental Office',$this), 'required|xss_clean');
             $this->form_validation->set_rules('dental_officephone', _l('Phone of Dental Office',$this), 'required|is_natural');
             //$this->form_validation->set_rules('dental_officeemail', _l('Email of Dental Office',$this), '');
             
