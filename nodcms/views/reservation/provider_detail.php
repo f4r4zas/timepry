@@ -28,7 +28,7 @@
     cursor: pointer;
 }
 
-.timings:nth-child(2) {
+.timings:nth-child(1) {
     order: 1;
 }
 
