@@ -1157,6 +1157,19 @@ class Appointment_admin extends NodCMS_Controller
             $this->data["date"] = $filter;
             $conditions['created_date'] = $filter;
         }
+
+        $filter = $this->input->get("closed", TRUE);
+        if($filter != NULL){
+
+            $this->data["closed"] = $filter;
+            $conditions['closed'] = 1;
+        }
+
+        $filter = $this->input->get("checked", TRUE);
+        if($filter != NULL){
+            $this->data["checked"] = $filter;
+            $conditions['checked'] = 1;
+        }
         // Service filter
         $filter = $this->input->get("service", TRUE);
         if($filter != NULL){
