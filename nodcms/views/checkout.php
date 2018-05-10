@@ -745,7 +745,7 @@ $totalReservations = getNoReservations($this->session->userdata("email"));
                 start++;
                 if(start == totalLoop){
 
-                    //window.location.href="<?php echo base_url(); ?>checkout-complete";
+                    window.location.href="<?php echo base_url(); ?>checkout-complete";
                 }
 
             });
